@@ -58,20 +58,22 @@ body {
     border: 2px solid var(--secondary-oclor);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    margin: 115px 7px;
+    margin: 0 10px;
     margin-top: 50px;
+    margin-bottom: 120px;
 }
 
 .title {
     text-align: center;
-    margin: 20px;
+    border-bottom: 3px solid var(--button-color);
+    margin: 5px;
     padding: 0px;
+    display: -webkit-inline-box;
 }
 
 .title h2
 {
     color: var(--text-color);
-    border-bottom: 2px solid var(--button-color);
     font-size: 30px;
     padding: 10px;
     font-family: 'Scheherazade';
@@ -174,10 +176,11 @@ footer {
   footer p {
     margin: 0;
     font-size: 20px;
-    margin-top: 110px;
+    margin-top: 80px;
     font-family: var(--font-family);
     font-weight: bold;
   }
+
 
 footer a {
     text-decoration: none;
@@ -185,8 +188,34 @@ footer a {
 }
 
   @media (max-width: 320px) {
-    .select {
-        margin-left: -30px;
-        margin-right: 30px;
+    .dropdown {
+        min-width: 8em;
+        position: relative;
+        margin: 2em 0px;
     }
+    .title h2 {
+        font-size: 24px;
+        padding: 0px;
+    }
+    footer{
+        margin: 0;
+        font-size: 18px;
+    }
+    footer p {
+        margin: 0;
+        font-size: 18px;
+        margin-top: 152px;
+    }
+    .containe {
+        margin-bottom: 120px;
+    }
+  }
+
+  @media (min-width: 340px) {
+    .dropdown {
+        min-width: 14em;
+        position: relative;
+        margin: 2em;
+        margin-left: 3px;
+}
   }
