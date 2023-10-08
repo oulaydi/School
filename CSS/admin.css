@@ -1,0 +1,152 @@
+@import url(https://fonts.googleapis.com/earlyaccess/scheherazade.css);
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+}
+
+::selection{
+    background-color: var(--button-color);
+    color: var(--background-color);
+}
+
+/* Colors */
+/* 
+    Primary Color (Official School Color): #0072CE (Blue)
+    Secondary Color (Accent): #FFA300 (Orange)
+    Background Color: #eeefef (Dark White)
+    Text Color: #333333 (Dark Gray)
+    Button Color: #4CAF50 (Green)
+*/
+:root {
+    --primary-color: #0072CE;
+    --secondary-oclor: #FFA300;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --button-color: #4CAF50;
+
+    /* Font family Arabic */
+    --font-family: 'Scheherazade';
+}
+
+body {
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	flex-direction: column;
+}
+
+div {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    max-width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
+}
+
+h2 {
+    font-family: 'Scheherazade';
+    text-align: center;
+    border-bottom: 3px solid var(--button-color);
+    font-size: 2.2rem;
+    cursor: default;
+    margin: 0 185px;
+    color: var(--text-color);
+    margin-bottom: 25px;
+    margin-top: 6px;
+}
+
+form {
+	width: 500px;
+	border: 2px solid var(--primary-color);
+	padding: 30px;
+	background: transparent;
+	border-radius: 15px;
+    margin-top: 50px;
+}
+
+input {
+	display: block;
+	border: 2px solid var(--secondary-oclor);
+	width: 95%;
+	padding: 15px;
+	margin: -2px auto;
+    border-radius: 5px;
+    font-size: 17px;
+    color: var(--text-color);
+    direction: rtl;
+}
+
+.input-field:focus {
+    filter: brightness(100%);
+}
+  
+  
+.input-field:hover {
+    filter: brightness(96%);
+    transition: .2s ease-in-out;
+}  
+
+button {
+    background-color: #0071cec8;
+    width: 35%;
+    margin-top: 22px;
+    font-size: 18px;
+    padding: 8px 2px;
+    color: var(--background-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-1 {
+    text-align: center;
+}
+
+button:hover{
+    background-color: var(--primary-color);
+}
+
+.error {
+    background: #F2DEDE;
+    color: #d13936;
+    padding: 10px;
+    width: 60%;
+   border-radius: 5px;
+   margin: 20px auto;
+   text-align: center;
+}
+
+/* footer */
+footer {
+    color: var(--text-color); 
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 20px;
+    margin-top: 60px;
+    font-family: var(--font-family);
+    font-weight: bold;
+}
+
+footer i a {
+    color: var(--text-color);
+}
