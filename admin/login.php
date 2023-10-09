@@ -42,7 +42,8 @@
 
                 if($row['username'] === $uname && $row['password'] === $pass)
                 {
-                    echo "Logged in!";
+                    header("Location: ". URL ."admin/admin-panel.php?success=مرحبًا بعودتك");
+                    exit();
                 }
                 else
                 {
