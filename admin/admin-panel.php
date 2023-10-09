@@ -37,37 +37,37 @@
             </tr>
           </thead>
           <tbody class="table-group-divider">
-            <tr>
-              <th scope="row">1</th>
+            <tr class="text-center">
+              <th scope="row">EE667357</th>
               <td>oussama oulaydi</td>
               <td>oulaydi</td>
               <td>ثانوي</td>
               <td>الرياضيات (Mathematics)</td>
               <td>
-                <button type="button" class="btn btn-outline-danger" id="text-light"><a class="fw-semibold text-decoration-none link-danger" href="remove-prof.php">حذف</a></button>
-                <button type="button" class="btn btn-outline-warning"><a  class="fw-semibold text-decoration-none link-warning" href="manage-prof.php">تحديث</a></button>
+                <button type="button" class="btn btn-warning"><a class="fw-semibold text-decoration-none link-light" href="manage-prof.php">تحديث</a></button>
+                <button type="button" class="btn btn-danger"><a class="fw-semibold text-decoration-none link-light icon-link-hover" href="remove-prof.php">حذف</a></button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
+            <tr class="text-center">
+              <th scope="row">SL21609</th>
               <td>oum el hanae aghlamenhoum</td>
               <td>aghla_oum</td>
               <td>إعدادي</td>
               <td>الرياضيات (Mathematics)</td>
               <td>
-                <button type="button" class="btn btn-outline-danger"><a  class="fw-semibold text-decoration-none link-danger" href="remove-prof.php">حذف</a></button>
-                <button type="button" class="btn btn-outline-warning"><a  class="fw-semibold text-decoration-none link-warning" href="manage-prof.php">تحديث</a></button>
+                <button type="button" class="btn btn-warning"><a class="fw-semibold text-decoration-none link-light" href="manage-prof.php">تحديث</a></button>
+                <button type="button" class="btn btn-danger"><a class="fw-semibold text-decoration-none link-light icon-link-hover" href="remove-prof.php">حذف</a></button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">3</th>
+            <tr class="text-center">
+              <th scope="row">SH27526</th>
               <td>Nejwa aghlamenhoum</td>
               <td>Nejwa_aghla</td>
               <td>ثانوي</td>
               <td>الرياضيات (Mathematics)</td>
               <td>
-                <button type="button" class="btn btn-outline-danger"><a  class="fw-semibold text-decoration-none link-danger" href="remove-prof.php">حذف</a></button>
-                <button type="button" class="btn btn-outline-warning"><a  class="fw-semibold text-decoration-none link-warning" href="manage-prof.php">تحديث</a></button>
+                <button type="button" class="btn btn-warning"><a class="fw-semibold text-decoration-none link-light" href="manage-prof.php">تحديث</a></button>
+                <button type="button" class="btn btn-danger"><a class="fw-semibold text-decoration-none link-light icon-link-hover" href="remove-prof.php">حذف</a></button>
               </td>
             </tr>
           </tbody>

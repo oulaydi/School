@@ -22,6 +22,10 @@
       <div class="container my-5" dir="rtl">
           <form autocomplete="off">
             <div class="mb-3">
+              <label class="form-label cus-label" >CIN</label><span> :</span>
+              <input type="full-name" placeholder="رقم البطاقة الوطنية" id="input-field" class="form-control">
+            </div>
+            <div class="mb-3">
               <label class="form-label cus-label" >الإسم الكامل </label><span> :</span>
               <input type="full-name" placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
             </div>
@@ -55,6 +59,9 @@
                 <option value="10">الجغرافيا (Geography)</option>
                 <option value="11">التربية الإسلامية (Islamic Education)</option>
                 <option value="12">الفلسفة (Philosophy)</option>
+                <option value="13">ألتربية التشكيلية (Art education)</option>
+                <option value="14">المعلوميات (Informatique)</option>
+                <option value="15">التكنولوجيا (technology)</option>
               </select>
             </div>
             <div class="mb-3 custom-control custom-checkbox">
