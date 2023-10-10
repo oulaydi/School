@@ -1,3 +1,5 @@
+<?php include('../config/constants.php') ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,7 +26,11 @@
       <?php if (isset($_GET['success'])) { ?>
               <p id="success-container" class="success" dir="rtl">
               <?php echo $_GET['success']; ?></p>
-            <?php } ?>
+      <?php } ?>
+      <?php if (isset($_GET['error'])) { ?>
+                <p id="error-container" class="error" dir="rtl">
+                <?php echo $_GET['error']; ?></p>
+      <?php } ?>
         <table class="table table-bordered w-75" id="center-container" dir="rtl">
           <thead>
             <tr class="text-center">
@@ -36,41 +42,55 @@
               <th scope="col">إجراء</th>
             </tr>
           </thead>
-          <tbody class="table-group-divider">
-            <tr class="text-center">
-              <th scope="row">EE667357</th>
-              <td>oussama oulaydi</td>
-              <td>oulaydi</td>
-              <td>ثانوي</td>
-              <td>الرياضيات (Mathematics)</td>
-              <td>
-                <button type="button" class="btn btn-warning"><a class="fw-semibold text-decoration-none link-light" href="manage-prof.php">تحديث</a></button>
-                <button type="button" class="btn btn-danger"><a class="fw-semibold text-decoration-none link-light icon-link-hover" href="remove-prof.php">حذف</a></button>
-              </td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">SL21609</th>
-              <td>oum el hanae aghlamenhoum</td>
-              <td>aghla_oum</td>
-              <td>إعدادي</td>
-              <td>الرياضيات (Mathematics)</td>
-              <td>
-                <button type="button" class="btn btn-warning"><a class="fw-semibold text-decoration-none link-light" href="manage-prof.php">تحديث</a></button>
-                <button type="button" class="btn btn-danger"><a class="fw-semibold text-decoration-none link-light icon-link-hover" href="remove-prof.php">حذف</a></button>
-              </td>
-            </tr>
-            <tr class="text-center">
-              <th scope="row">SH27526</th>
-              <td>Nejwa aghlamenhoum</td>
-              <td>Nejwa_aghla</td>
-              <td>ثانوي</td>
-              <td>الرياضيات (Mathematics)</td>
-              <td>
-                <button type="button" class="btn btn-warning"><a class="fw-semibold text-decoration-none link-light" href="manage-prof.php">تحديث</a></button>
-                <button type="button" class="btn btn-danger"><a class="fw-semibold text-decoration-none link-light icon-link-hover" href="remove-prof.php">حذف</a></button>
-              </td>
-            </tr>
-          </tbody>
+
+          <?php
+                //Query to get all admins
+                $sql = "SELECT * FROM table_profs";
+                // Execute the Query 
+                $result = mysqli_query($cnx, $sql);
+
+                if ($result == true)
+                {
+                    $rows = mysqli_num_rows($result); //functions that gets all rows from db
+                    if ($rows > 0)
+                    {
+                      // we hava data
+                          while($rows = mysqli_fetch_assoc($result))
+                          {
+                              $id = $rows['id_prof'];
+                              $cin = $rows['CIN'];
+                              $full_name = $rows['full_name'];
+                              $username = $rows['username'];
+                              $level = $rows['niveau'];
+                              $subject = $rows['matiere'];
+
+                              //Dispalying the values
+                              ?>
+                              
+                              <tbody class="table-group-divider">
+                                <tr class="text-center">
+                                  <td><?php echo $cin; ?></td>
+                                  <td><?php echo $full_name; ?></td>
+                                  <td><?php echo $username; ?></td>
+                                  <td><?php echo $level; ?></td>
+                                  <td><?php echo $subject; ?></td>
+                                  <td>
+                                      <button type="button" class="btn btn-warning"><a class="fw-semibold text-decoration-none link-light py-3" href="<?php echo URL; ?>admin/manage-prof.php?id_prof=<?php echo $id; ?>">تحديث</a></button>
+                                      <button type="button" class="btn btn-danger"><a class="fw-semibold text-decoration-none link-light py-3" href="<?php echo URL; ?>admin/remove-prof.php?id_prof=<?php echo $id; ?>">حذف</a></button>
+                                  </td>
+                                </tr>
+                              </tbody>
+
+                              <?php
+                          }
+                    }
+                    else
+                    {
+                        echo '<p id="error-container">! لا يوجد اي أساتذة</p>';                      
+                    }
+                
+                }
+            ?>
         </table>
     <footer>
       <p><i><a href="https://github.com/oulaydi" target="_blank">OUALDYI</a></i> &copy; 2023 .جميع الحقوق محفوظة</p>
@@ -83,7 +103,7 @@
       if (successContainer) {
           setTimeout(() => {
               successContainer.style.display = 'none';
-          }, 5000);
+          }, 4000);
       }
     </script>
 </body>

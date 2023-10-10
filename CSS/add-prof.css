@@ -65,22 +65,32 @@ div.logo {
     padding-right: 10px;
 }
 
-#input-field::placeholder {
+#input-field::placeholder, .confirm::placeholder, .confirm::placeholder {
     color: #33333372;
 }
 
-#input-field {
+#input-field, .confirm, .confirm{
     border: 2px solid var(--secondary-oclor);
     box-shadow: none;
     transition: .2s;
 }
 
-#input-field:focus {
+#input-field:focus, .confirm:focus, .confirm:focus {
     border: 2px solid var(--button-color);
 }
 
 span {
     font-weight:bolder;
+}
+
+#error-container {
+    background: #F2DEDE;
+    color: #d13936;
+    padding: 10px;
+    width: 47%;
+    border-radius: 5px;
+    margin: 20px auto;
+    text-align: center;
 }
 
 /* footer */
