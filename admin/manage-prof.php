@@ -37,6 +37,49 @@
       }
 ?>
 
+<?php
+    // ... (previous code)
+    if (isset($_POST['submit']))
+    {
+        $full_name = $_POST['full_name'];
+        $username = $_POST['username'];
+        $password1 = $_POST['password'];
+        $password2 = $_POST['confirm_password']; // New input for password confirmation
+        $level = $_POST['selected_level'];
+        $subject = $_POST['selected_subject'];
+        
+        // Check if passwords match
+        if ($password1 !== $password2)
+        {
+          header("Location: " . URL . "admin/manage-prof.php?id_prof=$id&error=كلمة المرور غير متطابقة !");
+          exit();
+        }
+        
+        $password = md5($password1);
+
+        // SQL Query then save into DB
+        $sql1 = "UPDATE table_profs SET 
+        full_name='$full_name',
+        username='$username',
+        password='$password',
+        niveau='$level',
+        matiere='$subject' WHERE id_prof = $id";
+
+        $result1 = mysqli_query($cnx, $sql1) or die(mysqli_error());
+
+        if ($result1 == true)
+        {
+          header("Location: " . URL . "admin/admin-panel.php?success=لقد تم التحديث بنجاح");
+          exit();
+        }
+        else
+        {
+          header("Location: " . URL . "admin/manage-prof.php?id_prof=$id&error=لم تتم العملية بنجاح");
+          exit();
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,11 +101,12 @@
       <img class="LogoMenAr" src="../images/LogoMenAr.png" alt="LogoMenAr"/>
     </div>
     <div class="center-container">
+     <a href="admin-panel.php" title="إلفاء" class="mt-5" dir="rtl"><button type="button" class="btn-close" aria-label="Close"></button></a>
       <div class="container my-5" dir="rtl">
-        <?php if (isset($_SESSION['error'])) {
-                echo $_SESSION['error'];
-              }
-        ?>
+      <?php if (isset($_GET['error'])) { ?>
+              <p id="error-container" class="error" dir="rtl">
+              <?php echo $_GET['error']; ?></p>
+      <?php } ?>
           <form autocomplete="off" method="POST">
             <div class="mb-3">
               <label class="form-label cus-label" >CIN</label><span> :</span>
@@ -116,60 +160,11 @@
             </form>
           </div>
       </div>
+      
+      <script src="../js/unset.js"></script>
+
         <footer>
             <p><i><a href="https://github.com/oulaydi" target="_blank">OUALDYI</a></i> &copy; 2023 .جميع الحقوق محفوظة</p>
         </footer>
   </body>
 </html>
-
-<?php
-    // ... (previous code)
-    if (isset($_POST['submit']))
-    {
-        $full_name = $_POST['full_name'];
-        $username = $_POST['username'];
-        $password1 = $_POST['password'];
-        $password2 = $_POST['confirm_password']; // New input for password confirmation
-        $level = $_POST['selected_level'];
-        $subject = $_POST['selected_subject'];
-
-        // Check if passwords match
-        if ($password1 !== $password2)
-        {
-          $_SESSION['error'] = '<p style="width: 65%;" id="error-container">كلمة المرور غير متطابقة</p>';
-        }
-        
-        $password = md5($password1);
-
-        // SQL Query then save into DB
-        $sql1 = "UPDATE table_profs SET 
-        full_name='$full_name',
-        username='$username',
-        password='$password',
-        niveau='$level',
-        matiere='$subject' WHERE id_prof = $id";
-
-        $result1 = mysqli_query($cnx, $sql1) or die(mysqli_error());
-
-        if ($result1 == true)
-        {
-          header("Location: " . URL . "admin/admin-panel.php?success=لقد تم التحديث بنجاح");
-          exit();
-        }
-        else
-        {
-          header("Location: " . URL . "admin/admin-panel.php?error=لم تتم العملية بنجاح");
-          exit();
-        }
-    }
-?>
-<script>
-      const errorContainer = document.querySelector('#error-container');
-
-      // Check if the error message is present and then schedule it to disappear after 5 seconds
-      if (errorContainer) {
-          setTimeout(() => {
-              errorContainer.style.display = 'none';
-          }, 4000);
-      }
-</script>

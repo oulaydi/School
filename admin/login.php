@@ -42,6 +42,7 @@
 
                 if($row['username'] === $uname && $row['password'] === $pass)
                 {
+                    $_SESSION['error'] = $uname;
                     header("Location: ". URL ."admin/admin-panel.php?success=مرحبًا بعودتك");
                     exit();
                 }

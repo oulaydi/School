@@ -8,12 +8,21 @@
         $cin = $_POST['CIN'];
         $full_name = $_POST['full_name'];
         $username = $_POST['username'];
-        $password = md5($_POST['password']); // md5 make an encrypted passcode
+        $password1 = $_POST['password'];
+        $password2 = $_POST['confirm_password']; // New input for password confirmation
         $level = $_POST['selected_level'];
         $subject = $_POST['selected_subject'];
         
+        // Check if passwords match
+        if ($password1 !== $password2)
+        {
+          header("Location: " . URL . "admin/add-prof.php?error=كلمة المرور غير متطابقة !");
+          exit();
+        }
+
+        $password = md5($password1);
+
         //SQL Query then sabe inot DB
-        
         $sql = "INSERT INTO table_profs SET 
             CIN='$cin',
             full_name='$full_name',
@@ -27,7 +36,7 @@
 
         if ($results == true)
         {
-            header("Location: ". URL ."admin/admin-panel.php?success=لقد تمت الإضافة بنجاح");
+            header("Location: ". URL ."admin/admin-panel.php?success=تمت الإضافة بنجاح");
             exit();
         }
         else
@@ -59,15 +68,12 @@
       <img class="LogoMenAr" src="../images/LogoMenAr.png" alt="LogoMenAr"/>
     </div>
     <div class="center-container">
-      <?php if (isset($_GET['success'])) { ?>
-              <p id="success-container" class="success" dir="rtl">
-              <?php echo $_GET['success']; ?></p>
-      <?php } ?>
-      <?php if (isset($_GET['error'])) { ?>
-              <p id="error-container" class="error" dir="rtl">
-              <?php echo $_GET['error']; ?></p>
-      <?php } ?>
+     <a href="admin-panel.php" title="إلفاء" class="mt-5" dir="rtl"><button type="button" class="btn-close" aria-label="Close"></button></a>
       <div class="container my-5" dir="rtl">
+        <?php if (isset($_GET['error'])) { ?>
+                <p id="error-container" class="error" dir="rtl">
+                <?php echo $_GET['error']; ?></p>
+        <?php } ?>
           <form autocomplete="off" method="POST">
             <div class="mb-3">
               <label class="form-label cus-label" >CIN</label><span> :</span>
@@ -75,7 +81,7 @@
             </div>
             <div class="mb-3">
               <label class="form-label cus-label" >الإسم الكامل </label><span> :</span>
-              <input type="text" name="full_name" required placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
+              <input type="text" name="full_name" placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">إسم المستخدم </label><span> :</span>
@@ -84,6 +90,10 @@
             <div class="mb-3">
               <label class="form-label cus-label">كلمة المرور </label><span> :</span>
               <input type="password" name="password" required placeholder="ادخل كلمة المرور" id="input-field" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label cus-label">اعد كلمة المرور</label><span> :</span>
+              <input type="password" required placeholder="ادخل كلمة المرور من جديد" name="confirm_password" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">المستوى </label><span> :</span>
@@ -120,6 +130,9 @@
           </form>
       </div>
     </div>
+
+    <script src="../js/unset.js"></script>
+    
     <footer>
       <p><i><a href="https://github.com/oulaydi" target="_blank">OUALDYI</a></i> &copy; 2023 .جميع الحقوق محفوظة</p>
     </footer>

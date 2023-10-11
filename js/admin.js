@@ -34,5 +34,3 @@
     function resetError(element) {
         element.style.border = '';
     }
-
-

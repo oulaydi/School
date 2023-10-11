@@ -28,13 +28,4 @@
     //Redirect to manage admin page with a message
 ?>
 
-<script>
-      const errorContainer = document.querySelector('#error-container');
-
-      // Check if the success message is present and then schedule it to disappear after 5 seconds
-      if (errorContainer) {
-          setTimeout(() => {
-              errorContainer.style.display = 'none';
-          }, 4000);
-      }
-    </script>
+<script src="../js/unset.js"></script>
