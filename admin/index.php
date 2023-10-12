@@ -49,7 +49,25 @@
       <p><i><a href="https://github.com/oulaydi" target="_blank">OUALDYI</a></i> &copy; 2023 .جميع الحقوق محفوظة</p>
     </footer>
 
-    <script src="../js/admin.js"></script>
+    <script>
+      <?php if (isset($_GET['error'])) { ?>
+        // Change the border color to red
+        document.getElementById('username').style.border = '2px solid red';
+        document.getElementById('password').style.border = '2px solid red';
+
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+
+      usernameInput.addEventListener('input', function() {
+        usernameInput.style.border = '2px solid #FFA300';
+      });
+
+      passwordInput.addEventListener('input', function() {
+        passwordInput.style.border = '2px solid #FFA300';
+      });
+
+      <?php } ?>
+    </script>
     </body>
 </html>
 

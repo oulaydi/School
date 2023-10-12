@@ -14,7 +14,7 @@
 }
 
 ::selection{
-  background-color: var(--primary-color);
+  background-color: var(--button-color);
   color: var(--background-color);
 }
 
@@ -100,16 +100,6 @@ form.sign-in-form {
   z-index: 2;
 }
 
-.input-field:focus{
-  filter: brightness(100%);
-}
-
-
-.input-field:hover{
-  filter: brightness(96%);
-  transition: .2s ease-in-out;
-}
-
 .title {
   font-family: 'Scheherazade';
   border-bottom: 3px solid var(--button-color);
@@ -134,7 +124,6 @@ form.sign-in-form {
   position: relative;
 }
 
-
 .input-field i {
   text-align: center;
   line-height: 55px;
@@ -148,7 +137,6 @@ form.sign-in-form {
   outline: none;
   border: none;
   line-height: 2;
-  font-weight: 500;
   font-size: 16px;
   color: var(--text-color);
 }
@@ -156,11 +144,6 @@ form.sign-in-form {
 .input-field input::placeholder {
   color: #aaa;
   font-weight: 500;
-}
-
-.social-text {
-  padding: 0.7rem 0;
-  font-size: 1rem;
 }
 
 .btn-1 {
@@ -310,6 +293,17 @@ form.sign-in-form {
   text-decoration: double;
   color: var(--text-color);
 }
+
+.error {
+  background: #F2DEDE;
+  color: #d13936;
+  padding: 10px;
+  width: 70%;
+  border-radius: 5px;
+  margin: 20px auto;
+  text-align: center;
+}
+
 /* ANIMATION */
 
 .container.sign-up-mode:before {

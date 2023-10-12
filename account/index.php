@@ -25,15 +25,19 @@
       </div>
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="#" class="sign-in-form">
+          <form action="log-in.php" method="post" class="sign-in-form" autocomplete="off">
             <h2 class="title">تسجيل الدخول</h2>
-            <div class="input-field">
+            <?php if (isset($_GET['error'])) { ?>
+              <p id="error-container" class="error">
+              <?php echo $_GET['error']; ?></p>
+            <?php } ?>
+            <div class="input-field" id="username">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="اسم المستخدم" />
+              <input type="text" name="username"  placeholder="اسم المستخدم" />
             </div>
-            <div class="input-field">
+            <div class="input-field" id="password">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="كلمة المرور" />
+              <input type="password" name="password" placeholder="كلمة المرور" />
             </div>
             <input type="submit" value="تسجيل الدخول" class="btn-1" />
             <button class="btn transparent" id="sign-up-btn">
@@ -76,6 +80,25 @@
         </div>
       </div>
     </div>
+    <script>
+      <?php if (isset($_GET['error'])) { ?>
+        // Change the border color to red
+        document.getElementById('username').style.border = '2px solid red';
+        document.getElementById('password').style.border = '2px solid red';
+
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+
+      usernameInput.addEventListener('input', function() {
+        usernameInput.style.border = '2px solid #FFA300';
+      });
+
+      passwordInput.addEventListener('input', function() {
+        passwordInput.style.border = '2px solid #FFA300';
+      });
+
+      <?php } ?>
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
