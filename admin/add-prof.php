@@ -16,6 +16,7 @@
         // Check if passwords match
         if ($password1 !== $password2)
         {
+          $_SESSION['form_data'] = $_POST;
           header("Location: " . URL . "admin/add-prof.php?error=كلمة المرور غير متطابقة !");
           exit();
         }
@@ -68,8 +69,8 @@
       <img class="LogoMenAr" src="../images/LogoMenAr.png" alt="LogoMenAr"/>
     </div>
     <div class="center-container">
-     <a href="admin-panel.php" title="إلفاء" class="mt-5" dir="rtl"><button type="button" class="btn-close" aria-label="Close"></button></a>
-      <div class="container my-5" dir="rtl">
+     <a href="<?php URL; ?>admin-panel.php" title="إلفاء" class="mt-5" dir="rtl"><button type="button" class="btn-close" aria-label="Close"></button></a> 
+     <div class="container my-5" dir="rtl">
         <?php if (isset($_GET['error'])) { ?>
                 <p id="error-container" class="error" dir="rtl">
                 <?php echo $_GET['error']; ?></p>
@@ -77,23 +78,23 @@
           <form autocomplete="off" method="POST">
             <div class="mb-3">
               <label class="form-label cus-label" >CIN</label><span> :</span>
-              <input type="text" name="CIN" placeholder="رقم البطاقة الوطنية" id="input-field" class="form-control">
+              <input type="text" name="CIN" placeholder="رقم البطاقة الوطنية" value="<?php echo isset($_SESSION['form_data']['CIN']) ? $_SESSION['form_data']['CIN'] : ''; ?>" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label" >الإسم الكامل </label><span> :</span>
-              <input type="text" name="full_name" placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
+              <input type="text" name="full_name" placeholder="اسم و نسب الاستاذ(ة)" value="<?php echo isset($_SESSION['form_data']['full_name']) ? $_SESSION['form_data']['full_name'] : ''; ?>" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">إسم المستخدم </label><span> :</span>
-              <input type="text" name="username" required placeholder="ادخل اسم المستخدم الخاص" id="input-field" class="form-control">
+              <input type="text" name="username" required placeholder="ادخل اسم المستخدم الخاص" value="<?php echo isset($_SESSION['form_data']['username']) ? $_SESSION['form_data']['username'] : ''; ?>" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">كلمة المرور </label><span> :</span>
-              <input type="password" name="password" required placeholder="ادخل كلمة المرور" id="input-field" class="form-control">
+              <input type="password" name="password" required placeholder="ادخل كلمة المرور" value="<?php echo isset($_SESSION['form_data']['password']) ? $_SESSION['form_data']['password'] : ''; ?>" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">اعد كلمة المرور</label><span> :</span>
-              <input type="password" required placeholder="ادخل كلمة المرور من جديد" name="confirm_password" id="input-field" class="form-control">
+              <input type="password" required placeholder="ادخل كلمة المرور من جديد" name="confirm_password" value="<?php echo isset($_SESSION['form_data']['confirm_password']) ? $_SESSION['form_data']['confirm_password'] : ''; ?>" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">المستوى </label><span> :</span>

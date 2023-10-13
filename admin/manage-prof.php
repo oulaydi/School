@@ -51,6 +51,7 @@
         // Check if passwords match
         if ($password1 !== $password2)
         {
+          $_SESSION['form_data'] = $_POST;
           header("Location: " . URL . "admin/manage-prof.php?id_prof=$id&error=كلمة المرور غير متطابقة !");
           exit();
         }
@@ -94,6 +95,7 @@
     <link rel="icon" href="../images/icon.PNG" type="image/x-icon" />
     <link rel="stylesheet" href="../css/add-prof.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>تحديث استاذ(ة)</title>
   </head>
 <body>
@@ -107,7 +109,7 @@
               <p id="error-container" class="error" dir="rtl">
               <?php echo $_GET['error']; ?></p>
       <?php } ?>
-          <form autocomplete="off" method="POST">
+          <form autocomplete="off" method="POST" >
             <div class="mb-3">
               <label class="form-label cus-label" >CIN</label><span> :</span>
               <input type="text" placeholder="رقم البطاقة الوطنية" id="input-field" disabled value="<?php echo $cin; ?>" class="form-control">
@@ -122,11 +124,13 @@
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">كلمة المرور الجديدة</label><span> :</span>
-              <input type="password" placeholder="ادخل كلمة المرور" name="password" id="input-field" class="form-control">
+              <input type="password" required placeholder="ادخل كلمة المرور" name="password" value="<?php echo isset($_SESSION['form_data']['password']) ? $_SESSION['form_data']['password'] : ''; ?>" id="input-field" class="form-control">
+              <i class="fas fa-eye" style="" id="togglePassword"></i>
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">اعد كلمة المرور</label><span> :</span>
-              <input type="password" placeholder="ادخل كلمة المرور من جديد" name="confirm_password" id="input-field" class="form-control">
+              <input type="password" required placeholder="ادخل كلمة المرور من جديد" name="confirm_password" value="<?php echo isset($_SESSION['form_data']['confirm_password']) ? $_SESSION['form_data']['confirm_password'] : ''; ?>" id="input-field" class="form-control">
+              <i class="fas fa-eye" style="" id="toggleConfirmPassword"></i>
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">المستوى</label><span> :</span>
@@ -166,5 +170,25 @@
         <footer>
             <p><i><a href="https://github.com/oulaydi" target="_blank">OUALDYI</a></i> &copy; 2023 .جميع الحقوق محفوظة</p>
         </footer>
+
+        <script>
+            const passwordInput = document.querySelector('input[name="password"]');
+            const confirmInput = document.querySelector('input[name="confirm_password"]');
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            
+            togglePassword.addEventListener('click', function () {
+              togglePasswordVisibility(passwordInput);
+              togglePasswordVisibility(confirmInput);
+            });
+            
+            function togglePasswordVisibility(inputField) {
+              if (inputField.type === 'password') {
+                    inputField.type = 'text';
+                } else {
+                    inputField.type = 'password';
+                  }
+            }
+          </script>
   </body>
 </html>

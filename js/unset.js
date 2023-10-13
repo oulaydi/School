@@ -5,7 +5,7 @@ const errorContainer = document.querySelector('#error-container');
 if (errorContainer) {
     setTimeout(() => {
         errorContainer.style.display = 'none';
-    }, 4000);
+    }, 5000);
     
 }
     

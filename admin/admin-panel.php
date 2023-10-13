@@ -24,6 +24,7 @@
       <div class="container" dir="rtl">
         <button class="btn btn-primary my-5"><a href="add-prof.php" class="text-light">إضافة استاذ(ة)</a><span> +</span></button>
       </div>
+      <?php unset($_SESSION['form_data']); ?>
       <?php if (isset($_GET['success'])) { ?>
               <p id="success-container" class="success" dir="rtl">
               <?php echo $_GET['success']; ?></p>

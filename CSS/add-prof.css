@@ -83,6 +83,22 @@ span {
     font-weight:bolder;
 }
 
+i, .fas {
+    display: flex;
+    font-weight: 900;
+    flex-direction: row-reverse;
+    position: absolute;
+    margin: -28px 258px;
+    color: rgba(128, 128, 128, 0.483);
+    cursor: pointer;
+    display: none;
+    transition: .2s;
+}
+
+i, .fas:hover {
+    color: var(--text-color);
+}
+
 #error-container {
     background: #F2DEDE;
     color: #d13936;
