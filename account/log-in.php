@@ -57,7 +57,7 @@
             }
             else
             {
-                header("Location: ". URL ."account/index.php?error=لا يوجد حاليا اي اساتذة");
+                header("Location: ". URL ."account/index.php?error=اسم المستخدم او كلمة المرور غير صحيح");
                 exit();
             }
         }

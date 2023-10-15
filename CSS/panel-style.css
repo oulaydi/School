@@ -39,6 +39,7 @@
 
 div.logo {
     padding: 10px;
+    margin-bottom: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +53,37 @@ div.logo {
     -ms-user-select: none;
     pointer-events: none;
 }
+
+#header {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+}
+
+.container h3 {
+    cursor: default;
+    width: 85%;
+    margin-top: 50px;
+    border-right: 4px solid var(--button-color);
+    margin-right: 200px;
+}
+
+#add-rem {
+    margin-left: 16px;
+}
+
+#bi-icon2::before {
+    font-size: 26px;
+    font-weight: 700 !important;
+}
+
+#bi-icon2:hover {
+    color: var(--secondary-oclor);
+}
+
+.btn.btn-outline-secondary .bi:hover{
+    color: var(--background-color);
+  }
 
 .text-light {
     text-decoration: none;

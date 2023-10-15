@@ -21,6 +21,7 @@
                   $cin = $row['CIN'];
                   $full_name = $row['full_name'];
                   $username = $row['username'];
+                  $pass = $row['password'];
                   $level = $row['niveau'];
                   $subject = $row['matiere'];
               }
@@ -48,15 +49,24 @@
         $level = $_POST['selected_level'];
         $subject = $_POST['selected_subject'];
         
-        // Check if passwords match
-        if ($password1 !== $password2)
+        if(empty($password1) && empty($password2))
         {
-          $_SESSION['form_data'] = $_POST;
-          header("Location: " . URL . "admin/manage-prof.php?id_prof=$id&error=كلمة المرور غير متطابقة !");
-          exit();
+          $password = $pass;
         }
-        
-        $password = md5($password1);
+        else
+        {
+          // Check if passwords match
+          if ($password1 !== $password2)
+          {
+            $_SESSION['form_data'] = $_POST;
+            header("Location: " . URL . "admin/manage-prof.php?id_prof=$id&error=كلمة المرور غير متطابقة !");
+            exit();
+          }
+          else
+          {
+            $password = md5($password1);
+          }            
+        }
 
         // SQL Query then save into DB
         $sql1 = "UPDATE table_profs SET 
@@ -124,13 +134,12 @@
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">كلمة المرور الجديدة</label><span> :</span>
-              <input type="password" required placeholder="ادخل كلمة المرور" name="password" value="<?php echo isset($_SESSION['form_data']['password']) ? $_SESSION['form_data']['password'] : ''; ?>" id="input-field" class="form-control">
+              <input type="password" placeholder="ادخل كلمة المرور" name="password" value="<?php echo isset($_SESSION['form_data']['password']) ? $_SESSION['form_data']['password'] : ''; ?>" id="input-field" class="form-control">
               <i class="fas fa-eye" style="" id="togglePassword"></i>
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">اعد كلمة المرور</label><span> :</span>
-              <input type="password" required placeholder="ادخل كلمة المرور من جديد" name="confirm_password" value="<?php echo isset($_SESSION['form_data']['confirm_password']) ? $_SESSION['form_data']['confirm_password'] : ''; ?>" id="input-field" class="form-control">
-              <i class="fas fa-eye" style="" id="toggleConfirmPassword"></i>
+              <input type="password" placeholder="ادخل كلمة المرور من جديد" name="confirm_password" value="<?php echo isset($_SESSION['form_data']['confirm_password']) ? $_SESSION['form_data']['confirm_password'] : ''; ?>" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">المستوى</label><span> :</span>
@@ -168,14 +177,13 @@
       <script src="../js/unset.js"></script>
 
         <footer>
-            <p><i><a href="https://github.com/oulaydi" target="_blank">OUALDYI</a></i> &copy; 2023 .جميع الحقوق محفوظة</p>
+            <p>&copy; 2023 .جميع الحقوق محفوظة</p>
         </footer>
 
         <script>
             const passwordInput = document.querySelector('input[name="password"]');
             const confirmInput = document.querySelector('input[name="confirm_password"]');
             const togglePassword = document.getElementById('togglePassword');
-            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
             
             togglePassword.addEventListener('click', function () {
               togglePasswordVisibility(passwordInput);

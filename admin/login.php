@@ -43,6 +43,7 @@
                 if($row['username'] === $uname && $row['password'] === $pass)
                 {
                     header("Location: ". URL ."admin/admin-panel.php?success=مرحبًا بعودتك");
+                    $_SESSION['user'] = $uname; //check if the user logged in or not, when logout will unset it
                     exit();
                 }
                 else

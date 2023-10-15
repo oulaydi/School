@@ -99,6 +99,17 @@
 
       <?php } ?>
     </script>
+    <script>
+        const errorContainer = document.querySelector('#error-container');
+
+        // Check if the error message is present and then schedule it to disappear after 5 seconds
+        if (errorContainer) {
+            setTimeout(() => {
+                errorContainer.style.display = 'none';
+            }, 5000);
+            
+        }
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

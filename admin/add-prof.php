@@ -62,6 +62,7 @@
     <link rel="icon" href="../images/icon.PNG" type="image/x-icon" />
     <link rel="stylesheet" href="../css/add-prof.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>إضافة استاذ(ة)</title>
   </head>
 <body>
@@ -78,7 +79,7 @@
           <form autocomplete="off" method="POST">
             <div class="mb-3">
               <label class="form-label cus-label" >CIN</label><span> :</span>
-              <input type="text" name="CIN" placeholder="رقم البطاقة الوطنية" value="<?php echo isset($_SESSION['form_data']['CIN']) ? $_SESSION['form_data']['CIN'] : ''; ?>" id="input-field" class="form-control">
+              <input type="text" name="CIN" required placeholder="رقم البطاقة الوطنية" value="<?php echo isset($_SESSION['form_data']['CIN']) ? $_SESSION['form_data']['CIN'] : ''; ?>" id="input-field" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label cus-label" >الإسم الكامل </label><span> :</span>
@@ -91,6 +92,7 @@
             <div class="mb-3">
               <label class="form-label cus-label">كلمة المرور </label><span> :</span>
               <input type="password" name="password" required placeholder="ادخل كلمة المرور" value="<?php echo isset($_SESSION['form_data']['password']) ? $_SESSION['form_data']['password'] : ''; ?>" id="input-field" class="form-control">
+              <i class="fas fa-eye" style="" id="togglePassword"></i>
             </div>
             <div class="mb-3">
               <label class="form-label cus-label">اعد كلمة المرور</label><span> :</span>
@@ -131,11 +133,28 @@
           </form>
       </div>
     </div>
-
+    <script>
+            const passwordInput = document.querySelector('input[name="password"]');
+            const confirmInput = document.querySelector('input[name="confirm_password"]');
+            const togglePassword = document.getElementById('togglePassword');
+            
+            togglePassword.addEventListener('click', function () {
+              togglePasswordVisibility(passwordInput);
+              togglePasswordVisibility(confirmInput);
+            });
+            
+            function togglePasswordVisibility(inputField) {
+              if (inputField.type === 'password') {
+                    inputField.type = 'text';
+                } else {
+                    inputField.type = 'password';
+                  }
+            }
+          </script>
     <script src="../js/unset.js"></script>
     
     <footer>
-      <p><i><a href="https://github.com/oulaydi" target="_blank">OUALDYI</a></i> &copy; 2023 .جميع الحقوق محفوظة</p>
+      <p>&copy; 2023 .جميع الحقوق محفوظة</p>
     </footer>
 </body>
 </html>
