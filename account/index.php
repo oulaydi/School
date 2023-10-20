@@ -40,9 +40,9 @@
               <input type="password" name="password" placeholder="كلمة المرور" />
             </div>
             <input type="submit" value="تسجيل الدخول" class="btn-1" />
-            <button class="btn transparent" id="sign-up-btn">
+            <a class="btn transparent" id="sign-up-btn">
               نسيت كلمة المرور؟
-            </button>
+            </a>
             <div class="footer">
               <p class="footer-p">
                 <i

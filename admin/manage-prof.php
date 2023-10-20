@@ -1,6 +1,5 @@
 <?php include('../config/constants.php'); ?>
 
-
 <?php
       //get the id to change
       $id = $_GET['id_prof'];
@@ -113,8 +112,11 @@
       <img class="LogoMenAr" src="../images/LogoMenAr.png" alt="LogoMenAr"/>
     </div>
     <div class="center-container">
-     <a href="admin-panel.php" title="إلفاء" class="mt-5" dir="rtl"><button type="button" class="btn-close" aria-label="Close"></button></a>
-      <div class="container my-5" dir="rtl">
+      <div>
+        <h3 id="h4" >تحديث استاذ(ة)</h3>
+      </div>
+      <a href="admin-panel.php" title="إلفاء" class="mt-5"><button type="button" class="btn-close" style="margin-left: 13px;" aria-label="Close"></button></a>
+     <div class="container my-5" dir="rtl">
       <?php if (isset($_GET['error'])) { ?>
               <p id="error-container" class="error" dir="rtl">
               <?php echo $_GET['error']; ?></p>

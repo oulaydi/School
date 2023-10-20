@@ -1,4 +1,4 @@
-<?php include('../config/constants.php') ?>
+<?php include('../config/constants.php'); ?>
 
 <?php 
 
@@ -39,11 +39,11 @@
             if ($result && mysqli_num_rows($result) > 0)
             {
                 $row = mysqli_fetch_assoc($result);
-
+                
                 if($row['username'] === $uname && $row['password'] === $pass)
                 {
+                    // $_SESSION['user'] = $uname; //check if the user logged in or not, when logout will unset it
                     header("Location: ". URL ."admin/admin-panel.php?success=مرحبًا بعودتك");
-                    $_SESSION['user'] = $uname; //check if the user logged in or not, when logout will unset it
                     exit();
                 }
                 else

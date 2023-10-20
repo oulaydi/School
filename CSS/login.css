@@ -545,6 +545,7 @@ form.sign-in-form {
     margin: 10px 0;
   }
   .btn.transparent {
+    margin: -10px;
     position: absolute;
     bottom: 80px;
     font-size: 12px;

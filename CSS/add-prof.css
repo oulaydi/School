@@ -38,6 +38,7 @@
 }
 
 div.logo {
+    margin-bottom: 40px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -97,6 +98,15 @@ i, .fas {
 
 i, .fas:hover {
     color: var(--text-color);
+}
+
+#h4 {
+    position: absolute;
+    margin-top: 43px;
+    right: 530px;
+    font-size: 22px;
+    left: 668px;
+    border-right: 4px solid var(--button-color);
 }
 
 #error-container {
