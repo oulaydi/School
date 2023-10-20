@@ -156,8 +156,7 @@
           </script>
     <script src="../js/unset.js"></script>
     
-    <footer>
-      <p>&copy; 2023 .جميع الحقوق محفوظة</p>
-    </footer>
+    <?php include('partials/footer.php'); ?>
+
 </body>
 </html>

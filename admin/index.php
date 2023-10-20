@@ -44,10 +44,7 @@
           </form>
         </div>
       </div>
-
-    <footer>
-      <p><i><a href="https://github.com/oulaydi" target="_blank">OUALDYI</a></i> &copy; 2023 .جميع الحقوق محفوظة</p>
-    </footer>
+    <?php include('partials/footer.php'); ?>
 
     <script>
       <?php if (isset($_GET['error'])) { ?>
