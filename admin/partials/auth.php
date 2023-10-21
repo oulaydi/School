@@ -1,8 +1,10 @@
 <?php
+    define('SITE', 'http://localhost/School/');
+
     // Access Control
-    if(!isset($_SESSION['auth']))
+    if(!isset($_SESSION['user']))
     {
-        header("Location: index.php?error=المرجو تسجيل الدخول اولا !");
+        header("Location: ". SITE ."admin/index.php?error=! المرجو تسجيل الدخول اولا");
         exit();
     }
 ?>

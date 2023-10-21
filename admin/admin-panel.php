@@ -102,7 +102,8 @@
             ?>
         </table>
       <?php include('partials/footer.php'); ?>
-
+      <?php include('partials/auth.php'); ?>
+      
     <script>
       const successContainer = document.querySelector('#success-container');
 

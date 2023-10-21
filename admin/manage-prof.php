@@ -179,6 +179,7 @@
       <script src="../js/unset.js"></script>
 
       <?php include('partials/footer.php'); ?>
+      <?php include('partials/auth.php'); ?>
 
         <script>
             const passwordInput = document.querySelector('input[name="password"]');

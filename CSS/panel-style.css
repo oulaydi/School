@@ -98,7 +98,7 @@ div.logo {
     background: #F2DEDE;
     color: #d13936;
     padding: 10px;
-    width: 14%;
+    width: max-content;
     border-radius: 5px;
     margin: 20px auto;
     text-align: center;
@@ -108,7 +108,7 @@ div.logo {
     background: #D4EDDA;
     color: #155724;
     padding: 10px;
-    width: 15%;
+    width: max-content;
     border-radius: 5px;
     text-align: center;
     margin: 20px auto;

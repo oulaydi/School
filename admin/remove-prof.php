@@ -27,5 +27,5 @@
 
     //Redirect to manage admin page with a message
 ?>
-
+<?php include('partials/auth.php'); ?>
 <script src="../js/unset.js"></script>

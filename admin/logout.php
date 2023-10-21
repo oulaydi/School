@@ -9,3 +9,4 @@
     header("location:".URL.'admin/');
 
 ?>
+<?php include('partials/auth.php'); ?>

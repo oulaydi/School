@@ -155,8 +155,9 @@
             }
           </script>
     <script src="../js/unset.js"></script>
-    
+
     <?php include('partials/footer.php'); ?>
+    <?php include('partials/auth.php'); ?>
 
 </body>
 </html>
