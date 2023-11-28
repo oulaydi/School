@@ -73,6 +73,7 @@
             <p style="margin-bottom: 90px">
               من فضلك، انتقل إلى إدارة المدرسة لتحديث كلمة المرور الجديدة الخاصة
               بك.
+              <span><a href="">او إضفط هنا</a></span>
             </p>
             <img src="../images/solution.svg" class="image" alt="" />
             <button class="btn transparent-1" id="sign-in-btn">عودة</button>
