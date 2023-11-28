@@ -97,7 +97,7 @@ div {
     border-radius: 20px;
     height: 370px;
     width: 300px;
-    transition: .3s;
+    transition: .2s;
 }
 
 .card:hover {
