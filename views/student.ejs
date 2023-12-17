@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="icon" href="images/icon.PNG" type="image/x-icon" />
+        <link rel="stylesheet" href="css/student.css" />
+        <script
+            src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous"
+        ></script>
+
+        <title>الفضاء الخاص بالتلاميذ</title>
+    </head>
+    <body>
+        <!-- Logo -->
+        <%- include('./partials/header.ejs') %>
+        <!-- Logo Ends -->
+        <div class="containe">
+            <div class="title">
+                <h2>اختر الموسم الدراسي</h2>
+            </div>
+            <div class="dropdown">
+                <div class="select">
+                    <span class="selected">الموسم الدراسي</span>
+                    <div class="caret"></div>
+                </div>
+                <ul class="menu">
+                    <li>2020/2021</li>
+                    <li>2021/2022</li>
+                    <li>2022/2023</li>
+                    <li class="active">2023/2024</li>
+                    <li>2024/2025</li>
+                </ul>
+            </div>
+        </div>
+        <!-- footer -->
+        <%- include('./partials/footer.ejs') %>
+        <!-- footer ends -->
+        <script src="js/dropdown.js"></script>
+    </body>
+</html>
