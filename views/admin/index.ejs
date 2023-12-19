@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/admin.css">
+  </head>
+  <body>
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %>
+    <!-- Header Ends!! -->
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="#" method="post" class="sign-in-form">
+            <h2 class="title">الإدارة</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input id="username" type="text" name="username" autocomplete="off" placeholder="اسم المستخدم" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input id="password" type="password" name="password" placeholder="كلمة المرور" />
+            </div>
+              <div class="btn-1">
+                <button class="rounded-1" id="submit" type="submit">تسجيل الدخول</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    <!-- footer -->
+        <%- include('../partials/footer.ejs') %>
+    <!-- footer ends -->
+    <!-- <script>
+        // Change the border color to red
+        document.getElementById('username').style.border = '2px solid red';
+        document.getElementById('password').style.border = '2px solid red';
+
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+
+      usernameInput.addEventListener('input', function() {
+        usernameInput.style.border = '2px solid #FFA300';
+      });
+
+      passwordInput.addEventListener('input', function() {
+        passwordInput.style.border = '2px solid #FFA300';
+      });
+    </script> -->
+    </body>
+</html>
+
