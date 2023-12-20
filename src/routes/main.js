@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const DirectorSchema = require("../models/DirectorSchema");
 
 router.get("/", (req, res) => {
     res.render("index", {
@@ -17,12 +16,6 @@ router.get("/teacher", (req, res) => {
 router.get("/student", (req, res) => {
     res.render("student", {
         title: "الفضاء الخاص - بالتلاميذ",
-    });
-}); 
-
-router.get("/admin", (req, res) => {
-    res.render("admin/index", {
-        title: "الإدارة - تسجيل الدخول",
     });
 });
 
