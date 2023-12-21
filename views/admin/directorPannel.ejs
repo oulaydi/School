@@ -1,1 +1,106 @@
-<h1>Welcome again :1</h1>
+<?php include('../config/constants.php'); ?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/directorPannel.css" />
+  </head>
+<body>
+    <!-- Header -->
+        <%- include('../partials/header.ejs') %>
+    <!-- Header Ends!! -->
+    <div class="container" id="header">
+      <div>
+          <h3>الفضاء الخاص بالإدارة</h3>
+          </div>
+          <div class="container" id="add-rem">
+            <button class="btn" title="تسجيل الخروج"><a href="/admin" style="color: #6c757d;"><i id="bi-icon2" class="bi bi-box-arrow-left fw-bold"></i></a></button>
+            <button class="btn btn-primary my-5"><a href="add-prof.php" class="text-light">إضافة استاذ(ة) <i id="bi-icon" class="bi bi-plus fw-bold"></i></a></button>
+          </div>
+        </div>
+        <table class="table table-bordered w-75" id="center-container" dir="rtl">
+          <thead>
+            <tr class="text-center">
+              <th scope="col">رقم الاستاذ(ة)</th>
+              <th scope="col">الإسم الكامل</th>
+              <th scope="col">إسم المستخدم</th>
+              <th scope="col">يدرس</th>
+              <th scope="col">المادة</th>
+              <th scope="col">إجراء</th>
+            </tr>
+          </thead>
+
+          <!-- <?php
+                //Query to get all admins
+                $sql = "SELECT * FROM table_profs";
+                // Execute the Query 
+                $result = mysqli_query($cnx, $sql);
+
+                if ($result == true)
+                {
+                    $rows = mysqli_num_rows($result); //functions that gets all rows from db
+                    if ($rows > 0)
+                    {
+                      // we hava data
+                          while($rows = mysqli_fetch_assoc($result))
+                          {
+                              $id = $rows['id_prof'];
+                              $cin = $rows['CIN'];
+                              $full_name = $rows['full_name'];
+                              $username = $rows['username'];
+                              $level = $rows['niveau'];
+                              $subject = $rows['matiere'];
+
+                              //Dispalying the values
+                              ?> -->
+                              
+                              <tbody class="table-group-divider">
+                                <!-- <tr class="text-center">
+                                  <td><?php echo $cin; ?></td>
+                                  <td><?php echo $full_name; ?></td>
+                                  <td><?php echo $username; ?></td>
+                                  <td><?php echo $level; ?></td>
+                                  <td><?php echo $subject; ?></td>
+                                  <td> -->
+                                <tr class="text-center">
+                                  <td>EE667537</td>
+                                  <td>Oussama Oulaydi</td>
+                                  <td>oulaydi</td>
+                                  <td>tanawi</td>
+                                  <td>info</td>
+                                  <td>
+                                      <button type="button" class="btn btn-warning"><a class="fw-semibold text-decoration-none link-light py-3" href="#">تحديث</a></button>
+                                      <button type="button" class="btn btn-danger"><a class="fw-semibold text-decoration-none link-light py-3" href="#">حذف</a></button>
+                                  </td>
+                                </tr>
+                              </tbody>
+<!-- 
+                              <?php
+                          }
+                    }
+                    else
+                    {
+                        echo '<p id="error-container">! لا يوجد اي أساتذة</p>';                      
+                    }
+                
+                }
+            ?> -->
+        </table>
+        <!-- footer -->
+            <%- include('../partials/footer.ejs') %>
+        <!-- footer ends -->     
+    <!-- <script>
+      const successContainer = document.querySelector('#success-container');
+
+      // Check if the success message is present and then schedule it to disappear after 5 seconds
+      if (successContainer) {
+          setTimeout(() => {
+              successContainer.style.display = 'none';
+          }, 4000);
+      }
+    </script> -->
+</body>
+</html>

@@ -19,7 +19,6 @@ router.get("/admin", async (req, res) => {
     }
 });
 
-
 /**
  * POST /
  * Director - Admin check login
@@ -47,14 +46,14 @@ router.post("/admin", async (req, res) => {
     }
 });
 
-
 /**
  * POST /
  * Admin pannel - Dashboard
  */
-router.get("/admin", async (req, res) => {
-  res.render("admin/directorPannel");
+router.get("/directorPannel", async (req, res) => {
+    res.render("admin/directorPannel", {
+        title: "الرئيسية - لوحة القيادة",
+    });
 });
-
 
 module.exports = router;

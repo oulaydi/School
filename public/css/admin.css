@@ -154,16 +154,6 @@ button:hover {
     text-align: center;
 }
 
-.error {
-    background: #F2DEDE;
-    color: #d13936;
-    padding: 10px;
-    width: max-content;
-    border-radius: 5px;
-    margin: 20px auto;
-    text-align: center;
-}
-
 /* footer */
 footer {
     color: var(--text-color); 
