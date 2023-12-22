@@ -5,6 +5,25 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
 
+// MiddleWare - Cookie
+/**
+ * Check Login
+ */
+const authMiddleware = (req, res, next) => {
+    const adminToken = req.cookies.adminToken;
+    if (!adminToken) {
+        return res.status(401).json({ message: "Unauthorized login!" });
+    } 
+    
+    try {
+        const decoded = jwt.verify(adminToken, jwtSecret);
+        req.directorId = decoded.directorId;
+        next();
+    } catch (error) {
+        res.status(401).json({ message: "Unauthorized!" });
+    }
+};
+
 /**
  * GET /
  * Director - Admin page
@@ -40,7 +59,7 @@ router.post("/admin", async (req, res) => {
         const adminToken = jwt.sign({ directorId: director._id }, jwtSecret);
         res.cookie("adminToken", adminToken, { httpOnly: true });
 
-        res.redirect("/directorPannel");
+        res.redirect("/director");
     } catch (error) {
         console.log(error);
     }
@@ -50,8 +69,8 @@ router.post("/admin", async (req, res) => {
  * POST /
  * Admin pannel - Dashboard
  */
-router.get("/directorPannel", async (req, res) => {
-    res.render("admin/directorPannel", {
+router.get("/director", authMiddleware, async (req, res) => {
+    res.render("admin/director", {
         title: "الرئيسية - لوحة القيادة",
     });
 });
