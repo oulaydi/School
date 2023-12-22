@@ -13,8 +13,8 @@ const authMiddleware = (req, res, next) => {
     const adminToken = req.cookies.adminToken;
     if (!adminToken) {
         return res.status(401).json({ message: "Unauthorized login!" });
-    } 
-    
+    }
+
     try {
         const decoded = jwt.verify(adminToken, jwtSecret);
         req.directorId = decoded.directorId;
@@ -66,13 +66,37 @@ router.post("/admin", async (req, res) => {
 });
 
 /**
- * POST /
- * Admin pannel - Dashboard
+ * GET /
+ * Director - Dashboard
  */
 router.get("/director", authMiddleware, async (req, res) => {
-    res.render("admin/director", {
-        title: "الرئيسية - لوحة القيادة",
-    });
+    try {
+        res.render("admin/director", {
+            title: "الرئيسية - لوحة القيادة",
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
+
+/**
+ * Post /
+ * Dashboard - Create New eahcer
+ */
+router.get("/add-teacher", authMiddleware, async (req, res) => {
+    try {
+        res.render("admin/add-teacher", {
+            title: "إضافة استاذ(ة)",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+
+
+
+
 
 module.exports = router;
