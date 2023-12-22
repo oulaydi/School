@@ -1,0 +1,55 @@
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const AddTeacherSchema = new Schema({
+    CIN: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    full_name: {
+        type: String,
+    },
+    confirm_password: {
+        type: String,
+        required: true,
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    selected_level: {
+        type: String,
+        enum: ["إعدادي", "ثانوي"],
+        required: true,
+    },
+    selected_subject: {
+        type: String,
+        enum: [
+            "اللغة العربية (Arabic Language)",
+            "اللغة الفرنسية (French Language)",
+            "اللغة الإنجليزية (English Language)",
+            "اللغة الإسبانية (Spanish Language)",
+            "اللغة الألمانية (German Language)",
+            "الرياضيات (Mathematics)",
+            "الفيزياء (Physics)",
+            "الكيمياء (Chemistry)",
+            "الأحياء (Biology)",
+            "الجغرافيا (Geography)",
+            "التربية الإسلامية (Islamic Education)",
+            "الفلسفة (Philosophy)",
+            "ألتربية التشكيلية (Art education)",
+            "المعلوميات (Informatique)",
+            "التكنولوجيا (technology)",
+        ],
+        required: true,
+    },
+});
+
+module.exports = mongoose.model("AddTeacher", AddTeacherSchema);

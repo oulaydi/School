@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const DirectorSchema = require("../models/DirectorSchema");
+const AddTeacher = require("../models/AddTeacherSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
@@ -67,12 +68,16 @@ router.post("/admin", async (req, res) => {
 
 /**
  * GET /
- * Director - Dashboard
+ * Director - All teachers
  */
 router.get("/director", authMiddleware, async (req, res) => {
     try {
+
+        const teachers = await AddTeacher.find();
+        
         res.render("admin/director", {
             title: "الرئيسية - لوحة القيادة",
+            teachers,
         });
     } catch (error) {
         console.log(error);
@@ -80,8 +85,8 @@ router.get("/director", authMiddleware, async (req, res) => {
 });
 
 /**
- * Post /
- * Dashboard - Create New eahcer
+ * Get /
+ * Dashboard Route - Teahcers
  */
 router.get("/add-teacher", authMiddleware, async (req, res) => {
     try {
@@ -93,10 +98,32 @@ router.get("/add-teacher", authMiddleware, async (req, res) => {
     }
 });
 
+/**
+ * Post /
+ * Dashboard - Create New eahcer
+ */
+router.post("/add-teacher", authMiddleware, async (req, res) => {
+    try {
+        try {
+            const newTeacher = AddTeacher({
+                CIN: req.body.CIN,
+                full_name: req.body.full_name,
+                password: req.body.password,
+                confirm_password: req.body.confirm_password,
+                username: req.body.username,
+                selected_level: req.body.selected_level,
+                selected_subject: req.body.selected_subject,
+            });
 
+            await AddTeacher.create(newTeacher);
 
-
-
-
+            res.redirect("/director");
+        } catch (error) {
+            console.log(error);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = router;

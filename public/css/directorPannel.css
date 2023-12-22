@@ -96,26 +96,10 @@ div.logo {
     border: 2px solid var(--text-color);
 }
 
-#error-container {
-    background: #F2DEDE;
-    color: #d13936;
-    padding: 10px;
-    width: max-content;
-    border-radius: 5px;
-    margin: 20px auto;
-    text-align: center;
-}
-
-#success-container {
-    background: #D4EDDA;
-    color: #155724;
-    padding: 10px;
-    width: max-content;
-    border-radius: 5px;
-    text-align: center;
-    margin: 20px auto;
-    transition: opacity 0.5s ease;
-    opacity: 1;
+.actions {
+    display: flex;
+    justify-content: space-around;
+    border: none;
 }
 
 span {
