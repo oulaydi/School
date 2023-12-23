@@ -159,6 +159,20 @@ router.put("/edit-teacher/:id", authMiddleware, async (req, res) => {
         });
 
         res.redirect("/director");
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+/**
+ * DELETE /
+ * Dashboard - DELETE Teahcer
+//  */
+router.delete("/edit-teacher/:id", authMiddleware, async (req, res) => {
+    try {
+        await AddTeacher.deleteOne({ _id: req.params.id });
+        res.redirect("/director");
     } catch (error) {
         console.log(error);
     }

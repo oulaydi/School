@@ -61,9 +61,9 @@
                         <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-teacher/<%= teacher._id %>">تحديث</a>
                       </button>
                       <form action="/delete-teacher/<%= teacher._id %>?_method=DELETE" method="POST">
-                        <button type="button" class="btn btn-danger">
+                        <button type="submit" class="btn btn-danger">
                           <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
-                      </button>
+                        </button>
                       </form>
                   </td>
                 </tr>
