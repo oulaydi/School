@@ -72,9 +72,8 @@ router.post("/admin", async (req, res) => {
  */
 router.get("/director", authMiddleware, async (req, res) => {
     try {
-
         const teachers = await AddTeacher.find();
-        
+
         res.render("admin/director", {
             title: "الرئيسية - لوحة القيادة",
             teachers,
@@ -99,8 +98,8 @@ router.get("/add-teacher", authMiddleware, async (req, res) => {
 });
 
 /**
- * Post /
- * Dashboard - Create New eahcer
+ * POST /
+ * Dashboard - Create New eahcer.
  */
 router.post("/add-teacher", authMiddleware, async (req, res) => {
     try {
@@ -121,6 +120,45 @@ router.post("/add-teacher", authMiddleware, async (req, res) => {
         } catch (error) {
             console.log(error);
         }
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+/**
+ * GET /
+ * Dashboard - Get Teahcer by ID
+ */
+router.get("/edit-teacher/:id", authMiddleware, async (req, res) => {
+    try {
+        const teacherInfo = await AddTeacher.findOne({ _id: req.params.id });
+
+        res.render("admin/edit-teacher", {
+            teacherInfo,
+            title: "تحديث استاذ(ة)",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+/**
+ * PUT /
+ * Dashboard - Edit Teahcer
+//  */
+router.put("/edit-teacher/:id", authMiddleware, async (req, res) => {
+    try {
+        await AddTeacher.findByIdAndUpdate(req.params.id, {
+            CIN: req.body.CIN,
+            full_name: req.body.full_name,
+            password: req.body.password,
+            confirm_password: req.body.confirm_password,
+            username: req.body.username,
+            selected_level: req.body.selected_level,
+            selected_subject: req.body.selected_subject,
+        });
+
+        res.redirect("/director");
     } catch (error) {
         console.log(error);
     }

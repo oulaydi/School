@@ -1,6 +1,7 @@
 const cookieParser = require("cookie-parser");
 const mongoStore = require("connect-mongo");
 const express = require("express");
+const methodOverride = require("method-override");
 const connectDB = require("../config/db");
 const path = require("path");
 const session = require("express-session");
@@ -25,6 +26,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(cookieParser());
 
+app.use(methodOverride("_method"));
+
 app.use(
     session({
         secret: "keyboard cat",
@@ -34,7 +37,6 @@ app.use(
             mongoUrl: process.env.MONGODB_URI,
         }),
         cookie: { maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }, // 7 days
-        // cookie: { maxAge: new Date(Date.now() + 10 * 1000) }, // 10s for test
     })
 );
 

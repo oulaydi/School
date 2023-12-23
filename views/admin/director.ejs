@@ -58,11 +58,11 @@
                     <td><%= teacher.selected_subject %></td>
                     <td class="actions">
                       <button type="button" class="btn btn-warning">
-                        <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-teacher/<%= teachers._id %>">تحديث</a>
+                        <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-teacher/<%= teacher._id %>">تحديث</a>
                       </button>
-                      <form action="/delete-teacher/<%= teachers._id %>?_method=DELETE" method="POST">
+                      <form action="/delete-teacher/<%= teacher._id %>?_method=DELETE" method="POST">
                         <button type="button" class="btn btn-danger">
-                          <a class="fw-semibold text-decoration-none link-light py-3" href="">حذف</a>
+                          <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
                       </button>
                       </form>
                   </td>
