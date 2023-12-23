@@ -33,7 +33,8 @@ app.use(
         store: mongoStore.create({
             mongoUrl: process.env.MONGODB_URI,
         }),
-        cookie: { maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) },
+        // cookie: { maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }, // 7 days
+        cookie: { maxAge: new Date(Date.now() + 10 * 1000) }, // 10s for test
     })
 );
 
