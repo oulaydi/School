@@ -159,7 +159,6 @@ router.put("/edit-teacher/:id", authMiddleware, async (req, res) => {
         });
 
         res.redirect("/director");
-
     } catch (error) {
         console.log(error);
     }
