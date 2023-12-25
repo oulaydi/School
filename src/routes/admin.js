@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const DirectorSchema = require("../models/DirectorSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const directorController = require("../controllers/directorController");
 const jwtSecret = process.env.jwtSecret;
+const jwt = require("jsonwebtoken");
 
 // MiddleWare - Cookie
 /**
@@ -43,45 +42,13 @@ router.get("/admin", async (req, res) => {
  * POST /
  * Director - Admin check login
  */
-router.post("/admin", async (req, res) => {
-    try {
-        const { username, password } = req.body;
-
-        const director = await DirectorSchema.findOne({ username });
-        if (!director) {
-            return res.status(401).json({ message: "Invalid infos" });
-        }
-
-        const ifPwdValid = await bcrypt.compare(password, director.password);
-        if (!ifPwdValid) {
-            return res.status(401).json({ message: "Invalid infos" });
-        }
-
-        const adminToken = jwt.sign({ directorId: director._id }, jwtSecret);
-        res.cookie("adminToken", adminToken, { httpOnly: true });
-
-        res.redirect("/director");
-    } catch (error) {
-        console.log(error);
-    }
-});
+router.post("/admin", directorController.director_login);
 
 /**
  * GET /
  * Director - All teachers
  */
-router.get("/director", authMiddleware, async (req, res) => {
-    try {
-        const teachers = await AddTeacher.find();
-
-        res.render("admin/director", {
-            title: "الرئيسية - لوحة القيادة",
-            teachers,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
+router.get("/director", authMiddleware, directorController.director_index);
 
 /**
  * Get /
@@ -101,29 +68,7 @@ router.get("/add-teacher", authMiddleware, async (req, res) => {
  * POST /
  * Dashboard - Create New eahcer.
  */
-router.post("/add-teacher", authMiddleware, async (req, res) => {
-    try {
-        try {
-            const newTeacher = AddTeacher({
-                CIN: req.body.CIN,
-                full_name: req.body.full_name,
-                password: req.body.password,
-                confirm_password: req.body.confirm_password,
-                username: req.body.username,
-                selected_level: req.body.selected_level,
-                selected_subject: req.body.selected_subject,
-            });
-
-            await AddTeacher.create(newTeacher);
-
-            res.redirect("/director");
-        } catch (error) {
-            console.log(error);
-        }
-    } catch (error) {
-        console.log(error);
-    }
-});
+router.post("/add-teacher", authMiddleware, directorController.director_add);
 
 /**
  * GET /
@@ -146,46 +91,26 @@ router.get("/edit-teacher/:id", authMiddleware, async (req, res) => {
  * PUT /
  * Dashboard - Edit Teahcer
 //  */
-router.put("/edit-teacher/:id", authMiddleware, async (req, res) => {
-    try {
-        await AddTeacher.findByIdAndUpdate(req.params.id, {
-            CIN: req.body.CIN,
-            full_name: req.body.full_name,
-            password: req.body.password,
-            confirm_password: req.body.confirm_password,
-            username: req.body.username,
-            selected_level: req.body.selected_level,
-            selected_subject: req.body.selected_subject,
-        });
-
-        res.redirect("/director");
-    } catch (error) {
-        console.log(error);
-    }
-});
+router.put(
+    "/edit-teacher/:id",
+    authMiddleware,
+    directorController.director_edit
+);
 
 /**
  * DELETE /
  * Dashboard - DELETE Teahcer
 //  */
-router.delete("/edit-teacher/:id", authMiddleware, async (req, res) => {
-    try {
-        await AddTeacher.deleteOne({ _id: req.params.id });
-        res.redirect("/director");
-    } catch (error) {
-        console.log(error);
-    }
-});
-
+router.delete(
+    "/edit-teacher/:id",
+    authMiddleware,
+    directorController.director_delete
+);
 
 /**
  * GET /
  * Admin - Logout
  */
-router.get("/logout", (req, res) => {
-    res.clearCookie("adminToken");
-    res.redirect("/admin");
-});
-
+router.get("/logout", directorController.director_logout);
 
 module.exports = router;
