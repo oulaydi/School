@@ -39,6 +39,13 @@
     --font-family1: 'IBM Plex Sans Arabic', sans-serif;
 }
 
+body {
+    background-image: url(https://www.rsu.ma/rsu/bgContent1-left.21b761aebb803b33.png),url(https://www.rsu.ma/rsu/bgContent3-topRight.00811284a834c59d.png),url(https://www.rsu.ma/rsu/bgContent3-BottomRight.dbecf231b0249381.png);
+    background-repeat: no-repeat,no-repeat,no-repeat;
+    background-position: -25px -2px,calc(100% + 37px) -85px,calc(100% + 63px) 70%;
+    background-size: 490px 677px,270px 307px,240px 239px;
+}
+
 div.logo {
     margin-bottom: 40px;
     padding: 10px;

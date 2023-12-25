@@ -27,41 +27,41 @@
                 </button>
             </div>
         </div>
-        <table class="table table-bordered table-striped w-75" id="center-container" dir="rtl">
-            <thead class="thead-dark">
-                <tr class="text-center">
-                    <th scope="col">رقم الاستاذ(ة)</th>
-                    <th scope="col">الإسم الكامل</th>
-                    <th scope="col">إسم المستخدم</th>
-                    <th scope="col">يدرس</th>
-                    <th scope="col">المادة</th>
-                    <th scope="col">إجراء</th>
-                </tr>
-            </thead>
-            <!-- Displaying the values -->
-            <tbody class="table-group-divider">
-                <% teachers.forEach(teacher => { %>
-                    <tr class="text-center">
-                        <td><%= teacher.CIN %></td>
-                        <td><%= teacher.full_name %></td>
-                        <td><%= teacher.username %></td>
-                        <td><%= teacher.selected_level %></td>
-                        <td><%= teacher.selected_subject %></td>
-                        <td class="actions">
-                            <button type="button" class="btn btn-warning">
-                                <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-teacher/<%= teacher._id %>">تحديث</a>
-                            </button>
-                            <form action="/edit-teacher/<%= teacher._id %>?_method=DELETE" method="POST" style="display: inline;">
-                                <button type="submit" class="btn btn-danger">
-                                    <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
-        
+<table class="table table-bordered w-75" id="center-container" dir="rtl">
+    <thead class="thead-dark">
+        <tr class="text-center">
+            <th scope="col">رقم الاستاذ(ة)</th>
+            <th scope="col">الإسم الكامل</th>
+            <th scope="col">إسم المستخدم</th>
+            <th scope="col">يدرس</th>
+            <th scope="col">المادة</th>
+            <th scope="col">إجراء</th>
+        </tr>
+    </thead>
+    <!-- Displaying the values -->
+    <tbody class="table-group-divider">
+        <% teachers.forEach(teacher => { %>
+            <tr class="text-center">
+                <td class="info"><%= teacher.CIN %></td>
+                <td class="info"><%= teacher.full_name %></td>
+                <td class="info"><%= teacher.username %></td>
+                <td class="info"><%= teacher.selected_level %></td>
+                <td class="info"><%= teacher.selected_subject %></td>
+                <td class="actions">
+                    <button type="button" class="btn btn-warning">
+                        <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-teacher/<%= teacher._id %>">تحديث</a>
+                    </button>
+                    <form action="/edit-teacher/<%= teacher._id %>?_method=DELETE" method="POST" style="display: inline;">
+                        <button type="submit" class="btn btn-danger">
+                            <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
         <!-- footer -->
         <%- include('../partials/footer.ejs') %>
         <!-- footer ends -->
