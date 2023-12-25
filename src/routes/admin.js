@@ -177,4 +177,15 @@ router.delete("/edit-teacher/:id", authMiddleware, async (req, res) => {
     }
 });
 
+
+/**
+ * GET /
+ * Admin - Logout
+ */
+router.get("/logout", (req, res) => {
+    res.clearCookie("adminToken");
+    res.redirect("/admin");
+});
+
+
 module.exports = router;
