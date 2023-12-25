@@ -41,28 +41,28 @@
                 <div class="col-md-6">
                   <label class="form-label cus-label">المستوى </label><span> :</span>
                   <select class="form-select" aria-label="Default select example" id="input-field" name="selected_level">
-                    <option selected name="colle" value="إعدادي">إعدادي</option>
-                    <option name="lycee" value="ثانوي">ثانوي</option>
+                    <option value="إعدادي" <%= teacherInfo.selected_level === 'إعدادي' ? 'selected' : '' %>>إعدادي</option>
+                    <option value="ثانوي" <%= teacherInfo.selected_level === 'ثانوي' ? 'selected' : '' %>>ثانوي</option>
                   </select>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label cus-label">المادة</label><span> :</span>
                     <select class="form-select" aria-label="Default select example" id="input-field" name="selected_subject">
-                      <option selected value="اللغة العربية (Arabic Language)">اللغة العربية (Arabic Language)</option>
-                      <option value="اللغة الفرنسية (French Language)">اللغة الفرنسية (French Language)</option>
-                      <option value="اللغة الإنجليزية (English Language)">اللغة الإنجليزية (English Language)</option>
-                      <option value="اللغة الإسبانية (Spanish Language)">اللغة الإسبانية (Spanish Language)</option>
-                      <option value="اللغة الألمانية (German Language)">اللغة الألمانية (German Language)</option>
-                      <option value="الرياضيات (Mathematics)">الرياضيات (Mathematics)</option>
-                      <option value="الفيزياء (Physics)">الفيزياء (Physics)</option>
-                      <option value="الكيمياء (Chemistry)">الكيمياء (Chemistry)</option>
-                      <option value="الأحياء (Biology)">الأحياء (Biology)</option>
-                      <option value="الجغرافيا (Geography)">الجغرافيا (Geography)</option>
-                      <option value="التربية الإسلامية (Islamic Education)">التربية الإسلامية (Islamic Education)</option>
-                      <option value="الفلسفة (Philosophy)">الفلسفة (Philosophy)</option>
-                      <option value="ألتربية التشكيلية (Art education)">ألتربية التشكيلية (Art education)</option>
-                      <option value="المعلوميات (Informatique)">المعلوميات (Informatique)</option>
-                      <option value="التكنولوجيا (technology)">التكنولوجيا (technology)</option>
+                      <option value="اللغة العربية (Arabic Language)" <%= teacherInfo.selected_subject === 'اللغة العربية (Arabic Language)' ? 'selected' : '' %>>اللغة العربية (Arabic Language)</option>
+                      <option value="اللغة الفرنسية (French Language)" <%= teacherInfo.selected_subject === 'اللغة الفرنسية (French Language)' ? 'selected' : '' %>>اللغة الفرنسية (French Language)</option>
+                      <option value="اللغة الإنجليزية (English Language)" <%= teacherInfo.selected_subject === 'اللغة الإنجليزية (English Language)' ? 'selected' : '' %>>اللغة الإنجليزية (English Language)</option>
+                      <option value="اللغة الإسبانية (Spanish Language)" <%= teacherInfo.selected_subject === 'اللغة الإسبانية (Spanish Language)' ? 'selected' : '' %>>اللغة الإسبانية (Spanish Language)</option>
+                      <option value="اللغة الألمانية (German Language)" <%= teacherInfo.selected_subject === 'اللغة الألمانية (German Language)' ? 'selected' : '' %>>اللغة الألمانية (German Language)</option>
+                      <option value="الرياضيات (Mathematics)" <%= teacherInfo.selected_subject === 'الرياضيات (Mathematics)' ? 'selected' : '' %>>الرياضيات (Mathematics)</option>
+                      <option value="الفيزياء (Physics)" <%= teacherInfo.selected_subject === 'الفيزياء (Physics)' ? 'selected' : '' %>>الفيزياء (Physics)</option>
+                      <option value="الكيمياء (Chemistry)" <%= teacherInfo.selected_subject === 'الكيمياء (Chemistry)' ? 'selected' : '' %>>الكيمياء (Chemistry)</option>
+                      <option value="الأحياء (Biology)" <%= teacherInfo.selected_subject === 'الأحياء (Biology)' ? 'selected' : '' %>>الأحياء (Biology)</option>
+                      <option value="الجغرافيا (Geography)" <%= teacherInfo.selected_subject === 'الجغرافيا (Geography)' ? 'selected' : '' %>>الجغرافيا (Geography)</option>
+                      <option value="التربية الإسلامية (Islamic Education)" <%= teacherInfo.selected_subject === 'التربية الإسلامية (Islamic Education)' ? 'selected' : '' %>>التربية الإسلامية (Islamic Education)</option>
+                      <option value="الفلسفة (Philosophy)" <%= teacherInfo.selected_subject === 'الفلسفة (Philosophy)' ? 'selected' : '' %>>الفلسفة (Philosophy)</option>
+                      <option value="ألتربية التشكيلية (Art education)" <%= teacherInfo.selected_subject === 'ألتربية التشكيلية (Art education)' ? 'selected' : '' %>>ألتربية التشكيلية (Art education)</option>
+                      <option value="المعلوميات (Informatique)" <%= teacherInfo.selected_subject === 'المعلوميات (Informatique)' ? 'selected' : '' %>>المعلوميات (Informatique)</option>
+                      <option value="التكنولوجيا (technology)" <%= teacherInfo.selected_subject === 'التكنولوجيا (technology)' ? 'selected' : '' %>>التكنولوجيا (technology)</option>
                     </select>
                 </div>
                 <div class="custom-control">
