@@ -16,27 +16,19 @@
             </div>
             <div class="container" id="add-rem">
                 <button class="btn" title="تسجيل الخروج">
-                    <a href="/admin" style="color: #6c757d"
-                        ><i
-                            id="bi-icon2"
-                            class="bi bi-box-arrow-left fw-bold"
-                        ></i
-                    ></a>
+                    <a href="/admin" style="color: #6c757d">
+                        <i id="bi-icon2" class="bi bi-box-arrow-left fw-bold"></i>
+                    </a>
                 </button>
                 <button class="btn btn-primary my-5">
-                    <a href="/add-teacher" class="text-light"
-                        >إضافة استاذ(ة)
-                        <i id="bi-icon" class="bi bi-plus fw-bold"></i
-                    ></a>
+                    <a href="/add-teacher" class="text-light">إضافة استاذ(ة)
+                        <i id="bi-icon" class="bi bi-plus fw-bold"></i>
+                    </a>
                 </button>
             </div>
         </div>
-        <table
-            class="table table-bordered w-75"
-            id="center-container"
-            dir="rtl"
-        >
-            <thead>
+        <table class="table table-bordered table-striped w-75" id="center-container" dir="rtl">
+            <thead class="thead-dark">
                 <tr class="text-center">
                     <th scope="col">رقم الاستاذ(ة)</th>
                     <th scope="col">الإسم الكامل</th>
@@ -46,7 +38,7 @@
                     <th scope="col">إجراء</th>
                 </tr>
             </thead>
-            <!-- Dispalying the values -->
+            <!-- Displaying the values -->
             <tbody class="table-group-divider">
                 <% teachers.forEach(teacher => { %>
                     <tr class="text-center">
@@ -59,7 +51,7 @@
                             <button type="button" class="btn btn-warning">
                                 <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-teacher/<%= teacher._id %>">تحديث</a>
                             </button>
-                            <form action="/edit-teacher/<%= teacher._id %>?_method=DELETE" method="POST">
+                            <form action="/edit-teacher/<%= teacher._id %>?_method=DELETE" method="POST" style="display: inline;">
                                 <button type="submit" class="btn btn-danger">
                                     <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
                                 </button>
@@ -69,6 +61,7 @@
                 <% }); %>
             </tbody>
         </table>
+        
         <!-- footer -->
         <%- include('../partials/footer.ejs') %>
         <!-- footer ends -->
