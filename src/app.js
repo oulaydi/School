@@ -21,13 +21,11 @@ connectDB();
 // This middleware is necessary for parsing form data in the request body.
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static assets from the public directory
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(methodOverride("_method"));
 
 app.use(cookieParser());
 
-app.use(methodOverride("_method"));
-
+// Cookies
 app.use(
     session({
         secret: "keyboard cat",
@@ -39,6 +37,9 @@ app.use(
         cookie: { maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }, // 7 days
     })
 );
+
+// Serve static assets from the public directory
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Specify the views directory
 app.set("views", path.join(__dirname, "../views"));
