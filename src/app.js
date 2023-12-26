@@ -5,7 +5,6 @@ const methodOverride = require("method-override");
 const connectDB = require("../config/db");
 const path = require("path");
 const session = require("express-session");
-const port = 1203;
 require("./routes/main");
 require("dotenv").config();
 
@@ -53,4 +52,4 @@ app.use("/teacher", require("./routes/main"));
 app.use("/student", require("./routes/main"));
 
 // listen to Request
-app.listen(port);
+app.listen(process.env.PORT);
