@@ -14,7 +14,7 @@ const authMiddleware = (req, res, next) => {
     // Check if adminToken is present in cookies
     const adminToken = req.cookies.adminToken;
     if (!adminToken) {
-        return res.status(401).redirect("/admin?loginRequired=true");
+        return res.status(401).redirect("/admin");
     }
 
     try {

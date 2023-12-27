@@ -12,7 +12,8 @@
         <div class="signin-signup">
           <form action="/admin" method="post" class="sign-in-form">
             <h2 class="title">الإدارة</h2>
-              <div>
+            <!-- Diplay none the warning msg till i fix the prblm -->
+              <div style="display: none;">
                 <div style="transition: opacity 400ms ease 0s, transform 400ms ease 0s; transform: none; opacity: 1;">
                     <div class="toaster-container toast--state-warning fade show">
                         <div class="d-flex align-items-center">
@@ -47,22 +48,7 @@
     <!-- footer -->
         <%- include('../partials/footer.ejs') %>
     <!-- footer ends -->
-    <!-- <script>
-        // Change the border color to red
-        document.getElementById('username').style.border = '2px solid red';
-        document.getElementById('password').style.border = '2px solid red';
-
-      const usernameInput = document.getElementById('username');
-      const passwordInput = document.getElementById('password');
-
-      usernameInput.addEventListener('input', function() {
-        usernameInput.style.border = '2px solid #FFA300';
-      });
-
-      passwordInput.addEventListener('input', function() {
-        passwordInput.style.border = '2px solid #FFA300';
-      });
-    </script> -->
+      <script src="/public/js/errors.js"></script>
     </body>
 </html>
 
