@@ -15,3 +15,13 @@ if (successContainer) {
         successContainer.style.display = 'none';
     }, 4000);
 }
+
+// Add JavaScript to remove the 'show' class after 5 seconds
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+        const toastContainer = document.querySelector('.toast--state-warning');
+        if (toastContainer) {
+            toastContainer.classList.remove('show');
+        }
+    }, 5000);
+});

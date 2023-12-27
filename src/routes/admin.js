@@ -10,9 +10,11 @@ const jwt = require("jsonwebtoken");
  * Check Login
  */
 const authMiddleware = (req, res, next) => {
+
+    // Check if adminToken is present in cookies
     const adminToken = req.cookies.adminToken;
     if (!adminToken) {
-        return res.status(401).json({ message: "Unauthorized login!" });
+        return res.status(401).redirect("/admin?loginRequired=true");
     }
 
     try {
@@ -20,7 +22,8 @@ const authMiddleware = (req, res, next) => {
         req.directorId = decoded.directorId;
         next();
     } catch (error) {
-        res.status(401).json({ message: "Unauthorized!" });
+        console.error("JWT Verification Error:", error);
+        return res.status(401).json({ message: "Unauthorized!" });
     }
 };
 

@@ -177,3 +177,36 @@ footer i a {
     color: var(--text-color);
     text-decoration: none;
 }
+
+/* Warning msg */
+.toaster-container {
+    padding: 0;
+    margin-top: -1rem;
+    box-shadow: 0 1rem 3rem #0000002d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.2rem;
+    background-color: var(--background-color);
+    font-family: var(--font-family);
+}
+
+.toaster-container .toast__content {
+    margin: 0 10px;
+    text-align: start;
+}
+
+.toaster-container .toast__content .toast__msg {
+    cursor: default;
+    font-size: 14px;
+    margin: 0
+}
+
+.toast--state-warning {
+    border-left: .24rem solid #ecb363
+}
+
+.toast--state-warning .toast__icon {
+    color: #ecb363;
+    font-size: 30px
+}

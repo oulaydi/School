@@ -12,6 +12,24 @@
         <div class="signin-signup">
           <form action="/admin" method="post" class="sign-in-form">
             <h2 class="title">الإدارة</h2>
+              <div>
+                <div style="transition: opacity 400ms ease 0s, transform 400ms ease 0s; transform: none; opacity: 1;">
+                    <div class="toaster-container toast--state-warning fade show">
+                        <div class="d-flex align-items-center">
+                            <div class="toast__icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="12" />
+                                <line x1="12" y1="16" x2="12" y2="16" />
+                              </svg>                              
+                            </div>
+                            <div class="toast__content">
+                                <p class="toast__msg">الرجاء تسجيل الدخول أولاً للوصول إلى لوحة التحكم</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input id="username" type="text" name="username" autocomplete="off" placeholder="اسم المستخدم" />
