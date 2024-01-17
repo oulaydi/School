@@ -5,6 +5,17 @@ const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
 
 
+// login page
+const loginAuth = async (req, res) => {
+    try {
+        res.render("admin/index", {
+            title: "الإدارة - تسجيل الدخول",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 // director_login
 const director_login = async (req, res) => {
     try {
@@ -68,6 +79,17 @@ const director_add = async (req, res) => {
     }
 };
 
+// director_add_teacher
+const directorAddTeacher = async (req, res) => {
+    try {
+        res.render("admin/add-teacher", {
+            title: "إضافة استاذ(ة)",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 // director_edit
 const director_edit = async (req, res) => {
     try {
@@ -82,6 +104,20 @@ const director_edit = async (req, res) => {
         });
 
         res.redirect("/director");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// director_edit_with_ID
+const director_edit_id = async (req, res) => {
+    try {
+        const teacherInfo = await AddTeacher.findOne({ _id: req.params.id });
+
+        res.render("admin/edit-teacher", {
+            teacherInfo,
+            title: "تحديث استاذ(ة)",
+        });
     } catch (error) {
         console.log(error);
     }
@@ -104,10 +140,13 @@ const director_logout = (req, res) => {
 };
 
 module.exports = {
+    loginAuth,
     director_login,
     director_index,
     director_add,
+    directorAddTeacher,
     director_edit,
+    director_edit_id,
     director_delete,
     director_logout,
 };

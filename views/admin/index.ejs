@@ -13,6 +13,7 @@
           <form action="/admin" method="post" class="sign-in-form">
             <h2 class="title">الإدارة</h2>
             <!-- Diplay none the warning msg till i fix the prblm -->
+            <!-- < if (errorMessage) { %> -->
               <div style="display: none;">
                 <div style="transition: opacity 400ms ease 0s, transform 400ms ease 0s; transform: none; opacity: 1;">
                     <div class="toaster-container toast--state-warning fade show">
@@ -25,12 +26,14 @@
                               </svg>                              
                             </div>
                             <div class="toast__content">
+                                <!-- <p class="toast__msg"><= errorMessage %></p> -->
                                 <p class="toast__msg">الرجاء تسجيل الدخول أولاً للوصول إلى لوحة التحكم</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- < } %> -->
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input id="username" type="text" name="username" autocomplete="off" placeholder="اسم المستخدم" />

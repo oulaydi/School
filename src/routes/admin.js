@@ -31,15 +31,7 @@ const authMiddleware = (req, res, next) => {
  * GET /
  * Director - Admin page
  */
-router.get("/admin", async (req, res) => {
-    try {
-        res.render("admin/index", {
-            title: "الإدارة - تسجيل الدخول",
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
+router.get("/admin", directorController.loginAuth);
 
 /**
  * POST /
@@ -57,15 +49,7 @@ router.get("/director", authMiddleware, directorController.director_index);
  * Get /
  * Dashboard Route - Teahcers
  */
-router.get("/add-teacher", authMiddleware, async (req, res) => {
-    try {
-        res.render("admin/add-teacher", {
-            title: "إضافة استاذ(ة)",
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
+router.get("/add-teacher", authMiddleware, directorController.directorAddTeacher);
 
 /**
  * POST /
@@ -77,38 +61,19 @@ router.post("/add-teacher", authMiddleware, directorController.director_add);
  * GET /
  * Dashboard - Get Teahcer by ID
  */
-router.get("/edit-teacher/:id", authMiddleware, async (req, res) => {
-    try {
-        const teacherInfo = await AddTeacher.findOne({ _id: req.params.id });
-
-        res.render("admin/edit-teacher", {
-            teacherInfo,
-            title: "تحديث استاذ(ة)",
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
+router.get("/edit-teacher/:id", authMiddleware, directorController.director_edit_id);
 
 /**
  * PUT /
  * Dashboard - Edit Teahcer
 //  */
-router.put(
-    "/edit-teacher/:id",
-    authMiddleware,
-    directorController.director_edit
-);
+router.put("/edit-teacher/:id", authMiddleware, directorController.director_edit);
 
 /**
  * DELETE /
  * Dashboard - DELETE Teahcer
 //  */
-router.delete(
-    "/edit-teacher/:id",
-    authMiddleware,
-    directorController.director_delete
-);
+router.delete("/edit-teacher/:id", authMiddleware, directorController.director_delete);
 
 /**
  * GET /
