@@ -48,6 +48,7 @@ app.set("view engine", "ejs");
 
 app.use("/", require("./routes/main"));
 app.use("/", require("./routes/admin"));
+
 app.use("/teacher", require("./routes/main"));
 app.use("/student", require("./routes/main"));
 
