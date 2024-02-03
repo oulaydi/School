@@ -14,7 +14,7 @@ const authMiddleware = (req, res, next) => {
     // Check if adminToken is present in cookies
     const adminToken = req.cookies.adminToken;
     if (!adminToken) {
-        return res.status(401).redirect("/admin");
+        return res.status(401).redirect("/admin?error=unauthorized");
     }
 
     try {
@@ -23,7 +23,7 @@ const authMiddleware = (req, res, next) => {
         next();
     } catch (error) {
         console.error("JWT Verification Error:", error);
-        return res.status(401).json({ message: "Unauthorized!" });
+        return res.redirect("/admin?error=unauthorized");
     }
 };
 

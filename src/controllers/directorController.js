@@ -4,12 +4,13 @@ const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
 
-
 // login page
 const loginAuth = async (req, res) => {
     try {
         res.render("admin/index", {
             title: "الإدارة - تسجيل الدخول",
+            query: req.query,
+            err_msg: "الرجاء تسجيل الدخول أولاً للوصول إلى لوحة التحكم"
         });
     } catch (error) {
         console.log(error);
@@ -43,7 +44,7 @@ const director_login = async (req, res) => {
 // director_index
 const director_index = async (req, res) => {
     try {
-        const teachers = await AddTeacher.find().sort({createdAt: -1});
+        const teachers = await AddTeacher.find().sort({ createdAt: -1 });
         res.render("admin/director", {
             title: "الرئيسية - لوحة القيادة",
             teachers,
@@ -56,11 +57,21 @@ const director_index = async (req, res) => {
 // director_add
 const director_add = async (req, res) => {
     try {
-        const { CIN, full_name, password, confirm_password, username, selected_level, selected_subject } = req.body;
+        const {
+            CIN,
+            full_name,
+            password,
+            confirm_password,
+            username,
+            selected_level,
+            selected_subject,
+        } = req.body;
 
         // Check if password matches confirm_password
         if (password !== confirm_password) {
-            return res.status(400).json({ error: "Password and confirm password do not match" });
+            return res
+                .status(400)
+                .json({ error: "Password and confirm password do not match" });
         }
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
@@ -83,7 +94,6 @@ const director_add = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-
 
 // director_add_teacher
 const directorAddTeacher = async (req, res) => {
