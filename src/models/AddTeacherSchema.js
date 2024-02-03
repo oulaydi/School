@@ -15,10 +15,10 @@ const AddTeacherSchema = new Schema({
     full_name: {
         type: String,
     },
-    confirm_password: {
-        type: String,
-        required: true,
-    },
+    // confirm_password: {
+    //     type: String,
+    //     required: true,
+    // },
     username: {
         type: String,
         required: true,
@@ -50,6 +50,7 @@ const AddTeacherSchema = new Schema({
         ],
         required: true,
     },
+    createdAt: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("AddTeacher", AddTeacherSchema);

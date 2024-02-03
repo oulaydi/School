@@ -43,8 +43,7 @@ const director_login = async (req, res) => {
 // director_index
 const director_index = async (req, res) => {
     try {
-        const teachers = await AddTeacher.find();
-
+        const teachers = await AddTeacher.find().sort({createdAt: -1});
         res.render("admin/director", {
             title: "الرئيسية - لوحة القيادة",
             teachers,
@@ -57,27 +56,34 @@ const director_index = async (req, res) => {
 // director_add
 const director_add = async (req, res) => {
     try {
-        try {
-            const newTeacher = AddTeacher({
-                CIN: req.body.CIN,
-                full_name: req.body.full_name,
-                password: req.body.password,
-                confirm_password: req.body.confirm_password,
-                username: req.body.username,
-                selected_level: req.body.selected_level,
-                selected_subject: req.body.selected_subject,
-            });
+        const { CIN, full_name, password, confirm_password, username, selected_level, selected_subject } = req.body;
 
-            await AddTeacher.create(newTeacher);
-
-            res.redirect("/director");
-        } catch (error) {
-            console.log(error);
+        // Check if password matches confirm_password
+        if (password !== confirm_password) {
+            return res.status(400).json({ error: "Password and confirm password do not match" });
         }
+
+        // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newTeacher = AddTeacher({
+            CIN,
+            full_name,
+            password: hashedPassword,
+            username,
+            selected_level,
+            selected_subject,
+        });
+
+        await AddTeacher.create(newTeacher);
+
+        res.redirect("/director");
     } catch (error) {
         console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
 
 // director_add_teacher
 const directorAddTeacher = async (req, res) => {
