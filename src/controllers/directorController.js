@@ -75,12 +75,12 @@ const director_add = async (req, res) => {
         }
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
-        // const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const newTeacher = AddTeacher({
             CIN,
             full_name,
-            password,
+            password: hashedPassword,
             username,
             selected_level,
             selected_subject,
