@@ -23,7 +23,7 @@ const authMiddleware = (req, res, next) => {
     } catch (error) {
         console.error("JWT Verification Error:", error);
         req.flash("error", "Session expired or invalid. Please login again.");
-        return res.redirect("/admin"); 
+        return res.redirect("/admin");
     }
 };
 
