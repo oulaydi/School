@@ -18,9 +18,6 @@ getFormattedDate = () => new Date().getFullYear();
 // Connect to DB
 connectDB();
 
-// flash middleware
-app.use(flash());
-
 // This middleware is necessary for parsing form data in the request body.
 app.use(express.urlencoded({ extended: true }));
 
@@ -40,6 +37,10 @@ app.use(
         cookie: { maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }, // 7 days
     })
 );
+
+
+// flash middleware
+app.use(flash());
 
 // Serve static assets from the public directory
 app.use(express.static(path.join(__dirname, "../public")));
