@@ -11,7 +11,6 @@ const authMiddleware = (req, res, next) => {
     // Check if adminToken is present in cookies
     const adminToken = req.cookies.adminToken;
     if (!adminToken) {
-        // req.flash("error", "Unauthorized access. Please login.");
         req.flash("error", "الرجاء تسجيل الدخول أولاً للوصول إلى لوحة التحكم.");
         return res.redirect("/admin");
     }
@@ -22,7 +21,7 @@ const authMiddleware = (req, res, next) => {
         next();
     } catch (error) {
         console.error("JWT Verification Error:", error);
-        req.flash("error", "Session expired or invalid. Please login again.");
+        req.flash("error", "انتهت صلاحية التسجيل, المرجو اعادة التسجيل.");
         return res.redirect("/admin");
     }
 };
