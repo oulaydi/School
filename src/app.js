@@ -5,6 +5,7 @@ const methodOverride = require("method-override");
 const connectDB = require("../config/db");
 const path = require("path");
 const session = require("express-session");
+const flash = require("express-flash");
 require("./routes/main");
 require("dotenv").config();
 
@@ -16,6 +17,9 @@ getFormattedDate = () => new Date().getFullYear();
 
 // Connect to DB
 connectDB();
+
+// flash middleware
+app.use(flash());
 
 // This middleware is necessary for parsing form data in the request body.
 app.use(express.urlencoded({ extended: true }));
