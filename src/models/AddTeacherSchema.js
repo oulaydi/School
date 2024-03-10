@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
@@ -52,12 +53,6 @@ const AddTeacherSchema = new Schema({
         required: true,
     },
     createdAt: { type: Date, default: Date.now },
-});
-
-AddTeacherSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
 });
 
 module.exports = mongoose.model("AddTeacher", AddTeacherSchema);
