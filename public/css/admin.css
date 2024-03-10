@@ -178,7 +178,7 @@ footer i a {
     text-decoration: none;
 }
 
-/* Warning msg */
+/* Error msg */
 .toaster-container {
     padding: 0;
     margin-top: -1rem;
@@ -200,15 +200,6 @@ footer i a {
     cursor: default;
     font-size: 14px;
     margin: 0
-}
-
-.toast--state-warning {
-    border-left: .24rem solid #ecb363
-}
-
-.toast--state-warning .toast__icon {
-    color: #dc3545;
-    font-size: 30px
 }
 
 .toast--state-error {
