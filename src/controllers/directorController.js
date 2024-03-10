@@ -10,7 +10,7 @@ const loginAuth = async (req, res) => {
         res.render("admin/index", {
             title: "الإدارة - تسجيل الدخول",
             query: req.query,
-            err_msg: "الرجاء تسجيل الدخول أولاً للوصول إلى لوحة التحكم"
+            messages: req.flash(),
         });
     } catch (error) {
         console.log(error);
@@ -21,23 +21,47 @@ const loginAuth = async (req, res) => {
 const director_login = async (req, res) => {
     try {
         const { username, password } = req.body;
+        let errorType = "";
 
-        const director = await DirectorSchema.findOne({ username });
-        if (!director) {
-            return res.status(401).json({ message: "Invalid infos" });
+        if (!username || !password) {
+            errorType = "missingCredentials";
+        } else {
+            const director = await DirectorSchema.findOne({ username });
+            if (!director) {
+                errorType = "invalidLogin";
+            } else if (password.length < 2) {
+                errorType = "passwordTooShort";
+            } else {
+                const ifPwdValid = await bcrypt.compare( password, director.password);
+                if (!ifPwdValid) {
+                    errorType = "invalidLogin";
+                }
+            }
         }
 
-        const ifPwdValid = await bcrypt.compare(password, director.password);
-        if (!ifPwdValid) {
-            return res.status(401).json({ message: "Invalid infos" });
+        switch (errorType) {
+            case "missingCredentials":
+                req.flash("error", ".اسم المستخدم وكلمة المرور مطلوبان");
+                res.status(401).redirect("/admin");
+                break;
+            case "passwordTooShort":
+                req.flash("error", ".يجب أن تكون كلمة المرور على الأقل 8 أحرف");
+                res.status(401).redirect("/admin");
+                break;
+            case "invalidLogin":
+                req.flash("error", ".اسم المستخدم أو كلمة المرور غير صحيحة");
+                res.status(401).redirect("/admin");
+                break;
+            default:
+                const adminToken = jwt.sign({ directorId: director._id }, jwtSecret);
+                res.cookie("adminToken", adminToken, { httpOnly: true });
+                res.redirect("/director");
+                break;
         }
-
-        const adminToken = jwt.sign({ directorId: director._id }, jwtSecret);
-        res.cookie("adminToken", adminToken, { httpOnly: true });
-
-        res.redirect("/director");
     } catch (error) {
         console.log(error);
+        req.flash("error", "حدث خطأ. حاول مرة اخرى.");
+        res.redirect("/admin");
     }
 };
 
