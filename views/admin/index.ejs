@@ -14,22 +14,6 @@
             <h2 class="title">الإدارة</h2>
             <!-- Diplay none the warning msg till i fix the prblm -->
               <!-- Inside your login EJS file -->
-            <% if (query.error) { %>
-              <div id="alert-message" style="transition: opacity 400ms ease 0s, transform 400ms ease 0s; transform: none; opacity: 1;">
-                  <div class="toaster-container toast--state-warning fade show">
-                      <div class="d-flex align-items-center">
-                          <div class="toast__content">
-                              <p class="toast__msg"><%= messages.error %></p>
-                          </div>
-                          <div class="toast__icon" style="margin-right: 10px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24.979" height="24.979" viewBox="0 0 24.979 24.979">
-                              <path data-name="Path 3959" d="M26.979 14.489A12.489 12.489 0 1 1 14.489 2a12.49 12.49 0 0 1 12.49 12.489zM16.05 8.245a1.561 1.561 0 1 1-1.561-1.561 1.562 1.562 0 0 1 1.561 1.561zm-3.122 4.683a1.561 1.561 0 0 0 0 3.122v4.683a1.562 1.562 0 0 0 1.561 1.567h1.561a1.561 1.561 0 0 0 0-3.122v-4.689a1.562 1.562 0 0 0-1.561-1.561z" transform="translate(-2 -2)" style="fill: #ecb363; fill-rule: evenodd;"></path>
-                            </svg>  
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            <% } %> 
             <% if (messages.error) { %>
               <div id="alert-message" style="transition: opacity 400ms ease 0s, transform 400ms ease 0s; transform: none; opacity: 1;">
                 <div class="toaster-container toast--state-error fade show">
@@ -39,7 +23,7 @@
                         </div>
                         <div class="toast__icon" style="margin-right: 10px;">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24.979" height="24.979" viewBox="0 0 24.979 24.979">
-                            <path data-name="Path 3959" d="M26.979 14.489A12.489 12.489 0 1 1 14.489 2a12.49 12.49 0 0 1 12.49 12.489zM16.05 8.245a1.561 1.561 0 1 1-1.561-1.561 1.562 1.562 0 0 1 1.561 1.561zm-3.122 4.683a1.561 1.561 0 0 0 0 3.122v4.683a1.562 1.562 0 0 0 1.561 1.567h1.561a1.561 1.561 0 0 0 0-3.122v-4.689a1.562 1.562 0 0 0-1.561-1.561z" transform="translate(-2 -2)" style="fill: #dc3545; fill-rule: evenodd;"></path> <!-- Changed fill color to red -->
+                            <path data-name="Path 3959" d="M26.979 14.489A12.489 12.489 0 1 1 14.489 2a12.49 12.49 0 0 1 12.49 12.489zM16.05 8.245a1.561 1.561 0 1 1-1.561-1.561 1.562 1.562 0 0 1 1.561 1.561zm-3.122 4.683a1.561 1.561 0 0 0 0 3.122v4.683a1.562 1.562 0 0 0 1.561 1.567h1.561a1.561 1.561 0 0 0 0-3.122v-4.689a1.562 1.562 0 0 0-1.561-1.561z" transform="translate(-2 -2)" style="fill: #dc3545; fill-rule: evenodd;"></path>
                           </svg>
                         </div>
                     </div>
