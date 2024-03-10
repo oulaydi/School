@@ -29,7 +29,7 @@ const director_login = async (req, res) => {
             const director = await DirectorSchema.findOne({ username });
             if (!director) {
                 errorType = "invalidLogin";
-            } else if (password.length < 2) {
+            } else if (password.length < 5) {
                 errorType = "passwordTooShort";
             } else {
                 const ifPwdValid = await bcrypt.compare( password, director.password);
