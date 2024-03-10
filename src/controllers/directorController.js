@@ -45,7 +45,7 @@ const director_login = async (req, res) => {
                 res.status(401).redirect("/admin");
                 break;
             case "passwordTooShort":
-                req.flash("error", ".يجب أن تكون كلمة المرور على الأقل 8 أحرف");
+                req.flash("error", ".يجب أن تكون كلمة المرور على الأقل 5 أحرف");
                 res.status(401).redirect("/admin");
                 break;
             case "invalidLogin":
@@ -179,6 +179,14 @@ const director_logout = (req, res) => {
     res.redirect("/admin");
 };
 
+// 404
+const notFound = (req, res) => {
+    res.render("404", {
+        title: "404 - الصفحة غير موجودة",
+    
+    });
+};
+
 module.exports = {
     loginAuth,
     director_login,
@@ -188,5 +196,6 @@ module.exports = {
     director_edit,
     director_edit_id,
     director_delete,
+    notFound,
     director_logout,
 };
