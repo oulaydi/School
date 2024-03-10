@@ -48,7 +48,9 @@ const director_index = async (req, res) => {
         res.render("admin/director", {
             title: "الرئيسية - لوحة القيادة",
             teachers,
+           
         });
+       
     } catch (error) {
         console.log(error);
     }
@@ -87,8 +89,12 @@ const director_add = async (req, res) => {
         });
 
         await AddTeacher.create(newTeacher);
-
-        res.redirect("/director");
+        //res.render('/admin/add-teacher');
+        /*res.render("/admin/director", {
+            err1_msg: "Teacher has been saved successfully!"
+        });*/
+       
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -118,8 +124,12 @@ const director_edit = async (req, res) => {
             selected_level: req.body.selected_level,
             selected_subject: req.body.selected_subject,
         });
-
-        res.redirect("/director");
+        res.render("admin/edit-teacher", {
+            teacherInfo,
+            title: "تحديث استاذ(ة)",
+            
+        });
+        
     } catch (error) {
         console.log(error);
     }
@@ -132,7 +142,8 @@ const director_edit_id = async (req, res) => {
 
         res.render("admin/edit-teacher", {
             teacherInfo,
-            title: "تحديث استاذ(ة)",
+            title: "تحديث استاذ(ة)"
+            
         });
     } catch (error) {
         console.log(error);
