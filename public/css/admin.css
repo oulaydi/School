@@ -207,6 +207,15 @@ footer i a {
 }
 
 .toast--state-warning .toast__icon {
-    color: #ecb363;
+    color: #dc3545;
+    font-size: 30px
+}
+
+.toast--state-error {
+    border-left: .24rem solid #dc3545
+}
+
+.toast--state-error .toast__icon {
+    color: #dc3545;
     font-size: 30px
 }
