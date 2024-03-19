@@ -52,15 +52,15 @@ router.put("/edit-teacher/:id", authMiddleware, directorController.director_edit
 router.delete("/edit-teacher/:id", authMiddleware, directorController.director_delete);
 
 /**
- *  * Not Found
- */
-router.use(directorController.notFound);
-
-
-/**
  * GET /
  * Admin - Logout
  */
 router.get("/logout", directorController.director_logout);
+
+/**
+ *  * Not Found
+ */
+router.use(directorController.notFound);
+
 
 module.exports = router;
