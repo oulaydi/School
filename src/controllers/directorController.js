@@ -19,6 +19,7 @@ const loginAuth = async (req, res) => {
 
 // director_login
 const director_login = async (req, res) => {
+    let director;
     try {
         const { username, password } = req.body;
         let errorType = "";
@@ -26,13 +27,13 @@ const director_login = async (req, res) => {
         if (!username || !password) {
             errorType = "missingCredentials";
         } else {
-            const director = await DirectorSchema.findOne({ username });
+              director = await DirectorSchema.findOne({ username });
             if (!director) {
                 errorType = "invalidLogin";
             } else if (password.length < 5) {
                 errorType = "passwordTooShort";
             } else {
-                const ifPwdValid = await bcrypt.compare( password, director.password);
+                const ifPwdValid = await bcrypt.compare( password,director.password);
                 if (!ifPwdValid) {
                     errorType = "invalidLogin";
                 }
@@ -113,11 +114,14 @@ const director_add = async (req, res) => {
         });
 
         await AddTeacher.create(newTeacher);
-        //res.render('/admin/add-teacher');
+        req.flash("success","Teacher has been saved successfully!");
+        res.render('admin/add-teacher',{
+            messages:req.flash()
+        });
         /*res.render("/admin/director", {
             err1_msg: "Teacher has been saved successfully!"
         });*/
-       
+        res.redirect("/director");
         
     } catch (error) {
         console.log(error);
@@ -139,25 +143,27 @@ const directorAddTeacher = async (req, res) => {
 // director_edit
 const director_edit = async (req, res) => {
     try {
-        await AddTeacher.findByIdAndUpdate(req.params.id, {
-            CIN: req.body.CIN,
-            full_name: req.body.full_name,
-            password: req.body.password,
-            confirm_password: req.body.confirm_password,
-            username: req.body.username,
-            selected_level: req.body.selected_level,
-            selected_subject: req.body.selected_subject,
-        });
-        res.render("admin/edit-teacher", {
-            teacherInfo,
-            title: "تحديث استاذ(ة)",
-            
-        });
-        
+      const { CIN, full_name, password, confirm_password, username, selected_level, selected_subject } = req.body;
+  
+      // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+      const updateObject = {};
+      if (CIN) updateObject.CIN = CIN;
+      if (full_name) updateObject.full_name = full_name;
+      if (password) updateObject.password = password; 
+      if (confirm_password) updateObject.confirm_password = confirm_password; 
+      if (username) updateObject.username = username;
+      if (selected_level) updateObject.selected_level = selected_level;
+      if (selected_subject) updateObject.selected_subject = selected_subject;
+  
+      
+      await AddTeacher.findByIdAndUpdate(req.params.id, updateObject);
+  
+      
+      res.redirect("/director");
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
 // director_edit_with_ID
 const director_edit_id = async (req, res) => {
