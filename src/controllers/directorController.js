@@ -27,7 +27,11 @@ const director_login = async (req, res) => {
         if (!username || !password) {
             errorType = "missingCredentials";
         } else {
+<<<<<<< HEAD
               director = await DirectorSchema.findOne({ username });
+=======
+            director = await DirectorSchema.findOne({ username });
+>>>>>>> 8160d9b34e700255cb4de45a9a1e5a4a2e9f7c89
             if (!director) {
                 errorType = "invalidLogin";
             } else if (password.length < 5) {
@@ -102,7 +106,11 @@ const director_add = async (req, res) => {
         }
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
+<<<<<<< HEAD
         //const hashedPassword = await bcrypt.hash(password, 10);
+=======
+        // const hashedPassword = await bcrypt.hash(password, 10);
+>>>>>>> 8160d9b34e700255cb4de45a9a1e5a4a2e9f7c89
 
         const newTeacher = AddTeacher({
             CIN,
@@ -200,7 +208,6 @@ const director_logout = (req, res) => {
 const notFound = (req, res) => {
     res.render("404", {
         title: "404 - الصفحة غير موجودة",
-    
     });
 };
 
