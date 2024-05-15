@@ -27,7 +27,7 @@ const director_login = async (req, res) => {
         if (!username || !password) {
             errorType = "missingCredentials";
         } else {
-<<<<<<< HEAD
+
               director = await DirectorSchema.findOne({ username });
 
             if (!director) {
