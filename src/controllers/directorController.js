@@ -118,9 +118,10 @@ const director_add = async (req, res) => {
         });
 
         await AddTeacher.create(newTeacher);
-        req.flash("success","Teacher has been saved successfully!");
+        // req.flash("success","Teacher has been saved successfully!");
         res.render('admin/add-teacher',{
-            messages:req.flash()
+            title: "إضافة استاذ(ة)",
+            // messages:req.flash(), // we'll add alerts later (oulaydi)
         });
         /*res.render("/admin/director", {
             err1_msg: "Teacher has been saved successfully!"
