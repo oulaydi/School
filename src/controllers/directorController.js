@@ -27,7 +27,9 @@ const director_login = async (req, res) => {
         if (!username || !password) {
             errorType = "missingCredentials";
         } else {
+<<<<<<< HEAD
               director = await DirectorSchema.findOne({ username });
+
             if (!director) {
                 errorType = "invalidLogin";
             } else if (password.length < 5) {
@@ -105,7 +107,6 @@ const director_add = async (req, res) => {
 
         //const hashedPassword = await bcrypt.hash(password, 10);
 
-        // const hashedPassword = await bcrypt.hash(password, 10);
 
         const newTeacher = AddTeacher({
             CIN,
