@@ -32,7 +32,7 @@ app.use(
         resave: false,
         saveUninitialized: true,
         store: mongoStore.create({
-            mongoUrl: process.env.MONGODB_URI,
+            mongoUrl:process.env.MONGODB_URI,
         }),
         cookie: { maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }, // 7 days
     })
@@ -56,6 +56,10 @@ app.use("/", require("./routes/admin"));
 
 app.use("/teacher", require("./routes/main"));
 app.use("/student", require("./routes/main"));
+
+//app.use("/profile", require("./routes/main"));
+
+
 
 // listen to Request
 app.listen(process.env.PORT);
