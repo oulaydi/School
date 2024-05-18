@@ -1,0 +1,159 @@
+
+@import url("https://fonts.googleapis.com/earlyaccess/scheherazade.css");
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400&family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap');
+
+body {
+    background-image: url(https://www.rsu.ma/rsu/bgContent1-left.21b761aebb803b33.png),url(https://www.rsu.ma/rsu/bgContent3-topRight.00811284a834c59d.png),url(https://www.rsu.ma/rsu/bgContent3-BottomRight.dbecf231b0249381.png);
+    background-repeat: no-repeat,no-repeat,no-repeat;
+    background-position: -25px -2px,calc(100% + 37px) -85px,calc(100% + 63px) 70%;
+    background-size: 490px 677px,270px 307px,240px 239px;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    
+}
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    
+}
+.background{
+    border: 5px solid white;
+    background-color: white;
+    border-radius: 20px;
+
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+header .logo {
+    position: absolute;
+    left: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.Cours {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background-color: #d3e8ff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #b0d4ff;
+    flex: 1;
+    flex: 1;
+    background-color: #d3e8ff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #b0d4ff;
+    display: flex;
+    align-items: center;
+}
+
+.Cour {
+    display: flex;
+    width: 290px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+
+.Cour-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.icon-pdf {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+.icon-download{
+position: absolute;
+margin: 10px 280px ;
+width: 20px; 
+height: 20px;
+}
+
+.Cour-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.Cour-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    padding: 20px 0;
+    width: 50px;
+    height: 365px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    padding-left: 13px;
+    padding-right: 15px;
+    background: #005DF0;
+    box-shadow: 8px 8px 40px rgba(51.76, 64.27, 83.94, 0.20);
+    border-radius: 50px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    display: inline-flex;
+    margin-bottom: 50px
+}
+
+.sidebar-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.sidebar-item:hover {
+    background-color: #0056b3;
+}
+
+.sidebar-item img {
+    width: 24px;
+    height: 24px;
+}

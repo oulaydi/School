@@ -18,5 +18,19 @@ router.get("/student", (req, res) => {
         title: "الفضاء الخاص - بالتلاميذ",
     });
 });
-
+router.get("/absence", (req, res) => {
+    res.render("absence", {
+        title: "الفضاء الخاص - بالتلاميذ",
+    });
+});
+router.get("/modules", (req, res) => {
+    res.render("modules", {
+        title: "الفضاء الخاص - بالتلاميذ",
+    });
+});
+router.get("/cours", (req, res) => {
+    res.render("cours", {
+        title: "الفضاء الخاص - بالتلاميذ",
+    });
+});
 module.exports = router;
