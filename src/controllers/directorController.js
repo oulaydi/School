@@ -28,16 +28,12 @@ const director_login = async (req, res) => {
             errorType = "missingCredentials";
         } else {
             director = await DirectorSchema.findOne({ username });
-
             if (!director) {
                 errorType = "invalidLogin";
             } else if (password.length < 5) {
                 errorType = "passwordTooShort";
             } else {
-                const ifPwdValid = await bcrypt.compare(
-                    password,
-                    director.password
-                );
+                const ifPwdValid = await bcrypt.compare( password,director.password);
                 if (!ifPwdValid) {
                     errorType = "invalidLogin";
                 }
@@ -58,10 +54,7 @@ const director_login = async (req, res) => {
                 res.status(401).redirect("/admin");
                 break;
             default:
-                const adminToken = jwt.sign(
-                    { directorId: director._id },
-                    jwtSecret
-                );
+                const adminToken = jwt.sign({ directorId: director._id }, jwtSecret);
                 res.cookie("adminToken", adminToken, { httpOnly: true });
                 res.redirect("/director");
                 break;
@@ -80,7 +73,9 @@ const director_index = async (req, res) => {
         res.render("admin/director", {
             title: "الرئيسية - لوحة القيادة",
             teachers,
+           
         });
+       
     } catch (error) {
         console.log(error);
     }
@@ -106,29 +101,27 @@ const director_add = async (req, res) => {
                 .json({ error: "Password and confirm password do not match" });
         }
 
-        // Hash the password before saving to MongoDB (uncomment if using bcrypt)
-        // const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newTeacher = new AddTeacher({
+        // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
+        //const hashedPassword = await bcrypt.hash(password, 10);
+        const newTeacher = AddTeacher({
             CIN,
             full_name,
-            password, // Use hashedPassword if you hash the password
+            password,
             username,
             selected_level,
             selected_subject,
         });
 
         await AddTeacher.create(newTeacher);
-        // req.flash("success", "Teacher has been saved successfully!");
-
-        // Choose one of the following responses:
-
-        // res.render('admin/add-teacher', {
-        //     title: "إضافة استاذ(ة)",
-        //     // messages: req.flash(), // we'll add alerts later (oulaydi)
-        // });
-
+        req.flash("success","Teacher has been saved successfully!");
+        res.render('admin/add-teacher',{
+            messages:req.flash()
+        });
+        /*res.render("/admin/director", {
+            err1_msg: "Teacher has been saved successfully!"
+        });*/
         res.redirect("/director");
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -149,33 +142,27 @@ const directorAddTeacher = async (req, res) => {
 // director_edit
 const director_edit = async (req, res) => {
     try {
-        const {
-            CIN,
-            full_name,
-            password,
-            confirm_password,
-            username,
-            selected_level,
-            selected_subject,
-        } = req.body;
-
-        // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
-        const updateObject = {};
-        if (CIN) updateObject.CIN = CIN;
-        if (full_name) updateObject.full_name = full_name;
-        if (password) updateObject.password = password;
-        if (confirm_password) updateObject.confirm_password = confirm_password;
-        if (username) updateObject.username = username;
-        if (selected_level) updateObject.selected_level = selected_level;
-        if (selected_subject) updateObject.selected_subject = selected_subject;
-
-        await AddTeacher.findByIdAndUpdate(req.params.id, updateObject);
-
-        res.redirect("/director");
+      const { CIN, full_name, password, confirm_password, username, selected_level, selected_subject } = req.body;
+  
+      // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+      const updateObject = {};
+      if (CIN) updateObject.CIN = CIN;
+      if (full_name) updateObject.full_name = full_name;
+      if (password) updateObject.password = password; 
+      if (confirm_password) updateObject.confirm_password = confirm_password; 
+      if (username) updateObject.username = username;
+      if (selected_level) updateObject.selected_level = selected_level;
+      if (selected_subject) updateObject.selected_subject = selected_subject;
+  
+      
+      await AddTeacher.findByIdAndUpdate(req.params.id, updateObject);
+  
+      
+      res.redirect("/director");
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
 // director_edit_with_ID
 const director_edit_id = async (req, res) => {
@@ -184,7 +171,8 @@ const director_edit_id = async (req, res) => {
 
         res.render("admin/edit-teacher", {
             teacherInfo,
-            title: "تحديث استاذ(ة)",
+            title: "تحديث استاذ(ة)"
+            
         });
     } catch (error) {
         console.log(error);
