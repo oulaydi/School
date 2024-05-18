@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../public/css/forms.css" />
+  </head>
+<body>
+    <!-- Header -->    
+    <%- include('../partials/header.ejs') %>
+    <!-- Header Ends!! -->
+    <div class="center-container">
+      <p><%= messages.success %></p>
+      <div>
+        <h3 id="h4"> Ajouter Emploi Temps </h3>
+      </div>
+     <a href="/director" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
+     <div class="container my-5" dir="rtl">
+          <form action="/add-teacher" class="row g-3" autocomplete="off" method="POST">
+            <div class="col-md-6">
+              <label class="form-label cus-label">Module</label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_semester">
+                <option value="Module"> Web Avanceé </option>
+                <option value="Module"> Introduction POO </option>
+                <option value="Module"> BD Repartis </option>
+                <option value="Module"> Administration de Reseau </option>
+                <option value="Module"> UML </option>
+                <option value="Module"> Oracle </option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label cus-label"> Salle </label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_salle">
+                <option value="الدار البيضاء">E2IM1 </option>
+                <option value=" فاس"> E2IM2</option>
+                <option value=" الرباط"> SV6</option>
+                <option value=" مراكش"> AMPHI1</option>
+                <option value=" طنجة "> AMPHI3 </option>
+                <option value=" أكادير"> FORUM </option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label cus-label"> Heure </label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_Hour">
+                <option value="الدار البيضاء"> 9-12</option>
+                <option value=" فاس"> 13-16</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label cus-label"> Jour </label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_day">
+                <option value="الدار البيضاء"> Lundi</option>
+                <option value=" فاس"> Mardi</option>
+                <option value=" الرباط"> Mercredi</option>
+                <option value=" مراكش"> Jeudi</option>
+                <option value=" طنجة "> Vendredi</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label cus-label"> Groupe </label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_group">
+                <option value="الدار البيضاء">INFO1 23-23 </option>
+                <option value=" فاس"> INFO1 22-23</option>
+                <option value=" الرباط"> INFO3 23-24</option>
+              </select>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                <label class="custom-control-label" for="customCheck1">اشهد على صحة المعلومات المصرح بها</label>
+            </div>
+            <button type="submit" class="btn w-25 btn-primary">إضافة</button>
+          </form>
+      </div>
+    </div>
+    <!-- <script>
+            const passwordInput = document.querySelector('input[name="password"]');
+            const confirmInput = document.querySelector('input[name="confirm_password"]');
+            const togglePassword = document.getElementById('togglePassword');
+            
+            togglePassword.addEventListener('click', function () {
+              togglePasswordVisibility(passwordInput);
+              togglePasswordVisibility(confirmInput);
+            });
+            
+            function togglePasswordVisibility(inputField) {
+              if (inputField.type === 'password') {
+                    inputField.type = 'text';
+                } else {
+                    inputField.type = 'password';
+                  }
+            }
+    </script> -->
+    
+    <!-- footer --->
+        <%- include('../partials/footer.ejs') %>
+    <!-- footer ends -->
+</body>
+</html>
