@@ -189,6 +189,86 @@ const director_delete = async (req, res) => {
     }
 };
 
+/* director_student  */
+
+    /*getAllStudent*/
+const director_getStudent = async (req, res) => {
+    try {
+        //const Students = await Students.find().sort({ createdAt: -1 });
+        res.render("admin/Students", {
+            title: "الثلاميد",
+            /*Students,*/
+            
+           
+        });
+       
+    } catch (error) {
+        console.log(error);
+    }
+};
+   /*add_student */
+   const director_Add_Student = async (req, res) => {
+    try {
+        res.render("admin/add-student", {
+            title: "إضافة تلميد(ة)",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+/*director_edit_student */
+
+const director_edit_student = async (req, res) => {
+    try {
+      const { CIN, full_name, username, city, tele, email, } = req.body;
+  
+      // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+      const updateObject = {};
+      if (full_name) updateObject.full_name = full_name;
+    if (username) updateObject.username = username;
+    if (city) updateObject.city = city;
+    if (tele) updateObject.tele = tele;
+    if (email) updateObject.email = email;
+  
+      
+      await Student.findByIdAndUpdate(req.params.id, updateObject);
+  
+      
+      res.redirect("/students");
+    } catch (error) {
+      console.log(error);
+    }
+};
+
+// director_editStudent_with_ID
+const director_edit_student_id = async (req, res) => {
+    try {
+        const studentinfo = await Student.findOne({ _id: req.params.id });
+
+        res.render("admin/edit-student", {
+            studentinfo,
+            title: "تحديث تلميد(ة)"
+            
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+// director_delete_student
+const director_delete_student = async (req, res) => {
+    try {
+        await Student.deleteOne({ _id: req.params.id });
+        res.redirect("/students");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
+
 // director_logout
 const director_logout = (req, res) => {
     res.clearCookie("adminToken");
@@ -211,6 +291,13 @@ module.exports = {
     director_edit,
     director_edit_id,
     director_delete,
+      /*crud student*/ 
+    director_getStudent,
+    director_Add_Student,
+    director_edit_student,
+    director_edit_student_id,
+    director_delete_student,
     notFound,
     director_logout,
+    
 };
