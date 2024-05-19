@@ -25,7 +25,7 @@ const AddTeacherSchema = new Schema({
         required: true,
         unique: true,
     },
-    selected_level: {
+   /* selected_level: {
         type: String,
         enum: ["إعدادي", "ثانوي"],
         required: true,
@@ -50,7 +50,7 @@ const AddTeacherSchema = new Schema({
             "التكنولوجيا (technology)",
         ],
         required: true,
-    },
+    },*/
     createdAt: { type: Date, default: Date.now },
 });
 AddTeacherSchema.pre("save", async function (next) {
