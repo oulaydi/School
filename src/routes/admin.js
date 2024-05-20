@@ -84,16 +84,35 @@ router.put("/edit-student/:id", /*authMiddleware,*/ directorController.director_
 router.delete("/edit-student/:id", /*authMiddleware,*/ directorController.director_delete_student);
 
 
+
+
+router.get('/add-subject',authMiddleware,(req,res)=>{
+
+    res.render('admin/add-subject', {
+        title: "الفضاء الخاص - بالأساتذة",
+    });
+});
+router.get('/add-group',authMiddleware,(req,res)=>{
+    res.render('admin/add-group', {
+        title: "الفضاء الخاص - بالأساتذة",
+    });
+});
+
+router.get("/add-grades",authMiddleware, (req, res) => {
+    res.render("admin/add-grades", {
+        title: "الفضاء الخاص - بالأساتذة",
+    });
+});
+
+
 /**
  * GET /
  * Admin - Logout
  */
 router.get("/logout", directorController.director_logout);
-
 /**
  *  * Not Found
  */
 router.use(directorController.notFound);
-
 
 module.exports = router;
