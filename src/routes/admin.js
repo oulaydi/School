@@ -84,7 +84,10 @@ router.put("/edit-student/:id", /*authMiddleware,*/ directorController.director_
 router.delete("/edit-student/:id", /*authMiddleware,*/ directorController.director_delete_student);
 
 
-
+/**
+ * GET /
+ *  Admin page
+ */
 
 router.get('/add-subject',authMiddleware,(req,res)=>{
 
