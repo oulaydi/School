@@ -84,6 +84,30 @@ router.put("/edit-student/:id", authMiddleware, directorController.director_edit
 router.delete("/edit-student/:id",authMiddleware, directorController.director_delete_student);
 
 
+
+/*************************TEST ROUTES ************************* */
+//admin add module view
+router.get("admin/add-module", authMiddleware, (req, res) => {
+    res.render("admin/add-Module", {
+        title: "الفضاء الخاص - الاداره",
+    });
+});
+
+//admin add room view
+router.get("admin/add-room",authMiddleware, (req, res) => {
+    res.render("admin/add-room", {
+        title: "الفضاء الخاص - الاداره",
+    });
+});
+//admin  add-Schedule view
+router.get("admin/add-Schedule",authMiddleware, (req, res) => {
+    res.render("admin/add-Schedule", {
+        title: "الفضاء الخاص - الاداره",
+    });
+});
+
+
+
 /**
  * GET /
  * Admin - Logout
@@ -94,6 +118,8 @@ router.get("/logout", directorController.director_logout);
  *  * Not Found
  */
 router.use(directorController.notFound);
+
+
 
 
 module.exports = router;

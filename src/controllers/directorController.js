@@ -211,31 +211,29 @@ const director_getStudent = async (req, res) => {
     }
 };
 
-const director_add_student = async (req, res) => {
+   /*add_student  pour get view form */
+   const director_Add_Student = async (req, res) => {
+    try {
+        res.render("admin/add-student", {
+            title: "إضافة تلميد(ة)",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+ /*add_student  methode post store une bd */
+ const director_add_student = async (req, res) => {
     try {
         const {
-            CIN,
-            full_name, 
-            username,
-            city,
-            tele,
-            email,
-            password,
-        } = req.body;
+            INE, full_name, username, birthday, selected_birthplace, email, password } = req.body;
 
        
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
         const newStudent = AddStudent({
-            CIN,
-            full_name, 
-            username,
-            city,
-            tele,
-            email,
-            password,
-        });
+            INE, full_name, username, birthday, selected_birthplace, email, password});
 
         await AddStudent.create(newStudent);
         req.flash("success","student has been saved successfully!");
@@ -252,30 +250,21 @@ const director_add_student = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-   /*add_student */
-   const director_Add_Student = async (req, res) => {
-    try {
-        res.render("admin/add-student", {
-            title: "إضافة تلميد(ة)",
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
 /*director_edit_student */
 
 const director_edit_student = async (req, res) => {
     try {
-      const { CIN, full_name, username, city, tele, email, } = req.body;
+      const { INE, full_name, username, birthday, selected_birthplace, email, password} = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
-        if (CIN) updateObject.full_name = CIN;
+        if (INE) updateObject.full_name = INE;
         if (full_name) updateObject.full_name = full_name;
         if (username) updateObject.username = username;
-        if (city) updateObject.city = city;
-        if (tele) updateObject.tele = tele;
+        if (birthday) updateObject.city = birthday;
+        if (selected_birthplace) updateObject.tele = selected_birthplace;
         if (email) updateObject.email = email;
+        if (password) updateObject.email = password;
   
       
       await AddStudent.findByIdAndUpdate(req.params.id, updateObject);

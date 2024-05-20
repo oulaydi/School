@@ -5,24 +5,48 @@ const Schema = mongoose.Schema;
 
 const AddTeacherSchema = new Schema({
     CIN: {
-        type: String,
+       type: String,
         required: true,
         unique: true,
     },
-    password: {
+    full_name: {
         type: String,
         required: true,
     },
-    full_name: {
-        type: String,
+    birthday: {
+        type: Date,
+        required: false,
     },
+    selected_birthplace: {
+        type: String,
+        required :false,
+        
+    },
+    num_tel: {
+        type: Number,
+        required: false,
+    },
+    email: {
+        type: String,
+        required: false,
+    },
+    username: {
+        type: String,
+        required: false,
+        unique :true,
+    },
+    password: {
+        type: String,
+        required: false,
+    },
+
     // confirm_password: {
     //     type: String,
     //     required: true,
     // },
     username: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
     },
    /* selected_level: {

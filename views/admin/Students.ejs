@@ -1,81 +1,27 @@
-
-<%- include('../partials/head.ejs') %>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-
-<link rel="stylesheet" href="css/Profile-student.css">
-<link rel="stylesheet" href="css/Profile-student.css">
-<link rel="stylesheet" href="css/student.css">
-<link rel="stylesheet" href="css/add-teacher.css">
-
-
-
-    <!-- header -->
-        <%- include('../partials/header.ejs') %>
-    <!-- header ends -->
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student Profile</title>
-
-        <style>
-            :root {
-                --secondary-color: #FFA300;
-            }
-    
-            .box-shadow-bottom {
-                    /*box-shadow: 4px 0px 0px 10px  var(--secondary-color);*/
-                    border: 1px solid var(--secondary-color);
-            }
-            .custom-bg-color {
-                background-color: var(--secondary-oclor);
-                text-align: center;
-                border-bottom: 1px solid var(--text-color);
-                padding: 16px;
-                border-radius: 7px;
-        }
-       
-    
-            .w-25 {
-                width: 25%;
-            }
-            .input:focus{
-                border-color:  #FFA300;
-            }
-            td,th{
-                text-align: center;
-               
-            }
-            td,th{
-                border-color: #FFA300;
-               
-            }
-           
-        </style>
-        
+        <%- include('../partials/head.ejs') %>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/directorPannel.css" />
     </head>
     <body>
-      
-        <p><%= messages.success %></p>
- 
-            <h3 class="title-5 m-b-35 custom-bg-color">الثلاميد </h3>
+        <!-- Header -->
+        <%- include('../partials/header.ejs') %>
+        <!-- Header Ends!! -->
+        <div class="container" id="header">
+            
+                
+             
             <div>
-               
-                <h3 id="h4" >الفضاء الخاص بالإدارة</h3>
+                <h3>الفضاء الخاص بالإدارة</h3>
             </div>
             <div class="container" id="add-rem">
-                
-                <button class="btn" title="تسجيل الخروج">
-                    <a href="/logout"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
-                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-                      </svg></a>   
-                    
-                    
+                <button class="btn" title="تسجيل الخروج">   
+                    <a href="/logout" style="color: #6c757d">
+                        <i id="bi-icon2" class="bi bi-box-arrow-left fw-bold"></i>
+                    </a>
                 </button>
                 <button class="btn btn-primary my-5">
                     <a href="/add-student" class="text-light">إضافة تلميد(ة)
@@ -85,87 +31,57 @@
             </div>
         </div>
 
-       
-    
-           
-      
-           
-                   </div>
-                   
-                   <% if (Students.length > 0) { %>
-                   <div class="container mt-5 box-shadow-bottom ">
-                    <div class="input-group mt-5 w-25  ml-30px  " >
-                        <span class="input-group-text" id="basic-addon1">filter</span>
-                        <input type="text" class="form-control input" placeholder="Name" aria-label="Name" >
-                      </div>
-                    
-                     
-                        <div class="table-responsive   d-flex justify-content-center">
-                         
-                          
-                            <table class="table table-data2  ">
-                              
-                              
-                             
-                                <thead >
-                                   
-                                    
-                                    <tr  class="tr-shadow">
-                                      
-                                
-                                        <th>CIN</th>
-                                        <th>full_name</th>
-                                        <th>username</th>
-                                        <th>city</th>
-                                        <th>Tele</th>
-                                        <th>email</th>
-                                      
+    <% if (Students.length > 0) { %>
+    <table class="table table-bordered w-75" id="center-container" dir="rtl">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
+                <th scope="col">رقم التلميد(ة)</th>
+                <th scope="col">الإسم الكامل</th>
+                <th scope="col">إسم التلميد</th>
+                <th scope="col">تاريخ الازدياد</th>
+                <th scope="col">مكان الازدياد</th>
+                <th scope="col">المادة</th>
+                <th scope="col">البريد الالكتروني</th>
+                <th scope="col"> اجراء</th>
+            </tr>
+        </thead>
+        <!-- Displaying the values -->
+        <tbody class="table-group-divider">
+            <% Students.forEach(Student => { %>
+                <tr class="text-center">
+                                            <td class="info"><%= Student.INE %></td>
+                                            <td class="info"><%= Student.full_name %></td>
+                                            <td class="info"><%= Student.username %></td>
+                                            <td class="info"><%= Student.birthday %></td>
+                                            <td class="info"><%= Student.selected_birthplace %></td>
+                                            <td class="info"><%= Student.selected_birthplace %></td>
+                                            <td class="info"><%= Student.email %></td>
                                         
-                                        <th>Action</th>
-                                        
-                                      
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                    <% Students.forEach(Students => { %>
-                                        <tr class="text-center">
-                                            <td class="info"><%= Students.CIN %></td>
-                                            <td class="info"><%= Students.full_name %></td>
-                                            <td class="info"><%= Students.username %></td>
-                                            <td class="info"><%= Students.city %></td>
-                                            <td class="info"><%= Students.Tele %></td>
-                                            <td class="info"><%= Students.email %></td>
                                          
-                                            <td class="actions">
-                                                <button type="button" class="btn btn-warning">
-                                                    <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-student/<%= Students._id %>">تحديث</a>
-                                                </button>
-                                                <form action="/edit-student/<%= Students._id %>?_method=DELETE" method="POST" style="display: inline;">
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    <% }); %>
-                                </tbody>
-                            </table>
-                            <% } else { %>
-                                <div class="text-center mt-4">
-                                    <p>.لا يوجد اي تلميد(ة)</p>
-                                </div>
-                            <% } %>
-                           
-                        </div>
-                   </div>
-                 
-</div>
+                    <td class="actions">
+                        <button type="button" class="btn btn-warning">
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-Student/<%= Student._id %>">تحديث</a>
+                        </button>
+                        <form action="/edit-Student/<%= Student._id %>?_method=DELETE" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">
+                                <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <div class="text-center mt-4">
+            <p>.لا يوجد اي بببب(ة)</p>
+        </div>
+    <% } %>
 
-
-   <!-- footer --->
-   <%- include('../partials/footer.ejs') %>
-   <!-- footer ends -->
- 
-
-</body>
+        <!-- footer -->
+        <%- include('../partials/footer.ejs') %>
+        <!-- footer ends -->
+        
+    </body>
 </html>

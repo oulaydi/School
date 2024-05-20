@@ -4,9 +4,9 @@ const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
 
 const AddStudentSchema = new Schema({
-    CIN: {
+    INE: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
     },
     full_name: {
@@ -14,13 +14,16 @@ const AddStudentSchema = new Schema({
     },
     username: {
         type: String,
+        required: true,
+        unique :true,
     },
    
-    city: {
-        type: String,
+  
+    birthday: {
+        type: Date,
         required: true,
     },
-    Tele: {
+    selected_birthplace: {
         type: String,
         required: false,
     },
@@ -28,6 +31,7 @@ const AddStudentSchema = new Schema({
         type: String,
         required: true,
     },
+
     password: {
         type: String,
         required: true,
@@ -37,12 +41,15 @@ const AddStudentSchema = new Schema({
         // type: String,
         // required: true,
     //},
-    
+
+    selected_group :{
+         type: Schema.Types.ObjectId,
+          ref: 'Group',
+    },
     
     
     createdAt: { type: Date, default: Date.now },
 });
-
 
 
 module.exports = mongoose.model("AddStudent", AddStudentSchema);

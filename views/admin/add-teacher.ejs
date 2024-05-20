@@ -22,19 +22,19 @@
           <form action="/add-teacher" class="row g-3" autocomplete="off" method="POST">
             <div class="col-md-6">
               <label class="form-label cus-label" >CIN</label><span> :</span>
-              <input type="text" name="CIN" required placeholder="رقم البطاقة الوطنية" id="input-field" class="form-control">
+              <input type="text"  name="CIN" required placeholder="رقم البطاقة الوطنية" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label" > Nom Complet </label><span> :</span>
-              <input type="text" name="full_name" placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
+              <input type="text" required name="full_name" placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label" > Date de naissance </label><span> :</span>
-              <input type="date" name="date_birthday" placeholder="تاريخ ازدياد الاستاذ(ة)" id="input-field" class="form-control">
+              <input type="date" required name="birthday" placeholder="تاريخ ازدياد الاستاذ(ة)" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label"> Lieu de naissance </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_city">
+              <select class="form-select"  required aria-label="Default select example" id="input-field" name="selected_birthplace">
                 <option value="الدار البيضاء">الدار البيضاء</option>
                 <option value=" فاس"> فاس</option>
                 <option value=" الرباط"> الرباط</option>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label" > Numero Telophone </label><span> :</span>
-              <input type="text" name="num_tel" placeholder="رقم الهاتف الخاص بالاستاذ(ة)" id="input-field" class="form-control">
+              <input type="text" required name="num_tel" placeholder="رقم الهاتف الخاص بالاستاذ(ة)" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label"> Adresse Electronique </label><span> :</span>
@@ -53,7 +53,7 @@
             </div>
             <div class="col-md-6">
                 <label class="form-label cus-label"> Username </label><span> :</span>
-                <input type="text" name="username" required placeholder="ادخل اسم المستخدم الخاص" id="input-field" class="form-control">
+                <input type="text"  name="username" required placeholder="ادخل اسم المستخدم الخاص" id="input-field" class="form-control">
               </div>
               <div class="col-md-6">
                 <label class="form-label cus-label"> Mot de passe </label><span> :</span>
@@ -62,7 +62,7 @@
               </div>
             <div class="col-md-6">
               <label class="form-label cus-label"> Specilate </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_Filiere">
+              <select class="form-select" required aria-label="Default select example" id="input-field" name="selected_subject">
                 <option value="DevOp">Développement Logiciel</option>
                 <option value="CyberInfo"> Sécurité Informatique</option>
                 <option value="INFO"> Informatique</option>
