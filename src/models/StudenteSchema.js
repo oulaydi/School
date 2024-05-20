@@ -12,7 +12,7 @@ const AddStudentSchema = new Schema({
     full_name: {
         type: String,
     },
-    full_name: {
+    username: {
         type: String,
     },
    
@@ -22,7 +22,7 @@ const AddStudentSchema = new Schema({
     },
     Tele: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,

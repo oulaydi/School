@@ -7,8 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../public/css/forms.css" />
-    <link rel="stylesheet" href="css/student.css">
-    <link rel="stylesheet" href="css/add-teacher.css">
+    <link rel="stylesheet" href="css/student.css" />
+
+    <link rel="stylesheet" href="/css/add-teacher.css" />
+    
+s">
+
+
   </head>
 <body>
     <!-- Header -->
@@ -17,47 +22,44 @@
     <div class="center-container">
       <p> <%= messages.success %> </p>
       <div>
-        <h3 id="h4"> Ajouter Etudiant </h3>
+        <h3 id="h4"> تحديث تلميد  </h3>
       </div>
      <a href="/director" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
-          <form action="/add-student" class="row g-3" autocomplete="off" method="POST">
+        <form method="POST" action="/edit-student/<%= studentinfo._id %>?_method=PUT" class="row g-3" autocomplete="off">
+         
             <div class="col-md-6">
               <label class="form-label cus-label">CIN</label><span> :</span>
-              <input type="text" name="CIN" placeholder="رقم التلميذ الوطني" id="input-field" class="form-control">
+              <input type="text" readonly value="<%= studentinfo.CIN %>" name="CIN" placeholder="رقم التلميذ الوطني" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
                 <label class="form-label cus-label" > Nom Complet  </label><span> :</span>
-                <input type="text" name="full_name" placeholder="اسم و نسب تلميد(ة)" id="input-field" class="form-control">
+                <input type="text" value="<%= studentinfo.full_name %>" name="full_name" placeholder="اسم و نسب تلميد(ة)" id="input-field" class="form-control">
               </div>
             <div class="col-md-6">
                 <label class="form-label cus-label" > username</label><span> :</span>
-                <input type="text" name="username" placeholder="تاريخ الازدياد التلميد(ة)" id="input-field" class="form-control">
+                <input type="text" value="<%= studentinfo.username %>" name="username" placeholder="تاريخ الازدياد التلميد(ة)" id="input-field" class="form-control">
               </div>
             <div class="col-md-6">
                 <label class="form-label cus-label">city </label><span> :</span>
-                <input type="text" name="city" placeholder="تاريخ الازدياد التلميد(ة)" id="input-field" class="form-control">
+                <input type="text" value="<%= studentinfo.city %>"  name="city" placeholder="تاريخ الازدياد التلميد(ة)" id="input-field" class="form-control">
               </div>
             <div class="col-md-6">
                 <label class="form-label cus-label" > Numero Telophone </label><span> :</span>
-                <input type="text" name="Tele" placeholder="رقم الهاتف الخاص بالتلميذ(ة)" id="input-field" class="form-control">
+                <input type="text" value="<%= studentinfo.Tele %>"  name="Tele" placeholder="رقم الهاتف الخاص بالتلميذ(ة)" id="input-field" class="form-control">
               </div>
             <div class="col-md-6">
                 <label class="form-label cus-label"> Adresse Electronique </label><span> :</span>
-                <input type="email" name="email" required placeholder="ادخل العنوان الالكتروني الخاص بالمستخدم" id="input-field" class="form-control">
+                <input type="email" value="<%= studentinfo.email %>" value="<%= studentinfo.username %>"  name="email" required placeholder="ادخل العنوان الالكتروني الخاص بالمستخدم" id="input-field" class="form-control">
               </div>
             
-            <div class="col-md-6">
-                <label class="form-label cus-label"> Mot de passe </label><span> :</span>
-                <input type="password" name="password" required placeholder="ادخل كلمة المرور" id="input-field" class="form-control">
-                <i class="fas fa-eye" id="togglePassword"></i>
-              </div>
+          
            
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" required>
                 <label class="custom-control-label" for="customCheck1">اشهد على صحة المعلومات المصرح بها</label>
             </div>
-            <button type="submit" class="btn w-25 btn-primary">إضافة</button>
+            <button type="submit" class="btn w-25 btn-primary">تحديث</button>
           </form>
       </div>
     </div>
