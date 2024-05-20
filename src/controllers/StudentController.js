@@ -47,6 +47,7 @@ const student_edit_id = async (req, res) => {
   module.exports = {
     student_edit_id,
     student_edit,
+    student_edit_id,
 };
 
 
