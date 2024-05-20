@@ -9,48 +9,47 @@ const AddTeacherSchema = new Schema({
         required: true,
         unique: true,
     },
+    full_name: {
+        type: String,
+        required: true,
+    },
+    birthday: {
+        type: Date,
+        required: true,
+    },
+    selected_birthplace: {
+        type: String,
+        required :true,
+        
+    },
+    num_tel: {
+        type: Number,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    username: {
+        type: String,
+        required: true,
+        unique :true,
+    },
     password: {
         type: String,
         required: true,
     },
-    full_name: {
-        type: String,
-    },
-    // confirm_password: {
-    //     type: String,
-    //     required: true,
-    // },
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    selected_level: {
-        type: String,
-        enum: ["إعدادي", "ثانوي"],
-        required: true,
-    },
-    selected_subject: {
-        type: String,
-        enum: [
-            "اللغة العربية (Arabic Language)",
-            "اللغة الفرنسية (French Language)",
-            "اللغة الإنجليزية (English Language)",
-            "اللغة الإسبانية (Spanish Language)",
-            "اللغة الألمانية (German Language)",
-            "الرياضيات (Mathematics)",
-            "الفيزياء (Physics)",
-            "الكيمياء (Chemistry)",
-            "الأحياء (Biology)",
-            "الجغرافيا (Geography)",
-            "التربية الإسلامية (Islamic Education)",
-            "الفلسفة (Philosophy)",
-            "ألتربية التشكيلية (Art education)",
-            "المعلوميات (Informatique)",
-            "التكنولوجيا (technology)",
-        ],
-        required: true,
-    },
+    
+   //  confirm_password: {
+        // type: String,
+        // required: true,
+    //},
+
+    selected_subject :{
+        type: Schema.Types.ObjectId,
+         ref: 'Subject',
+   },
+    
     createdAt: { type: Date, default: Date.now },
 });
 AddTeacherSchema.pre("save", async function (next) {
