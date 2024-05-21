@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/earlyaccess/scheherazade.css");
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400&family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap');
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: var(--font-family);
+}
+
+::selection{
+    background-color: var(--button-color);
+    color: var(--background-color);
+}
+
+/* Colors */
+/* 
+    Primary Color (Official School Color): #0072CE (Blue)
+    Secondary Color (Accent): #FFA300 (Orange)
+    Background Color: #eeefef (Dark White)
+    Text Color: #333333 (Dark Gray)
+    Button Color: #4CAF50 (Green)
+*/
+:root {
+    --primary-color: #0072CE;
+    --secondary-oclor: #FFA300;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --button-color: #4CAF50;
+
+    /* Font family Arabic */
+    --font-family: 'Cairo', sans-serif;
+    --font-family1: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+body {
+    background-image: url(https://www.rsu.ma/rsu/bgContent1-left.21b761aebb803b33.png),url(https://www.rsu.ma/rsu/bgContent3-topRight.00811284a834c59d.png),url(https://www.rsu.ma/rsu/bgContent3-BottomRight.dbecf231b0249381.png);
+    background-repeat: no-repeat,no-repeat,no-repeat;
+    background-position: -25px -2px,calc(100% + 37px) -85px,calc(100% + 63px) 70%;
+    background-size: 490px 677px,270px 307px,240px 239px;
+}
+
+div.logo {
+    margin-bottom: 40px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    max-width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
+}
+
+.center-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.cus-label {
+    font-weight: 700;
+    border-right: 3px solid var(--button-color);
+    padding-right: 10px;
+}
+
+#input-field::placeholder, .confirm::placeholder, .confirm::placeholder {
+    color: #33333372;
+}
+
+#input-field, .confirm, .confirm{
+    border: 2px solid var(--secondary-oclor);
+    box-shadow: none;
+    transition: .2s;
+}
+
+#input-field:focus, .confirm:focus, .confirm:focus {
+    border: 2px solid var(--button-color);
+}
+
+span {
+    font-weight:bolder;
+}
+
+i, .fas {
+    display: flex;
+    font-weight: 900;
+    flex-direction: row-reverse;
+    position: absolute;
+    margin: -28px 258px;
+    color: rgba(128, 128, 128, 0.483);
+    cursor: pointer;
+    display: none;
+    transition: .2s;
+}
+
+i, .fas:hover {
+    color: var(--text-color);
+}
+
+#h4 {
+    position: absolute;
+    margin-top: 43px;
+    right: 117px;
+    font-size: 22px;
+    left: 80%;
+    cursor: default;
+    border-right: 4px solid var(--button-color);
+}
+
+#cancel {
+    width: fit-content;
+}
+
+
+/* footer */
+footer {
+    color: var(--text-color); 
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 15px;
+    margin-top: 60px;
+    font-weight: 700;
+    font-family: var(--font-family1) !important;
+}
+
+footer i a {
+    color: var(--text-color);
+    text-decoration: none;
+}

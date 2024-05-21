@@ -1,0 +1,89 @@
+ /* beginning of template */
+     
+@import url("https://fonts.googleapis.com/earlyaccess/scheherazade.css");
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400&family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap');
+
+ body {
+  background-image: url(https://www.rsu.ma/rsu/bgContent1-left.21b761aebb803b33.png),url(https://www.rsu.ma/rsu/bgContent3-topRight.00811284a834c59d.png),url(https://www.rsu.ma/rsu/bgContent3-BottomRight.dbecf231b0249381.png);
+  background-repeat: no-repeat,no-repeat,no-repeat;
+  background-position: -25px -2px,calc(100% + 37px) -85px,calc(100% + 63px) 70%;
+  background-size: 490px 677px,270px 307px,240px 239px;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  
+  
+}
+
+.background{
+  border: 5px solid white;
+  background-color: white;
+  border-radius: 20px;
+
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+header .logo {
+  position: absolute;
+  left: 20px;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+/* end of template */
+    .Table {
+border: 1px solid gold; 
+margin-bottom: 30px;
+border-radius: 12px;
+}
+thead th {
+background-color:rgba(246, 246, 254, 1); 
+color: black;
+font-weight: bold; 
+padding: 10px 45px; 
+
+}
+td, th {
+text-align: center;
+border: 0.5px solid gold; 
+}
+.Td{
+padding: 5px 20px;
+}
+.Button-Span-Inprogress{
+display: flexbox;
+background-color: rgba(65, 84, 241, 1);
+color: white;
+border-radius: 5px;
+border: none;
+padding: 7px 22px;
+margin-left: 10px;
+}
+.Button-Span-Abroved{
+display: flexbox;
+background-color:rgba(76, 225, 182, 1);
+color: white;
+border-radius: 5px;
+border: none;
+padding: 7px 27px;
+position: relative;
+margin-left: 10px;
+}

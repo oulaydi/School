@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <%- include('./partials/head.ejs') %>
+       
+        <link rel="stylesheet" href="/css/absence.css" />
+    </head>
+   
+    <body>
+      <div class="container">
+        <!-- header -->
+            <%- include('./partials/header.ejs') %>
+        <!-- header ends -->
+        <%# backgroud of the project %>
+
+        <div class="background">
+          <div class="container">
+                  <h1>Registres d'absence</h1>
+              <div class="content">
+                  <div class="modules">
+
+                    <%# End of backgroud of the project %>
+                <div class="UserDetails">
+                  <table class="Table">
+                    <thead>
+                      <tr class="Tr">
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Cour</th>
+                        <th>Absence reason</th>
+                        <th>Absence for</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="Tbody">
+                      <tr class="Tr">
+                        <td>1</td>
+                        <td class="Maria">Amin</td>
+                        <td class="Bict">info</td>
+                        <td class="Sick">Sick</td>
+                        <td class="Day">1 day</td>
+                        <td class="Td">
+                          <button class="Button-Span-Inprogress">In Progress</button>
+                        </td>
+                      </tr>
+                      <tr class="Tr">
+                        <td>2</td>
+                        <td class="Maria">Hajita</td>
+                        <td class="Bict">UML</td>
+                        <td class="Sick">Sick</td>
+                        <td class="Day">1 day</td>
+                        <td class="Td">
+                          <button class="Button-Span-Abroved">Approved</button>
+                        </td>
+                      </tr>
+                      <tr class="Tr">
+                        <td>3</td>
+                        <td class="Maria">Hajita</td>
+                        <td class="Bict">UML</td>
+                        <td class="Sick">Sick</td>
+                        <td class="Day">1 day</td>
+                        <td class="Td">
+                          <button class="Button-Span-Inprogress">In Progress</button>
+                        </td>
+                      </tr>
+                      <tr class="Tr">
+                        <td>4</td>
+                        <td class="Maria">Hajita</td>
+                        <td class="Bict">UML</td>
+                        <td class="Sick">Sick</td>
+                        <td class="Day">1 day</td>
+                        <td class="Td">
+                          <button class="Button-Span-Abroved">Approved</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+        <!-- footer -->
+        <%- include('./partials/footer.ejs') %>
+        <!-- footer ends -->
+        <script src="js/dropdown.js"></script>
+    </body>
+</html>

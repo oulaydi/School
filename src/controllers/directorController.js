@@ -1,5 +1,6 @@
 const DirectorSchema = require("../models/DirectorSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
+const AddStudent = require("../models/StudenteSchema");
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
@@ -28,16 +29,12 @@ const director_login = async (req, res) => {
             errorType = "missingCredentials";
         } else {
             director = await DirectorSchema.findOne({ username });
-
             if (!director) {
                 errorType = "invalidLogin";
             } else if (password.length < 5) {
                 errorType = "passwordTooShort";
             } else {
-                const ifPwdValid = await bcrypt.compare(
-                    password,
-                    director.password
-                );
+                const ifPwdValid = await bcrypt.compare( password,director.password);
                 if (!ifPwdValid) {
                     errorType = "invalidLogin";
                 }
@@ -58,10 +55,7 @@ const director_login = async (req, res) => {
                 res.status(401).redirect("/admin");
                 break;
             default:
-                const adminToken = jwt.sign(
-                    { directorId: director._id },
-                    jwtSecret
-                );
+                const adminToken = jwt.sign({ directorId: director._id }, jwtSecret);
                 res.cookie("adminToken", adminToken, { httpOnly: true });
                 res.redirect("/director");
                 break;
@@ -80,7 +74,9 @@ const director_index = async (req, res) => {
         res.render("admin/director", {
             title: "الرئيسية - لوحة القيادة",
             teachers,
+           
         });
+       
     } catch (error) {
         console.log(error);
     }
@@ -92,11 +88,14 @@ const director_add = async (req, res) => {
         const {
             CIN,
             full_name,
+            birthday,
+            selected_birthplace,
+            num_tel,
+            email,
+            username,
             password,
             confirm_password,
-            username,
-            selected_level,
-            selected_subject,
+
         } = req.body;
 
         // Check if password matches confirm_password
@@ -106,29 +105,30 @@ const director_add = async (req, res) => {
                 .json({ error: "Password and confirm password do not match" });
         }
 
-        // Hash the password before saving to MongoDB (uncomment if using bcrypt)
-        // const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newTeacher = new AddTeacher({
+        // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
+        //const hashedPassword = await bcrypt.hash(password, 10);
+        const newTeacher = AddTeacher({
             CIN,
             full_name,
-            password, // Use hashedPassword if you hash the password
+            birthday,
+            selected_birthplace,
+            num_tel,
+            email,
             username,
-            selected_level,
-            selected_subject,
+            password,
+            confirm_password,
         });
 
         await AddTeacher.create(newTeacher);
-        // req.flash("success", "Teacher has been saved successfully!");
-
-        // Choose one of the following responses:
-
-        // res.render('admin/add-teacher', {
-        //     title: "إضافة استاذ(ة)",
-        //     // messages: req.flash(), // we'll add alerts later (oulaydi)
-        // });
-
+        req.flash("success","Teacher has been saved successfully!");
+        res.render('admin/add-teacher',{
+            messages:req.flash()
+        });
+        /*res.render("/admin/director", {
+            err1_msg: "Teacher has been saved successfully!"
+        });*/
         res.redirect("/director");
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -149,33 +149,27 @@ const directorAddTeacher = async (req, res) => {
 // director_edit
 const director_edit = async (req, res) => {
     try {
-        const {
-            CIN,
-            full_name,
-            password,
-            confirm_password,
-            username,
-            selected_level,
-            selected_subject,
-        } = req.body;
-
-        // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
-        const updateObject = {};
-        if (CIN) updateObject.CIN = CIN;
-        if (full_name) updateObject.full_name = full_name;
-        if (password) updateObject.password = password;
-        if (confirm_password) updateObject.confirm_password = confirm_password;
-        if (username) updateObject.username = username;
-        if (selected_level) updateObject.selected_level = selected_level;
-        if (selected_subject) updateObject.selected_subject = selected_subject;
-
-        await AddTeacher.findByIdAndUpdate(req.params.id, updateObject);
-
-        res.redirect("/director");
+      const {CIN,full_name,birthday,selected_birthplace,num_tel,email,username, password,confirm_password, } = req.body;
+  
+      // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+      const updateObject = {};
+      if (CIN) updateObject.CIN = CIN;
+      if (full_name) updateObject.full_name = full_name;
+      if (password) updateObject.password = password; 
+      if (confirm_password) updateObject.confirm_password = confirm_password; 
+      if (username) updateObject.username = username;
+      if (selected_level) updateObject.selected_level = selected_level;
+      if (selected_subject) updateObject.selected_subject = selected_subject;
+  
+      
+      await AddTeacher.findByIdAndUpdate(req.params.id, updateObject);
+  
+      
+      res.redirect("/director");
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
 // director_edit_with_ID
 const director_edit_id = async (req, res) => {
@@ -184,7 +178,8 @@ const director_edit_id = async (req, res) => {
 
         res.render("admin/edit-teacher", {
             teacherInfo,
-            title: "تحديث استاذ(ة)",
+            title: "تحديث استاذ(ة)"
+            
         });
     } catch (error) {
         console.log(error);
@@ -200,6 +195,121 @@ const director_delete = async (req, res) => {
         console.log(error);
     }
 };
+
+
+
+/* director_student  */
+
+
+    /*getAllStudent*/
+const director_getStudent = async (req, res) => {
+    try {
+        const Students = await AddStudent.find().sort({ createdAt: -1 });
+        res.render("admin/Students", {
+            title: "الثلاميد",
+            Students,
+            
+           
+        });
+       
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+   /*add_student  pour get view form */
+   const director_Add_Student = async (req, res) => {
+    try {
+        res.render("admin/add-student", {
+            title: "إضافة تلميد(ة)",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+ /*add_student  methode post store une bd */
+ const director_add_student = async (req, res) => {
+    try {
+        const {
+            INE, full_name, username, birthday, selected_birthplace, email, password } = req.body;
+
+       
+
+        // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
+        //const hashedPassword = await bcrypt.hash(password, 10);
+        const newStudent = AddStudent({
+            INE, full_name, username, birthday, selected_birthplace, email, password});
+
+        await AddStudent.create(newStudent);
+        req.flash("success","student has been saved successfully!");
+        res.render('admin/add-student',{
+            messages:req.flash()
+        });
+        /*res.render("/admin/director", {
+            err1_msg: "Teacher has been saved successfully!"
+        });*/
+        res.redirect("/students");
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+/*director_edit_student */
+
+const director_edit_student = async (req, res) => {
+    try {
+      const { INE, full_name, username, birthday, selected_birthplace, email, password} = req.body;
+  
+      // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+      const updateObject = {};
+        if (INE) updateObject.full_name = INE;
+        if (full_name) updateObject.full_name = full_name;
+        if (username) updateObject.username = username;
+        if (birthday) updateObject.city = birthday;
+        if (selected_birthplace) updateObject.tele = selected_birthplace;
+        if (email) updateObject.email = email;
+        if (password) updateObject.email = password;
+  
+      
+      await AddStudent.findByIdAndUpdate(req.params.id, updateObject);
+  
+      
+      res.redirect("/Students");
+    } catch (error) {
+      console.log(error);
+    }
+};
+
+// director_editStudent_with_ID
+const director_edit_student_id = async (req, res) => {
+    try {
+        const studentinfo = await AddStudent.findOne({ _id: req.params.id });
+
+        res.render("admin/edit-student", {
+            studentinfo,
+            title: "تحديث تلميد(ة)"
+            
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+// director_delete_student
+const director_delete_student = async (req, res) => {
+    try {
+        await AddStudent.deleteOne({ _id: req.params.id });
+        res.redirect("/Students");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
 
 // director_logout
 const director_logout = (req, res) => {
@@ -223,6 +333,14 @@ module.exports = {
     director_edit,
     director_edit_id,
     director_delete,
+      /*crud student*/ 
+      director_add_student,
+    director_getStudent,
+    director_Add_Student,
+    director_edit_student,
+    director_edit_student_id,
+    director_delete_student,
     notFound,
     director_logout,
+    
 };

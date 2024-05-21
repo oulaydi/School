@@ -1,0 +1,8 @@
+.profile{
+    background-color: var(--secondary-oclor);
+    text-align: center;
+   border-bottom: 1px solid var(--text-color);
+  padding: 20px;
+  border-radius: 7px;
+}
+
