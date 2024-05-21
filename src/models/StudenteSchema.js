@@ -7,13 +7,18 @@ const Schema = mongoose.Schema;
 const AddStudentSchema = new Schema({
     INE: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
     },
     full_name: {
         type: String,
-        required: true,
     },
+    username: {
+        type: String,
+        required: true,
+        unique :true,
+    },
+   
     birthday: {
         type: Date,
         required: true,
@@ -38,11 +43,7 @@ const AddStudentSchema = new Schema({
         type: String,
         required: true,
     },
-    username: {
-        type: String,
-        required: true,
-        unique :true,
-    },
+
     password: {
         type: String,
         required: true,
@@ -53,19 +54,6 @@ const AddStudentSchema = new Schema({
         // required: true,
     //},
 
-    Group:{
-         type: Schema.Types.ObjectId,
-          ref: 'Group',
-    },
-
-    Group: { // Virtual field to store the retrieved name_group
-        type: String,
-        get: function() {
-          return this.group ? this.group.name_group : undefined;
-        },
-      },
-    
-    
     
     createdAt: { type: Date, default: Date.now },
 });
