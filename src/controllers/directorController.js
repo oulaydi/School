@@ -87,11 +87,14 @@ const director_add = async (req, res) => {
         const {
             CIN,
             full_name,
+            birthday,
+            selected_birthplace,
+            num_tel,
+            email,
+            username,
             password,
             confirm_password,
-            username,
-            selected_level,
-            selected_subject,
+
         } = req.body;
 
         // Check if password matches confirm_password
@@ -106,10 +109,13 @@ const director_add = async (req, res) => {
         const newTeacher = AddTeacher({
             CIN,
             full_name,
-            password,
+            birthday,
+            selected_birthplace,
+            num_tel,
+            email,
             username,
-            selected_level,
-            selected_subject,
+            password,
+            confirm_password,
         });
 
         await AddTeacher.create(newTeacher);
@@ -142,7 +148,7 @@ const directorAddTeacher = async (req, res) => {
 // director_edit
 const director_edit = async (req, res) => {
     try {
-      const { CIN, full_name, password, confirm_password, username, selected_level, selected_subject } = req.body;
+      const {CIN,full_name,birthday,selected_birthplace,num_tel,email,username, password,confirm_password, } = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+
 const Schema = mongoose.Schema;
 
 const AddStudentSchema = new Schema({
@@ -20,6 +21,14 @@ const AddStudentSchema = new Schema({
     selected_birthplace: {
         type: String,
         required :true,
+        enum:[
+            "الدار البيضاء",
+            " فاس",
+            "الرباط",
+            " مراكش",
+            " طنجة ",
+            " أكادير",
+        ]
     },
     num_tel: {
         type: Number,
@@ -44,10 +53,18 @@ const AddStudentSchema = new Schema({
         // required: true,
     //},
 
-    selected_group :{
+    Group:{
          type: Schema.Types.ObjectId,
           ref: 'Group',
     },
+
+    Group: { // Virtual field to store the retrieved name_group
+        type: String,
+        get: function() {
+          return this.group ? this.group.name_group : undefined;
+        },
+      },
+    
     
     
     createdAt: { type: Date, default: Date.now },

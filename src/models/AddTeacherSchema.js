@@ -7,23 +7,30 @@ const AddTeacherSchema = new Schema({
     CIN: {
         type: String,
         required: true,
-        unique: true,
+       // unique: true,
     },
     full_name: {
         type: String,
         required: true,
     },
     birthday: {
-        type: Date,
+        type: String,
         required: true,
     },
     selected_birthplace: {
         type: String,
         required :true,
-        
+        enum:[
+            "الدار البيضاء",
+            " فاس",
+            "الرباط",
+            " مراكش",
+            " طنجة ",
+            " أكادير",
+        ]
     },
     num_tel: {
-        type: Number,
+        type: String,
         required: true,
     },
     email: {
@@ -33,22 +40,22 @@ const AddTeacherSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique :true,
+       // unique :true,
     },
     password: {
         type: String,
         required: true,
     },
     
-   //  confirm_password: {
-        // type: String,
-        // required: true,
-    //},
+   // confirm_password: {
+     //    type: String,
+       //  required: true,
+    // },
 
-    selected_subject :{
-        type: Schema.Types.ObjectId,
-         ref: 'Subject',
-   },
+   // selected_subject :{
+    // type: Schema.Types.ObjectId,
+     //    ref: 'Subject',
+   //},
     
     createdAt: { type: Date, default: Date.now },
 });
