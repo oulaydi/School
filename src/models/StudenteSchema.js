@@ -1,18 +1,24 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+
 const Schema = mongoose.Schema;
 
 const AddStudentSchema = new Schema({
     INE: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
     },
     full_name: {
         type: String,
-        required: true,
     },
+    username: {
+        type: String,
+        required: true,
+        unique :true,
+    },
+   
     birthday: {
         type: Date,
         required: true,
@@ -20,6 +26,14 @@ const AddStudentSchema = new Schema({
     selected_birthplace: {
         type: String,
         required :true,
+        enum:[
+            "الدار البيضاء",
+            " فاس",
+            "الرباط",
+            " مراكش",
+            " طنجة ",
+            " أكادير",
+        ]
     },
     num_tel: {
         type: Number,
@@ -29,11 +43,7 @@ const AddStudentSchema = new Schema({
         type: String,
         required: true,
     },
-    username: {
-        type: String,
-        required: true,
-        unique :true,
-    },
+
     password: {
         type: String,
         required: true,
@@ -44,11 +54,6 @@ const AddStudentSchema = new Schema({
         // required: true,
     //},
 
-    selected_group :{
-         type: Schema.Types.ObjectId,
-          ref: 'Group',
-    },
-    
     
     createdAt: { type: Date, default: Date.now },
 });

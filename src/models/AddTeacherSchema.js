@@ -5,51 +5,75 @@ const Schema = mongoose.Schema;
 
 const AddTeacherSchema = new Schema({
     CIN: {
-        type: String,
+       type: String,
         required: true,
-        unique: true,
+       // unique: true,
     },
     full_name: {
         type: String,
         required: true,
     },
     birthday: {
-        type: Date,
+        type: String,
         required: true,
     },
     selected_birthplace: {
         type: String,
         required :true,
+        enum:[
+            "الدار البيضاء",
+            " فاس",
+            "الرباط",
+            " مراكش",
+            " طنجة ",
+            " أكادير",
+        ]
+    },
+    num_tel: {
+        type: String,
+        required: true,
+    },
+    selected_birthplace: {
+        type: String,
+        required :false,
         
     },
     num_tel: {
         type: Number,
-        required: true,
+        required: false,
     },
     email: {
         type: String,
-        required: true,
+        required: false,
     },
     username: {
         type: String,
         required: true,
-        unique :true,
+       // unique :true,
+
     },
     password: {
         type: String,
-        required: true,
+        required: false,
     },
-    
-   //  confirm_password: {
-        // type: String,
-        // required: true,
-    //},
 
-    selected_subject :{
-        type: Schema.Types.ObjectId,
-         ref: 'Subject',
-   },
-    
+    // confirm_password: {
+    //     type: String,
+    //     required: true,
+    // },
+    username: {
+        type: String,
+        required: false,
+        unique: true,
+    },
+ 
+   // confirm_password: {
+     //    type: String,
+       //  required: true,
+    // },
+
+ 
+
     createdAt: { type: Date, default: Date.now },
 });
 AddTeacherSchema.pre("save", async function (next) {

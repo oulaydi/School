@@ -1,5 +1,6 @@
 const DirectorSchema = require("../models/DirectorSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
+const AddStudent = require("../models/StudenteSchema");
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
@@ -87,11 +88,14 @@ const director_add = async (req, res) => {
         const {
             CIN,
             full_name,
+            birthday,
+            selected_birthplace,
+            num_tel,
+            email,
+            username,
             password,
             confirm_password,
-            username,
-            selected_level,
-            selected_subject,
+
         } = req.body;
 
         // Check if password matches confirm_password
@@ -106,10 +110,13 @@ const director_add = async (req, res) => {
         const newTeacher = AddTeacher({
             CIN,
             full_name,
-            password,
+            birthday,
+            selected_birthplace,
+            num_tel,
+            email,
             username,
-            selected_level,
-            selected_subject,
+            password,
+            confirm_password,
         });
 
         await AddTeacher.create(newTeacher);
@@ -142,7 +149,7 @@ const directorAddTeacher = async (req, res) => {
 // director_edit
 const director_edit = async (req, res) => {
     try {
-      const { CIN, full_name, password, confirm_password, username, selected_level, selected_subject } = req.body;
+      const {CIN,full_name,birthday,selected_birthplace,num_tel,email,username, password,confirm_password, } = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
@@ -189,15 +196,18 @@ const director_delete = async (req, res) => {
     }
 };
 
+
+
 /* director_student  */
+
 
     /*getAllStudent*/
 const director_getStudent = async (req, res) => {
     try {
-        //const Students = await Students.find().sort({ createdAt: -1 });
+        const Students = await AddStudent.find().sort({ createdAt: -1 });
         res.render("admin/Students", {
             title: "الثلاميد",
-            /*Students,*/
+            Students,
             
            
         });
@@ -206,7 +216,8 @@ const director_getStudent = async (req, res) => {
         console.log(error);
     }
 };
-   /*add_student */
+
+   /*add_student  pour get view form */
    const director_Add_Student = async (req, res) => {
     try {
         res.render("admin/add-student", {
@@ -216,25 +227,56 @@ const director_getStudent = async (req, res) => {
         console.log(error);
     }
 };
+
+ /*add_student  methode post store une bd */
+ const director_add_student = async (req, res) => {
+    try {
+        const {
+            INE, full_name, username, birthday, selected_birthplace, email, password } = req.body;
+
+       
+
+        // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
+        //const hashedPassword = await bcrypt.hash(password, 10);
+        const newStudent = AddStudent({
+            INE, full_name, username, birthday, selected_birthplace, email, password});
+
+        await AddStudent.create(newStudent);
+        req.flash("success","student has been saved successfully!");
+        res.render('admin/add-student',{
+            messages:req.flash()
+        });
+        /*res.render("/admin/director", {
+            err1_msg: "Teacher has been saved successfully!"
+        });*/
+        res.redirect("/students");
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 /*director_edit_student */
 
 const director_edit_student = async (req, res) => {
     try {
-      const { CIN, full_name, username, city, tele, email, } = req.body;
+      const { INE, full_name, username, birthday, selected_birthplace, email, password} = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
-      if (full_name) updateObject.full_name = full_name;
-    if (username) updateObject.username = username;
-    if (city) updateObject.city = city;
-    if (tele) updateObject.tele = tele;
-    if (email) updateObject.email = email;
+        if (INE) updateObject.full_name = INE;
+        if (full_name) updateObject.full_name = full_name;
+        if (username) updateObject.username = username;
+        if (birthday) updateObject.city = birthday;
+        if (selected_birthplace) updateObject.tele = selected_birthplace;
+        if (email) updateObject.email = email;
+        if (password) updateObject.email = password;
   
       
-      await Student.findByIdAndUpdate(req.params.id, updateObject);
+      await AddStudent.findByIdAndUpdate(req.params.id, updateObject);
   
       
-      res.redirect("/students");
+      res.redirect("/Students");
     } catch (error) {
       console.log(error);
     }
@@ -243,7 +285,7 @@ const director_edit_student = async (req, res) => {
 // director_editStudent_with_ID
 const director_edit_student_id = async (req, res) => {
     try {
-        const studentinfo = await Student.findOne({ _id: req.params.id });
+        const studentinfo = await AddStudent.findOne({ _id: req.params.id });
 
         res.render("admin/edit-student", {
             studentinfo,
@@ -259,8 +301,8 @@ const director_edit_student_id = async (req, res) => {
 // director_delete_student
 const director_delete_student = async (req, res) => {
     try {
-        await Student.deleteOne({ _id: req.params.id });
-        res.redirect("/students");
+        await AddStudent.deleteOne({ _id: req.params.id });
+        res.redirect("/Students");
     } catch (error) {
         console.log(error);
     }
@@ -292,6 +334,7 @@ module.exports = {
     director_edit_id,
     director_delete,
       /*crud student*/ 
+      director_add_student,
     director_getStudent,
     director_Add_Student,
     director_edit_student,
