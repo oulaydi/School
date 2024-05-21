@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../public/css/forms.css" />
+    <link rel="stylesheet" href="css/student.css" />
+    <link rel="stylesheet" href="css/add-teacher.css" />
+  </head>
+<body>
+    <!-- Header -->    
+    <%- include('../partials/header.ejs') %>
+    <!-- Header Ends!! -->
+    <div class="center-container">
+      <p><%= messages.success %></p>
+      <div>
+        <h3 id="h4"> Ajouter Groupe</h3>
+      </div>
+     <a href="/director" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
+     <div class="container my-5" dir="rtl">
+          <form action="/add-teacher" class="row g-3" autocomplete="off" method="POST">
+            <div class="col-md-6">
+              <label class="form-label cus-label" >Nom de Groupe </label><span> :</span>
+              <input type="text" name="name_group" required placeholder="generer auto" id="input-field" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label cus-label">  Filiere de Groupe </label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_subject">
+                <option value="DevOp">Développement Logiciel</option>
+                <option value="CyberInfo"> Sécurité Informatique</option>
+                <option value="INFO"> Informatique</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label cus-label">  Niveau Scolaire   </label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_level">
+                <option value="S1">1</option>
+                <option value="S2"> 2 </option>
+                <option value="S3"> 3</option>
+                <option value="S4"> 4</option>
+                <option value="S5"> 5</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label cus-label"> Année Scolaire </label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_saison">
+                <option value="19-20"> 2019-2020 </option>
+                <option value="20-21"> 2020-2021 </option>
+                <option value="21-22">2021-2022</option>
+                <option value="22-23">2022-2023</option>
+                <option value="23-24">2023-2024</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label cus-label" > Capacité du Groupe</label><span> :</span>
+              <input type="text" name="capacity_group" placeholder=" سعة الصف" id="input-field" class="form-control">
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                <label class="custom-control-label" for="customCheck1">اشهد على صحة المعلومات المصرح بها</label>
+            </div>
+            <button type="submit" class="btn w-25 btn-primary">إضافة</button>
+          </form>
+      </div>
+    </div>
+    <!-- <script>
+            const passwordInput = document.querySelector('input[name="password"]');
+            const confirmInput = document.querySelector('input[name="confirm_password"]');
+            const togglePassword = document.getElementById('togglePassword');
+            
+            togglePassword.addEventListener('click', function () {
+              togglePasswordVisibility(passwordInput);
+              togglePasswordVisibility(confirmInput);
+            });
+            
+            function togglePasswordVisibility(inputField) {
+              if (inputField.type === 'password') {
+                    inputField.type = 'text';
+                } else {
+                    inputField.type = 'password';
+                  }
+            }
+    </script> -->
+    
+    <!-- footer --->
+        <%- include('../partials/footer.ejs') %>
+    <!-- footer ends -->
+</body>
+</html>
