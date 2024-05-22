@@ -16,7 +16,7 @@ router.get("/admin", directorController.loginAuth);
 router.post("/admin", directorController.director_login);
 
 /**
- * GET /
+ * GET /g
  * Director - All teachers
  */
 router.get("/director", authMiddleware, directorController.director_index);
@@ -85,20 +85,22 @@ router.delete("/edit-student/:id",authMiddleware, directorController.director_de
 
 /*************************TEST ROUTES ************************* */
 //admin add module view
-router.get("admin/add-module", authMiddleware, (req, res) => {
+router.get("/admin/add-module", authMiddleware, (req, res) => {
     res.render("admin/add-Module", {
         title: "الفضاء الخاص - الاداره",
     });
 });
 
+router.post("/admin/add-module", authMiddleware,directorController.director_add_module);
+
 //admin add room view
-router.get("admin/add-room",authMiddleware, (req, res) => {
+router.get("/admin/add-room",authMiddleware, (req, res) => {
     res.render("admin/add-room", {
         title: "الفضاء الخاص - الاداره",
     });
 });
 //admin  add-Schedule view
-router.get("admin/add-Schedule",authMiddleware, (req, res) => {
+router.get("/admin/add-Schedule",authMiddleware, (req, res) => {
     res.render("admin/add-Schedule", {
         title: "الفضاء الخاص - الاداره",
     });
@@ -108,19 +110,19 @@ router.get("admin/add-Schedule",authMiddleware, (req, res) => {
  *  Admin page
  */
 
-router.get('/add-subject',authMiddleware,(req,res)=>{
+router.get('/admin/add-subject',authMiddleware,(req,res)=>{
 
     res.render('admin/add-subject', {
         title: "الفضاء الخاص - بالأساتذة",
     });
 });
-router.get('/add-group',authMiddleware,(req,res)=>{
+router.get('/admin/add-group',authMiddleware,(req,res)=>{
     res.render('admin/add-group', {
         title: "الفضاء الخاص - بالأساتذة",
     });
 });
 
-router.get("/add-grades",authMiddleware, (req, res) => {
+router.get("/admin/add-grades",authMiddleware, (req, res) => {
     res.render("admin/add-grades", {
         title: "الفضاء الخاص - بالأساتذة",
     });

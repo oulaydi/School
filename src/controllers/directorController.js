@@ -1,6 +1,7 @@
 const DirectorSchema = require("../models/DirectorSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
 const AddStudent = require("../models/StudenteSchema");
+const AddModule = require("../models/ModuleSchema");
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
@@ -307,7 +308,33 @@ const director_delete_student = async (req, res) => {
         console.log(error);
     }
 };
+// director_add_module
 
+const director_add_module = async (req, res) => {
+    try {
+        const { name_module, desc_module, selected_semester, selected_teacher } = req.body;
+
+       
+        const newModule = await AddModule.create({
+            name_module,
+            desc_module,
+            selected_semester,
+            selected_teacher
+        });
+
+
+        req.flash("success", "Module has been saved successfully!");
+        res.render('admin/add-Module', {
+            messages: req.flash()
+        });
+    } catch (error) {
+        console.log(error);
+        req.flash("error", "An error occurred while saving the module.");
+        res.render('admin/add-Module', {
+            messages: req.flash()
+        });
+    }
+};
 
 
 
@@ -333,6 +360,7 @@ module.exports = {
     director_edit,
     director_edit_id,
     director_delete,
+    director_add_module,
       /*crud student*/ 
       director_add_student,
     director_getStudent,
