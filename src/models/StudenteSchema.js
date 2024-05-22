@@ -20,12 +20,12 @@ const AddStudentSchema = new Schema({
     },
    
     birthday: {
-        type: Date,
+        type: String,
         required: true,
     },
     selected_birthplace: {
         type: String,
-        required :true,
+        required :false,
         enum:[
             "الدار البيضاء",
             " فاس",
@@ -35,10 +35,7 @@ const AddStudentSchema = new Schema({
             " أكادير",
         ]
     },
-    num_tel: {
-        type: Number,
-        required: true,
-    },
+ 
     email: {
         type: String,
         required: true,

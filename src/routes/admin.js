@@ -85,20 +85,47 @@ router.delete("/edit-student/:id",authMiddleware, directorController.director_de
 
 /*************************TEST ROUTES ************************* */
 //admin add module view
-router.get("admin/add-module", authMiddleware, (req, res) => {
+router.get("/admin/add-module", authMiddleware, (req, res) => {
     res.render("admin/add-Module", {
         title: "الفضاء الخاص - الاداره",
     });
 });
 
-//admin add room view
-router.get("admin/add-room",authMiddleware, (req, res) => {
-    res.render("admin/add-room", {
-        title: "الفضاء الخاص - الاداره",
-    });
-});
+
+
+//admin add room get form add room view
+router.get("/admin/add-room", authMiddleware, directorController.director_Add_Room);
+
+//admin add room use post in db
+router.post("/admin/add-room", authMiddleware, directorController.director_add_room);
+
+//admin getAll rooms 
+router.get("/rooms",authMiddleware, directorController.director_getRooms );
+
+/**
+ * GET /
+ * Dashboard - Get room by ID
+ */
+router.get("/admin/edit-room/:id", authMiddleware, directorController.director_edit_room_id);
+
+/**
+ * PUT /
+ * Dashboard - Edit rom by id
+//  */
+
+router.put("/admin/edit-room/:id", authMiddleware, directorController.director_edit_room );
+
+/**
+ * DELETE /
+ * Dashboard - delete rom by id
+//  */
+router.delete("/admin/edit-room/:id",authMiddleware, directorController.director_delete_room);
+
+
+
+
 //admin  add-Schedule view
-router.get("admin/add-Schedule",authMiddleware, (req, res) => {
+router.get("/admin/add-Schedule",authMiddleware, (req, res) => {
     res.render("admin/add-Schedule", {
         title: "الفضاء الخاص - الاداره",
     });
@@ -110,21 +137,26 @@ router.get("admin/add-Schedule",authMiddleware, (req, res) => {
 
 router.get('/add-subject',authMiddleware,(req,res)=>{
 
-    res.render('admin/add-subject', {
+    res.render('/admin/add-subject', {
         title: "الفضاء الخاص - بالأساتذة",
     });
 });
-router.get('/add-group',authMiddleware,(req,res)=>{
+router.get('/admin/add-group',authMiddleware,(req,res)=>{
     res.render('admin/add-group', {
         title: "الفضاء الخاص - بالأساتذة",
     });
 });
 
-router.get("/add-grades",authMiddleware, (req, res) => {
+router.get("/admin/add-grades",authMiddleware, (req, res) => {
     res.render("admin/add-grades", {
         title: "الفضاء الخاص - بالأساتذة",
     });
 });
+
+
+//search
+
+router.post("/search", authMiddleware, directorController.director_serach);
 
 
 /**

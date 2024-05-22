@@ -18,9 +18,9 @@
       <div>
         <h3 id="h4"> Ajouter Salle </h3>
       </div>
-     <a href="/director" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
+     <a href="/rooms" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
-          <form action="/add-teacher" class="row g-3" autocomplete="off" method="POST">
+          <form action="/admin/add-room" class="row g-3" autocomplete="off" method="POST">
             <div class="col-md-6">
               <label class="form-label cus-label" > Nom de salle </label><span> :</span>
               <input type="text" name="name_room" required placeholder="اسم القاعة" id="input-field" class="form-control">
@@ -32,19 +32,19 @@
             <div class="col-md-6">
               <label class="form-label cus-label" > Disponibilité de Salle </label><span> :</span>
               <select class="form-select" aria-label="Default select example" id="input-field" name="selected_dispo_room">
-                <option value="الدار البيضاء"> OUI </option>
-                <option value=" فاس"> NON </option>
+                <option value="OUI "> OUI </option>
+                <option value=" NON"> NON </option>
               </select>
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label">Equipement de Salle</label><span> :</span>
               <select  class="form-select" aria-label="Default select example"  id="input-field" name="equipement_room">
-                <option value="الدار البيضاء"> Projecteur</option>
-                <option value=" فاس"> Tableau de Feutre</option>
-                <option value=" الرباط"> Tableau intelligent</option>
-                <option value=" مراكش"> Poste de Travail</option>
-                <option value=" طنجة "> Bureau </option>
-                <option value=" أكادير"> Écran de Télévision</option>
+                <option value="Projecteur" > Projecteur</option>
+                <option value="Tableau de Feutre "> Tableau de Feutre</option>
+                <option value=" Tableau intelligent"> Tableau intelligent</option>
+                <option value=" Poste de Travail"> Poste de Travail</option>
+                <option value=" Bureau "> Bureau </option>
+                <option value=" Écran de Télévision"> Écran de Télévision</option>
               </select>
             </div>
             <div class="custom-control custom-checkbox">
