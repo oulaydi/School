@@ -129,7 +129,7 @@ router.get("/admin/add-room",authMiddleware, (req, res) => {
     });
 });
 //admin  add-Schedule view
-router.get("admin/add-Schedule",authMiddleware, (req, res) => {
+router.get("/admin/add-Schedule",authMiddleware, (req, res) => {
     res.render("admin/add-Schedule", {
         title: "الفضاء الخاص - الاداره",
     });
@@ -230,6 +230,11 @@ router.delete("/edit-subject/:id",authMiddleware, directorController.director_de
  
 
  
+
+
+//search
+
+router.post("/search", authMiddleware, directorController.director_serach);
 
 
 /**
