@@ -60,7 +60,7 @@ const director_login = async (req, res) => {
             default:
                 const adminToken = jwt.sign({ directorId: director._id }, jwtSecret);
                 res.cookie("adminToken", adminToken, { httpOnly: true });
-                res.redirect("/director");
+                res.redirect("/dashboard");  // change the path, was /director
                 break;
         }
     } catch (error) {
@@ -74,7 +74,7 @@ const director_login = async (req, res) => {
 const director_index = async (req, res) => {
     try {
         const teachers = await AddTeacher.find().sort({ createdAt: -1 });
-        res.render("admin/director", {
+        res.render("admin/dashboard", { // change the path, was /director
             title: "الرئيسية - لوحة القيادة",
             teachers,
            

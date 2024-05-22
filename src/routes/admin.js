@@ -20,7 +20,8 @@ router.post("/admin", directorController.director_login);
  * GET /
  * Director - All teachers
  */
-router.get("/director", authMiddleware, directorController.director_index);
+// router.get("/director", authMiddleware, directorController.director_index);
+router.get("/dashboard", authMiddleware, directorController.director_index);
 
 /**
  * Get /
