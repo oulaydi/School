@@ -236,6 +236,34 @@ router.delete("/edit-subject/:id",authMiddleware, directorController.director_de
 
 router.post("/search", authMiddleware, directorController.director_serach);
 
+// Route pour afficher la page add-group avec les groups
+router.get('/rooms',authMiddleware, directorController.director_getRooms);
+/**
+* Get /
+* Dashboard Route - Group
+*/
+router.get('/admin/Add-room',authMiddleware, directorController.director_Add_group);
+/**
+* GET /
+* Director - Add student
+*/
+router.post('/admin/Add-room',authMiddleware,directorController.director_add_room);
+
+/**
+* GET /
+* Dashboard - Get student by ID
+*/
+router.get("/admin/edit-room/:id", authMiddleware, directorController.director_edit_room_id);
+/**
+* PUT /
+* Dashboard - Edit student
+*/
+router.put("/admin/edit-room/:id", authMiddleware, directorController.director_edit_room);
+/**
+* DELETE /
+* Dashboard - DELETE student
+*/
+router.delete("/admin/edit-room/:id",authMiddleware, directorController. director_delete_room);
 
 /**
  * GET /

@@ -1,13 +1,11 @@
 const DirectorSchema = require("../models/DirectorSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
 const AddStudent = require("../models/StudenteSchema");
-<<<<<<< HEAD
 const AddSubject = require("../models/SubjectSchema");
 const AddGroup = require("../models/GroupSchema");
 const AddModule = require("../models/ModuleSchema");
-=======
 const AddRoom = require("../models/RoomSchema");
->>>>>>> BranchYou
+
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
@@ -213,8 +211,6 @@ const director_getStudent = async (req, res) => {
         res.render("admin/Students", {
             title: "الثلاميد",
             Students,
-            
-           
         });
        
     } catch (error) {
@@ -313,7 +309,6 @@ const director_add_module = async (req, res) => {
     try {
         const { name_module, desc_module, selected_semester, selected_teacher } = req.body;
 
-<<<<<<< HEAD
         await AddModule.create({
             name_module,
             desc_module,
@@ -396,6 +391,7 @@ const director_delete_modules = async (req,res)=>{
         console.log(error);
     }
 }
+
 /* director_subject  */
 
 /*add_subjectt  pour get view form */
@@ -403,23 +399,13 @@ const director_Add_Subject = async (req, res) => {
     try {
         res.render("admin/add-subject", {
             title: "إضافة تلميد(ة)",
-=======
-/*-------------------  director_room ------------ */
-
- /*director_room  pour get view form */
-
-const director_Add_Room = async (req, res) => {
-    try {
-        res.render("admin/add-room", {
-            title: "إضافة قاعة(ة)",
->>>>>>> BranchYou
         });
     } catch (error) {
         console.log(error);
     }
 };
 
-<<<<<<< HEAD
+
 /*add_subject  methode post store une bd */
 const director_add_subject = async (req, res) => {
     try {
@@ -494,7 +480,6 @@ const director_edit_subject_id = async (req, res) => {
         console.log(error);
     }
 };
-
 // director_delete_subject
 const director_delete_subject = async (req, res) => {
     try {
@@ -539,26 +524,6 @@ const director_add_group = async (req, res) => {
             err1_msg: "Teacher has been saved successfully!"
         });*/
        res.redirect('admin/Groups')
-=======
-
- /*add_room  methode post store une bd */
- const director_add_room = async (req, res) => {
-
-    try {
-        const {
-            name_room, capacity_room, selected_dispo_room, equipement_room } = req.body;
-
-       
-
-    
-        const newRoom = AddRoom({
-            name_room, capacity_room, selected_dispo_room, equipement_room });
-
-        await AddRoom.create(newRoom);
-        req.flash("success","Room has been saved successfully!");
-        res.redirect("/rooms");
-  
->>>>>>> BranchYou
         
     } catch (error) {
         console.log(error);
@@ -566,7 +531,6 @@ const director_add_group = async (req, res) => {
     }
 };
 
-<<<<<<< HEAD
 /*director_get_all_groups*/
 
 const director_getGroups = async (req, res) => {
@@ -577,16 +541,6 @@ const director_getGroups = async (req, res) => {
             title: "الثلاميد",
             Groups,
             subjects
-=======
-  /*get All Rooms*/
-  const director_getRooms = async (req, res) => {
-    try {
-        const Rooms = await AddRoom.find().sort({ createdAt: -1 });
-        res.render("admin/Rooms", {
-            title: "القاعة",
-            Rooms,
-           
->>>>>>> BranchYou
         });
        
     } catch (error) {
@@ -595,7 +549,6 @@ const director_getGroups = async (req, res) => {
 };
 
 
-<<<<<<< HEAD
 /*director_edit_Group */
 
 const director_edit_group = async (req, res) => {
@@ -613,8 +566,109 @@ const director_edit_group = async (req, res) => {
       await AddGroup.findByIdAndUpdate(req.params.id, updateObject);
       
       res.redirect("/Groups");
-=======
+    } catch (error) {
+      console.log(error);
+    }
+};
 
+// director_editGroup_with_ID
+const director_edit_group_id = async (req, res) => {
+    try {
+        const subjects = await AddSubject.find({}, 'name_subject');
+        const groupinfo = await AddGroup.findOne({ _id: req.params.id });
+        res.render("admin/edit-group", {
+            groupinfo,
+            title: "تحديث تلميد(ة)",
+            subjects
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// director_delete_group 
+const director_delete_group = async (req, res) => {
+    try {
+        await AddGroup.deleteOne({ _id: req.params.id });
+        res.redirect("/groups");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+//getSubjects depuuis mongoose
+const getSubjects = async (req, res) => {
+    try {
+        const subjects = await AddSubject.find({}, 'name_subject'); // Récupère uniquement le champ name_subject
+        res.render('admin/add-group',
+        {  
+            title: "إضافة تلميد(ة)",
+            subjects 
+        }
+    ); // Passe les sujets à la vue
+    } catch (error) {
+        res.status(500).send({ message: 'Error retrieving subjects' });
+    }
+};
+
+
+/*-------------------  director_room ------------ */
+
+ /*director_room  pour get view form */
+
+ const director_Add_Room = async (req, res) => {
+    try {
+        res.render("admin/add-room", {
+            title: "إضافة قاعة(ة)",
+
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/*add_room  methode post store une bd */
+ const director_add_room = async (req, res) => {
+
+    try {
+        const {
+            name_room, capacity_room, selected_dispo_room, equipement_room } = req.body;
+
+       
+
+    
+        const newRoom = AddRoom({
+            name_room, capacity_room, selected_dispo_room, equipement_room });
+
+        await AddRoom.create(newRoom);
+        req.flash("success","Room has been saved successfully!");
+        res.redirect("/rooms");
+  
+
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
+ /*get All Rooms*/
+ const director_getRooms = async (req, res) => {
+    try {
+        const Rooms = await AddRoom.find().sort({ createdAt: -1 });
+        res.render("admin/Rooms", {
+            title: "القاعة",
+            Rooms,
+           
+
+        });
+       
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 /*director_edit_Room */
 
@@ -632,28 +686,13 @@ const director_edit_room = async (req, res) => {
       
       await  AddRoom.findByIdAndUpdate(req.params.id, updateObject);
       
-  
-      
-     
-      
-      res.redirect("/admin/rooms");
->>>>>>> BranchYou
+      res.redirect("/rooms");
+
     } catch (error) {
       console.log(error);
     }
 };
 
-<<<<<<< HEAD
-// director_editGroup_with_ID
-const director_edit_group_id = async (req, res) => {
-    try {
-        const subjects = await AddSubject.find({}, 'name_subject');
-        const groupinfo = await AddGroup.findOne({ _id: req.params.id });
-        res.render("admin/edit-group", {
-            groupinfo,
-            title: "تحديث تلميد(ة)",
-            subjects
-=======
 // director_editRoom_with_ID get view
 const director_edit_room_id = async (req, res) => {
     try {
@@ -663,48 +702,23 @@ const director_edit_room_id = async (req, res) => {
             rooms,
             title: "تحديث قاعة(ة)"
             
->>>>>>> BranchYou
+
         });
     } catch (error) {
         console.log(error);
     }
 };
 
-<<<<<<< HEAD
-// director_delete_group 
-const director_delete_group = async (req, res) => {
-    try {
-        await AddGroup.deleteOne({ _id: req.params.id });
-        res.redirect("/groups");
-=======
 // director_delete_room
 const director_delete_room= async (req, res) => {
     try {
         await AddRoom.deleteOne({ _id: req.params.id });
         res.redirect("/rooms");
->>>>>>> BranchYou
+
     } catch (error) {
         console.log(error);
     }
 };
-
-<<<<<<< HEAD
-//getSubjects depuuis mongoose
-const getSubjects = async (req, res) => {
-    try {
-        const subjects = await AddSubject.find({}, 'name_subject'); // Récupère uniquement le champ name_subject
-        res.render('admin/add-group',
-        {  
-            title: "إضافة تلميد(ة)",
-            subjects 
-        }
-    ); // Passe les sujets à la vue
-    } catch (error) {
-        res.status(500).send({ message: 'Error retrieving subjects' });
-    }
-};
-=======
-
 
 //search
 const director_serach= async (req, res) => {
@@ -724,8 +738,6 @@ const director_serach= async (req, res) => {
 };
 
 
->>>>>>> BranchYou
-
 
 // director_logout
 const director_logout = (req, res) => {
@@ -739,10 +751,6 @@ const notFound = (req, res) => {
         title: "404 - الصفحة غير موجودة",
     });
 };
-
-
-
-
 
 
 
@@ -770,8 +778,6 @@ module.exports = {
     director_edit_student,
     director_edit_student_id,
     director_delete_student,
-<<<<<<< HEAD
-    director_getStudent,
     /*CRUD subject*/
     director_Add_Subject,
     director_add_subject,
@@ -787,8 +793,6 @@ module.exports = {
     director_edit_group_id,
     director_delete_group,
     getSubjects,
-    
-=======
   /*crud room*/ 
     director_Add_Room,
     director_add_room,
@@ -798,7 +802,7 @@ module.exports = {
     director_delete_room,
     /*director_serach*/ 
     director_serach,
->>>>>>> BranchYou
+
 
     notFound,
     director_logout,
