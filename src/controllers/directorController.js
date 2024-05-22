@@ -1,6 +1,8 @@
 const DirectorSchema = require("../models/DirectorSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
 const AddStudent = require("../models/StudenteSchema");
+const AddSubject = require("../models/SubjectSchema");
+const AddGroup = require("../models/GroupSchema");
 const AddModule = require("../models/ModuleSchema");
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
@@ -200,8 +202,6 @@ const director_delete = async (req, res) => {
 
 
 /* director_student  */
-
-
     /*getAllStudent*/
 const director_getStudent = async (req, res) => {
     try {
@@ -234,8 +234,6 @@ const director_getStudent = async (req, res) => {
     try {
         const {
             INE, full_name, username, birthday, selected_birthplace, email, password } = req.body;
-
-       
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
@@ -273,10 +271,8 @@ const director_edit_student = async (req, res) => {
         if (email) updateObject.email = email;
         if (password) updateObject.email = password;
   
-      
       await AddStudent.findByIdAndUpdate(req.params.id, updateObject);
-  
-      
+
       res.redirect("/Students");
     } catch (error) {
       console.log(error);
@@ -297,7 +293,6 @@ const director_edit_student_id = async (req, res) => {
         console.log(error);
     }
 };
-
 
 // director_delete_student
 const director_delete_student = async (req, res) => {
@@ -337,6 +332,225 @@ const director_add_module = async (req, res) => {
 };
 
 
+/* director_subject  */
+
+/*add_subjectt  pour get view form */
+const director_Add_Subject = async (req, res) => {
+    try {
+        res.render("admin/add-subject", {
+            title: "إضافة تلميد(ة)",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/*add_subject  methode post store une bd */
+const director_add_subject = async (req, res) => {
+    try {
+        const {
+            name_subject, desc_subject, id_subject } = req.body;
+
+        // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
+        //const hashedPassword = await bcrypt.hash(password, 10);
+        const newSubject = AddSubject({
+            name_subject, desc_subject, id_subject});
+
+        await AddSubject.create(newSubject);
+        req.flash("success","subject has been saved successfully!");
+        res.render('admin/add-subject',{
+            messages:req.flash()
+        });
+        /*res.render("/admin/director", {
+            err1_msg: "Teacher has been saved successfully!"
+        });*/
+       res.send('add Subject successully')
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+/*director_get_all_subjects*/
+
+const director_getSubjects = async (req, res) => {
+    try {
+        const Subjects = await AddSubject.find().sort({ createdAt: -1 });
+        res.render("admin/Subjects", {
+            title: "الثلاميد",
+            Subjects,
+        });
+       
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/*director_edit_subject */
+
+const director_edit_subject = async (req, res) => {
+    try {
+      const { name_subject, desc_subject, id_subject} = req.body;
+  
+      // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+      const updateObject = {};
+        if (name_subject) updateObject.name_subject = name_subject;
+        if (desc_subject) updateObject.desc_subject = desc_subject;
+        if (id_subject) updateObject.id_subject = id_subject;
+        
+      await AddSubject.findByIdAndUpdate(req.params.id, updateObject);
+      
+      res.redirect("/Subjects");
+    } catch (error) {
+      console.log(error);
+    }
+};
+
+// director_editStudent_with_ID
+const director_edit_subject_id = async (req, res) => {
+    try {
+        const subjectinfo = await AddSubject.findOne({ _id: req.params.id });
+        res.render("admin/edit-subject", {
+            subjectinfo,
+            title: "تحديث تلميد(ة)"
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// director_delete_subject
+const director_delete_subject = async (req, res) => {
+    try {
+        await AddSubject.deleteOne({ _id: req.params.id });
+        res.redirect("/Subjects");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/*director group*/
+
+/*add_group  pour get view form */
+const director_Add_group = async (req, res) => {
+    try {
+        res.render("/admin/add-group", {
+            title: "إضافة تلميد(ة)",
+            subjects
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/*add_group  methode post store une bd */
+const director_add_group = async (req, res) => {
+    try {
+        const {
+            name_group, selected_level, selected_saison,capacity_group,selected_subject } = req.body;
+
+        // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
+        //const hashedPassword = await bcrypt.hash(password, 10);
+        const newGroup = AddGroup({
+            name_group, selected_level, selected_saison,capacity_group,selected_subject});
+
+        await AddGroup.create(newGroup);
+        req.flash("success","Group has been saved successfully!");
+        res.render('admin/add-group',{
+            messages:req.flash()
+        });
+        /*res.render("/admin/director", {
+            err1_msg: "Teacher has been saved successfully!"
+        });*/
+       res.redirect('admin/Groups')
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+/*director_get_all_groups*/
+
+const director_getGroups = async (req, res) => {
+    try {
+        const subjects = await AddSubject.find({}, 'name_subject');
+        const Groups = await AddGroup.find().sort({ createdAt: -1 });
+        res.render("admin/Groups", {
+            title: "الثلاميد",
+            Groups,
+            subjects
+        });
+       
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+/*director_edit_Group */
+
+const director_edit_group = async (req, res) => {
+    try {
+      const { name_group, selected_level, selected_saison,capacity_group,selected_subject} = req.body;
+  
+      // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+      const updateObject = {};
+        if (name_group) updateObject.name_group = name_group;
+        if (selected_level) updateObject.selected_level = selected_level;
+        if (selected_saison) updateObject.selected_saison = selected_saison;
+        if (capacity_group) updateObject.capacity_group = capacity_group;
+        if (selected_subject) updateObject.selected_subject = selected_subject;
+
+      await AddGroup.findByIdAndUpdate(req.params.id, updateObject);
+      
+      res.redirect("/Groups");
+    } catch (error) {
+      console.log(error);
+    }
+};
+
+// director_editGroup_with_ID
+const director_edit_group_id = async (req, res) => {
+    try {
+        const subjects = await AddSubject.find({}, 'name_subject');
+        const groupinfo = await AddGroup.findOne({ _id: req.params.id });
+        res.render("admin/edit-group", {
+            groupinfo,
+            title: "تحديث تلميد(ة)",
+            subjects
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// director_delete_group 
+const director_delete_group = async (req, res) => {
+    try {
+        await AddGroup.deleteOne({ _id: req.params.id });
+        res.redirect("/groups");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//getSubjects depuuis mongoose
+const getSubjects = async (req, res) => {
+    try {
+        const subjects = await AddSubject.find({}, 'name_subject'); // Récupère uniquement le champ name_subject
+        res.render('admin/add-group',
+        {  
+            title: "إضافة تلميد(ة)",
+            subjects 
+        }
+    ); // Passe les sujets à la vue
+    } catch (error) {
+        res.status(500).send({ message: 'Error retrieving subjects' });
+    }
+};
+
 
 // director_logout
 const director_logout = (req, res) => {
@@ -351,6 +565,12 @@ const notFound = (req, res) => {
     });
 };
 
+
+
+
+
+
+
 module.exports = {
     loginAuth,
     director_login,
@@ -360,15 +580,36 @@ module.exports = {
     director_edit,
     director_edit_id,
     director_delete,
+      /*CRUD student*/ 
     director_add_module,
       /*crud student*/ 
       director_add_student,
     director_getStudent,
     director_Add_Student,
+    director_add_student,
     director_edit_student,
     director_edit_student_id,
     director_delete_student,
+    director_getStudent,
+    /*CRUD subject*/
+    director_Add_Subject,
+    director_add_subject,
+    director_getSubjects,
+    director_edit_subject,
+    director_edit_subject_id,
+    director_delete_subject,
+    /*CRUD group */
+    director_Add_group,
+    director_add_group,
+    director_getGroups,
+    director_edit_group,
+    director_edit_group_id,
+    director_delete_group,
+    getSubjects,
+    
+
     notFound,
     director_logout,
+    
     
 };

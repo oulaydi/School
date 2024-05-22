@@ -19,8 +19,8 @@ const ModuleSchema = new Schema({
     },
 
     selected_teacher :{
-        type: Schema.Types.ObjectId,
-         ref: 'AddTeacher',
+        type: String,
+        required: true,
    },
 
     createdAt: { type: Date, default: Date.now },

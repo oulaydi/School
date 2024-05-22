@@ -67,13 +67,6 @@ const AddTeacherSchema = new Schema({
         unique: true,
     },
  
-   // confirm_password: {
-     //    type: String,
-       //  required: true,
-    // },
-
- 
-
     createdAt: { type: Date, default: Date.now },
 });
 AddTeacherSchema.pre("save", async function (next) {

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const directorController = require("../controllers/directorController");
+const Subject = require("../models/SubjectSchema");
 
 /**
  * GET /
@@ -56,6 +57,10 @@ router.delete("/edit-teacher/:id", authMiddleware, directorController.director_d
  * Director - All student
  */
 router.get("/students",authMiddleware, directorController.director_getStudent);
+/**
+ * Get /
+ * Dashboard Route - Teahcers
+ */
 router.get("/add-student",authMiddleware, directorController.director_Add_Student);
 /**
  * GET /
@@ -105,10 +110,15 @@ router.get("/admin/add-Schedule",authMiddleware, (req, res) => {
         title: "الفضاء الخاص - الاداره",
     });
 });
+
+
+
+
 /**
  * GET /
  *  Admin page
  */
+
 
 router.get('/admin/add-subject',authMiddleware,(req,res)=>{
 
@@ -127,6 +137,95 @@ router.get("/admin/add-grades",authMiddleware, (req, res) => {
         title: "الفضاء الخاص - بالأساتذة",
     });
 });
+
+
+//router.get('/add-subject',authMiddleware,(req,res)=>{
+
+   // res.render('admin/add-subject', {
+  //      title: "الفضاء الخاص - بالأساتذة",
+   // });
+//});
+
+
+/**
+ * Get /
+ * Dashboard Route - subject
+ */
+router.get("/add-subject",authMiddleware, directorController.director_Add_Subject);
+/**
+ * GET /
+ * Director - Add subject
+ */
+router.post("/add-subject", authMiddleware, directorController.director_add_subject);
+/**
+ * GET /
+ * Director - All subject
+ */
+router.get("/subjects",authMiddleware, directorController.director_getSubjects);
+/**
+ * GET /
+ * Dashboard - Get subject by ID
+ */
+router.get("/edit-subject/:id", authMiddleware, directorController.director_edit_subject_id);
+/**
+ * PUT /
+ * Dashboard - Edit subject
+*/
+router.put("/edit-subject/:id", authMiddleware, directorController.director_edit_subject);
+/**
+ * DELETE /
+ * Dashboard - DELETE subject
+*/
+router.delete("/edit-subject/:id",authMiddleware, directorController.director_delete_subject);
+
+
+
+
+// router.get("/add-grades",authMiddleware, (req, res) => {
+//     res.render("admin/add-grades", {
+//         title: "الفضاء الخاص - بالأساتذة",
+//     });
+// });
+
+
+
+// Route pour afficher la page add-group avec les groups
+ router.get('/add-group',authMiddleware, directorController.getSubjects);
+ /**
+ * Get /
+ * Dashboard Route - Group
+ */
+ router.get('/add-group',authMiddleware, directorController.director_Add_group);
+/**
+ * GET /
+ * Director - Add student
+ */
+ router.post('/add-group',authMiddleware,directorController.director_add_group);
+/**
+ * GET /
+ * Director - All student
+ */
+ router.get("/groups",authMiddleware, directorController.director_getGroups);
+/**
+ * GET /
+ * Dashboard - Get student by ID
+ */
+ router.get("/edit-group/:id", authMiddleware, directorController.director_edit_group_id);
+/**
+ * PUT /
+ * Dashboard - Edit student
+ */
+ router.put("/edit-group/:id", authMiddleware, directorController.director_edit_group);
+/**
+ * DELETE /
+ * Dashboard - DELETE student
+ */
+ router.delete("/edit-group/:id",authMiddleware, directorController.director_delete_group);
+
+ 
+
+ 
+
 
 
 /**
