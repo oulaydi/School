@@ -11,12 +11,11 @@ const SubjectSchema = new Schema({
     },
     desc_subject: {
         type: String,
-        required: true,
+        required: false,
     },
-
     id_subject: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
     },
         

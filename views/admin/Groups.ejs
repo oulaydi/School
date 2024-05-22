@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/directorPannel.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <%- include('../partials/header.ejs') %>
+        <!-- Header Ends!! -->
+        <div class="container" id="header">
+            
+            <div>
+                <h3>الفضاء الخاص بالإدارة</h3>
+            </div>
+            <div class="container" id="add-rem">
+                <button class="btn" title="تسجيل الخروج">   
+                    <a href="/logout" style="color: #6c757d">
+                        <i id="bi-icon2" class="bi bi-box-arrow-left fw-bold"></i>
+                    </a>
+                </button>
+                <button class="btn btn-primary my-5">
+                    <a href="/add-group" class="text-light"> ajouter group
+                        <i id="bi-icon" class="bi bi-plus fw-bold"></i>
+                    </a>
+                </button>
+            </div>
+        </div>
+
+    <% if (Groups.length > 0) { %>
+    <table class="table table-bordered w-75" id="center-container" dir="rtl">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
+                <th scope="col"> name_group </th>
+                <th scope="col"> selected_level</th>
+                <th scope="col"> selected_saison</th>
+                <th scope="col">capacity_group </th>
+                <th scope="col">selected_subject</th>
+                <th scope="col"> Action </th>
+
+            </tr>
+        </thead>
+        <!-- Displaying the values -->
+        <tbody class="table-group-divider">
+            <% Groups.forEach(Group => { %>
+                <tr class="text-center">
+                                            <td class="info"><%= Group.name_group %></td>
+                                            <td class="info"><%= Group.selected_level %></td>
+                                            <td class="info"><%= Group.selected_saison %></td>
+                                            <td class="info"><%= Group.capacity_group %></td>
+                                            <td class="info"><%= Group.selected_subject %></td> 
+
+                    <td class="actions">
+                        <button type="button" class="btn btn-warning">
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-group/<%= Group._id %>">تحديث</a>
+                        </button>
+                        <form action="/edit-Group/<%= Group._id %>?_method=DELETE" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">
+                                <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <div class="text-center mt-4">
+            <p>.لا يوجد اي بببب(ة)</p>
+        </div>
+    <% } %>
+
+        <!-- footer -->
+        <%- include('../partials/footer.ejs') %>
+        <!-- footer ends -->
+        
+    </body>
+</html>

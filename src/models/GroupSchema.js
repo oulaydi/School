@@ -23,8 +23,8 @@ const GroupSchema = new Schema({
     },
 
     selected_subject :{
-        type: Schema.Types.ObjectId,
-         ref: 'Subject',
+        type: String,
+        required: true,
    },
 
     createdAt: { type: Date, default: Date.now },

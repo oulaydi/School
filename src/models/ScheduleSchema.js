@@ -13,16 +13,16 @@ const ScheduleSchema = new Schema({
         required: true,
     },
     selected_module :{
-        type: Schema.Types.ObjectId,
-         ref: 'Module',
+        type: String,
+        required: true,
     },
     selected_room :{
-        type: Schema.Types.ObjectId,
-        ref: 'Room',
+        type: String,
+        required: true,
     },
     selected_group :{
-        type: Schema.Types.ObjectId,
-        ref: 'Group',
+        type: String,
+        required: true,
     },
 
 
