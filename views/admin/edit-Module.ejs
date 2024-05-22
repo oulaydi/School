@@ -25,18 +25,18 @@
       </div>
      <a href="/admin/Module" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
-          <form action="/admin/add-Module" class="row g-3" autocomplete="off" method="POST">
+          <form method="POST"  action="/admin/edit-Module/<%= ModuleInfo._id %>?_method=PUT" class="row g-3" autocomplete="off">
             <div class="col-md-6">
               <label class="form-label cus-label" > Nom du Module </label><span> :</span>
-              <input type="text" name="name_module" required placeholder="اسم المادة" id="input-field" class="form-control">
+              <input type="text"  value="<%= ModuleInfo.name_module %>" name="name_module" required placeholder="اسم المادة" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label" > Description de Module </label><span> :</span>
-              <input type="text" name="desc_module" placeholder="وصف للمادة" id="input-field" class="form-control">
+              <input type="text" value="<%= ModuleInfo.desc_module %>" name="desc_module" placeholder="وصف للمادة" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label" > Semestre du Module </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_semester">
+              <select class="form-select" value="<%= ModuleInfo.selected_semester %>" aria-label="Default select example" id="input-field" name="selected_semester">
                 <option value="S1">S1</option>
                 <option value="S2">S2</option>
                 <option value="S3">S3</option>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label"> Nom de Professeur </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_teacher">
+              <select class="form-select" value="<%= ModuleInfo.selected_teacher %>" aria-label="Default select example" id="input-field" name="selected_teacher">
                 <option value="Fathia">Fathia</option>
                 <option value="Samiri">Samiri</option>
                 <option value="Cheffira">Cheffira</option>
