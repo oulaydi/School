@@ -3,6 +3,7 @@ const AddTeacher = require("../models/AddTeacherSchema");
 const AddStudent = require("../models/StudenteSchema");
 const AddSubject = require("../models/SubjectSchema");
 const AddGroup = require("../models/GroupSchema");
+const AddModule = require("../models/ModuleSchema");
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
@@ -302,6 +303,96 @@ const director_delete_student = async (req, res) => {
     }
 };
 
+
+/********************Module***********************/
+
+// director_creat_module
+const director_add_module = async (req, res) => {
+    try {
+        const { name_module, desc_module, selected_semester, selected_teacher } = req.body;
+
+        await AddModule.create({
+            name_module,
+            desc_module,
+            selected_semester,
+            selected_teacher
+        });
+
+        req.flash("success", "Module has been saved successfully!");
+        res.redirect('/admin/Module');
+    } catch (error) {
+        console.log(error);
+        req.flash("error", "An error occurred while saving the module.");
+        res.render('admin/add-Module', {
+            messages: req.flash()
+        });
+    }
+};
+// director_add_module
+const director_getModule = async (req,res)=>{
+    try{
+        res.render('admin/add-Module',{
+        title: "الفضاء الخاص - الاداره",
+        messages: req.flash()
+        }
+        );
+    }catch(error){
+          console.log(error);
+          
+    }
+}
+
+// // director Module index 
+const Module_index = async (req,res)=>{
+    try{
+     const Modules = await AddModule.find().sort({createdAt:-1});
+     res.render('admin/Module', {
+        title: "إضافة تلميد(ة)",
+        Modules}
+     );
+    }catch(error){
+         console.log(error);
+    }
+}
+// director_edit_module with id
+const director_edit_modules_id = async (req,res)=>{
+    try{
+    const ModuleInfo = await AddModule.findById({_id:req.params.id});
+        res.render('admin/edit-Module',
+         { ModuleInfo,
+            title : "إضافة تلميد(ة)",
+    });
+    }catch(error){
+        console.log(error);
+
+    }
+}
+// director_edit_module
+const director_edit_modules = async (req,res)=>{
+    try{
+        const { name_module, desc_module, selected_semester, selected_teacher } = req.body;
+
+        updateObject={};
+        if(name_module) updateObject.name_module=name_module;
+        if(desc_module) updateObject.desc_module=desc_module;
+        if(selected_semester) updateObject.selected_semester=selected_semester;
+        if(selected_teacher) updateObject.selected_teacher=selected_teacher;
+
+        await AddModule.findByIdAndUpdate(req.params.id,updateObject);
+        res.redirect('/admin/Module');
+    }catch(error){
+        console.log(error);
+    }
+}
+// director_Delete_module by id
+const director_delete_modules = async (req,res)=>{
+    try{
+         await AddModule.findByIdAndDelete({ _id:req.params.id });
+        res.redirect("/admin/Module")
+    }catch(error){
+        console.log(error);
+    }
+}
 /********************Subject***********************/
 
 /*add_subjectt  pour get view form */
@@ -544,7 +635,16 @@ module.exports = {
     director_edit,
     director_edit_id,
     director_delete,
-      /*CRUD student*/ 
+      /*CRUD Modules*/ 
+    director_add_module,
+    director_getModule,
+    Module_index,
+    director_edit_modules,
+    director_edit_modules_id,
+    director_delete_modules,
+      /*crud student*/ 
+      director_add_student,
+    director_getStudent,
     director_Add_Student,
     director_add_student,
     director_edit_student,
