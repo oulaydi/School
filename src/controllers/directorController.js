@@ -68,7 +68,7 @@ const director_login = async (req, res) => {
         res.redirect("/admin");
     }
 };
-
+/*******************Teacher*******************/
 // director_index
 const director_index = async (req, res) => {
     try {
@@ -199,9 +199,8 @@ const director_delete = async (req, res) => {
 };
 
 
-
-/* director_student  */
-    /*getAllStudent*/
+//***************Student***********************/
+/*getAllStudent*/
 const director_getStudent = async (req, res) => {
     try {
         const Students = await AddStudent.find().sort({ createdAt: -1 });
@@ -254,8 +253,8 @@ const director_getStudent = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-/*director_edit_student */
 
+/*director_edit_student */
 const director_edit_student = async (req, res) => {
     try {
       const { INE, full_name, username, birthday, selected_birthplace, email, password} = req.body;
@@ -303,7 +302,7 @@ const director_delete_student = async (req, res) => {
     }
 };
 
-/* director_subject  */
+/********************Subject***********************/
 
 /*add_subjectt  pour get view form */
 const director_Add_Subject = async (req, res) => {
@@ -401,7 +400,7 @@ const director_delete_subject = async (req, res) => {
     }
 };
 
-/*director group*/
+/*******************Group*******************/
 
 /*add_group  pour get view form */
 const director_Add_group = async (req, res) => {
@@ -507,7 +506,7 @@ const director_delete_group = async (req, res) => {
     }
 };
 
-//getSubjects depuuis mongoose
+//getSubjects depuis mongoose
 const getSubjects = async (req, res) => {
     try {
         const subjects = await AddSubject.find({}, 'name_subject'); // Récupère uniquement le champ name_subject
@@ -535,12 +534,6 @@ const notFound = (req, res) => {
         title: "404 - الصفحة غير موجودة",
     });
 };
-
-
-
-
-
-
 
 module.exports = {
     loginAuth,
