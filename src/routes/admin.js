@@ -20,7 +20,10 @@ router.post("/admin", directorController.director_login);
  * GET /
  * Director - All teachers
  */
-router.get("/director", authMiddleware, directorController.director_index);
+
+// router.get("/director", authMiddleware, directorController.director_index);
+router.get("/dashboard", authMiddleware, directorController.director_index);
+
 /**
  * Get /
  * Dashboard Route - Teahcers
@@ -82,6 +85,7 @@ router.put("/edit-student/:id", authMiddleware, directorController.director_edit
 router.delete("/edit-student/:id",authMiddleware, directorController.director_delete_student);
 
 /*************************TEST ROUTES ************************* */
+
 //admin add module view
 router.get("admin/add-module", authMiddleware, (req, res) => {
     res.render("admin/add-Module", {
