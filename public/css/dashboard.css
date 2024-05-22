@@ -1,0 +1,168 @@
+.main-container {
+    width: 1350px;
+    height: 768px;
+    position: relative;
+    background: transparent;
+}
+
+.main-img {
+    width: 560px;
+    height: 70px;
+    left: 403px;
+    top: 21px;
+    position: absolute;
+}
+
+.inner-container {
+    width: 1075px;
+    height: 583px;
+    left: 36px;
+    top: 32px;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 8px 8px 40px rgba(51.76, 64.27, 83.94, 0.20);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.box {
+    width: 412px;
+    height: 271px;
+    position: absolute;
+    background: #FAFCFF;
+    border-radius: 8px;
+    border: 1.5px solid #005DF0;
+}
+
+.box1 {
+    left: 95px;
+    top: 90px;
+}
+
+.box2 {
+    left: 567px;
+    top: 90px;
+}
+
+.box3 {
+    width: 256px;
+    height: 256px;
+    left: 645px;
+    top: 124px;
+    position: absolute;
+}
+
+.small-box {
+    width: 244px;
+    height: 90px;
+    position: absolute;
+    background: #FAFCFF;
+    border-radius: 8px;
+    border: 1.5px solid #005DF0;
+}
+
+.small-box1 {
+    left: 95px;
+    top: 405px;
+}
+
+.small-box2 {
+    left: 735px;
+    top: 405px;
+}
+
+.small-box3 {
+    left: 415px;
+    top: 405px;
+}
+
+.highlight-box {
+    width: 107px;
+    height: 35px;
+    position: absolute;
+    background: #FAFCFF;
+    border-radius: 8px;
+    border: 3px solid #FFA300;
+}
+
+.highlight-box1 {
+    left: 719px;
+    top: 106px;
+}
+
+.highlight-box2 {
+    left: 247px;
+    top: 106px;
+}
+
+.side-container {
+    padding-top: 20px;
+    padding-bottom: 73.67px;
+    padding-left: 13px;
+    padding-right: 15px;
+    left: 1077px;
+    top: 119px;
+    position: absolute;
+    background: #005DF0;
+    box-shadow: 8px 8px 40px rgba(51.76, 64.27, 83.94, 0.20);
+    border-radius: 50px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    display: inline-flex;
+}
+
+.side-content {
+    width: 45px;
+    height: 317.33px;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    display: flex;
+}
+
+.circle-container {
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+
+.spacer {
+    width: 39px;
+    height: 40px;
+    position: relative;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+
+.icon-container {
+    width: 40px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+.icon-inner {
+    flex: 1 1 0;
+    align-self: stretch;
+    padding-top: 3.31px;
+    padding-bottom: 2.31px;
+    padding-left: 8.08px;
+    padding-right: 6.08px;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+.icon-inner div {
+    width: 25.83px;
+    height: 24.38px;
+    background: white;
+}
