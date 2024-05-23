@@ -538,10 +538,6 @@ const notFound = (req, res) => {
 
 
 
-
-
-
-
 module.exports = {
     loginAuth,
     director_login,
@@ -574,9 +570,7 @@ module.exports = {
     director_delete_group,
     getSubjects,
     
-
     notFound,
     director_logout,
-    
-    
+
 };

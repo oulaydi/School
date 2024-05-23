@@ -79,9 +79,6 @@ router.get("/edit-student/:id", authMiddleware, directorController.director_edit
  * Dashboard - Edit student
 //  */
 router.put("/edit-student/:id", authMiddleware, directorController.director_edit_student);
-
-
-
 /**
  * DELETE /
  * Dashboard - DELETE student
