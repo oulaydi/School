@@ -38,11 +38,9 @@
                 <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
                 <th scope="col">رقم التلميد(ة)</th>
                 <th scope="col">الإسم الكامل</th>
-                <th scope="col">إسم التلميد</th>
-                <th scope="col">تاريخ الازدياد</th>
-                <th scope="col">مكان الازدياد</th>
-                <th scope="col">المادة</th>
+                <th scope="col">username</th>
                 <th scope="col">البريد الالكتروني</th>
+                <th scope="col"> Groupe </th>
                 <th scope="col"> اجراء</th>
             </tr>
         </thead>
@@ -53,17 +51,14 @@
                                             <td class="info"><%= Student.INE %></td>
                                             <td class="info"><%= Student.full_name %></td>
                                             <td class="info"><%= Student.username %></td>
-                                            <td class="info"><%= Student.birthday %></td>
-                                            <td class="info"><%= Student.selected_birthplace %></td>
-                                            <td class="info"><%= Student.selected_birthplace %></td>
                                             <td class="info"><%= Student.email %></td>
+                                            <td class="info"><%= Student.select_group %></td>
                                         
-                                         
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
-                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-Student/<%= Student._id %>">تحديث</a>
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-student/<%= Student._id %>">تحديث</a>
                         </button>
-                        <form action="/edit-Student/<%= Student._id %>?_method=DELETE" method="POST" style="display: inline;">
+                        <form action="/edit-student/<%= Student._id %>?_method=DELETE" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-danger">
                                 <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
                             </button>

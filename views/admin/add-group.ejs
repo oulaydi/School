@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label">  Filiere de Groupe </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_subject">
+              <select class="form-select" aria-label="Default select example" id="input-field" required name="select_subject">
                 <% subjects.forEach(subject => { %>
                   <option value="<%= subject.name_subject %>"><%= subject.name_subject %></option>
               <% }) %>
@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label">  Niveau Scolaire   </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_level">
+              <select class="form-select" aria-label="Default select example" id="input-field" required name="selected_level">
                 <option value="S1">1</option>
                 <option value="S2"> 2 </option>
                 <option value="S3"> 3</option>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label"> Année Scolaire </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_saison">
+              <select class="form-select" aria-label="Default select example" id="input-field" required name="selected_saison">
                 <option value="19-20"> 2019-2020 </option>
                 <option value="20-21"> 2020-2021 </option>
                 <option value="21-22">2021-2022</option>
@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label" > Capacité du Groupe</label><span> :</span>
-              <input type="text" name="capacity_group" placeholder=" سعة الصف" id="input-field" class="form-control">
+              <input type="text" required name="capacity_group" placeholder=" سعة الصف" id="input-field" class="form-control">
             </div>
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" required>

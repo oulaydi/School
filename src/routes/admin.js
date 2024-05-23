@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const directorController = require("../controllers/directorController");
-const Subject = require("../models/SubjectSchema");
+//const Subject = require("../models/SubjectSchema");
 /******************Admin************************/
 /**
  * GET /
@@ -21,11 +21,11 @@ router.post("/admin", directorController.director_login);
  * Director - All teachers
  */
 
-// router.get("/director", authMiddleware, directorController.director_index);
+//router.get("/director", authMiddleware, directorController.director_index);
 router.get("/dashboard", authMiddleware, directorController.director_index);
 
 //passer la valeur de name_subject dans add-teacher 
-router.get("/add-teacher", authMiddleware, directorController.getSubjects);
+//router.get("/add-teacher", authMiddleware, directorController.getSubjects);
 /**
  * Get /
  * Dashboard Route - Teahcers
@@ -33,7 +33,7 @@ router.get("/add-teacher", authMiddleware, directorController.getSubjects);
 router.get("/add-teacher", authMiddleware, directorController.directorAddTeacher);
 /**
  * POST /
- * Dashboard - Create New eahcer.
+ * Dashboard - Create New Teahcer.
  */
 router.post("/add-teacher", authMiddleware, directorController.director_add);
 /**
@@ -150,7 +150,7 @@ router.get("/admin/add-Schedule",authMiddleware, (req, res) => {
    // res.render('admin/add-subject', {
   //      title: "الفضاء الخاص - بالأساتذة",
    // });
-//});s
+//});
 
 /*******************Subjcet***********************/
 /**
@@ -204,27 +204,27 @@ router.delete("/edit-subject/:id",authMiddleware, directorController.director_de
  router.get('/add-group',authMiddleware, directorController.director_Add_group);
 /**
  * GET /
- * Director - Add student
+ * Director - Add Group
  */
  router.post('/add-group',authMiddleware,directorController.director_add_group);
 /**
  * GET /
- * Director - All student
+ * Director - All Group
  */
  router.get("/groups",authMiddleware, directorController.director_getGroups);
 /**
  * GET /
- * Dashboard - Get student by ID
+ * Dashboard - Get Group by ID
  */
  router.get("/edit-group/:id", authMiddleware, directorController.director_edit_group_id);
 /**
  * PUT /
- * Dashboard - Edit student
+ * Dashboard - Edit Group
  */
  router.put("/edit-group/:id", authMiddleware, directorController.director_edit_group);
 /**
  * DELETE /
- * Dashboard - DELETE student
+ * Dashboard - DELETE Group
  */
  router.delete("/edit-group/:id",authMiddleware, directorController.director_delete_group);
 

@@ -208,8 +208,9 @@ const director_getStudent = async (req, res) => {
     try {
         const groups = await AddGroup.find({}, 'name_group');
         const Students = await AddStudent.find().sort({ createdAt: -1 });
-        res.render("admin/Students", {
+        res.render("/Students", {
             title: "الثلاميد",
+            Students,
             groups,
         });
        
@@ -221,7 +222,7 @@ const director_getStudent = async (req, res) => {
    /*add_student  pour get view form */
    const director_Add_Student = async (req, res) => {
     try {
-        res.render("admin/add-student", {
+        res.render("/add-student", {
             title: "إضافة تلميد(ة)",
         });
     } catch (error) {
@@ -233,22 +234,22 @@ const director_getStudent = async (req, res) => {
  const director_add_student = async (req, res) => {
     try {
         const {
-            INE, full_name, username, birthday, selected_birthplace, email, password } = req.body;
+            INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password } = req.body;
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
         const newStudent = AddStudent({
-            INE, full_name, username, birthday, selected_birthplace, email, password});
+            INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password});
 
         await AddStudent.create(newStudent);
         req.flash("success","student has been saved successfully!");
-        res.render('admin/add-student',{
+        res.render('/add-student',{
             messages:req.flash()
         });
         /*res.render("/admin/director", {
             err1_msg: "Teacher has been saved successfully!"
         });*/
-        res.redirect("/students");
+        res.redirect("/Students");
         
     } catch (error) {
         console.log(error);
@@ -259,18 +260,21 @@ const director_getStudent = async (req, res) => {
 /*director_edit_student */
 const director_edit_student = async (req, res) => {
     try {
-      const { INE, full_name, username, birthday, selected_birthplace, email, password} = req.body;
+      const { INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password } = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
         if (INE) updateObject.full_name = INE;
         if (full_name) updateObject.full_name = full_name;
         if (username) updateObject.username = username;
-        if (birthday) updateObject.city = birthday;
-        if (selected_birthplace) updateObject.tele = selected_birthplace;
+        if (birthday) updateObject.birthday = birthday;
+        if (birthplace) updateObject.birthplace = birthplace;
+        if (password) updateObject.password = password;
         if (email) updateObject.email = email;
-        if (password) updateObject.email = password;
-  
+        if (num_tel) updateObject.num_tel = num_tel;
+        if (select_group) updateObject.select_group = select_group;
+        if (confirm_password) updateObject.confirm_password = confirm_password;
+
       await AddStudent.findByIdAndUpdate(req.params.id, updateObject);
 
       res.redirect("/Students");
@@ -284,7 +288,7 @@ const director_edit_student_id = async (req, res) => {
     try {
         const groups = await AddGroup.find({}, 'name_group');
         const studentinfo = await AddStudent.findOne({ _id: req.params.id });
-        res.render("admin/edit-student", {
+        res.render("/edit-student", {
             studentinfo,
             title: "تحديث تلميد(ة)",
             groups,
@@ -404,7 +408,7 @@ const director_delete_modules = async (req,res)=>{
 
 /* director_subject  */
 
-/*add_subjectt  pour get view form */
+/*add_subject  pour get view form */
 const director_Add_Subject = async (req, res) => {
     try {
         res.render("admin/add-subject", {
@@ -435,7 +439,7 @@ const director_add_subject = async (req, res) => {
         /*res.render("/admin/director", {
             err1_msg: "Teacher has been saved successfully!"
         });*/
-       res.send('add Subject successully')
+       res.redirect('/Subjects')
         
     } catch (error) {
         console.log(error);
@@ -518,16 +522,16 @@ const director_Add_group = async (req, res) => {
 const director_add_group = async (req, res) => {
     try {
         const {
-            name_group, selected_level, selected_saison,capacity_group,selected_subject } = req.body;
+            name_group, selected_level,selected_saison,capacity_group,select_subject } = req.body;
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
         const newGroup = AddGroup({
-            name_group, selected_level, selected_saison,capacity_group,selected_subject});
+            name_group, selected_level, selected_saison,capacity_group,select_subject});
 
         await AddGroup.create(newGroup);
         req.flash("success","Group has been saved successfully!");
-        res.render('admin/add-group',{
+        res.render('/add-group',{
             messages:req.flash()
         });
         /*res.render("/admin/director", {
@@ -563,7 +567,7 @@ const director_getGroups = async (req, res) => {
 
 const director_edit_group = async (req, res) => {
     try {
-      const { name_group, selected_level, selected_saison,capacity_group,selected_subject} = req.body;
+      const { name_group, selected_level, selected_saison,capacity_group,select_subject} = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
@@ -571,7 +575,7 @@ const director_edit_group = async (req, res) => {
         if (selected_level) updateObject.selected_level = selected_level;
         if (selected_saison) updateObject.selected_saison = selected_saison;
         if (capacity_group) updateObject.capacity_group = capacity_group;
-        if (selected_subject) updateObject.selected_subject = selected_subject;
+        if (select_subject) updateObject.select_subject = select_subject;
 
       await AddGroup.findByIdAndUpdate(req.params.id, updateObject);
       
