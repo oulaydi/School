@@ -206,10 +206,11 @@ const director_delete = async (req, res) => {
 /*getAllStudent*/
 const director_getStudent = async (req, res) => {
     try {
+        const groups = await AddGroup.find({}, 'name_group');
         const Students = await AddStudent.find().sort({ createdAt: -1 });
         res.render("admin/Students", {
             title: "الثلاميد",
-            Students,
+            groups,
         });
        
     } catch (error) {
@@ -281,12 +282,12 @@ const director_edit_student = async (req, res) => {
 // director_editStudent_with_ID
 const director_edit_student_id = async (req, res) => {
     try {
+        const groups = await AddGroup.find({}, 'name_group');
         const studentinfo = await AddStudent.findOne({ _id: req.params.id });
-
         res.render("admin/edit-student", {
             studentinfo,
-            title: "تحديث تلميد(ة)"
-            
+            title: "تحديث تلميد(ة)",
+            groups,
         });
     } catch (error) {
         console.log(error);
@@ -331,8 +332,10 @@ const director_add_module = async (req, res) => {
 // director_add_module
 const director_getModule = async (req,res)=>{
     try{
+        const addteachers = await AddTeacher.find({}, 'full_name');
         res.render('admin/add-Module',{
         title: "الفضاء الخاص - الاداره",
+        addteachers,
         messages: req.flash()
         }
         );
@@ -357,10 +360,12 @@ const Module_index = async (req,res)=>{
 // director_edit_module with id
 const director_edit_modules_id = async (req,res)=>{
     try{
+    const addteachers = await AddTeacher.find({}, 'full_name');
     const ModuleInfo = await AddModule.findById({_id:req.params.id});
         res.render('admin/edit-Module',
          { ModuleInfo,
             title : "إضافة تلميد(ة)",
+            addteachers,
     });
     }catch(error){
         console.log(error);
@@ -621,6 +626,67 @@ const getSubjects = async (req, res) => {
 };
 
 
+//getGroups depuuis mongoose
+const getGroups = async (req, res) => {
+    try {
+        const groups = await AddGroup.find({}, 'name_group'); // Récupère uniquement le champ name_group
+        res.render('admin/add-student',
+        {  
+            title: "إضافة تلميد(ة)",
+            groups,
+        }
+    ); // Passe les sujets à la vue
+    } catch (error) {
+        res.status(500).send({ message: 'Error retrieving subjects' });
+    }
+};
+
+//getTeachers depuuis mongoose
+const getTeachers = async (req, res) => {
+    try {
+        const addteachers = await AddTeacher.find({}, 'full_name'); // Récupère uniquement le champ full_name
+        res.render('admin/add-teacher',
+        {  
+            title: "إضافة تلميد(ة)",
+            addteachers, 
+        }
+    ); // Passe les sujets à la vue
+    } catch (error) {
+        res.status(500).send({ message: 'Error retrieving subjects' });
+    }
+};
+
+//getRooms depuuis mongoose
+const getRooms = async (req, res) => {
+    try {
+        const rooms = await AddRoom.find({}, 'name_room'); // Récupère uniquement le champ name_room
+        res.render('admin/add-room',
+        {  
+            title: "إضافة تلميد(ة)",
+            rooms,
+        }
+    ); // Passe les sujets à la vue
+    } catch (error) {
+        res.status(500).send({ message: 'Error retrieving subjects' });
+    }
+};
+
+//getRooms depuuis mongoose
+const getModules = async (req, res) => {
+    try {
+        const modules = await AddModule.find({}, 'name_module'); // Récupère uniquement le champ name_module
+        res.render('admin/add-room',
+        {  
+            title: "إضافة تلميد(ة)",
+            modules,
+        }
+    ); // Passe les sujets à la vue
+    } catch (error) {
+        res.status(500).send({ message: 'Error retrieving subjects' });
+    }
+};
+
+
 /*-------------------  director_room ------------ */
 
  /*director_room  pour get view form */
@@ -777,6 +843,7 @@ module.exports = {
     director_edit_modules,
     director_edit_modules_id,
     director_delete_modules,
+    getTeachers,
       /*crud student*/ 
       director_add_student,
     director_getStudent,
@@ -785,6 +852,7 @@ module.exports = {
     director_edit_student,
     director_edit_student_id,
     director_delete_student,
+    getGroups,
     /*CRUD subject*/
     director_Add_Subject,
     director_add_subject,

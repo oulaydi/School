@@ -24,6 +24,8 @@ router.post("/admin", directorController.director_login);
 // router.get("/director", authMiddleware, directorController.director_index);
 router.get("/dashboard", authMiddleware, directorController.director_index);
 
+//passer la valeur de name_subject dans add-teacher 
+router.get("/add-teacher", authMiddleware, directorController.getSubjects);
 /**
  * Get /
  * Dashboard Route - Teahcers
@@ -51,6 +53,8 @@ router.put("/edit-teacher/:id", authMiddleware, directorController.director_edit
 router.delete("/edit-teacher/:id", authMiddleware, directorController.director_delete);
 
 /*******************Student*********************/
+//passer la valeur name_group dans add-student
+router.get("/add-student",authMiddleware, directorController.getGroups);
 /**
  * GET /
  * Director - All student
@@ -85,17 +89,19 @@ router.put("/edit-student/:id", authMiddleware, directorController.director_edit
 router.delete("/edit-student/:id",authMiddleware, directorController.director_delete_student);
 
 /*************************TEST ROUTES ************************* */
-
+/***************Modules*************/
+// passer la valeur de full_name de teacher dans add-module
+router.get("/admin/add-module", authMiddleware, directorController.getTeachers);
 /**
  * GET /
  * Director - Add Modules
  */
-router.get("/admin/add-module", authMiddleware, directorController.director_getModule);
+router.get("/admin/add-Module", authMiddleware, directorController.director_getModule);
 /**
  * Post /
  * Director - CREAT Modules
  */
-router.post("/admin/add-module", authMiddleware, directorController.director_add_module);
+router.post("/admin/add-Module", authMiddleware, directorController.director_add_module);
 /**
  * GET /
  * Director - view all  Modules
