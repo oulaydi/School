@@ -4,6 +4,8 @@ const AddStudent = require("../models/StudenteSchema");
 const AddSubject = require("../models/SubjectSchema");
 const AddGroup = require("../models/GroupSchema");
 const AddModule = require("../models/ModuleSchema");
+const AddRoom = require("../models/RoomSchema");
+
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
@@ -208,8 +210,6 @@ const director_getStudent = async (req, res) => {
         res.render("admin/Students", {
             title: "الثلاميد",
             Students,
-            
-           
         });
        
     } catch (error) {
@@ -393,7 +393,11 @@ const director_delete_modules = async (req,res)=>{
         console.log(error);
     }
 }
+
 /********************Subject***********************/
+
+
+/* director_subject  */
 
 /*add_subjectt  pour get view form */
 const director_Add_Subject = async (req, res) => {
@@ -405,6 +409,7 @@ const director_Add_Subject = async (req, res) => {
         console.log(error);
     }
 };
+
 
 /*add_subject  methode post store une bd */
 const director_add_subject = async (req, res) => {
@@ -480,7 +485,6 @@ const director_edit_subject_id = async (req, res) => {
         console.log(error);
     }
 };
-
 // director_delete_subject
 const director_delete_subject = async (req, res) => {
     try {
@@ -597,7 +601,11 @@ const director_delete_group = async (req, res) => {
     }
 };
 
+
 //getSubjects depuis mongoose
+
+
+//getSubjects depuuis mongoose
 const getSubjects = async (req, res) => {
     try {
         const subjects = await AddSubject.find({}, 'name_subject'); // Récupère uniquement le champ name_subject
@@ -611,6 +619,132 @@ const getSubjects = async (req, res) => {
         res.status(500).send({ message: 'Error retrieving subjects' });
     }
 };
+
+
+/*-------------------  director_room ------------ */
+
+ /*director_room  pour get view form */
+
+ const director_Add_Room = async (req, res) => {
+    try {
+        res.render("admin/add-room", {
+            title: "إضافة قاعة(ة)",
+
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/*add_room  methode post store une bd */
+ const director_add_room = async (req, res) => {
+
+    try {
+        const {
+            name_room, capacity_room, selected_dispo_room, equipement_room } = req.body;
+
+       
+
+    
+        const newRoom = AddRoom({
+            name_room, capacity_room, selected_dispo_room, equipement_room });
+
+        await AddRoom.create(newRoom);
+        req.flash("success","Room has been saved successfully!");
+        res.redirect("/rooms");
+  
+
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
+ /*get All Rooms*/
+ const director_getRooms = async (req, res) => {
+    try {
+        const Rooms = await AddRoom.find().sort({ createdAt: -1 });
+        res.render("admin/Rooms", {
+            title: "القاعة",
+            Rooms,
+           
+
+        });
+       
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/*director_edit_Room */
+
+const director_edit_room = async (req, res) => {
+    try {
+      const {name_room, capacity_room, selected_dispo_room, equipement_room } = req.body;
+  
+      // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+      const updateObject = {};
+        if (name_room) updateObject.name_room =name_room ;
+        if (capacity_room) updateObject.capacity_room  =capacity_room ;
+        if (selected_dispo_room) updateObject.selected_dispo_room =selected_dispo_room ;
+        if (equipement_room) updateObject.equipement_room  =equipement_room ;
+        
+      
+      await  AddRoom.findByIdAndUpdate(req.params.id, updateObject);
+      
+      res.redirect("/rooms");
+
+    } catch (error) {
+      console.log(error);
+    }
+};
+
+// director_editRoom_with_ID get view
+const director_edit_room_id = async (req, res) => {
+    try {
+        const rooms = await AddRoom.findOne({ _id: req.params.id });
+
+        res.render("admin/Edit-Room", {
+            rooms,
+            title: "تحديث قاعة(ة)"
+            
+
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// director_delete_room
+const director_delete_room= async (req, res) => {
+    try {
+        await AddRoom.deleteOne({ _id: req.params.id });
+        res.redirect("/rooms");
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//search
+const director_serach= async (req, res) => {
+    try {
+        const searchTtext = req.body.searchTtext ;
+           const  result =  await AddRoom.find({$or : [{name_room:searchTtext}] });
+
+      res.render("admin/search",
+       {title:"search",
+        arr:result,
+        
+       } 
+      )
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 
 // director_logout
@@ -650,7 +784,6 @@ module.exports = {
     director_edit_student,
     director_edit_student_id,
     director_delete_student,
-    director_getStudent,
     /*CRUD subject*/
     director_Add_Subject,
     director_add_subject,
@@ -666,7 +799,16 @@ module.exports = {
     director_edit_group_id,
     director_delete_group,
     getSubjects,
-    
+  /*crud room*/ 
+    director_Add_Room,
+    director_add_room,
+    director_getRooms ,
+    director_edit_room ,
+    director_edit_room_id,
+    director_delete_room,
+    /*director_serach*/ 
+    director_serach,
+
 
     notFound,
     director_logout,
