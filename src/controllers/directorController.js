@@ -760,6 +760,7 @@ const notFound = (req, res) => {
     });
 };
 
+
 module.exports = {
     loginAuth,
     director_login,
@@ -799,6 +800,7 @@ module.exports = {
     director_edit_group_id,
     director_delete_group,
     getSubjects,
+
   /*crud room*/ 
     director_Add_Room,
     director_add_room,
@@ -815,3 +817,5 @@ module.exports = {
     
     
 };
+
+
