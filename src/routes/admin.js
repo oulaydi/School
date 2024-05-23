@@ -263,7 +263,7 @@ router.put("/admin/edit-room/:id", authMiddleware, directorController.director_e
 * DELETE /
 * Dashboard - DELETE student
 */
-router.delete("/admin/edit-room/:id",authMiddleware, directorController. director_delete_room);
+router.delete("/admin/edit-room/:id",authMiddleware, directorController.director_delete_room);
 
 /**
  * GET /
