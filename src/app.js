@@ -7,6 +7,7 @@ const path = require("path");
 const session = require("express-session");
 const flash = require("express-flash");
 require("./routes/main");
+
 require("dotenv").config();
 
 // Express app
@@ -51,11 +52,20 @@ app.set("views", path.join(__dirname, "../views"));
 // Registre view engine
 app.set("view engine", "ejs");
 
+
+app.use("/", require("./routes/professeur"));
 app.use("/", require("./routes/main"));
 app.use("/", require("./routes/admin"));
 
+
+
 app.use("/teacher", require("./routes/main"));
 app.use("/student", require("./routes/main"));
+app.use("/professeur", require("./routes/professeur"));
+
+
+
+
 
 
 //app.use("/profile", require("./routes/main"));
