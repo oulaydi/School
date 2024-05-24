@@ -7,11 +7,12 @@ const Schema = mongoose.Schema;
 const AddStudentSchema = new Schema({
     INE: {
         type: String,
-        required: false,
+        required: true,
         unique: true,
     },
     full_name: {
         type: String,
+        required: true,
     },
     username: {
         type: String,
@@ -23,25 +24,23 @@ const AddStudentSchema = new Schema({
         type: String,
         required: true,
     },
-    selected_birthplace: {
+    birthplace: {
         type: String,
-        required :false,
-        enum:[
-            "الدار البيضاء",
-            " فاس",
-            "الرباط",
-            " مراكش",
-            " طنجة ",
-            " أكادير",
-        ]
+        required :true,
     },
- 
+    num_tel:{
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
     },
-
     password: {
+        type: String,
+        required: true,
+    },
+    select_group:{
         type: String,
         required: true,
     },
@@ -55,5 +54,10 @@ const AddStudentSchema = new Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
+AddStudentSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+});
 
 module.exports = mongoose.model("AddStudent", AddStudentSchema);

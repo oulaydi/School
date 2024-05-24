@@ -20,7 +20,7 @@
       </div>
      <a href="/rooms" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
-          <form action="/admin/edit-room/<%= rooms._id %>?_method=PUT"  class="row g-3" autocomplete="off" method="POST">
+          <form action="/edit-room/<%= rooms._id %>?_method=PUT"  class="row g-3" autocomplete="off" method="POST">
             <div class="col-md-6">
               <label class="form-label cus-label" > Nom de salle </label><span> :</span>
               <input type="text" value="<%= rooms.name_room %>" name="name_room" required placeholder="اسم القاعة" id="input-field" class="form-control">

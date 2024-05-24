@@ -20,7 +20,7 @@
       </div>
      <a href="/schedules" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
-          <form action="/add-schedule" class="row g-3" autocomplete="off" method="POST">
+      <form method="POST" action="/edit-schedule/<%= scheduleinfo._id %>?_method=PUT" class="row g-3" autocomplete="off">
             <div class="col-md-6">
               <label class="form-label cus-label">Module</label><span> :</span>
               <select class="form-select" aria-label="Default select example" id="input-field" name="selected_module">
@@ -40,22 +40,22 @@
             <div class="col-md-6">
               <label class="form-label cus-label"> Heure </label><span> :</span>
               <select class="form-select" aria-label="Default select example" id="input-field" name="selected_Hour">
-                <option value="heure"> 9.00-10.30</option>
-                <option value="heure"> 10.30-12.00</option>
-                <option value="heure"> 9.00-12.00</option>
-                <option value="heure"> 13.00-14.30</option>
-                <option value="heure"> 14.30-16.00</option>
-                <option value="heure"> 13.00-16.00</option>
+                <option value="9.00-10.30" <%= scheduleinfo.selected_Hour === '9.00-10.30' ? 'selected' : '' %>> 9.00-10.30</option>
+                <option value="10.30-12.00" <%= scheduleinfo.selected_Hour === '10.30-12.00' ? 'selected' : '' %>> 10.30-12.00</option>
+                <option value="9.00-12.00" <%= scheduleinfo.selected_Hour === '9.00-12.00' ? 'selected' : '' %>> 9.00-12.00</option>
+                <option value="13.00-14.30" <%= scheduleinfo.selected_Hour === '13.00-14.30' ? 'selected' : '' %>> 13.00-14.30</option>
+                <option value="14.30-16.00" <%= scheduleinfo.selected_Hour === '14.30-16.00' ? 'selected' : '' %>> 14.30-16.00</option>
+                <option value="13.00-16.00" <%= scheduleinfo.selected_Hour === '13.00-16.00' ? 'selected' : '' %>> 13.00-16.00</option>
               </select>
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label"> Jour </label><span> :</span>
               <select class="form-select" aria-label="Default select example" id="input-field" name="selected_day">
-                <option value="day"> Lundi</option>
-                <option value=" day"> Mardi</option>
-                <option value=" day"> Mercredi</option>
-                <option value=" day"> Jeudi</option>
-                <option value=" day "> Vendredi</option>
+                <option value="Lundi" <%= scheduleinfo.selected_day === 'Lundi' ? 'selected' : '' %>> Lundi</option>
+                <option value=" Mardi" <%= scheduleinfo.selected_day === 'Mardi' ? 'selected' : '' %>> Mardi</option>
+                <option value=" Mercredi" <%= scheduleinfo.selected_day === 'Mercredi' ? 'selected' : '' %>> Mercredi</option>
+                <option value=" Jeudi" <%= scheduleinfo.selected_day === 'Jeudi' ? 'selected' : '' %>> Jeudi</option>
+                <option value=" Vendredi " <%= scheduleinfo.selected_day === 'Vendredi' ? 'selected' : '' %>> Vendredi</option>
               </select>
             </div>
             <div class="col-md-6">

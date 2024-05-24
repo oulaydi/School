@@ -12,6 +12,8 @@
         <!-- Header Ends!! -->
         <div class="container" id="header">
             
+                
+             
             <div>
                 <h3>الفضاء الخاص بالإدارة</h3>
             </div>
@@ -22,42 +24,41 @@
                     </a>
                 </button>
                 <button class="btn btn-primary my-5">
-                    <a href="/add-group" class="text-light"> ajouter group
+                    <a href="/add-schedule" class="text-light"> Ajouter Schedule
                         <i id="bi-icon" class="bi bi-plus fw-bold"></i>
                     </a>
                 </button>
             </div>
         </div>
 
-    <% if (Groups.length > 0) { %>
+    <% if (Schedules.length > 0) { %>
     <table class="table table-bordered w-75" id="center-container" dir="rtl">
         <thead class="thead-dark">
             <tr class="text-center">
                 <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
-                <th scope="col"> name_group </th>
-                <th scope="col"> selected_level</th>
-                <th scope="col"> selected_saison</th>
-                <th scope="col">capacity_group </th>
-                <th scope="col">select_subject</th>
-                <th scope="col"> Action </th>
+                <th scope="col"> name module</th>
+                <th scope="col"> name room</th>
+                <th scope="col"> name Hour</th>
+                <th scope="col"> day</th>
+                <th scope="col"> name group</th>
+                <th scope="col"> Action</th>
 
             </tr>
         </thead>
         <!-- Displaying the values -->
         <tbody class="table-group-divider">
-            <% Groups.forEach(Group => { %>
+            <% Schedules.forEach(Schedule => { %>
                 <tr class="text-center">
-                                            <td class="info"><%= Group.name_group %></td>
-                                            <td class="info"><%= Group.selected_level %></td>
-                                            <td class="info"><%= Group.selected_saison %></td>
-                                            <td class="info"><%= Group.capacity_group %></td>
-                                            <td class="info"><%= Group.select_subject %></td> 
-
+                                            <td class="info"><%= Schedule.selected_module %></td>
+                                            <td class="info"><%= Schedule.selected_room %></td>
+                                            <td class="info"><%= Schedule.selected_Hour %></td> 
+                                            <td class="info"><%= Schedule.selected_day %></td>
+                                            <td class="info"><%= Schedule.selected_group %></td>                                       
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
-                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-group/<%= Group._id %>">تحديث</a>
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-schedule/<%= Schedule._id %>">تحديث</a>
                         </button>
-                        <form action="/edit-group/<%= Group._id %>?_method=DELETE" method="POST" style="display: inline;">
+                        <form action="/edit-schedule/<%= Schedule._id %>?_method=DELETE" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-danger">
                                 <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
                             </button>
