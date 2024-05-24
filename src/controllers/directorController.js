@@ -71,7 +71,7 @@ const director_login = async (req, res) => {
         res.redirect("/admin");
     }
 };
-/*******************Teacher*******************/
+
 // director_index
 const director_index = async (req, res) => {
     try {
@@ -202,16 +202,15 @@ const director_delete = async (req, res) => {
 };
 
 
-//***************Student***********************/
-/*getAllStudent*/
+
+/* director_student  */
+    /*getAllStudent*/
 const director_getStudent = async (req, res) => {
     try {
-        const groups = await AddGroup.find({}, 'name_group');
         const Students = await AddStudent.find().sort({ createdAt: -1 });
-        res.render("/Students", {
+        res.render("admin/Students", {
             title: "الثلاميد",
             Students,
-            groups,
         });
        
     } catch (error) {
@@ -222,7 +221,7 @@ const director_getStudent = async (req, res) => {
    /*add_student  pour get view form */
    const director_Add_Student = async (req, res) => {
     try {
-        res.render("/add-student", {
+        res.render("admin/add-student", {
             title: "إضافة تلميد(ة)",
         });
     } catch (error) {
@@ -234,47 +233,44 @@ const director_getStudent = async (req, res) => {
  const director_add_student = async (req, res) => {
     try {
         const {
-            INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password } = req.body;
+            INE, full_name, username, birthday, selected_birthplace, email, password } = req.body;
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
         const newStudent = AddStudent({
-            INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password});
+            INE, full_name, username, birthday, selected_birthplace, email, password});
 
         await AddStudent.create(newStudent);
         req.flash("success","student has been saved successfully!");
-        res.render('/add-student',{
+        res.render('admin/add-student',{
             messages:req.flash()
         });
         /*res.render("/admin/director", {
             err1_msg: "Teacher has been saved successfully!"
         });*/
-        res.redirect("/Students");
+        res.redirect("/students");
         
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-
 /*director_edit_student */
+
 const director_edit_student = async (req, res) => {
     try {
-      const { INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password } = req.body;
+      const { INE, full_name, username, birthday, selected_birthplace, email, password} = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
         if (INE) updateObject.full_name = INE;
         if (full_name) updateObject.full_name = full_name;
         if (username) updateObject.username = username;
-        if (birthday) updateObject.birthday = birthday;
-        if (birthplace) updateObject.birthplace = birthplace;
-        if (password) updateObject.password = password;
+        if (birthday) updateObject.city = birthday;
+        if (selected_birthplace) updateObject.tele = selected_birthplace;
         if (email) updateObject.email = email;
-        if (num_tel) updateObject.num_tel = num_tel;
-        if (select_group) updateObject.select_group = select_group;
-        if (confirm_password) updateObject.confirm_password = confirm_password;
-
+        if (password) updateObject.email = password;
+  
       await AddStudent.findByIdAndUpdate(req.params.id, updateObject);
 
       res.redirect("/Students");
@@ -286,12 +282,12 @@ const director_edit_student = async (req, res) => {
 // director_editStudent_with_ID
 const director_edit_student_id = async (req, res) => {
     try {
-        const groups = await AddGroup.find({}, 'name_group');
         const studentinfo = await AddStudent.findOne({ _id: req.params.id });
-        res.render("/edit-student", {
+
+        res.render("admin/edit-student", {
             studentinfo,
-            title: "تحديث تلميد(ة)",
-            groups,
+            title: "تحديث تلميد(ة)"
+            
         });
     } catch (error) {
         console.log(error);
@@ -307,10 +303,7 @@ const director_delete_student = async (req, res) => {
         console.log(error);
     }
 };
-
-
 /********************Module***********************/
-
 // director_creat_module
 const director_add_module = async (req, res) => {
     try {
@@ -336,10 +329,8 @@ const director_add_module = async (req, res) => {
 // director_add_module
 const director_getModule = async (req,res)=>{
     try{
-        const addteachers = await AddTeacher.find({}, 'full_name');
         res.render('admin/add-Module',{
         title: "الفضاء الخاص - الاداره",
-        addteachers,
         messages: req.flash()
         }
         );
@@ -364,12 +355,10 @@ const Module_index = async (req,res)=>{
 // director_edit_module with id
 const director_edit_modules_id = async (req,res)=>{
     try{
-    const addteachers = await AddTeacher.find({}, 'full_name');
     const ModuleInfo = await AddModule.findById({_id:req.params.id});
         res.render('admin/edit-Module',
          { ModuleInfo,
             title : "إضافة تلميد(ة)",
-            addteachers,
     });
     }catch(error){
         console.log(error);
@@ -403,12 +392,9 @@ const director_delete_modules = async (req,res)=>{
     }
 }
 
-/********************Subject***********************/
-
-
 /* director_subject  */
 
-/*add_subject  pour get view form */
+/*add_subjectt  pour get view form */
 const director_Add_Subject = async (req, res) => {
     try {
         res.render("admin/add-subject", {
@@ -439,7 +425,7 @@ const director_add_subject = async (req, res) => {
         /*res.render("/admin/director", {
             err1_msg: "Teacher has been saved successfully!"
         });*/
-       res.redirect('/Subjects')
+       res.send('add Subject successully')
         
     } catch (error) {
         console.log(error);
@@ -504,7 +490,7 @@ const director_delete_subject = async (req, res) => {
     }
 };
 
-/*******************Group*******************/
+/*director group*/
 
 /*add_group  pour get view form */
 const director_Add_group = async (req, res) => {
@@ -522,16 +508,16 @@ const director_Add_group = async (req, res) => {
 const director_add_group = async (req, res) => {
     try {
         const {
-            name_group, selected_level,selected_saison,capacity_group,select_subject } = req.body;
+            name_group, selected_level, selected_saison,capacity_group,selected_subject } = req.body;
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
         const newGroup = AddGroup({
-            name_group, selected_level, selected_saison,capacity_group,select_subject});
+            name_group, selected_level, selected_saison,capacity_group,selected_subject});
 
         await AddGroup.create(newGroup);
         req.flash("success","Group has been saved successfully!");
-        res.render('/add-group',{
+        res.render('admin/add-group',{
             messages:req.flash()
         });
         /*res.render("/admin/director", {
@@ -567,7 +553,7 @@ const director_getGroups = async (req, res) => {
 
 const director_edit_group = async (req, res) => {
     try {
-      const { name_group, selected_level, selected_saison,capacity_group,select_subject} = req.body;
+      const { name_group, selected_level, selected_saison,capacity_group,selected_subject} = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
@@ -575,7 +561,7 @@ const director_edit_group = async (req, res) => {
         if (selected_level) updateObject.selected_level = selected_level;
         if (selected_saison) updateObject.selected_saison = selected_saison;
         if (capacity_group) updateObject.capacity_group = capacity_group;
-        if (select_subject) updateObject.select_subject = select_subject;
+        if (selected_subject) updateObject.selected_subject = selected_subject;
 
       await AddGroup.findByIdAndUpdate(req.params.id, updateObject);
       
@@ -611,9 +597,6 @@ const director_delete_group = async (req, res) => {
 };
 
 
-//getSubjects depuis mongoose
-
-
 //getSubjects depuuis mongoose
 const getSubjects = async (req, res) => {
     try {
@@ -622,67 +605,6 @@ const getSubjects = async (req, res) => {
         {  
             title: "إضافة تلميد(ة)",
             subjects 
-        }
-    ); // Passe les sujets à la vue
-    } catch (error) {
-        res.status(500).send({ message: 'Error retrieving subjects' });
-    }
-};
-
-
-//getGroups depuuis mongoose
-const getGroups = async (req, res) => {
-    try {
-        const groups = await AddGroup.find({}, 'name_group'); // Récupère uniquement le champ name_group
-        res.render('admin/add-student',
-        {  
-            title: "إضافة تلميد(ة)",
-            groups,
-        }
-    ); // Passe les sujets à la vue
-    } catch (error) {
-        res.status(500).send({ message: 'Error retrieving subjects' });
-    }
-};
-
-//getTeachers depuuis mongoose
-const getTeachers = async (req, res) => {
-    try {
-        const addteachers = await AddTeacher.find({}, 'full_name'); // Récupère uniquement le champ full_name
-        res.render('admin/add-teacher',
-        {  
-            title: "إضافة تلميد(ة)",
-            addteachers, 
-        }
-    ); // Passe les sujets à la vue
-    } catch (error) {
-        res.status(500).send({ message: 'Error retrieving subjects' });
-    }
-};
-
-//getRooms depuuis mongoose
-const getRooms = async (req, res) => {
-    try {
-        const rooms = await AddRoom.find({}, 'name_room'); // Récupère uniquement le champ name_room
-        res.render('admin/add-room',
-        {  
-            title: "إضافة تلميد(ة)",
-            rooms,
-        }
-    ); // Passe les sujets à la vue
-    } catch (error) {
-        res.status(500).send({ message: 'Error retrieving subjects' });
-    }
-};
-
-//getRooms depuuis mongoose
-const getModules = async (req, res) => {
-    try {
-        const modules = await AddModule.find({}, 'name_module'); // Récupère uniquement le champ name_module
-        res.render('admin/add-room',
-        {  
-            title: "إضافة تلميد(ة)",
-            modules,
         }
     ); // Passe les sujets à la vue
     } catch (error) {
@@ -831,6 +753,7 @@ const notFound = (req, res) => {
 };
 
 
+
 module.exports = {
     loginAuth,
     director_login,
@@ -847,7 +770,6 @@ module.exports = {
     director_edit_modules,
     director_edit_modules_id,
     director_delete_modules,
-    getTeachers,
       /*crud student*/ 
       director_add_student,
     director_getStudent,
@@ -856,7 +778,6 @@ module.exports = {
     director_edit_student,
     director_edit_student_id,
     director_delete_student,
-    getGroups,
     /*CRUD subject*/
     director_Add_Subject,
     director_add_subject,
@@ -872,7 +793,6 @@ module.exports = {
     director_edit_group_id,
     director_delete_group,
     getSubjects,
-
   /*crud room*/ 
     director_Add_Room,
     director_add_room,
@@ -889,5 +809,3 @@ module.exports = {
     
     
 };
-
-
