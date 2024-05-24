@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const directorController = require("../controllers/directorController");
-//const Subject = require("../models/SubjectSchema");
+
 /******************Admin************************/
 /**
  * GET /
@@ -21,7 +21,7 @@ router.post("/admin", directorController.director_login);
  * Director - All teachers
  */
 
-//router.get("/director", authMiddleware, directorController.director_index);
+
 router.get("/dashboard", authMiddleware, directorController.director_index);
 
 //passer la valeur de name_subject dans add-teacher 
@@ -59,7 +59,7 @@ router.delete("/edit-teacher/:id", authMiddleware, directorController.director_d
 
 /*******************Student*********************/
 //passer la valeur name_group dans add-student
-router.get("/add-student",authMiddleware, directorController.getGroups);
+router.get("/add-student",authMiddleware, directorController.director_getGroups);
 /**
  * GET /
  * Director - All student
@@ -197,7 +197,8 @@ router.delete("/edit-subject/:id",authMiddleware, directorController.director_de
 
 /*********Room**********/
 
-// Route pour afficher la page add-group avec les groups
+// Route pour room---------------------------------------------------------------
+
 router.get('/rooms',authMiddleware, directorController.director_getRooms);
 /**
 * Get /
