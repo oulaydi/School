@@ -14,7 +14,7 @@
           <div>
             <h3 id="h4" >تحديث استاذ(ة)</h3>
           </div>
-        <a href="/director" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
+        <a href="/teachers" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
       <div class="container my-5" dir="rtl">
             <form method="POST" action="/edit-teacher/<%= teacherInfo._id %>?_method=PUT" class="row g-3" autocomplete="off">
                 <div class="col-md-6">
@@ -22,49 +22,46 @@
                   <input type="text" value="<%= teacherInfo.CIN %>" name="CIN" placeholder="رقم البطاقة الوطنية" id="input-field" class="form-control">
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label cus-label">كلمة المرور الجديدة</label><span> :</span>
-                  <input type="password" name="password" placeholder="ادخل كلمة المرور" id="input-field" class="form-control">
+                  <label class="form-label cus-label" > Nom Complet  </label><span> :</span>
+                  <input type="text" value="<%= teacherInfo.full_name %>" required name="full_name" placeholder="اسم و نسب تلميد(ة)" id="input-field" class="form-control">
+                </div>
+              <div class="col-md-6">
+                  <label class="form-label cus-label" > Date de naissance </label><span> :</span>
+                  <input type="text" value="<%= teacherInfo.birthday %>" required name="birthday" placeholder="تاريخ الازدياد التلميد(ة)" id="input-field" class="form-control">
+                </div>
+              <div class="col-md-6">
+                  <label class="form-label cus-label">Lieu de naissance </label><span> :</span>
+                  <input type="text" value="<%= teacherInfo.birthplace %>" required name="birthplace" placeholder="تاريخ الازدياد التلميد(ة)" id="input-field" class="form-control">
+                </div>
+              <div class="col-md-6">
+                  <label class="form-label cus-label" > Numero Telophone </label><span> :</span>
+                  <input type="text" value="<%= teacherInfo.num_tel %>" required name="num_tel" placeholder="رقم الهاتف الخاص بالتلميذ(ة)" id="input-field" class="form-control">
+                </div>
+              <div class="col-md-6">
+                  <label class="form-label cus-label"> Adresse Electronique </label><span> :</span>
+                  <input type="email" value="<%= teacherInfo.email %>" name="email" required placeholder="ادخل العنوان الالكتروني الخاص بالمستخدم" id="input-field" class="form-control">
+                </div>
+              <div class="col-md-6">
+                  <label class="form-label cus-label"> Username </label><span> :</span>
+                  <input type="text" value="<%= teacherInfo.username %>" name="username" required placeholder="ادخل اسم المستخدم الخاص" id="input-field" class="form-control">
+                </div>
+              <div class="col-md-6">
+                  <label class="form-label cus-label"> Mot de passe </label><span> :</span>
+                  <input type="password" value="<%= teacherInfo.password %>" name="password" required placeholder="ادخل كلمة المرور" id="input-field" class="form-control">
                   <i class="fas fa-eye" id="togglePassword"></i>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label cus-label" >الإسم الكامل </label><span> :</span>
-                  <input type="text" value="<%= teacherInfo.full_name %>" name="full_name" placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label cus-label">اعد كلمة المرور الجديدة</label><span> :</span>
-                  <input type="password" placeholder="ادخل كلمة المرور من جديد" name="confirm_password" id="input-field" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label cus-label">إسم المستخدم </label><span> :</span>
-                  <input type="text" value="<%= teacherInfo.username %>" name="username" required placeholder="ادخل اسم المستخدم الخاص" id="input-field" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label cus-label">المستوى </label><span> :</span>
-                  <select class="form-select" aria-label="Default select example" id="input-field" name="selected_level">
-                    <option value="إعدادي" <%= teacherInfo.selected_level === 'إعدادي' ? 'selected' : '' %>>إعدادي</option>
-                    <option value="ثانوي" <%= teacherInfo.selected_level === 'ثانوي' ? 'selected' : '' %>>ثانوي</option>
+                  <label class="form-label cus-label"> Specilate </label><span> :</span>
+                  <select class="form-select" required aria-label="Default select example" id="input-field" name="select_subject">
+                    <% subjects.forEach(subject => { %>
+                      <option value="<%= subject.name_subject %>"><%= subject.name_subject %></option>
+                  <% }) %>
                   </select>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label cus-label">المادة</label><span> :</span>
-                    <select class="form-select" aria-label="Default select example" id="input-field" name="selected_subject">
-                      <option value="اللغة العربية (Arabic Language)" <%= teacherInfo.selected_subject === 'اللغة العربية (Arabic Language)' ? 'selected' : '' %>>اللغة العربية (Arabic Language)</option>
-                      <option value="اللغة الفرنسية (French Language)" <%= teacherInfo.selected_subject === 'اللغة الفرنسية (French Language)' ? 'selected' : '' %>>اللغة الفرنسية (French Language)</option>
-                      <option value="اللغة الإنجليزية (English Language)" <%= teacherInfo.selected_subject === 'اللغة الإنجليزية (English Language)' ? 'selected' : '' %>>اللغة الإنجليزية (English Language)</option>
-                      <option value="اللغة الإسبانية (Spanish Language)" <%= teacherInfo.selected_subject === 'اللغة الإسبانية (Spanish Language)' ? 'selected' : '' %>>اللغة الإسبانية (Spanish Language)</option>
-                      <option value="اللغة الألمانية (German Language)" <%= teacherInfo.selected_subject === 'اللغة الألمانية (German Language)' ? 'selected' : '' %>>اللغة الألمانية (German Language)</option>
-                      <option value="الرياضيات (Mathematics)" <%= teacherInfo.selected_subject === 'الرياضيات (Mathematics)' ? 'selected' : '' %>>الرياضيات (Mathematics)</option>
-                      <option value="الفيزياء (Physics)" <%= teacherInfo.selected_subject === 'الفيزياء (Physics)' ? 'selected' : '' %>>الفيزياء (Physics)</option>
-                      <option value="الكيمياء (Chemistry)" <%= teacherInfo.selected_subject === 'الكيمياء (Chemistry)' ? 'selected' : '' %>>الكيمياء (Chemistry)</option>
-                      <option value="الأحياء (Biology)" <%= teacherInfo.selected_subject === 'الأحياء (Biology)' ? 'selected' : '' %>>الأحياء (Biology)</option>
-                      <option value="الجغرافيا (Geography)" <%= teacherInfo.selected_subject === 'الجغرافيا (Geography)' ? 'selected' : '' %>>الجغرافيا (Geography)</option>
-                      <option value="التربية الإسلامية (Islamic Education)" <%= teacherInfo.selected_subject === 'التربية الإسلامية (Islamic Education)' ? 'selected' : '' %>>التربية الإسلامية (Islamic Education)</option>
-                      <option value="الفلسفة (Philosophy)" <%= teacherInfo.selected_subject === 'الفلسفة (Philosophy)' ? 'selected' : '' %>>الفلسفة (Philosophy)</option>
-                      <option value="ألتربية التشكيلية (Art education)" <%= teacherInfo.selected_subject === 'ألتربية التشكيلية (Art education)' ? 'selected' : '' %>>ألتربية التشكيلية (Art education)</option>
-                      <option value="المعلوميات (Informatique)" <%= teacherInfo.selected_subject === 'المعلوميات (Informatique)' ? 'selected' : '' %>>المعلوميات (Informatique)</option>
-                      <option value="التكنولوجيا (technology)" <%= teacherInfo.selected_subject === 'التكنولوجيا (technology)' ? 'selected' : '' %>>التكنولوجيا (technology)</option>
-                    </select>
-                </div>
+                </div> 
+              <div class="col-md-6">
+                  <label class="form-label cus-label">  Confirmer Mot de passe </label><span> :</span>
+                  <input type="password" value="<%= teacherInfo.confirm_password %>" required placeholder="ادخل كلمة المرور من جديد" name="confirm_password" id="input-field" class="form-control">
+                  </div>
                 <div class="custom-control">
                 </div>
                   <button type="submit" class="btn w-25 btn-primary">تحديث</button>

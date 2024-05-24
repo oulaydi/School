@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 
 const AddTeacherSchema = new Schema({
     CIN: {
-       type: String,
+        type: String,
         required: true,
-       // unique: true,
+        unique: true,
     },
     full_name: {
         type: String,
@@ -17,54 +17,40 @@ const AddTeacherSchema = new Schema({
         type: String,
         required: true,
     },
-    selected_birthplace: {
-        type: String,
-        required :true,
-        enum:[
-            "الدار البيضاء",
-            " فاس",
-            "الرباط",
-            " مراكش",
-            " طنجة ",
-            " أكادير",
-        ]
-    },
     num_tel: {
         type: String,
         required: true,
     },
-    selected_birthplace: {
+    birthplace: {
         type: String,
-        required :false,
-        
+        required :true,
     },
     num_tel: {
         type: Number,
-        required: false,
+        required: true,
     },
     email: {
         type: String,
-        required: false,
+        required: true,
     },
     username: {
         type: String,
         required: true,
-       // unique :true,
-
+        unique :true,
     },
     password: {
         type: String,
-        required: false,
+        required: true,
     },
 
     // confirm_password: {
     //     type: String,
     //     required: true,
     // },
-    username: {
+
+    select_subject: {
         type: String,
-        required: false,
-        unique: true,
+        required: true,  
     },
  
     createdAt: { type: Date, default: Date.now },

@@ -36,11 +36,10 @@
         <thead class="thead-dark">
             <tr class="text-center">
                 <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
-                <th scope="col">رقم الاستاذ(ة)</th>
                 <th scope="col">الإسم الكامل</th>
                 <th scope="col">إسم المستخدم</th>
+                <th scope="col">email</th>
                 <th scope="col">يدرس</th>
-                <th scope="col">المادة</th>
                 <th scope="col">إجراء</th>
             </tr>
         </thead>
@@ -48,11 +47,10 @@
         <tbody class="table-group-divider">
             <% teachers.forEach(teacher => { %>
                 <tr class="text-center">
-                    <td class="info"><%= teacher.CIN %></td>
                     <td class="info"><%= teacher.full_name %></td>
                     <td class="info"><%= teacher.username %></td>
-                    <td class="info"><%= teacher.selected_level %></td>
-                    <td class="info"><%= teacher.selected_subject %></td>
+                    <td class="info"><%= teacher.email %></td>
+                    <td class="info"><%= teacher.select_subject %></td>
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
                             <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-teacher/<%= teacher._id %>">تحديث</a>
