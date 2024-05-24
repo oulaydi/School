@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        <link rel="stylesheet" href="css/style_card_brancheProf.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <%- include('../partials/header.ejs') %>
+        <!-- Header Ends!! -->
+
+        <!-- Container -->
+        <div class="main">
+           
+            <!-- teachers Div -->
+            <div class="container">
+                <div class="card">
+                    <a href="BrancheReasau">
+                        <div class="info-div">
+                            <img
+                                src="images/branch1.png"
+                                alt="teacher-side"
+                            />
+                        </div>
+                        <div class="content">
+                            <p>المعلوميات</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Ends Parent Div!! -->
+            <!-- Studnets Div -->
+            <div class="container">
+                <div class="card">
+                    <a href="brancheInfo">
+                        <div class="genie-div">
+                            <img src="images/branch1.png" alt="student-side" />
+                        </div>
+                        <div class="content">
+                            <p>المعلوميات</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Ends Studnets Div!! -->
+        </div>
+        <!-- Container Ends-->
+
+        <!-- footer -->
+        <%- include('../partials/footer.ejs') %>
+        <!-- footer ends -->
+
+        <!-- js -->
+        <script src="JS/app.js"></script>
+    </body>
+</html>

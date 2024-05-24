@@ -90,14 +90,13 @@ const director_index = async (req, res) => {
 // teachers index
 const teacher_index = async (req, res) => {
     try {
-        const subjects = await AddSubject.find({}, 'name_subject');
         const teachers = await AddTeacher.find().sort({ createdAt: -1 });
         res.render("admin/directorAddTeacher", { // change the path, was /director
             title: "الرئيسية - لوحة القيادة",
             teachers,
-            subjects,
+           
         });
-
+       
     } catch (error) {
         console.log(error);
     }
@@ -996,6 +995,7 @@ module.exports = {
     loginAuth,
     director_login,
     director_index,
+    teacher_index,
     director_add,
     directorAddTeacher,
     director_edit,

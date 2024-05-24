@@ -197,7 +197,8 @@ router.delete("/edit-subject/:id",authMiddleware, directorController.director_de
 
 /*********Room**********/
 
-// Route pour afficher la page add-group avec les groups
+// Route pour room---------------------------------------------------------------
+
 router.get('/rooms',authMiddleware, directorController.director_getRooms);
 /**
 * Get /
