@@ -87,6 +87,21 @@ const director_index = async (req, res) => {
     }
 };
 
+// teachers index
+const teacher_index = async (req, res) => {
+    try {
+        const teachers = await AddTeacher.find().sort({ createdAt: -1 });
+        res.render("admin/directorAddTeacher", { // change the path, was /director
+            title: "الرئيسية - لوحة القيادة",
+            teachers,
+           
+        });
+       
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 // director_add
 const director_add = async (req, res) => {
     try {
@@ -758,6 +773,7 @@ module.exports = {
     loginAuth,
     director_login,
     director_index,
+    teacher_index,
     director_add,
     directorAddTeacher,
     director_edit,

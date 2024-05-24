@@ -57,6 +57,7 @@ app.use("/", require("./routes/admin"));
 app.use("/teacher", require("./routes/main"));
 app.use("/student", require("./routes/main"));
 
+
 //app.use("/profile", require("./routes/main"));
 
 

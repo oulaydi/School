@@ -23,6 +23,9 @@ router.post("/admin", directorController.director_login);
 // router.get("/director", authMiddleware, directorController.director_index);
 router.get("/dashboard", authMiddleware, directorController.director_index);
 
+// Get all teachers
+router.get("/teachers", authMiddleware, directorController.teacher_index);
+
 /**
  * Get /
  * Dashboard Route - Teahcers
@@ -122,12 +125,7 @@ router.put("/admin/edit-Module/:id",authMiddleware,directorController.director_e
  */
 router.delete("/admin/edit-Module/:id",authMiddleware,directorController.director_delete_modules);
 
-//admin add room view
-router.get("/admin/add-room",authMiddleware, (req, res) => {
-    res.render("admin/add-room", {
-        title: "الفضاء الخاص - الاداره",
-    });
-});
+
 //admin  add-Schedule view
 router.get("/admin/add-Schedule",authMiddleware, (req, res) => {
     res.render("admin/add-Schedule", {
@@ -233,37 +231,25 @@ router.delete("/edit-subject/:id",authMiddleware, directorController.director_de
 
 
 //search
-
 router.post("/search", authMiddleware, directorController.director_serach);
 
-// Route pour afficher la page add-group avec les groups
-router.get('/rooms',authMiddleware, directorController.director_getRooms);
-/**
-* Get /
-* Dashboard Route - Group
-*/
-router.get('/admin/Add-room',authMiddleware, directorController.director_Add_group);
-/**
-* GET /
-* Director - Add student
-*/
-router.post('/admin/Add-room',authMiddleware,directorController.director_add_room);
+// Route pour room---------------------------------------------------------------
 
-/**
-* GET /
-* Dashboard - Get student by ID
-*/
-router.get("/admin/edit-room/:id", authMiddleware, directorController.director_edit_room_id);
-/**
-* PUT /
-* Dashboard - Edit student
-*/
-router.put("/admin/edit-room/:id", authMiddleware, directorController.director_edit_room);
-/**
-* DELETE /
-* Dashboard - DELETE student
-*/
-router.delete("/admin/edit-room/:id",authMiddleware, directorController.director_delete_room);
+router.get('/rooms',authMiddleware, directorController.director_getRooms);
+
+
+router.post('/dashboard/Add-room',authMiddleware,directorController.director_add_room);
+
+
+router.get("/dashboard/Add-room", authMiddleware, directorController. director_Add_Room);
+
+
+router.get("/dashboard/edit-room/:id", authMiddleware, directorController.director_edit_room_id);
+
+
+router.put("/dashboard/edit-room/:id", authMiddleware, directorController.director_edit_room);
+
+router.delete("/dashboard/edit-room/:id",authMiddleware, directorController.director_delete_room);
 
 /**
  * GET /

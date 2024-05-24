@@ -14,9 +14,14 @@ router.get("/teacher", (req, res) => {
     });
 });
 
-router.get("/student", (req, res) => {
-    res.render("student", {
-        title: "الفضاء الخاص - بالتلاميذ",
+router.get("/branches", (req, res) => {
+    res.render("prof/Branch", {
+        title: "الفضاء الخاص - بالاستاد",
+    });
+});
+router.get("/branches", (req, res) => {
+    res.render("/Branch", {
+        title: "الفضاء الخاص -بالاستاد",
     });
 });
 /**
