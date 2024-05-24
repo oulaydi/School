@@ -24,38 +24,41 @@
                     </a>
                 </button>
                 <button class="btn btn-primary my-5">
-                    <a href="/add-teacher" class="text-light">إضافة استاذ(ة)
+                    <a href="/add-schedule" class="text-light"> Ajouter Schedule
                         <i id="bi-icon" class="bi bi-plus fw-bold"></i>
                     </a>
                 </button>
             </div>
         </div>
 
-    <% if (teachers.length > 0) { %>
+    <% if (Schedules.length > 0) { %>
     <table class="table table-bordered w-75" id="center-container" dir="rtl">
         <thead class="thead-dark">
             <tr class="text-center">
                 <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
-                <th scope="col">الإسم الكامل</th>
-                <th scope="col">إسم المستخدم</th>
-                <th scope="col">email</th>
-                <th scope="col">يدرس</th>
-                <th scope="col">إجراء</th>
+                <th scope="col"> name module</th>
+                <th scope="col"> name room</th>
+                <th scope="col"> name Hour</th>
+                <th scope="col"> day</th>
+                <th scope="col"> name group</th>
+                <th scope="col"> Action</th>
+
             </tr>
         </thead>
         <!-- Displaying the values -->
         <tbody class="table-group-divider">
-            <% teachers.forEach(teacher => { %>
+            <% Schedules.forEach(Schedule => { %>
                 <tr class="text-center">
-                    <td class="info"><%= teacher.full_name %></td>
-                    <td class="info"><%= teacher.username %></td>
-                    <td class="info"><%= teacher.email %></td>
-                    <td class="info"><%= teacher.select_subject %></td>
+                                            <td class="info"><%= Schedule.selected_module %></td>
+                                            <td class="info"><%= Schedule.selected_room %></td>
+                                            <td class="info"><%= Schedule.selected_Hour %></td> 
+                                            <td class="info"><%= Schedule.selected_day %></td>
+                                            <td class="info"><%= Schedule.selected_group %></td>                                       
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
-                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-teacher/<%= teacher._id %>">تحديث</a>
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-schedule/<%= Schedule._id %>">تحديث</a>
                         </button>
-                        <form action="/edit-teacher/<%= teacher._id %>?_method=DELETE" method="POST" style="display: inline;">
+                        <form action="/edit-schedule/<%= Schedule._id %>?_method=DELETE" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-danger">
                                 <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
                             </button>
@@ -67,7 +70,7 @@
     </table>
     <% } else { %>
         <div class="text-center mt-4">
-            <p>.لا يوجد اي استاذ(ة)</p>
+            <p>.لا يوجد اي بببب(ة)</p>
         </div>
     <% } %>
 

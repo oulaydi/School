@@ -65,7 +65,7 @@
                     </a>
                 </button>
                 <button class="btn btn-primary my-5">
-                    <a href="/admin/add-room" class="text-light">إضافة قاعة(ة)
+                    <a href="/add-room" class="text-light">إضافة قاعة(ة)
                         <i id="bi-icon" class="bi bi-plus fw-bold"></i>
                     </a>
                 </button>
@@ -111,9 +111,9 @@
                                          
                                             <td class="actions">
                                                 <button type="button" class="btn btn-warning">
-                                                    <a class="fw-semibold text-decoration-none link-light py-3" href="/admin/edit-room/<%= Room._id %>">تحديث</a>
+                                                    <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-room/<%= Room._id %>">تحديث</a>
                                                 </button>
-                                                <form action="/admin/edit-room/<%= Room._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                                <form action="/edit-room/<%= Room._id %>?_method=DELETE" method="POST" style="display: inline;">
                                                     <button type="submit" class="btn btn-danger">
                                                         <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
                                                     </button>
