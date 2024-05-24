@@ -1010,6 +1010,7 @@ module.exports = {
     director_edit_modules,
     director_edit_modules_id,
     director_delete_modules,
+    getTeachers,
       /*crud student*/ 
       director_add_student,
     director_getStudent,
@@ -1053,7 +1054,6 @@ module.exports = {
     getModules,
     getRooms,
     getGroups_Schedule,
-
 
 
     notFound,
