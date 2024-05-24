@@ -59,7 +59,7 @@
                 <label class="form-label cus-label"> Groupe  </label><span> :</span>
                 <select class="form-select" aria-label="Default select example" id="input-field" required name="select_group">
                   <% groups.forEach(group => { %>
-                    <option value="<%= groups.name_group %>"><%= groups.name_group  %></option>
+                    <option value="<%= group.name_group %>"><%= group.name_group  %></option>
                 <% }) %>
                 </select>
               </div>

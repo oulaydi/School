@@ -24,7 +24,7 @@
       <div>
         <h3 id="h4"> تحديث تلميد  </h3>
       </div>
-     <a href="/director" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
+     <a href="/students" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
         <form method="POST" action="/edit-student/<%= studentinfo._id %>?_method=PUT" class="row g-3" autocomplete="off">
          
@@ -65,7 +65,9 @@
             <div class="col-md-6">
                 <label class="form-label cus-label"> Groupe  </label><span> :</span>
                 <select class="form-select" aria-label="Default select example" id="input-field" required name="select_group">
-                  
+                  <% groups.forEach(group => { %>
+                    <option value="<%= group.name_group %>"><%= group.name_group  %></option>
+                <% }) %>
                 </select>
               </div>
             <div class="col-md-6">
