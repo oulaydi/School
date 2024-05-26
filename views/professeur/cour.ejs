@@ -13,6 +13,9 @@
         <%- include('../partials/header.ejs') %>
         <!-- Header Ends!! -->
         <div class="container" id="header">
+            
+                
+             
             <div>
                 <h3>الفضاء الخاص بالإدارة</h3>
             </div>
@@ -23,38 +26,34 @@
                     </a>
                 </button>
                 <button class="btn btn-primary my-5">
-                    <a href="/add-Module" class="text-light">Add-Module
+                    <a href="/add-cour" class="text-light">Add-Cour
                         <i id="bi-icon" class="bi bi-plus fw-bold"></i>
                     </a>
                 </button>
             </div>
         </div>
 
-    <% if (Modules.length > 0) { %>
+    <% if (Cours.length > 0) { %>
     <table class="table table-bordered w-75" id="center-container" dir="rtl">
         <thead class="thead-dark">
             <tr class="text-center">
                 <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
-                <th scope="col">Nom du Module </th>
-                <th scope="col">Description de Module</th>
-                <th scope="col">Semestre du Module</th>
-                <th scope="col">Nom de Professeur</th>
+                <th scope="col">Nom du Cour </th>
+                <th scope="col">Nom du Module</th>
                 <th scope="col">إجراء</th>
             </tr>
         </thead>
         <!-- Displaying the values -->
         <tbody class="table-group-divider">
-            <% Modules.forEach(Module => { %>
+            <% Cours.forEach(Cour => { %>
                 <tr class="text-center">
-                    <td class="info"><%= Module.name_module  %></td>
-                    <td class="info"><%= Module.desc_module %></td>
-                    <td class="info"><%= Module.selected_semester %></td>
-                    <td class="info"><%= Module.selected_teacher %></td>
+                    <td class="<%= Cour.name_cour  %>"><%= Cour.name_cour  %></td>
+                    <td class="<%= Cour.module %>"><%= Cour.module %></td>
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
-                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-Module/<%= Module._id %>">تحديث</a>
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-cour/<%= Cour._id %>">تحديث</a>
                         </button>
-                        <form action="/edit-Module/<%= Module._id %>?_method=DELETE" method="POST" style="display: inline;">
+                        <form action="/edit-cour/<%= Cour._id %>?_method=DELETE" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-danger">
                                 <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
                             </button>
