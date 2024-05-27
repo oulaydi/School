@@ -68,7 +68,7 @@ app.use("/professeur", require("./routes/professeur"));
 
 
 
-//app.use("/profile", require("./routes/main"));
+app.use("/profile", require("./routes/main"));
 
 
 
