@@ -26,19 +26,38 @@ router.get("/add-grade-info",profMiddleware, professeurController.professeur_Add
 
 router.get("/BrancheReasau", professeurController.professeur_getStudentResau);
 /***************Cour*************/
-
+/**
+ * GET /
+ * Cour - Add Modules
+ */
 router.get("/add-cour",professeurController.professeur_get_Cour);
+/**
+ * GET /
+ * Cour - Add Modules
+ */
 router.post("/add-cour", upload.single('file'), professeurController.professeur_Add_Cour);
+/**
+ * GET /
+ * Cour - edit Modules by id
+ */
 router.get("/edit-cour/:id",professeurController.professeur_edit_Cour_id);
+/**
+ * GET /
+ * Cour - edit Modules
+ */
 router.put("/edit-cour/:id",professeurController.professeur_edit_Cour);
+/**
+ * GET /
+ * Cour - get All Modules
+ */
 router.get("/cour",professeurController.Cour_index);
+/**
+ * GET /
+ * Cour - delete Modules
+ */
 router.delete("/edit-cour/:id",professeurController.professeur_delete_Cour);
 
-router.get("/Cour",(req,res)=>{
-    res.render("professeur/cour",{
-        title: "الفضاء الخاص - بالاستاد",
-    });
-});
+
 
 
 
