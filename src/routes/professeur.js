@@ -23,8 +23,8 @@ router.get("/brancheInfo",profMiddleware, professeurController.professeur_getStu
 //filtrage BrancheReasau
 router.get("/BrancheReasau",profMiddleware, professeurController.professeur_getStudentResau);
 
-/*get view add-grades prof*/ 
-router.get("/add-grade-info",profMiddleware, professeurController.professeur_Add_grade);
+
+
 
 router.get("/BrancheReasau", professeurController.professeur_getStudentResau);
 /***************Cour*************/

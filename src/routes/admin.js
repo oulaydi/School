@@ -178,7 +178,7 @@ router.delete("/edit-subject/:id",authMiddleware, directorController.director_de
  * Director - All Group
  */
  router.get("/groups",authMiddleware, directorController.director_getGroups);
- router.get("/groupTeachers",authMiddleware, directorController.director_getGroupsTeachers);
+// router.get("/groupTeachers",authMiddleware, directorController.director_getGroupsTeachers);
 /**
  * GET /
  * Dashboard - Get Group by ID
