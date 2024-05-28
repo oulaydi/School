@@ -8,12 +8,42 @@ router.get("/branches", (req, res) => {
         title: "الفضاء الخاص - بالاستاد",
     });
 });
+const { profMiddleware } = require("../middlewares/profMiddleware");
+
+
+
+// get view login professeur
+router.get("/teacher",professeurController.loginProfAuth);
+
+//post professeur 
+router.post("/teacher",professeurController.professeurLogin)
+
+
+router.get("/logoutProf", professeurController. professeur_logout,);
+
+
+//get all branches*/
+router.get("/branches",profMiddleware, professeurController.professeur_getBranch);
+
+
+
+
+
+
 
 
 
 //filtrage brancheInfo
-router.get("/brancheInfo", professeurController.professeur_getStudentInfo);
+router.get("/brancheInfo",profMiddleware, professeurController.professeur_getStudentInfo);
 //filtrage BrancheReasau
+router.get("/BrancheReasau",profMiddleware, professeurController.professeur_getStudentResau);
+
+
+/*get view add-grades prof*/ 
+router.get("/add-grade-info",profMiddleware, professeurController.professeur_Add_grade);
+
+
+
 router.get("/BrancheReasau", professeurController.professeur_getStudentResau);
 /***************Cour*************/
 
