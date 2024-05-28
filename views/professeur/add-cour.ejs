@@ -25,7 +25,7 @@
       </div>
      <a href="/cour" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
-          <form action="/add-cour" class="row g-3" autocomplete="off" method="POST">
+      <form id="courForm" class="row g-3" autocomplete="off" enctype="multipart/form-data" action="/add-cour" method="POST">
             <div class="col-md-6">
               <label class="form-label cus-label" > Nom du Cour </label><span> :</span>
               <input type="text" name="name_cour" required placeholder="اسم المادة" id="input-field" class="form-control">
@@ -38,48 +38,15 @@
                 <% }) %>
               </select>
             </div>
-           <div>
-            <!-- actual upload which is hidden -->
-            <input type="file" id="actual-btn" hidden/>
-
-            <!-- our custom upload button -->
-            <label for="actual-btn" class="btn w-25 btn-primary">Choose File</label>
-
-            <!-- name of file chosen -->
-            <span id="file-chosen">No file chosen</span>
-          </div> 
-        
+            <input type="file" name="file" required>
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" required>
                 <label class="custom-control-label" for="customCheck1">اشهد على صحة المعلومات المصرح بها</label>
             </div>
-              <form id="uploadForm" action="/api/upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" required>
-                <button type="submit" class="btn w-25 btn-primary">إضافة</button>
-              </form>
+            <button type="submit" class="btn w-25 btn-primary">إضافة</button>
           </form>
       </div>
     </div>
-    <script>
-      document.getElementById('downloadButton').addEventListener('click', async () => {
-            const filename = document.getElementById('filename').value;
-            const response = await fetch(`/api/download/${filename}`);
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        });
-      const actualBtn = document.getElementById('actual-btn');
-      const fileChosen = document.getElementById('file-chosen');
-      actualBtn.addEventListener('change', function(){
-        fileChosen.textContent = this.files[0].name
-      });
-    </script> 
-                    
     <!-- footer --->
     <%- include('../partials/footer.ejs') %>
     <!-- footer ends -->

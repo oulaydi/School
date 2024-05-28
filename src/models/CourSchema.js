@@ -12,8 +12,12 @@ const CourSchema = new Schema({
     module:{
         type: String,
         require:true
-    } 
-
+    } ,file :{
+        type: String,
+        require:true
+    },filePath: {
+        type: String }
+     
 });
 
 
