@@ -277,7 +277,7 @@ module.exports = {
     professeur_getStudentInfo,
     professeur_getStudentResau,
     professeur_getBranch,
-    professeur_Add_grade,
+    //professeur_Add_grade,
     getAllModulesByTeacher,
     professeur_get_Cour,
     professeur_Add_Cour,
