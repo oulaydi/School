@@ -29,9 +29,9 @@
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label"> name_professeur  </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" required name="name_professeur">
+              <select class="form-select" aria-label="Default select example" id="input-field" required name="username">
                 <% teachers.forEach(teacher => { %>
-                  <option value="<%= teacher.name_professeur %>"><%= teacher.name_professeur  %></option>
+                  <option value="<%= teacher.username %>"><%= teacher.username  %></option>
               <% }) %>
               </select>
             </div>

@@ -9,20 +9,20 @@ const SeanceSchema = new Schema({
         required: true,
         unique: true,
     },
-    name_professeur: {
+    username: {
         type: String,
         required: true,
-        unique :true,
+        //unique :true,
     },
     name_module: {
         type: String,
         required: true,
-        unique: true,
+       // unique: true,
     },
     name_group: {
         type: String,
         required: true,
-        unique: true,
+       // unique: true,
     },
         
     createdAt: { type: Date, default: Date.now },

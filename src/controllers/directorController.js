@@ -5,7 +5,8 @@ const AddSubject = require("../models/SubjectSchema");
 const AddGroup = require("../models/GroupSchema");
 const AddModule = require("../models/ModuleSchema");
 const AddRoom = require("../models/RoomSchema");
-const AddSchedule= require('../models/ScheduleSchema')
+const AddSchedule= require('../models/ScheduleSchema');
+const AddSeance = require('../models/SeanceSchema');
 
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
@@ -1008,7 +1009,7 @@ const director_Add_Seance = async (req, res) => {
     try { 
         const groups = await AddGroup.find({}, 'name_group');
         const modules = await AddModule.find({}, 'name_module');
-        const teachers = await AddGroup.find({}, 'name_professeur');
+        const teachers = await AddTeacher.find({}, 'username');
         res.render("admin/add-seance", {
             title: "إضافة تلميد(ة)",
             groups,
@@ -1020,19 +1021,19 @@ const director_Add_Seance = async (req, res) => {
     }
 };
 
-/*AddSchedule  methode post store une bd */
+/*AddSeance  methode post store une bd */
 const director_add_seance = async (req, res) => {
     try {
         const {
-            name_seance, name_professeur,name_module,name_group } = req.body;
+            name_seance, username,name_module,name_group } = req.body;
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
-        const newSchedule = AddSchedule({
-            name_seance, name_professeur,name_module,name_group});
+        const newSeance = AddSeance({
+            name_seance, username,name_module,name_group});
 
-        await AddSchedule.create(newSchedule);
-        req.flash("success","Schedule has been saved successfully!");
+        await AddSeance.create(newSeance);
+        req.flash("success","Seance has been saved successfully!");
         res.render('admin/add-seance',{
             messages:req.flash()
         });
@@ -1053,8 +1054,8 @@ const director_getSeance = async (req, res) => {
     try {
         const groups = await AddGroup.find({}, 'name_group');
         const modules = await AddModule.find({}, 'name_module');
-        const teachers = await AddGroup.find({}, 'name_professeur');
-        const Seances = await AddSchedule.find().sort({ createdAt: -1 });
+        const teachers = await AddTeacher.find({}, 'username');
+        const Seances = await AddSeance.find().sort({ createdAt: -1 });
         res.render("admin/Seances", {
             title: "الثلاميد",
             Seances,
@@ -1073,17 +1074,17 @@ const director_getSeance = async (req, res) => {
 
 const director_edit_seance = async (req, res) => {
     try {
-      const { name_seance, name_professeur,name_module,name_group} = req.body;
+      const { name_seance, username,name_module,name_group} = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
         if (name_seance) updateObject.name_seance = name_seance;
-        if (name_professeur) updateObject.name_professeur = name_professeur;
+        if (username) updateObject.username = username;
         if (name_module) updateObject.name_module = name_module;
         if (name_group) updateObject.name_group = name_group;
         
 
-      await AddSchedule.findByIdAndUpdate(req.params.id, updateObject);
+      await AddSeance.findByIdAndUpdate(req.params.id, updateObject);
       
       res.redirect("/Seances");
     } catch (error) {
@@ -1097,8 +1098,8 @@ const director_edit_seance_id = async (req, res) => {
         
         const groups = await AddGroup.find({}, 'name_group');
         const modules = await AddModule.find({}, 'name_module');
-        const teachers = await AddGroup.find({}, 'name_professeur');
-        const seanceinfo = await AddSchedule.findOne({ _id: req.params.id });
+        const teachers = await AddTeacher.find({}, 'username');
+        const seanceinfo = await AddSeance.findOne({ _id: req.params.id });
         res.render("admin/edit-seance", {
             seanceinfo,
             title: "تحديث تلميد(ة)",
@@ -1115,7 +1116,7 @@ const director_edit_seance_id = async (req, res) => {
 // director_delete_schedule 
 const director_delete_seance = async (req, res) => {
     try {
-        await AddSchedule.deleteOne({ _id: req.params.id });
+        await AddSeance.deleteOne({ _id: req.params.id });
         res.redirect("/Seances");
     } catch (error) {
         console.log(error);

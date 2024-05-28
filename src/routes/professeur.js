@@ -16,7 +16,9 @@ router.get("/logoutProf", professeurController. professeur_logout,);
 
 
 //get all branches*/
-router.get("/branches",profMiddleware, professeurController.professeur_getBranch);
+router.get("/GroupTeachers",profMiddleware, professeurController.professeur_getBranch);
+
+// router.get("/GroupTeachers",profMiddleware, professeurController.getGroups);
 
 
 
@@ -36,5 +38,8 @@ router.get("/BrancheReasau",profMiddleware, professeurController.professeur_getS
 router.get("/add-grade-info",profMiddleware, professeurController.professeur_Add_grade);
 
 
+//route pour getAllModuleByTeacher 
+
+router.get("/Modulebyteachers",profMiddleware, professeurController.getAllModulesByTeacher);
 
 module.exports = router;
