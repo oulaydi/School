@@ -9,7 +9,7 @@ const AddTeacherSchema = new Schema({
         required: true,
         unique: true,
     },
-    full_name: {
+    name_professeur: {
         type: String,
         required: true,
     },
@@ -26,7 +26,7 @@ const AddTeacherSchema = new Schema({
         required :true,
     },
     num_tel: {
-        type: Number,
+        type: String,
         required: true,
     },
     email: {
@@ -48,9 +48,9 @@ const AddTeacherSchema = new Schema({
     //     required: true,
     // },
 
-    select_subject: {
+    specialite: {
         type: String,
-        required: true,  
+        required: true,
     },
  
     createdAt: { type: Date, default: Date.now },

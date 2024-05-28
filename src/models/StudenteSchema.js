@@ -10,7 +10,7 @@ const AddStudentSchema = new Schema({
         required: true,
         unique: true,
     },
-    full_name: {
+    name_student: {
         type: String,
         required: true,
     },
@@ -40,7 +40,7 @@ const AddStudentSchema = new Schema({
         type: String,
         required: true,
     },
-    select_group:{
+    name_group:{
         type: String,
         required: true,
     },

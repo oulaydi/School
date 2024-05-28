@@ -45,14 +45,6 @@
                 <option value="S6">S6</option>
               </select>
             </div>
-            <div class="col-md-6">
-              <label class="form-label cus-label"> Nom de Professeur </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_teacher">
-                <% teachers.forEach(teacher => { %>
-                  <option value="<%= teacher.full_name %>"><%= teacher.full_name  %></option>
-              <% }) %>
-              </select>
-            </div>
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" required>
                 <label class="custom-control-label" for="customCheck1">اشهد على صحة المعلومات المصرح بها</label>

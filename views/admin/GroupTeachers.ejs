@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/directorPannel.css" />
+        <style>
+                    .card-title {
+  color: #262626;
+  font-size: 1.5em;
+  line-height: normal;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.small-desc {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: #452c2c;
+}
+
+.small-desc {
+  font-size: 1em;
+}
+
+.go-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #6293c8, #384c6c);
+  border-radius: 0 4px 0 32px;
+}
+
+.go-arrow {
+  margin-top: -4px;
+  margin-right: -4px;
+  color: white;
+  font-family: courier, sans;
+}
+
+.card {
+  display: block;
+  position: relative;
+  max-width: 300px;
+  max-height: 320px;
+  background-color: #f2f8f9;
+  border-radius: 10px;
+  padding: 2em 1.2em;
+  margin: 12px;
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #c3e6ec, #a7d1d9);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -16px;
+  right: -16px;
+  background: linear-gradient(135deg, #364a60, #384c6c);
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.35s ease-out;
+}
+
+.card:hover:before {
+  transform: scale(28);
+}
+
+.card:hover .small-desc {
+  transition: all 0.5s ease-out;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card:hover .card-title {
+  transition: all 0.5s ease-out;
+  color: #ffffff;
+}
+
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <%- include('../partials/header.ejs') %>
+        <!-- Header Ends!! -->
+        <div class="container" id="header">
+            
+            <div>
+                <h3>الفضاء الخاص بالإدارة</h3>
+            </div>
+            <div class="container" id="add-rem">
+                <button class="btn" title="تسجيل الخروج">   
+                    <a href="/logout" style="color: #6c757d">
+                        <i id="bi-icon2" class="bi bi-box-arrow-left fw-bold"></i>
+                    </a>
+                </button>
+                <button class="btn btn-primary my-5">
+                    <a href="/add-group" class="text-light"> ajouter group
+                        <i id="bi-icon" class="bi bi-plus fw-bold"></i>
+                    </a>
+                </button>
+            </div>
+        </div>
+
+    <% if (Groups.length > 0) { %>
+            <% Groups.forEach(Group => { %>
+                <div class="card">
+                    <p class="card-title">Group Name</p>
+                    <p class="small-desc" name="name_group">
+                      <%= Group.name_group %>
+                    </p>
+                    <!-- <button type="button" class="btn btn-warning">
+                      <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-group/<%= Group._id %>">تحديث</a>
+                  </button>
+                  <form action="/edit-group/<%= Group._id %>?_method=DELETE" method="POST" style="display: inline;">
+                      <button type="submit" class="btn btn-danger">
+                          <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
+                      </button>
+                  </form> -->
+                    <div class="go-corner">
+                      <div class="go-arrow">→</div>
+                    </div>
+                  </div>
+            <% }); %>
+    <% } else { %>
+        <div class="text-center mt-4">
+            <p>.لا يوجد اي بببب(ة)</p>
+        </div>
+    <% } %>
+
+        <!-- footer -->
+        <%- include('../partials/footer.ejs') %>
+        <!-- footer ends -->
+        
+    </body>
+</html>

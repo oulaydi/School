@@ -18,11 +18,6 @@ const ModuleSchema = new Schema({
         required: true,
     },
 
-    selected_teacher :{
-        type: String,
-        required: true,
-   },
-
     createdAt: { type: Date, default: Date.now },
 });
 

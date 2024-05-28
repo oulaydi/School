@@ -22,14 +22,6 @@
      <div class="container my-5" dir="rtl">
       <form method="POST" action="/edit-schedule/<%= scheduleinfo._id %>?_method=PUT" class="row g-3" autocomplete="off">
             <div class="col-md-6">
-              <label class="form-label cus-label">Module</label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_module">
-                <% modules.forEach(module => { %>
-                  <option value="<%= module.name_module %>"><%= module.name_module %></option>
-              <% }) %>
-              </select>
-            </div>
-            <div class="col-md-6">
               <label class="form-label cus-label"> Salle </label><span> :</span>
               <select class="form-select" aria-label="Default select example" id="input-field" name="selected_room">
                 <% rooms.forEach(room => { %>
@@ -56,14 +48,6 @@
                 <option value=" Mercredi" <%= scheduleinfo.selected_day === 'Mercredi' ? 'selected' : '' %>> Mercredi</option>
                 <option value=" Jeudi" <%= scheduleinfo.selected_day === 'Jeudi' ? 'selected' : '' %>> Jeudi</option>
                 <option value=" Vendredi " <%= scheduleinfo.selected_day === 'Vendredi' ? 'selected' : '' %>> Vendredi</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label cus-label"> Groupe </label><span> :</span>
-              <select class="form-select" aria-label="Default select example" id="input-field" name="selected_group">
-                <% groups.forEach(group => { %>
-                  <option value="<%= group.name_group %>"><%= group.name_group %></option>
-              <% }) %>
               </select>
             </div>
             <div class="custom-control custom-checkbox">

@@ -22,7 +22,7 @@ const GroupSchema = new Schema({
         required: true,
     },
 
-    select_subject :{
+    name_subject :{
         type: String,
         required: true,
    },

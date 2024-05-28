@@ -12,19 +12,15 @@ const ScheduleSchema = new Schema({
         type: String,
         required: true,
     },
-    selected_module :{
-        type: String,
-        required: true,
-    },
     selected_room :{
         type: String,
         required: true,
     },
-    selected_group :{
+    name_seance :{
         type: String,
         required: true,
+        unique :true,
     },
-
 
     createdAt: { type: Date, default: Date.now },
 });

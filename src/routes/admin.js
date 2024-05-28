@@ -28,6 +28,7 @@ router.get("/dashboard", authMiddleware, directorController.director_index);
 //router.get("/add-teacher", authMiddleware, directorController.getSubjects);
 /* Get all teachers*/
 router.get("/teachers", authMiddleware, directorController.teacher_index);
+//router.get("/teachers2", authMiddleware, directorController.teacher_index2);
 
 router.get("/add-teacher",authMiddleware, directorController.getSubjects_Teacher);
 /**
@@ -94,8 +95,6 @@ router.put("/edit-student/:id", authMiddleware, directorController.director_edit
 router.delete("/edit-student/:id",authMiddleware, directorController.director_delete_student);
 
 /***************Modules*************/
-// passer la valeur de full_name de teacher dans add-module
-router.get("/add-module", authMiddleware, directorController.getTeachers);
 /**
  * GET /
  * Director - Add Modules
@@ -179,6 +178,7 @@ router.delete("/edit-subject/:id",authMiddleware, directorController.director_de
  * Director - All Group
  */
  router.get("/groups",authMiddleware, directorController.director_getGroups);
+ router.get("/groupTeachers",authMiddleware, directorController.director_getGroupsTeachers);
 /**
  * GET /
  * Dashboard - Get Group by ID
@@ -262,14 +262,52 @@ router.delete("/edit-schedule/:id",authMiddleware, directorController.director_d
 
 // passer la valeur name_room dans add-schedule
 router.get("/add-schedule",authMiddleware, directorController.getRooms);
-// passer la valeur name_module dans add-schedule
-router.get("/add-schedule",authMiddleware, directorController.getModules);
-// passer la valeur name_group dans add-schedule
-router.get("/add-schedule",authMiddleware, directorController.getGroups_Schedule);
+// passer la valeur name_seance dans add-schedule
+router.get("/add-schedule",authMiddleware, directorController.getSeance);
 
 //search
 router.post("/search", authMiddleware, directorController.director_serach);
 
+/******Seance******/
+
+/**
+ * GET /
+ * Director - All Schedule
+ */
+router.get("/seances",authMiddleware, directorController.director_getSeance);
+/**
+ * Get /
+ * Dashboard Route - Schedule
+ */
+router.get("/add-seance",authMiddleware, directorController.director_Add_Seance);
+/**
+ * GET /
+ * Director - Add Schedule
+ */
+router.post("/add-seance", authMiddleware, directorController.director_add_seance);
+/**
+ * GET /
+ * Dashboard - Get Schedule by ID
+ */
+router.get("/edit-seance/:id", authMiddleware, directorController.director_edit_seance_id);
+/**
+ * PUT /
+ * Dashboard - Edit Schedule
+//  */
+router.put("/edit-seance/:id", authMiddleware, directorController.director_edit_seance);
+/**
+ * DELETE /
+ * Dashboard - DELETE Schedule
+//  */
+router.delete("/edit-seance/:id",authMiddleware, directorController.director_delete_seance);
+
+
+// passer la valeur name_module dans add-schedule
+router.get("/add-seance",authMiddleware, directorController.getModules);
+// passer la valeur name_group dans add-schedule
+router.get("/add-seance",authMiddleware, directorController.getGroupsSeance);
+// passer la valeur name_professeur dans add-schedule
+router.get("/add-seance",authMiddleware, directorController.getTeachers);
 
 /**
  * GET /
