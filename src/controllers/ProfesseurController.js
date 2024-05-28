@@ -7,14 +7,8 @@ const AddSeance = require('../models/SeanceSchema');
 const { deleteFile } = require('../middlewares/files');
 const path = require('path');
 const fs = require('fs');
-
-
-
-
-
 const bcrypt = require("bcrypt");
 const jwtSecret = 'yourSecretKeyHere'; 
-
 const jwt = require("jsonwebtoken");
 
 //get view login
