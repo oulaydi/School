@@ -39,7 +39,7 @@
             <tr class="text-center">
                 <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
                 <th scope="col">name_seance </th>
-                <th scope="col">name_professeur</th>
+                <th scope="col">username</th>
                 <th scope="col"> name_module</th>
                 <th scope="col"> name_group</th>
                 <th scope="col">إجراء</th>
@@ -50,7 +50,7 @@
             <% Seances.forEach(Seance => { %>
                 <tr class="text-center">
                     <td class="info"><%= Seance.name_seance %></td>
-                    <td class="info"><%= Seance.name_professeur %></td>
+                    <td class="info"><%= Seance.username %></td>
                     <td class="info"><%= Seance.name_module %></td>
                     <td class="info"><%= Seance.name_group %></td>
                     <td class="actions">

@@ -104,33 +104,26 @@
             </div>
             <div class="container" id="add-rem">
                 <button class="btn" title="تسجيل الخروج">   
-                    <a href="/logout" style="color: #6c757d">
+                    <a href="/logoutProf" style="color: #6c757d">
                         <i id="bi-icon2" class="bi bi-box-arrow-left fw-bold"></i>
                     </a>
                 </button>
                 <button class="btn btn-primary my-5">
-                    <a href="/add-group" class="text-light"> ajouter group
+                    <a href="/add-seance" class="text-light"> ajouter group
                         <i id="bi-icon" class="bi bi-plus fw-bold"></i>
                     </a>
                 </button>
             </div>
         </div>
 
-    <% if (Groups.length > 0) { %>
-            <% Groups.forEach(Group => { %>
+    <% if (seances.length > 0) { %>
+            <% seances.forEach(seance => { %>
                 <div class="card">
-                    <p class="card-title">Group Name</p>
-                    <p class="small-desc" name="name_group">
-                      <%= Group.name_group %>
+                    <p class="card-title">Name Module</p>
+                    <p class="small-desc" name="name_module">
+                      <%= seance.name_module %>
                     </p>
-                    <!-- <button type="button" class="btn btn-warning">
-                      <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-group/<%= Group._id %>">تحديث</a>
-                  </button>
-                  <form action="/edit-group/<%= Group._id %>?_method=DELETE" method="POST" style="display: inline;">
-                      <button type="submit" class="btn btn-danger">
-                          <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
-                      </button>
-                  </form> -->
+                  
                     <div class="go-corner">
                       <div class="go-arrow">→</div>
                     </div>

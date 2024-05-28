@@ -14,7 +14,9 @@ router.post("/teacher",professeurController.professeurLogin)
 router.get("/logoutProf", professeurController. professeur_logout,);
 
 //get all branches*/
-router.get("/branches",profMiddleware, professeurController.professeur_getBranch);
+router.get("/GroupTeachers",profMiddleware, professeurController.professeur_getBranch);
+
+// router.get("/GroupTeachers",profMiddleware, professeurController.getGroups);
 
 //filtrage brancheInfo
 router.get("/brancheInfo",profMiddleware, professeurController.professeur_getStudentInfo);
@@ -61,5 +63,8 @@ router.delete("/edit-cour/:id",professeurController.professeur_delete_Cour);
 
 
 
+//route pour getAllModuleByTeacher 
+
+router.get("/Modulebyteachers",profMiddleware, professeurController.getAllModulesByTeacher);
 
 module.exports = router;

@@ -2,6 +2,8 @@ const Student = require("../models/StudenteSchema");
 const AddModule = require("../models/ModuleSchema");
 const AddCour = require("../models/CourSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
+const AddGroup = require('../models/GroupSchema');
+const AddSeance = require('../models/SeanceSchema');
 const { deleteFile } = require('../middlewares/files');
 const path = require('path');
 const fs = require('fs');
@@ -78,7 +80,7 @@ const professeurLogin = async (req, res) => {
             default:
                 const profToken = jwt.sign({professeurId: professeur._id }, jwtSecret);
                 res.cookie("profToken", profToken, { httpOnly: true });
-                res.redirect("/branches");  
+                res.redirect("/Modulebyteachers");  
                 break;
         }
     } catch (error) {
@@ -100,13 +102,15 @@ const professeur_logout = (req, res) => {
 /*get prof all branches  */
 const professeur_getBranch = async (req, res) => {
     try {
-        res.render("professeur/Branche", {
-            title: "الثلاميد",
-
-        });
-
+        const groups = await AddGroup.find({}, 'name_group'); // Récupère uniquement le champ name_group
+        res.render('professeur/GroupTeachers',
+        {  
+            title: "إضافة تلميد(ة)",
+            groups,
+        }
+    ); // Passe les sujets à la vue
     } catch (error) {
-        console.log(error);
+        res.status(500).send({ message: 'Error retrieving groups' });
     }
 };
 
@@ -239,6 +243,36 @@ const professeur_delete_Cour = async (req, res) => {
 };
 
 
+//getAllModules By Teacher
+
+// Your controller function
+const getAllModulesByTeacher = async (req, res) => {
+    try {
+        // Fetch the teacher based on username or any other unique identifier
+        // const user2= req.body.username;  
+        // console.log(user2); 
+        const teacher = await AddTeacher.findOne({username : "my.samiri" }); // Assuming you pass the teacher's username in the request parameters
+        console.log(teacher);
+        // If teacher is not found
+        if (!teacher) {
+            return res.status(404).json({ message: "Teacher not found" });
+        }
+
+        // Fetch module with the same selected subject as the teacher
+        const seances = await AddSeance.find({ username: teacher.username });
+        console.log(seances);
+        // Send the groups as response
+        res.render('professeur/ModuleTeachers',{
+            title:'Module by Teachers OK',
+            seances,
+        })
+    } catch (err) {
+        // Handle errors
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
+
 
 
 module.exports = {
@@ -248,10 +282,13 @@ module.exports = {
     professeur_logout,
     professeur_getStudentInfo,
     professeur_getStudentResau,
+    professeur_getBranch,
+    professeur_Add_grade,
+    getAllModulesByTeacher,
     professeur_get_Cour,
     professeur_Add_Cour,
     professeur_edit_Cour,
     professeur_edit_Cour_id,
     Cour_index,
-    professeur_delete_Cour
+    professeur_delete_Cour,
 };
