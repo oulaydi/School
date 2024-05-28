@@ -1,14 +1,13 @@
 const Student = require("../models/StudenteSchema");
 const AddModule = require("../models/ModuleSchema");
 const AddCour = require("../models/CourSchema");
+const AddTeacher = require("../models/AddTeacherSchema");
 const { deleteFile } = require('../middlewares/files');
 const path = require('path');
 const fs = require('fs');
 
 
-const AddTeacher = require("../models/AddTeacherSchema");
-//require("dotenv").config();
-//const jwtSecret = process.env.jwtSecretProf;
+
 
 
 const bcrypt = require("bcrypt");
