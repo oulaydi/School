@@ -3,17 +3,23 @@ const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
-const SubjectSchema = new Schema({
-    name_subject: {
+const SeanceSchema = new Schema({
+    name_seance: {
         type: String,
         required: true,
         unique: true,
     },
-    desc_subject: {
+    name_professeur: {
         type: String,
         required: true,
+        unique :true,
     },
-    id_subject: {
+    name_module: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    name_group: {
         type: String,
         required: true,
         unique: true,
@@ -23,4 +29,4 @@ const SubjectSchema = new Schema({
 });
 
 
-module.exports = mongoose.model("Subject", SubjectSchema);
+module.exports = mongoose.model("Seance", SeanceSchema);

@@ -20,7 +20,7 @@
       <div>
         <h3 id="h4"> Ajouter Professeur </h3>
       </div>
-     <a href="/director" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
+     <a href="/teachers" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
           <form action="/add-teacher" class="row g-3" autocomplete="off" method="POST">
             <div class="col-md-6">
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label" > Nom Complet </label><span> :</span>
-              <input type="text" required name="full_name" placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
+              <input type="text" required name="name_professeur" placeholder="اسم و نسب الاستاذ(ة)" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
               <label class="form-label cus-label" > Date de naissance </label><span> :</span>
@@ -58,12 +58,13 @@
               </div>
             <div class="col-md-6">
               <label class="form-label cus-label"> Specilate </label><span> :</span>
-              <select class="form-select" required aria-label="Default select example" id="input-field" name="select_subject">
-                <% subjects.forEach(subject => { %>
-                  <option value="<%= subject.name_subject %>"><%= subject.name_subject %></option>
-              <% }) %>
+              <select class="form-select" required aria-label="Default select example" id="input-field" name="specialite">
+                <option value="Programmation"> Programmation </option>
+                <option value="Reseaux"> Reseaux </option>
+                <option value="Communication"> Communication </option>
+                <option value="Economie"> Economie </option>
               </select>
-            </div> -
+            </div> 
             <div class="col-md-6">
               <label class="form-label cus-label"> Confirmer Mot de passe  </label><span> :</span>
               <input type="password" required placeholder="ادخل كلمة المرور من جديد" name="confirm_password" id="input-field" class="form-control">

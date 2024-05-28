@@ -127,7 +127,8 @@ const professeur_getStudentInfo = async (req, res) => {
 /*get prof  brancheResau */
 const professeur_getStudentResau = async (req, res) => {
     try {
-        const studentresau = await Student.find({ select_group: 'resau 23-24' });
+  
+        const studentresau = await Student.find({ select_group : 'DevOp2 23-24'  });
         res.render("professeur/BrancheReasau", {
             title: "الثلاميد",
             studentresau,

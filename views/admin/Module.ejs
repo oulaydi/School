@@ -38,7 +38,6 @@
                 <th scope="col">Nom du Module </th>
                 <th scope="col">Description de Module</th>
                 <th scope="col">Semestre du Module</th>
-                <th scope="col">Nom de Professeur</th>
                 <th scope="col">إجراء</th>
             </tr>
         </thead>
@@ -49,7 +48,6 @@
                     <td class="info"><%= Module.name_module  %></td>
                     <td class="info"><%= Module.desc_module %></td>
                     <td class="info"><%= Module.selected_semester %></td>
-                    <td class="info"><%= Module.selected_teacher %></td>
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
                             <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-Module/<%= Module._id %>">تحديث</a>
