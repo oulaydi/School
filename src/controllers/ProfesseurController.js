@@ -28,6 +28,7 @@ const professeurLogin = async (req, res) => {
     let professeur;
     try {
         const { username, password } = req.body;
+        req.session.username = username;
         let errorType = "";
 
         if (!username || !password) {
@@ -243,10 +244,10 @@ const professeur_delete_Cour = async (req, res) => {
 const getAllModulesByTeacher = async (req, res) => {
     try {
         // Fetch the teacher based on username or any other unique identifier
-        // const user2= req.body.username;  
+        const auth_user= req.session.username;  
         // console.log(user2); 
-        const teacher = await AddTeacher.findOne({username : "my.samiri" }); // Assuming you pass the teacher's username in the request parameters
-        console.log(teacher);
+        const teacher = await AddTeacher.findOne({username : auth_user }); // Assuming you pass the teacher's username in the request parameters
+        // console.log(teacher);
         // If teacher is not found
         if (!teacher) {
             return res.status(404).json({ message: "Teacher not found" });
@@ -259,6 +260,9 @@ const getAllModulesByTeacher = async (req, res) => {
         res.render('professeur/ModuleTeachers',{
             title:'Module by Teachers OK',
             seances,
+            auth_user,
+
+           
         })
     } catch (err) {
         // Handle errors
@@ -277,7 +281,7 @@ module.exports = {
     professeur_getStudentInfo,
     professeur_getStudentResau,
     professeur_getBranch,
-    //professeur_Add_grade,
+    // professeur_Add_grade,
     getAllModulesByTeacher,
     professeur_get_Cour,
     professeur_Add_Cour,
