@@ -23,6 +23,17 @@ const loginProfAuth = async (req, res) => {
         console.log(error);
     }
 };
+
+// directorDashboard
+const directorDashboard = async (req, res) => {
+    try {
+        res.render("professeur/teacherDashboard");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
 //find prof and login
 const professeurLogin = async (req, res) => {
     let professeur;
@@ -75,7 +86,7 @@ const professeurLogin = async (req, res) => {
             default:
                 const profToken = jwt.sign({professeurId: professeur._id }, jwtSecret);
                 res.cookie("profToken", profToken, { httpOnly: true });
-                res.redirect("/Modulebyteachers");  
+                res.redirect("/teacherDashboard");  
                 break;
         }
     } catch (error) {
@@ -281,6 +292,7 @@ module.exports = {
     professeur_getStudentInfo,
     professeur_getStudentResau,
     professeur_getBranch,
+    directorDashboard,
     // professeur_Add_grade,
     getAllModulesByTeacher,
     professeur_get_Cour,
