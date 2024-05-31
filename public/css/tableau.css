@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.table-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 60%;
+    border: 1px solid #ddd;
+}
+
+.table-header, .table-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 3fr 3fr 4fr;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-cell {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-cell {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.border-right {
+    border-right: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.absente {
+    background: linear-gradient(45deg, #db1b1f, #ffd9d7);
+    color: white;
+}
+
+button.present {
+    background: linear-gradient(45deg, #a6f3a9, hsl(123, 88%, 55%));
+    color: white;
+}
+
+button:hover {
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: scale(0.98);
+}
