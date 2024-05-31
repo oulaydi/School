@@ -5,8 +5,25 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
         <link rel="stylesheet" href="css/directorPannel.css" />
-        <style>
-                    .card-title {
+
+  <style>
+
+.cards{
+
+   display: flex;
+
+   
+   align-items: center;
+   justify-content: space-around;
+      }
+
+
+      .card{
+        height: 50%;
+        width: 60%;
+      }
+   
+  .card-title {
   color: #262626;
   font-size: 1.5em;
   line-height: normal;
@@ -100,7 +117,7 @@
         <div class="container" id="header">
             
             <div>
-                <h3>الفضاء الخاص بالإدارة</h3>
+                <h3>الفضاء الخاص بالاستاد</h3>
             </div>
             <div class="container" id="add-rem">
                 <button class="btn" title="تسجيل الخروج">   
@@ -108,27 +125,33 @@
                         <i id="bi-icon2" class="bi bi-box-arrow-left fw-bold"></i>
                     </a>
                 </button>
-                <button class="btn btn-primary my-5">
-                    <a href="/add-seance" class="text-light"> ajouter group
-                        <i id="bi-icon" class="bi bi-plus fw-bold"></i>
-                    </a>
-                </button>
+               
             </div>
         </div>
 
     <% if (seances.length > 0) { %>
-            <% seances.forEach(seance => { %>
-                <div class="card">
-                    <p class="card-title">Name Module</p>
-                    <p class="small-desc" name="name_module">
-                      <%= seance.name_module %>
-                    </p>
-                  
-                    <div class="go-corner">
-                      <div class="go-arrow">→</div>
-                    </div>
-                  </div>
-            <% }); %>
+      <div class="cards">
+      <% seances.forEach(seance => { %>
+
+
+
+        <div class="card" onclick="redirectToModule('<%= seance.name_module %>')">
+            <p class="card-title">Name Module</p>
+            <p class="small-desc" name="name_module"><%= seance.name_module %></p>
+            <div class="go-corner">
+                <div class="go-arrow">→</div>
+            </div>
+        </div>
+    <% }); %>
+  </div>
+
+    
+    <script>
+        function redirectToModule(moduleName) {
+            const encodedModuleName = encodeURIComponent(moduleName);
+            window.location.href = '/groupbyteacherNote/' + encodedModuleName;
+        }
+    </script>
     <% } else { %>
         <div class="text-center mt-4">
             <p>.لا يوجد اي بببب(ة)</p>

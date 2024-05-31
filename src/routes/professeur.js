@@ -23,8 +23,8 @@ router.get("/brancheInfo",profMiddleware, professeurController.professeur_getStu
 //filtrage BrancheReasau
 router.get("/BrancheReasau",profMiddleware, professeurController.professeur_getStudentResau);
 
-
-
+/*get view add-grades prof*/ 
+//router.get("/add-grade-info",profMiddleware, professeurController.professeur_Add_grade);
 
 router.get("/BrancheReasau", professeurController.professeur_getStudentResau);
 /***************Cour*************/
@@ -60,11 +60,31 @@ router.get("/cour",professeurController.Cour_index);
 router.delete("/edit-cour/:id",professeurController.professeur_delete_Cour);
 
 
+//route pour getAllModuleByTeacherNote
+router.get("/ModulebyteacherNote",profMiddleware, professeurController.getAllModulesByTeacherNote);
+
+//router.get("/groupbyteacher",profMiddleware, professeurController.getAllGroupesByTeacher);
+
+//route pour getAllgroupByTeacherNote
+router.get("/groupbyteacherNote/:moduleName", profMiddleware, professeurController.getAllGroupesByTeacherNote);
+
+
+//route pour getAllModuleByTeacherAbsence
+router.get("/ModulebyteacherAbsence",profMiddleware, professeurController.getAllModulesByTeacherAbsence);
 
 
 
-//route pour getAllModuleByTeacher 
+//route pour getAllgroupByTeacherAbsence
+router.get("/groupbyteacherAbsence/:moduleName", profMiddleware, professeurController.getAllGroupesByTeacherAbsence);
 
-router.get("/Modulebyteachers",profMiddleware, professeurController.getAllModulesByTeacher);
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

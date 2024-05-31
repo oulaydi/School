@@ -4,6 +4,8 @@ const AddCour = require("../models/CourSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
 const AddGroup = require('../models/GroupSchema');
 const AddSeance = require('../models/SeanceSchema');
+
+
 const { deleteFile } = require('../middlewares/files');
 const path = require('path');
 const fs = require('fs');
@@ -28,6 +30,7 @@ const professeurLogin = async (req, res) => {
     let professeur;
     try {
         const { username, password } = req.body;
+        req.session.username = username;
         let errorType = "";
 
         if (!username || !password) {
@@ -36,16 +39,7 @@ const professeurLogin = async (req, res) => {
             professeur = await AddTeacher.findOne({ username });
 
 
-             // If user doesn't exist, create a new one
-        if (!professeur) {
-            // Create new user
-            const hashedPassword = await bcrypt.hash(password, 10);
-            professeur = new ProfesseurSchema({ username, password: hashedPassword });
-            await professeur.save();
-
-            req.flash("success", "تم إنشاء الحساب بنجاح.");
-            return res.redirect("/teacher");
-        }
+             
 
         const isPasswordValid = await bcrypt.compare(password, professeur.password);
         if (!isPasswordValid) {
@@ -74,7 +68,7 @@ const professeurLogin = async (req, res) => {
             default:
                 const profToken = jwt.sign({professeurId: professeur._id }, jwtSecret);
                 res.cookie("profToken", profToken, { httpOnly: true });
-                res.redirect("/Modulebyteachers");  
+                res.redirect("/ModulebyteacherNote");  
                 break;
         }
     } catch (error) {
@@ -237,28 +231,71 @@ const professeur_delete_Cour = async (req, res) => {
 };
 
 
-//getAllModules By Teacher
+//getAllModules By Teacher Note
 
-// Your controller function
-const getAllModulesByTeacher = async (req, res) => {
+
+const getAllModulesByTeacherNote = async (req, res) => {
     try {
         // Fetch the teacher based on username or any other unique identifier
-        // const user2= req.body.username;  
+        const auth_user= req.session.username;  
         // console.log(user2); 
-        const teacher = await AddTeacher.findOne({username : "my.samiri" }); // Assuming you pass the teacher's username in the request parameters
-        console.log(teacher);
+        const teacher = await AddTeacher.findOne({username : auth_user }); 
+       
         // If teacher is not found
         if (!teacher) {
             return res.status(404).json({ message: "Teacher not found" });
         }
 
-        // Fetch module with the same selected subject as the teacher
+        
         const seances = await AddSeance.find({ username: teacher.username });
-        console.log(seances);
-        // Send the groups as response
-        res.render('professeur/ModuleTeachers',{
+    
+        
+        res.render('professeur/ModuleTeachersNote',{
             title:'Module by Teachers OK',
             seances,
+            auth_user,
+
+           
+        })
+    } catch (err) {
+        
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
+
+//get all group By Teacher Note
+
+const getAllGroupesByTeacherNote = async (req, res) => {
+    try {
+   
+        const auth_user= req.session.username;  
+
+        const moduleName = req.params.moduleName;
+       
+
+       
+      
+        const teacher = await AddTeacher.findOne({username : auth_user }); 
+       
+        // If teacher is not found
+        if (!teacher) {
+            return res.status(404).json({ message: "Teacher not found" });
+        }
+
+     
+        const groupTeacher = await AddSeance.find({ username: teacher.username,name_module: moduleName })
+            //console.log('Groups found for module:', moduleName, groupTeacher);
+            
+
+    
+   
+        res.render('professeur/GroupTeachersNote',{
+            title: `Groups for Module: ${moduleName}`,
+            groupTeacher,
+            auth_user,
+
+           
         })
     } catch (err) {
         // Handle errors
@@ -267,6 +304,80 @@ const getAllModulesByTeacher = async (req, res) => {
     }
 }
 
+
+//get All Modules By Teacher Absence
+
+const getAllModulesByTeacherAbsence = async (req, res) => {
+    try {
+        // Fetch the teacher based on username or any other unique identifier
+        const auth_user= req.session.username;  
+        // console.log(user2); 
+        const teacher = await AddTeacher.findOne({username : auth_user }); 
+       
+        // If teacher is not found
+        if (!teacher) {
+            return res.status(404).json({ message: "Teacher not found" });
+        }
+
+        
+        const moudules = await AddSeance.find({ username: teacher.username });
+    
+        
+        res.render('professeur/moduleTeacherAbsence',{
+            title:'Module by Teachers OK',
+            moudules,
+            auth_user,
+
+           
+        })
+    } catch (err) {
+        
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
+
+
+//get All groups By Teacher Absence
+
+
+const getAllGroupesByTeacherAbsence = async (req, res) => {
+    try {
+   
+        const auth_user= req.session.username;  
+
+        const moduleName = req.params.moduleName;
+       
+
+       
+      
+        const teacher = await AddTeacher.findOne({username : auth_user }); 
+       
+        // If teacher is not found
+        if (!teacher) {
+            return res.status(404).json({ message: "Teacher not found" });
+        }
+
+     
+        const groupTeacherAbsence = await AddSeance.find({ username: teacher.username,name_module: moduleName })
+            //console.log('Groups found for module:', moduleName, groupTeacher);
+            
+
+    
+   
+        res.render('professeur/groupTeachersAbsence',{
+            title: `Groups for Module: ${moduleName}`,
+            groupTeacherAbsence,
+            auth_user,
+
+           
+        })
+    } catch (err) {
+        // Handle errors
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
 
 
 module.exports = {
@@ -277,8 +388,22 @@ module.exports = {
     professeur_getStudentInfo,
     professeur_getStudentResau,
     professeur_getBranch,
+
+    /*Filter By teacher */  
+
+    /* getAllModulesByTeacherNote*/
+    getAllModulesByTeacherNote,
+     /* getAllGroupesByTeacherNote*/
+    getAllGroupesByTeacherNote,
     
-    getAllModulesByTeacher,
+    /* getAllModulesByTeacherAbsence*/
+    getAllModulesByTeacherAbsence,
+    /* getAllGroupesByTeacherAbsence*/
+    getAllGroupesByTeacherAbsence,
+
+    
+
+
     professeur_get_Cour,
     professeur_Add_Cour,
     professeur_edit_Cour,

@@ -17,7 +17,7 @@ const SeanceSchema = new Schema({
     name_module: {
         type: String,
         required: true,
-       // unique: true,
+     //   unique: true,
     },
     name_group: {
         type: String,
