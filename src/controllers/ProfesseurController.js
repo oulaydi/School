@@ -25,6 +25,26 @@ const loginProfAuth = async (req, res) => {
         console.log(error);
     }
 };
+
+// directorDashboard
+const directorDashboard = async (req, res) => {
+    try {
+        const countCour = await AddCour.countDocuments();
+        const countStudent = await Student.countDocuments();
+        const countModule = await AddModule.countDocuments();
+
+        res.render("professeur/teacherDashboard",{
+            title: "الثلاميد",
+            countCour: countCour, 
+            countModule: countModule, 
+            countStudent: countStudent, 
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
 //find prof and login
 const professeurLogin = async (req, res) => {
     let professeur;
@@ -68,7 +88,7 @@ const professeurLogin = async (req, res) => {
             default:
                 const profToken = jwt.sign({professeurId: professeur._id }, jwtSecret);
                 res.cookie("profToken", profToken, { httpOnly: true });
-                res.redirect("/ModulebyteacherNote");  
+                res.redirect("/teacherDashboard");  
                 break;
         }
     } catch (error) {
@@ -141,6 +161,10 @@ const professeur_get_Cour = async (req, res) => {
         console.log(error);
     }
 };
+
+
+
+
 const professeur_Add_Cour = async (req, res) => {
     try {
         const { name_cour, module } = req.body;
@@ -236,6 +260,7 @@ const professeur_delete_Cour = async (req, res) => {
 
 const getAllModulesByTeacherNote = async (req, res) => {
     try {
+       
         // Fetch the teacher based on username or any other unique identifier
         const auth_user= req.session.username;  
         // console.log(user2); 
@@ -388,22 +413,18 @@ module.exports = {
     professeur_getStudentInfo,
     professeur_getStudentResau,
     professeur_getBranch,
-
-    /*Filter By teacher */  
-
-    /* getAllModulesByTeacherNote*/
-    getAllModulesByTeacherNote,
-     /* getAllGroupesByTeacherNote*/
-    getAllGroupesByTeacherNote,
-    
-    /* getAllModulesByTeacherAbsence*/
-    getAllModulesByTeacherAbsence,
-    /* getAllGroupesByTeacherAbsence*/
+    // professeur_Add_grade,
+    directorDashboard,
+    //filetr 
     getAllGroupesByTeacherAbsence,
+    getAllModulesByTeacherAbsence,
+    getAllGroupesByTeacherNote,
+    getAllModulesByTeacherNote,
 
-    
 
 
+
+    //couurs
     professeur_get_Cour,
     professeur_Add_Cour,
     professeur_edit_Cour,

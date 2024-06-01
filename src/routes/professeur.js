@@ -16,6 +16,15 @@ router.get("/logoutProf", professeurController. professeur_logout,);
 //get all branches*/
 router.get("/GroupTeachers",profMiddleware, professeurController.professeur_getBranch);
 
+
+//get teacher's main dashboard*/
+router.get("/teacherDashboard", professeurController.directorDashboard);
+
+
+
+
+
+
 // router.get("/GroupTeachers",profMiddleware, professeurController.getGroups);
 
 //filtrage brancheInfo
