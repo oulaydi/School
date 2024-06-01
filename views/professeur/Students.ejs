@@ -31,7 +31,7 @@
             </div>
         </div>
 
-    <% if (Students.length > 0) { %>
+    <% if (StudentGroup.length > 0) { %>
     <table class="table table-bordered w-75" id="center-container" dir="rtl">
         <thead class="thead-dark">
             <tr class="text-center">
@@ -39,24 +39,25 @@
                 <th scope="col">رقم التلميد(ة)</th>
                 <th scope="col">الإسم الكامل</th>
                 <th scope="col">username</th>
-                <th scope="col">البريد الالكتروني</th>
                 <th scope="col"> Groupe </th>
                 <th scope="col"> اجراء</th>
             </tr>
         </thead>
         <!-- Displaying the values -->
         <tbody class="table-group-divider">
-            <% Students.forEach(Student => { %>
+            <% StudentGroup.forEach(Student => { %>
                 <tr class="text-center">
-                                            <td class="info"><%= Student.INE %></td>
-                                            <td class="info"><%= Student.name_student %></td>
-                                            <td class="info"><%= Student.username %></td>
-                                            <td class="info"><%= Student.email %></td>
-                                            <td class="info"><%= Student.name_group %></td>
+                             <td class="info"><%= Student.INE %></td>
+                             <td class="info"><%= Student.name_student %></td>
+                             <td class="info"><%= Student.username %></td>
+                             <td class="info"><%= Student.name_group %></td>
                                         
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
                             <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-student/<%= Student._id %>">تحديث</a>
+                        </button>
+                        <button type="button" class="btn btn-warning">
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/add-grades">Ajouter</a>
                         </button>
                         <form action="/edit-student/<%= Student._id %>?_method=DELETE" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-danger">

@@ -139,10 +139,9 @@ justify-content: space-around;
         </div>
        
           <% if (groupTeacher.length > 0) { %>
-         
                   <% groupTeacher.forEach(group => { %>
                  
-                    <div class="card">
+                    <div class="card" onclick="redirectToGroup('<%= group.name_group %>')">
                       <p class="card-title">Group Name</p>
                         <p class="small-desc" name="name_group">
                           <%= group.name_group %>
@@ -155,9 +154,13 @@ justify-content: space-around;
                       </div>
        
           
-                   
                   <% }); %>
-               
+                  <script>
+                    function redirectToGroup(groupName) {
+                        const encodedGroupName = encodeURIComponent(groupName);
+                        window.location.href = '/studentsbygroupsNote/' + encodedGroupName;
+                    }
+                </script>
           <% } else { %>
               <div class="text-center mt-4">
                   <p>.لا يوجد اي بببب(ة)</p>

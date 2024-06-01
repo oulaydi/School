@@ -4,6 +4,8 @@ const AddCour = require("../models/CourSchema");
 const AddTeacher = require("../models/AddTeacherSchema");
 const AddGroup = require('../models/GroupSchema');
 const AddSeance = require('../models/SeanceSchema');
+const AddGrade = require('../models/GradeSchema');
+const AddStudent =require('../models/StudenteSchema');
 
 
 const { deleteFile } = require('../middlewares/files');
@@ -103,52 +105,7 @@ const professeur_logout = (req, res) => {
     res.redirect("/teacher");
 };
 
-
-
-
-
-/*get prof all branches  */
-const professeur_getBranch = async (req, res) => {
-    try {
-        const groups = await AddGroup.find({}, 'name_group'); // Récupère uniquement le champ name_group
-        res.render('professeur/GroupTeachers',
-        {  
-            title: "إضافة تلميد(ة)",
-            groups,
-        }
-    ); // Passe les sujets à la vue
-    } catch (error) {
-        res.status(500).send({ message: 'Error retrieving groups' });
-    }
-};
-
-/*get prof  brancheInfo  */
-const professeur_getStudentInfo = async (req, res) => {
-    try {
-        const studentinfo = await Student.find({ select_group: 'INFO2 23-24' });
-        res.render("professeur/brancheInfo", {
-            title: "الثلاميد",
-            studentinfo,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-
-/*get prof  brancheResau */
-const professeur_getStudentResau = async (req, res) => {
-    try {
-  
-        const studentresau = await Student.find({ select_group : 'DevOp2 23-24'  });
-        res.render("professeur/BrancheReasau", {
-            title: "الثلاميد",
-            studentresau,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
+/**************Cours*************/
 
 const professeur_get_Cour = async (req, res) => {
     try {
@@ -161,9 +118,6 @@ const professeur_get_Cour = async (req, res) => {
         console.log(error);
     }
 };
-
-
-
 
 const professeur_Add_Cour = async (req, res) => {
     try {
@@ -298,29 +252,24 @@ const getAllGroupesByTeacherNote = async (req, res) => {
 
         const moduleName = req.params.moduleName;
        
-
-       
       
         const teacher = await AddTeacher.findOne({username : auth_user }); 
+       
        
         // If teacher is not found
         if (!teacher) {
             return res.status(404).json({ message: "Teacher not found" });
         }
-
      
         const groupTeacher = await AddSeance.find({ username: teacher.username,name_module: moduleName })
             //console.log('Groups found for module:', moduleName, groupTeacher);
             
-
-    
    
         res.render('professeur/GroupTeachersNote',{
             title: `Groups for Module: ${moduleName}`,
             groupTeacher,
             auth_user,
-
-           
+    
         })
     } catch (err) {
         // Handle errors
@@ -373,9 +322,6 @@ const getAllGroupesByTeacherAbsence = async (req, res) => {
 
         const moduleName = req.params.moduleName;
        
-
-       
-      
         const teacher = await AddTeacher.findOne({username : auth_user }); 
        
         // If teacher is not found
@@ -386,16 +332,43 @@ const getAllGroupesByTeacherAbsence = async (req, res) => {
      
         const groupTeacherAbsence = await AddSeance.find({ username: teacher.username,name_module: moduleName })
             //console.log('Groups found for module:', moduleName, groupTeacher);
-            
-
-    
    
         res.render('professeur/groupTeachersAbsence',{
             title: `Groups for Module: ${moduleName}`,
             groupTeacherAbsence,
             auth_user,
+   
+        })
+    } catch (err) {
+        // Handle errors
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
 
-           
+//get All Students By Group
+const getAllStudentsByGroups = async (req, res) => {
+    try {
+   
+        const auth_user= req.session.username;  
+
+        const groupName = req.params.groupName;
+       
+        const teacher = await AddTeacher.findOne({username : auth_user }); 
+       
+        // If teacher is not found
+        if (!teacher) {
+            return res.status(404).json({ message: "Teacher not found" });
+        }
+     
+        const StudentGroup = await AddStudent.find({ name_group: groupName })
+            //console.log('Groups found for module:', moduleName, groupTeacher);
+    
+        res.render('professeur/Students',{
+            title: `Students for Group : ${groupName}`,
+            StudentGroup,
+            auth_user,
+    
         })
     } catch (err) {
         // Handle errors
@@ -405,30 +378,123 @@ const getAllGroupesByTeacherAbsence = async (req, res) => {
 }
 
 
+/********************GRADES**************/
+    /*getAllGrades*/
+    const professeur_getGrades = async (req, res) => {
+        try {
+            const Grades = await AddGrade.find().sort({ createdAt: -1 });
+            res.render("professeur/Grades", {
+                title: "الثلاميد",
+                Grades,
+            });
+           
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
+       /*add_grade  pour get view form */
+       const professeur_Add_Grade = async (req, res) => {
+        try {
+            res.render("professeur/add-grades", {
+                title: "إضافة تلميد(ة)",
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
+     /*add_grade  methode post store une bd */
+     const professeur_add_grade = async (req, res) => {
+        try {
+            const {
+                name_module, username, grade_normal, grade_partiel, grade_final,decision  } = req.body;
+    
+            const newGrade = AddGrade({
+                name_module, username, grade_normal, grade_partiel, grade_final,decision});
+    
+            await AddGrade.create(newGrade);
+            req.flash("success","grade has been saved successfully!");
+            res.render('professeur/add-grades',{
+                messages:req.flash()
+            });
+            res.redirect("/grades");
+            
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    };
+    /*edit_grade */
+    
+    const  professeur_edit_grade = async (req, res) => {
+        try {
+          const {grade_normal, grade_partiel} = req.body;
+      
+          // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
+          const updateObject = {};
+            if (grade_normal) updateObject.grade_normal = grade_normal;
+            if (grade_partiel) updateObject.grade_partiel = grade_partiel;
+      
+          await AddGrade.findByIdAndUpdate(req.params.id, updateObject);
+    
+          res.redirect("/Grades");
+        } catch (error) {
+          console.log(error);
+        }
+    };
+    
+    // edit_grade_with_ID
+    const professeur_edit_grade_id = async (req, res) => {
+        try {
+            const gradeinfo = await AddGrade.findOne({ _id: req.params.id });
+            res.render("admin/edit-grade", {
+                gradeinfo,
+                title: "تحديث تلميد(ة)",           
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
+    // delete_grade
+    const professeur_delete_grade = async (req, res) => {
+        try {
+            await AddGrade.deleteOne({ _id: req.params.id });
+            res.redirect("/Grades");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+
 module.exports = {
     //auth
     loginProfAuth,
     professeurLogin,
     professeur_logout,
-    professeur_getStudentInfo,
-    professeur_getStudentResau,
-    professeur_getBranch,
-    // professeur_Add_grade,
     directorDashboard,
-    //filetr 
+    //filtre
     getAllGroupesByTeacherAbsence,
     getAllModulesByTeacherAbsence,
     getAllGroupesByTeacherNote,
     getAllModulesByTeacherNote,
+    getAllStudentsByGroups,
 
-
-
-
-    //couurs
+    //cours
     professeur_get_Cour,
     professeur_Add_Cour,
     professeur_edit_Cour,
     professeur_edit_Cour_id,
     Cour_index,
     professeur_delete_Cour,
+
+    //grades
+    professeur_getGrades,
+    professeur_Add_Grade,
+    professeur_add_grade,
+    professeur_edit_grade,
+    professeur_edit_grade_id,
+    professeur_delete_grade,
 };
