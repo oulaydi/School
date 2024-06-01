@@ -24,19 +24,19 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="ModulebyteacherAbsence">
 					<i class='bx bxs-info-circle'></i>
 					<span class="text">Absences</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="/add-cour">
 					<i class='bx bx-book'></i>
 					<span class="text">Cours</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="/ModulebyteacherNote">
 					<i class='bx bxs-edit'></i>
 					<span class="text">Notes</span>
 				</a>
@@ -98,7 +98,7 @@
 						</li>
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
+				<a href="/add-cour" class="btn-download">
 					<i class='bx bxs-cloud-upload'></i>
 					<span class="text">Ajouter un cours</span>
 				</a>
@@ -108,22 +108,22 @@
 				<li>
 					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
-						<h3>34</h3>
-						<p>Cours</p>
+						<h3><%= countCour %></h3>
+						<p>cours</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>102</h3>
+						<h3><%=countStudent %></h3>
 						<p>Étudiants</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-info-circle'></i>
 					<span class="text">
-						<h3>43</h3>
-						<p>Absences</p>
+						<h3><%= countModule %></h3>
+						<p>Modules</p>
 					</span>
 				</li>
 			</ul>
