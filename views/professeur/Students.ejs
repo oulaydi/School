@@ -40,24 +40,31 @@
                 <th scope="col">الإسم الكامل</th>
                 <th scope="col">username</th>
                 <th scope="col"> Groupe </th>
+                <th scope="col">Module Name</th>
                 <th scope="col"> اجراء</th>
             </tr>
         </thead>
         <!-- Displaying the values -->
         <tbody class="table-group-divider">
             <% StudentGroup.forEach(Student => { %>
+                <% groupTeacher.forEach(groupteacher => { %>    
                 <tr class="text-center">
                              <td class="info"><%= Student.INE %></td>
                              <td class="info"><%= Student.name_student %></td>
                              <td class="info"><%= Student.username %></td>
                              <td class="info"><%= Student.name_group %></td>
+                                      
+                             <td class="info"><%= groupteacher.name_module %></td>
+                         
+                             
+                             
                                         
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
                             <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-student/<%= Student._id %>">تحديث</a>
                         </button>
-                        <button type="button" class="btn btn-warning">
-                            <a class="fw-semibold text-decoration-none link-light py-3" href="/add-grades">Ajouter</a>
+                        <button id="ajouter-button" type="button" class="btn btn-warning" onclick="redirectToGrades('<%= Student.username %>','<%= groupteacher.name_module %>')" >
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/add-grade/:usernameGrade/:moduleGrade" >Ajouter</a>
                         </button>
                         <form action="/edit-student/<%= Student._id %>?_method=DELETE" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-danger">
@@ -66,9 +73,19 @@
                         </form>
                     </td>
                 </tr>
+                <% }); %>
             <% }); %>
         </tbody>
     </table>
+
+    <script>
+        function redirectToGrades(usernameGrade,moduleGrade) {
+            const encodedUsernameGrade = encodeURIComponent(usernameGrade);
+            const encodedModuleGrade = encodeURIComponent(moduleGrade);
+
+            window.location.href = `/add-grade/${encodedUsernameGrade}/${encodedModuleGrade}`;
+        }
+    </script>
     <% } else { %>
         <div class="text-center mt-4">
             <p>.لا يوجد اي بببب(ة)</p>
