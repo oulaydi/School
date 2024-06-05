@@ -779,11 +779,13 @@ const director_Add_Schedule = async (req, res) => {
         const rooms = await AddRoom.find({}, 'name_room'); 
         const groups = await AddGroup.find({}, 'name_group');
         const modules = await AddModule.find({}, 'name_module');
+        const sences = await AddSeance.find({}, 'name_seance');
         res.render("admin/add-schedule", {
             title: "إضافة تلميد(ة)",
             rooms,
             groups,
             modules,
+            sences,
         });
     } catch (error) {
         console.log(error);
@@ -839,6 +841,7 @@ const director_getSchedules = async (req, res) => {
 
 const director_edit_schedule = async (req, res) => {
     try {
+        
       const { selected_Hour, selected_day, selected_room,name_seance} = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
@@ -860,12 +863,14 @@ const director_edit_schedule = async (req, res) => {
 // director_editSchedule_with_ID
 const director_edit_schedule_id = async (req, res) => {
     try {
+        const sences = await AddSeance.find({}, 'name_seance');
         const rooms = await AddRoom.find({}, 'name_room'); 
         const scheduleinfo = await AddSchedule.findOne({ _id: req.params.id });
         res.render("admin/edit-schedule", {
             scheduleinfo,
             title: "تحديث تلميد(ة)",
             rooms,
+            sences,
         });
     } catch (error) {
         console.log(error);

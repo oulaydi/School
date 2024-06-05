@@ -21,17 +21,17 @@
           <div class="alert alert-danger"><%= messages.error %></div>
       <% } %>
       <div>
-        <h3 id="h4"> Ajouter Module </h3>
+        <h3 id="h4">الفضاء الخاص بالاستاد</h3>
       </div>
      <a href="/cour" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button></a> 
      <div class="container my-5" dir="rtl">
           <form method="POST"  action="/edit-cour/<%= CourInfo._id %>?_method=PUT" class="row g-3" autocomplete="off">
             <div class="col-md-6">
-              <label class="form-label cus-label" > Nom du Module </label><span> :</span>
+              <label class="form-label cus-label" > الدرس </label><span> :</span>
               <input type="text"  value="<%= CourInfo.name_cour %>" name="name_cour" required placeholder="اسم المادة" id="input-field" class="form-control">
             </div>
             <div class="col-md-6">
-              <label class="form-label cus-label" > Nom du Module </label><span> :</span>
+              <label class="form-label cus-label" >الوحدة</label><span> :</span>
               <select class="form-select" value="<%= CourInfo.module %>" aria-label="Default select example" id="input-field" name="module">
                 <% Modules.forEach(Module => { %>
                     <option value="<%= Module.name_module %>"><%= Module.name_module %></option>

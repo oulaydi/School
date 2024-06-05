@@ -133,10 +133,10 @@
     
   
 
-        <div class="cards">
+        <div dir="rtl" class="cards">
           <% moudules.forEach(moudule => { %>
               <div class="card" onclick="redirectToModule('<%= moudule.name_module %>')">
-                  <p class="card-title">Name Module</p>
+                  <p class="card-title">الوحدة</p>
                   <p class="small-desc" name="name_module"><%= moudule.name_module %></p>
                   <div class="go-corner">
                       <div class="go-arrow">→</div>

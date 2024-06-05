@@ -6,6 +6,8 @@ const AddGroup = require('../models/GroupSchema');
 const AddSeance = require('../models/SeanceSchema');
 const AddGrade = require('../models/GradeSchema');
 const AddStudent =require('../models/StudenteSchema');
+const Schedule =require('../models/ScheduleSchema');
+
 
 
 const { deleteFile } = require('../middlewares/files');
@@ -31,6 +33,24 @@ const loginProfAuth = async (req, res) => {
 // directorDashboard
 const directorDashboard = async (req, res) => {
     try {
+
+        const teacherInfo  = await AddTeacher.findById(req.params.id).select("-password")
+      
+
+        //pour affiche obligatoir pass params -------------------------------------
+
+           const auth_user = req.session.username;
+            // Find the teacher by username
+            const teacher = await AddTeacher.findOne({ username: auth_user }); 
+          //search all seance teacher
+          const seances = await AddSeance.find({ username: teacher.username });
+          //get all sence by prof in array
+           const seanceNames = seances.map(seance => seance.name_seance);
+          //search i shema  Schedule  name_seance inside array above (seanceNames)
+           const emploi = await Schedule.find({ name_seance: { $in: seanceNames } });
+
+           //--------------------------------------------------------------------
+
         const countCour = await AddCour.countDocuments();
         const countStudent = await Student.countDocuments();
         const countModule = await AddModule.countDocuments();
@@ -40,6 +60,9 @@ const directorDashboard = async (req, res) => {
             countCour: countCour, 
             countModule: countModule, 
             countStudent: countStudent, 
+            emploi,
+            teacher,
+            teacherInfo,
         });
     } catch (error) {
         console.log(error);
@@ -467,6 +490,57 @@ const getAllStudentsByGroups = async (req, res) => {
         }
     };
 
+    //get emploi by teacher
+
+    const professeur_Get_Emploi = async (req, res) => {
+        try {
+            const auth_user = req.session.username;
+    
+            // Find the teacher by username
+            const teacher = await AddTeacher.findOne({ username: auth_user });
+    
+            // If teacher is not found
+            if (!teacher) {
+                return res.status(404).json({ message: "Teacher not found" });
+            }
+    
+     //search all seance teacher
+            const seances = await AddSeance.find({ username: teacher.username });
+    
+         //get all sence by prof in array
+            const seanceNames = seances.map(seance => seance.name_seance);
+    
+           //search i shema  Schedule  name_seance inside array above (seanceNames)
+            const emploi = await Schedule.find({ name_seance: { $in: seanceNames } });
+    
+            res.render('professeur/schedules', {
+                title: "الزمن استعمال",
+                emploi,
+                auth_user,
+            });
+    
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    };
+
+    const profileTeacher = async (req, res) => {
+        try {
+            const teacherInfo  = await AddTeacher.findById(req.params.id).select("-password")
+         
+            res.render("professeur/parametre", {
+                teacherInfo,
+               
+               title: " حسابي"
+               
+           });
+           } catch (error) {
+             console.log(error);
+           }
+    };
+
+
 
 
 module.exports = {
@@ -475,6 +549,10 @@ module.exports = {
     professeurLogin,
     professeur_logout,
     directorDashboard,
+
+    //profile teacher
+    profileTeacher,
+
     //filtre
     getAllGroupesByTeacherAbsence,
     getAllModulesByTeacherAbsence,
@@ -497,4 +575,9 @@ module.exports = {
     professeur_edit_grade,
     professeur_edit_grade_id,
     professeur_delete_grade,
+
+
+    //emploi
+
+    professeur_Get_Emploi,
 };

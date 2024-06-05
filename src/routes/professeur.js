@@ -74,6 +74,22 @@ router.get("/studentsbygroupsNote/:groupName", profMiddleware, professeurControl
 
 router.get("/add-grade", profMiddleware, professeurController.professeur_Add_Grade);
 
+router.get("/edit-grade", profMiddleware, (req,res)=>{
+    res.json({edit:"edit userll"})
+});
+
+
+
+//emploi by teacher
+
+router.get("/Emploi", profMiddleware, professeurController.professeur_Get_Emploi);
+
+
+
+router.get("/profileTeacher/:id",profMiddleware , professeurController.profileTeacher);
+
+
+
 
 
 
