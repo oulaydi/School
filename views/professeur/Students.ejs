@@ -41,28 +41,35 @@
             <table class="table table-striped table-bordered" dir="rtl">
                 <thead class="thead-dark">
                 <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
-                <th style="text-align: center;" scope="col">رقم التلميد(ة)</th>
-                <th style="text-align: center;" scope="col">الإسم الكامل</th>
-                <th style="text-align: center;" scope="col">اسم المستحدم</th>
-                <th style="text-align: center;" scope="col"> المجموعة </th>
-                <th style="text-align: center;" scope="col"> اجراء</th>
+                <th scope="col">رقم التلميد(ة)</th>
+                <th scope="col">الإسم الكامل</th>
+                <th scope="col">اسم المستخدم</th>
+                <th scope="col"> المجموعة </th>
+                <th scope="col">الوحدة</th>
+                <th scope="col"> اجراء</th>
             </tr>
         </thead>
         <!-- Displaying the values -->
         <tbody class="table-group-divider">
             <% StudentGroup.forEach(Student => { %>
+                <% groupTeacher.forEach(groupteacher => { %>    
                 <tr class="text-center">
-                             <td class="table-info"><%= Student.INE %></td>
-                             <td class="table-info"><%= Student.name_student %></td>
-                             <td class="table-info"><%= Student.username %></td>
-                             <td class="table-info"><%= Student.name_group %></td>
+                             <td class="info" ><%= Student.INE %></td>
+                             <td class="info"><%= Student.name_student %></td>
+                             <td class="info"><%= Student.username %></td>
+                             <td class="info"><%= Student.name_group %></td>
+                                      
+                             <td class="info"><%= groupteacher.name_module %></td>
+                         
+                             
+                             
                                         
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
                             <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-grade/<%= Student.username %>">تحديث</a>
                         </button>
-                        <button type="button" class="btn btn-warning">
-                            <a class="fw-semibold text-decoration-none link-light py-3" href="/add-grade">Ajouter</a>
+                        <button id="ajouter-button" type="button" class="btn btn-warning" onclick="redirectToGrades('<%= Student.username %>','<%= groupteacher.name_module %>')" >
+                            <a class="fw-semibold text-decoration-none link-light py-3"  >Ajouter</a>
                         </button>
                         <form action="/edit-student/<%= Student._id %>?_method=DELETE" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-danger">
@@ -71,10 +78,19 @@
                         </form>
                     </td>
                 </tr>
+                <% }); %>
             <% }); %>
         </tbody>
     </table>
 
+    <script>
+        function redirectToGrades(usernameGrade,moduleGrade) {
+            const encodedUsernameGrade = encodeURIComponent(usernameGrade);
+            const encodedModuleGrade = encodeURIComponent(moduleGrade);
+
+            window.location.href = `/add-grade/${encodedUsernameGrade}/${encodedModuleGrade}`;
+        }
+    </script>
     <% } else { %>
         <div class="text-center mt-4">
             <p>.لا يوجد اي بببب(ة)</p>

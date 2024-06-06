@@ -67,12 +67,12 @@ router.get("/ModulebyteacherAbsence",profMiddleware, professeurController.getAll
 router.get("/groupbyteacherAbsence/:moduleName", profMiddleware, professeurController.getAllGroupesByTeacherAbsence);
 
 //route pour getAllStudentsByGroups
-router.get("/studentsbygroupsNote/:groupName", profMiddleware, professeurController.getAllStudentsByGroups);
+router.get("/studentsbygroupsNote/:groupName/:moduleName", profMiddleware, professeurController.getAllStudentsByGroups);
 
 
 //Grades
 
-router.get("/add-grade", profMiddleware, professeurController.professeur_Add_Grade);
+router.get("/add-grade/:usernameGrade/:moduleGrade", profMiddleware, professeurController.professeur_Add_Grade);
 
 router.get("/edit-grade", profMiddleware, (req,res)=>{
     res.json({edit:"edit userll"})

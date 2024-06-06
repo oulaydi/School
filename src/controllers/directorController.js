@@ -7,6 +7,7 @@ const AddModule = require("../models/ModuleSchema");
 const AddRoom = require("../models/RoomSchema");
 const AddSchedule= require('../models/ScheduleSchema');
 const AddSeance = require('../models/SeanceSchema');
+const AddCour = require('../models/CourSchema');
 
 const bcrypt = require("bcrypt");
 const jwtSecret = process.env.jwtSecret;
@@ -76,11 +77,25 @@ const director_login = async (req, res) => {
 
 // director_index
 const director_index = async (req, res) => {
+
+   
+    
+
     try {
+        const countCour = await AddCour.countDocuments();
+        const countStudent = await AddStudent.countDocuments();
+        const countModule = await AddModule.countDocuments();
+        const director = await DirectorSchema.findOne({},"username");
+        console.log(director)
         const teachers = await AddTeacher.find().sort({ createdAt: -1 });
+       
         res.render("admin/dashboard", { // change the path, was /director
             title: "الرئيسية - لوحة القيادة",
             teachers,
+            countCour,
+            countStudent,
+            countModule,
+            director,
         });
        
     } catch (error) {
@@ -158,14 +173,14 @@ const director_add = async (req, res) => {
 
         await AddTeacher.create(newTeacher);
         req.flash("success","Teacher has been saved successfully!");
-        res.render('admin/add-teacher',{
+        res.render('admin/Teachers',{
             title: "الرئيسية - لوحة القيادة",
             messages:req.flash()
         });
         /*res.render("/admin/director", {
             err1_msg: "Teacher has been saved successfully!"
         });*/
-        res.redirect("/Teachers");
+        res.redirect("/teachers");
         
     } catch (error) {
         console.log(error);
@@ -213,12 +228,14 @@ const director_edit = async (req, res) => {
 // director_edit_with_ID
 const director_edit_id = async (req, res) => {
     try {
+        const rooms = await AddRoom.find();
         const subjects = await AddSubject.find({}, 'name_subject');
         const teacherInfo = await AddTeacher.findOne({ _id: req.params.id });
         res.render("admin/edit-teacher", {
             teacherInfo,
             title: "تحديث استاذ(ة)",
-            subjects
+            subjects, 
+            rooms,
             
         });
     } catch (error) {
@@ -366,9 +383,11 @@ const director_add_module = async (req, res) => {
 };
 // director_add_module
 const director_getModule = async (req,res)=>{
+    const teachers =   await AddTeacher.find().sort({createdAt:-1});
     try{
         res.render('admin/add-Module',{
         title: "الفضاء الخاص - الاداره",
+        teachers,
         messages: req.flash()
         }
         );
@@ -544,8 +563,10 @@ const director_Add_group = async (req, res) => {
 /*add_group  methode post store une bd */
 const director_add_group = async (req, res) => {
     try {
+
         const {
             name_group, selected_level,selected_saison,capacity_group,select_subject } = req.body;
+            
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
@@ -555,6 +576,7 @@ const director_add_group = async (req, res) => {
         await AddGroup.create(newGroup);
         req.flash("success","Group has been saved successfully!");
         res.render('admin/add-group',{
+          
             messages:req.flash()
         });
         /*res.render("/admin/director", {

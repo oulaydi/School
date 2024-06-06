@@ -7,7 +7,7 @@ const SeanceSchema = new Schema({
     name_seance: {
         type: String,
         required: true,
-        unique: true,
+       
     },
     username: {
         type: String,

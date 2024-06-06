@@ -19,7 +19,7 @@ const ScheduleSchema = new Schema({
     name_seance :{
         type: String,
         required: true,
-        unique :true,
+      
     },
 
     createdAt: { type: Date, default: Date.now },

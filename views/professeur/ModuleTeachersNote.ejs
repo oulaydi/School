@@ -135,7 +135,7 @@
 
 
 
-        <div class="card" onclick="redirectToModule('<%= seance.name_module %>')">
+        <div class="card" onclick="redirectToGroups('<%= seance.name_module %>')">
             <p class="card-title">الوحدة </p>
             <p class="small-desc" name="name_module"><%= seance.name_module %></p>
             <div class="go-corner">
@@ -147,7 +147,7 @@
 
     
     <script>
-        function redirectToModule(moduleName) {
+        function redirectToGroups(moduleName) {
             const encodedModuleName = encodeURIComponent(moduleName);
             window.location.href = '/groupbyteacherNote/' + encodedModuleName;
         }
