@@ -1,35 +1,45 @@
-
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <%- include('partials/head.ejs') %>
-        <link rel="stylesheet" href="css/student.css" />
-    </head>
-    <body>
-        <!-- Logo -->
-        <%- include('./partials/header.ejs') %>
-        <!-- Logo Ends -->
-        <div class="containe">
-            <div class="title">
-                <h2>اختر الموسم الدراسي</h2>
-            </div>
-            <div class="dropdown">
-                <div class="select">
-                    <span class="selected">الموسم الدراسي</span>
-                    <div class="caret"></div>
-                </div>
-                <ul class="menu">
-                    <li>2020/2021</li>
-                    <li>2021/2022</li>
-                    <li>2022/2023</li>
-                    <li class="active">2023/2024</li>
-                    <li>2024/2025</li>
-                </ul>
-            </div>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/student.css">
+	<title>تسجيل الدخول</title>
+</head>
+<body>
+	<img class="wave" src="images/wave.png">
+	<div class="container">
+		<div class="img">
+			<img src="images/bg.svg">
+		</div>
+		<div class="login-content">
+			<form action="#" dir="rtl">
+				<img src="images/avatar.svg">
+				<h2 class="title">الفضاء الخاص بالتلاميذ</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>اسم المستخدم</h5>
+           		   		<input type="text" class="input">
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>كلمة المرور</h5>
+           		    	<input type="password" class="input">
+            	   </div>
+            	</div>
+            	<a href="#">نسيت كلمة المرور؟</a>
+            	<input type="submit" class="btn" value="تسجيل الدخول">
+            </form>
         </div>
-        <!-- footer -->
-        <%- include('./partials/footer.ejs') %>
-        <!-- footer ends -->
-        <script src="js/dropdown.js"></script>
-    </body>
+    </div>
+    <script type="text/javascript" src="js/student.js"></script>
+</body>
 </html>
