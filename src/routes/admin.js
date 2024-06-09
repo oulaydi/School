@@ -3,6 +3,12 @@ const router = express.Router();
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const directorController = require("../controllers/directorController");
 
+
+router.get("/student", (req, res) => {
+    res.render("student");
+});
+
+
 /******************Admin************************/
 /**
  * GET /
