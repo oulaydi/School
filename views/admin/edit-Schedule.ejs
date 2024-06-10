@@ -22,7 +22,7 @@
      <div class="container my-5" dir="rtl">
       <form method="POST" action="/edit-schedule/<%= scheduleinfo._id %>?_method=PUT" class="row g-3" autocomplete="off">
             <div class="col-md-6">
-              <label class="form-label cus-label"> Salle </label><span> :</span>
+              <label class="form-label cus-label"> القاعة </label><span> :</span>
               <select class="form-select" aria-label="Default select example" id="input-field" name="selected_room">
                 <% rooms.forEach(room => { %>
                   <option value="<%= room.name_room %>"><%= room.name_room %></option>
@@ -30,7 +30,7 @@
               </select>
             </div>
             <div class="col-md-6">
-              <label class="form-label cus-label"> Heure </label><span> :</span>
+              <label class="form-label cus-label"> الساعة </label><span> :</span>
               <select class="form-select" aria-label="Default select example" id="input-field" name="selected_Hour">
                 <option value="9.00-10.30" <%= scheduleinfo.selected_Hour === '9.00-10.30' ? 'selected' : '' %>> 9.00-10.30</option>
                 <option value="10.30-12.00" <%= scheduleinfo.selected_Hour === '10.30-12.00' ? 'selected' : '' %>> 10.30-12.00</option>
@@ -41,13 +41,24 @@
               </select>
             </div>
             <div class="col-md-6">
-              <label class="form-label cus-label"> Jour </label><span> :</span>
+              <label class="form-label cus-label"> اليوم </label><span> :</span>
               <select class="form-select" aria-label="Default select example" id="input-field" name="selected_day">
                 <option value="Lundi" <%= scheduleinfo.selected_day === 'Lundi' ? 'selected' : '' %>> Lundi</option>
                 <option value=" Mardi" <%= scheduleinfo.selected_day === 'Mardi' ? 'selected' : '' %>> Mardi</option>
                 <option value=" Mercredi" <%= scheduleinfo.selected_day === 'Mercredi' ? 'selected' : '' %>> Mercredi</option>
                 <option value=" Jeudi" <%= scheduleinfo.selected_day === 'Jeudi' ? 'selected' : '' %>> Jeudi</option>
                 <option value=" Vendredi " <%= scheduleinfo.selected_day === 'Vendredi' ? 'selected' : '' %>> Vendredi</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label cus-label"> الحصة </label><span> :</span>
+              <select class="form-select" aria-label="Default select example" id="input-field" name="name_seance">
+                <% sences.forEach(sence => { %>
+                  <option value="<%= sence.name_seance %>"><%= sence.name_seance %></option>
+              <% }) %>
+              
+
               </select>
             </div>
             <div class="custom-control custom-checkbox">

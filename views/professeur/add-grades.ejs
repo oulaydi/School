@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs') %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/public/css/forms.css" />
+    <link rel="stylesheet" href="/css/student.css" />
+    <link rel="stylesheet" href="/css/add-teacher.css" />
+</head>
+<body>
+    <!-- Header -->    
+    <%- include('../partials/header.ejs') %>
+    <!-- Header Ends!! -->
+    <div class="center-container">
+        <p><%= messages.success %></p>
+        <div>
+            <h3 id="h4">Ajouter Notes</h3>
+        </div>
+        <a href="/director" title="إلفاء" id="cancel" class="mt-5">
+            <button type="button" class="btn-close" aria-label="Close" style="margin-left: 13px;"></button>
+        </a>
+        <div class="container my-5" dir="rtl">
+            <form action="/add-grade" class="row g-3" autocomplete="off" method="POST">
+              <div class="col-md-6">
+                <% let moduleRendered = false; %>
+                <% ModuleStudent.forEach(module => { %>  
+                  <% if (!moduleRendered) { %>
+                    <label class="form-label cus-label">nom module</label><span> :</span>
+                    <input type="text" name="name_module" value="<%= module.name_module %>" required placeholder="اسم المادة" id="name_module" class="form-control">
+                    <% moduleRendered = true; %>
+                  <% } %>
+                <% }); %>
+              </div>
+                <div class="col-md-6">
+                    <label class="form-label cus-label">username</label><span> :</span>
+                    <% StudentGrade.forEach(student => { %>
+                        <input type="text" name="username" value="<%= student.username %>" required placeholder="اسم المستخدم" id="username" class="form-control">
+                    <% }); %>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label cus-label">Note examen</label><span> :</span>
+                    <input type="text" name="grade_normal" required placeholder="اسم المادة" id="grade_normal" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label cus-label">Note Partiels</label><span> :</span>
+                    <input type="text" name="grade_partiel" required placeholder="اسم المادة" id="grade_partiel" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label cus-label">Note Final</label><span> :</span>
+                    <input type="text" name="grade_final" required placeholder="اسم المادة" id="grade_final" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label cus-label">Decision</label><span> :</span>
+                    <input type="text" name="grade_decision" required placeholder="اسم المادة" id="grade_decision" class="form-control">
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                    <label class="custom-control-label" for="customCheck1">اشهد على صحة المعلومات المصرح بها</label>
+                </div>
+                <button type="submit" class="btn w-25 btn-primary">إضافة</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get the input elements
+        const gradeNormal = document.querySelector('input[name="grade_normal"]');
+        const gradePartiel = document.querySelector('input[name="grade_partiel"]');
+        const gradeFinal = document.querySelector('#grade_final');
+        const gradeDecision = document.querySelector('#grade_decision');
+
+        // Calculate the average and set the value of the grade_final input field
+        function calculateAverage() {
+            const normal = parseFloat(gradeNormal.value);
+            const partiel = parseFloat(gradePartiel.value);
+            const average = (normal + partiel) / 2;
+            gradeFinal.value = average.toFixed(2);
+
+            // Set the value of the grade_decision input field based on the value of grade_final
+            setDecision();
+        }
+
+        // Set the value of the grade_decision input field based on the value of grade_final
+        function setDecision() {
+            const final = parseFloat(gradeFinal.value);
+            gradeDecision.value = final >= 10 ? 'Validée' : 'Rattrapage';
+        }
+
+        // Add event listeners to the input elements
+        gradeNormal.addEventListener('input', calculateAverage);
+        gradePartiel.addEventListener('input', calculateAverage);
+    </script>
+
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %>
+    <!-- Footer Ends -->
+</body>
+</html>

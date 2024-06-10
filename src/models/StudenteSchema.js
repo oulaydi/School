@@ -19,7 +19,6 @@ const AddStudentSchema = new Schema({
         required: true,
         unique :true,
     },
-   
     birthday: {
         type: String,
         required: true,

@@ -1,29 +1,34 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
-const ScheduleSchema = new Schema({
-    selected_Hour: {
+const GradesSchema = new Schema({
+    name_module: {
         type: String,
         required: true,
     },
-    selected_day: {
+    username: {
         type: String,
         required: true,
     },
-    selected_room :{
+    grade_normal: {
         type: String,
         required: true,
     },
-    name_seance :{
+    grade_partiel: {
         type: String,
         required: true,
-      
     },
-
+    grade_final: {
+        type: String,
+        required: true,
+    },
+    grade_decision: {
+        type: String,
+        required: true,
+    },
+   
     createdAt: { type: Date, default: Date.now },
 });
 
-
-module.exports = mongoose.model("Schedule", ScheduleSchema);
+module.exports = mongoose.model("Grade", GradesSchema);

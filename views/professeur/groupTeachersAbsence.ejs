@@ -126,7 +126,7 @@ justify-content: space-around;
         <div class="container" id="header">
             
             <div class="title-groups">
-                <h3 class="title-prof">الفضاء الخاص  absence</h3>
+                <h3 class="title-prof">الفضاء الخاص  بالاستاد</h3>
             </div>
             <div class="container" id="add-rem">
                   <a href="/ModulebyteacherAbsence">
@@ -142,8 +142,8 @@ justify-content: space-around;
          
                   <% groupTeacherAbsence.forEach(groupTeacherAbsence => { %>
                  
-                    <div class="card">
-                      <p class="card-title">Group Name</p>
+                    <div dir="rtl" class="card"  onclick="redirectToAbsence('<%= groupTeacherAbsence.name_group %>', '<%= groupTeacherAbsence.name_module %>')"> 
+                      <p class="card-title">المجموعة</p>
                         <p class="small-desc" name="name_group">
                           <%= groupTeacherAbsence.name_group %>
                         </p>
@@ -157,7 +157,13 @@ justify-content: space-around;
           
                    
                   <% }); %>
-               
+            <script>
+            function redirectToAbsence(groupName, moduleName) {
+              const encodedGroupName = encodeURIComponent(groupName);
+              const encodedModuleName = encodeURIComponent(moduleName);
+              window.location.href = `/Absence/${encodedGroupName}/${encodedModuleName}`;
+            }
+          </script>
           <% } else { %>
               <div class="text-center mt-4">
                   <p>.لا يوجد اي بببب(ة)</p>

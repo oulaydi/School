@@ -38,9 +38,9 @@
                 <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
                 <th scope="col">رقم التلميد(ة)</th>
                 <th scope="col">الإسم الكامل</th>
-                <th scope="col">username</th>
+                <th scope="col">اسم المستخدم</th>
                 <th scope="col">البريد الالكتروني</th>
-                <th scope="col"> Groupe </th>
+                <th scope="col"> المجموعة </th>
                 <th scope="col"> اجراء</th>
             </tr>
         </thead>
@@ -49,10 +49,10 @@
             <% Students.forEach(Student => { %>
                 <tr class="text-center">
                                             <td class="info"><%= Student.INE %></td>
-                                            <td class="info"><%= Student.full_name %></td>
+                                            <td class="info"><%= Student.name_student %></td>
                                             <td class="info"><%= Student.username %></td>
                                             <td class="info"><%= Student.email %></td>
-                                            <td class="info"><%= Student.select_group %></td>
+                                            <td class="info"><%= Student.name_group %></td>
                                         
                     <td class="actions">
                         <button type="button" class="btn btn-warning">

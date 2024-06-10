@@ -13,29 +13,10 @@ router.post("/teacher",professeurController.professeurLogin)
 
 router.get("/logoutProf", professeurController. professeur_logout,);
 
-//get all branches*/
-router.get("/GroupTeachers",profMiddleware, professeurController.professeur_getBranch);
-
 
 //get teacher's main dashboard*/
 router.get("/teacherDashboard", professeurController.directorDashboard);
 
-
-
-
-
-
-// router.get("/GroupTeachers",profMiddleware, professeurController.getGroups);
-
-//filtrage brancheInfo
-router.get("/brancheInfo",profMiddleware, professeurController.professeur_getStudentInfo);
-//filtrage BrancheReasau
-router.get("/BrancheReasau",profMiddleware, professeurController.professeur_getStudentResau);
-
-/*get view add-grades prof*/ 
-//router.get("/add-grade-info",profMiddleware, professeurController.professeur_Add_grade);
-
-router.get("/BrancheReasau", professeurController.professeur_getStudentResau);
 /***************Cour*************/
 /**
  * GET /
@@ -82,18 +63,38 @@ router.get("/groupbyteacherNote/:moduleName", profMiddleware, professeurControll
 router.get("/ModulebyteacherAbsence",profMiddleware, professeurController.getAllModulesByTeacherAbsence);
 
 
-
 //route pour getAllgroupByTeacherAbsence
 router.get("/groupbyteacherAbsence/:moduleName", profMiddleware, professeurController.getAllGroupesByTeacherAbsence);
 
+//route pour getAllStudentsByGroups
+router.get("/studentsbygroupsNote/:groupName/:moduleName", profMiddleware, professeurController.getAllStudentsByGroups);
+
+
+//Grades
+
+router.get("/add-grade/:usernameGrade/:moduleGrade", profMiddleware, professeurController.professeur_Add_Grade);
+
+router.post("/add-grade", profMiddleware, professeurController.professeur_add_grade);
+
+router.get("/edit-grade", profMiddleware, (req,res)=>{
+    res.json({edit:"edit userll"})
+});
 
 
 
+//emploi by teacher
+
+router.get("/Emploi", profMiddleware, professeurController.professeur_Get_Emploi);
 
 
 
+router.get("/profileTeacher/:id",profMiddleware , professeurController.profileTeacher);
 
 
+
+//Absence
+
+router.get("/Absence/:groupName/:moduleName",profMiddleware, professeurController.professeur_Add_Absence);
 
 
 module.exports = router;
