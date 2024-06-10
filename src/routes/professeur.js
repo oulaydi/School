@@ -74,6 +74,8 @@ router.get("/studentsbygroupsNote/:groupName/:moduleName", profMiddleware, profe
 
 router.get("/add-grade/:usernameGrade/:moduleGrade", profMiddleware, professeurController.professeur_Add_Grade);
 
+router.post("/add-grade", profMiddleware, professeurController.professeur_add_grade);
+
 router.get("/edit-grade", profMiddleware, (req,res)=>{
     res.json({edit:"edit userll"})
 });
@@ -90,7 +92,9 @@ router.get("/profileTeacher/:id",profMiddleware , professeurController.profileTe
 
 
 
+//Absence
 
+router.get("/Absence/:groupName/:moduleName",profMiddleware, professeurController.professeur_Add_Absence);
 
 
 module.exports = router;

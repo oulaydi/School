@@ -1,31 +1,15 @@
 @import url("https://fonts.googleapis.com/earlyaccess/scheherazade.css");
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400&family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap');
 
-*,
-*::before,
-*::after {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    scroll-behavior: smooth;
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400&family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap');
+	
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
-::selection{
-    background-color: var(--button-color);
-    color: var(--background-color);
-}
-
-/* Colors */
-/* 
-    Primary Color (Official School Color): #0072CE (Blue)
-    Secondary Color (Accent): #FFA300 (Orange)
-    Background Color: #eeefef (Dark White)
-    Text Color: #333333 (Dark Gray)
-    Button Color: #4CAF50 (Green)
-*/
 :root {
     --primary-color: #0072CE;
     --secondary-oclor: #FFA300;
@@ -38,197 +22,220 @@
     --font-family1: 'IBM Plex Sans Arabic', sans-serif;
 }
 
-.logo {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.logo img {
-    max-width: 100%;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    pointer-events: none;
-}
-
-
-body {
+body{
     font-family: var(--font-family);
-    background-color: var(--background-color);
-    min-height: 85vh;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    overflow: hidden;
 }
 
-.containe {
-    background-color: #ebe6e644;
-    text-align: center;
-    border-radius: 10px;
-    border: 2px solid var(--secondary-oclor);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin: 0 10px;
-    margin-top: 50px;
-    margin-bottom: 120px;
+.wave{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	z-index: -1;
 }
 
-.title {
-    font-size: "Scheherazade" !important;
-    text-align: center;
-    border-bottom: 3px solid var(--button-color);
-    margin: 5px;
-    padding: 0px;
-    display: -webkit-inline-box;
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap :7rem;
+    padding: 0 2rem;
 }
 
-.title h2
-{
-    color: var(--text-color);
-    font-size: 30px;
-    padding: 10px;
-    font-family: 'Scheherazade';
+.img{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }
 
-.dropdown {
-    min-width: 15em;
+.login-content{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
+
+.img img{
+	width: 500px;
+}
+
+form{
+	width: 360px;
+}
+
+.login-content img{
+    height: 100px;
+}
+
+.login-content h2{
+	margin: 15px 0 25px;
+	color: #333;
+	text-transform: uppercase;
+	font-size: 2rem;
+}
+
+.login-content .input-div{
+	position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.login-content .input-div.one{
+	margin-top: 0;
+}
+
+.i{
+	color: #d9d9d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.i i{
+	transition: .3s;
+}
+
+.input-div > div{
     position: relative;
-    margin: 2em;
+	height: 45px;
 }
 
-.dropdown * {
-    box-sizing: border-box;
+.input-div > div > h5{
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #999;
+	font-size: 16px;
+	transition: .3s;
 }
 
-.select {
-    background: transparent;
-    color: var(--text-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 2px solid var(--primary-color);
-    border-radius: .5em;
-    padding: 1em;
-    cursor: pointer;
-    transition: .3s;
+.input-div:before, .input-div:after{
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	width: 0%;
+	height: 2px;
+	background-color: var(--secondary-oclor);
+	transition: .4s;
 }
 
-.select-clicked {
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 .8em #26499a4f;
+.input-div:before{
+	right: 50%;
 }
 
-.select:hover {
-    background: #3237410c;
+.input-div:after{
+	left: 50%;
 }
 
-.caret {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid var(--text-color);
-    transition: .3s;
+.input-div.focus:before, .input-div.focus:after{
+	width: 50%;
 }
 
-.caret-rotate {
-    transform: rotate(180deg);
+.input-div.focus > div > h5{
+	top: -5px;
+	font-size: 15px;
 }
 
-.menu {
-    list-style: none;
-    padding: .2em .5em;
-    background: #a8a6a6;
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 .5 1em rgba(0, 0, 0 .2);
-    border-radius: .5em;
-    color: var(--text-color);
-    position: absolute;
-    top: 3em;
-    left: 50%;
-    width: 100%;
-    transform: translateX(-50%);
-    opacity: 0;
-    display: none;
-    transition: .2s;
-    z-index: 1;
+.input-div.focus > .i > i{
+	color: var(--text-color);
 }
 
-.menu li {
-    font-size: 16px;
-    padding: .7em .5em;
-    margin: .3em 0;
-    border-radius: .5em;
-    cursor: pointer;
-    transition: .2s;
+.input-div > div > input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	background: none;
+	padding: 0.5rem 0.7rem;
+	font-size: 1.2rem;
+	color: #555;
+	font-family: var(--font-family);
 }
 
-.menu li:hover {
-    color: var(--background-color);
+.input-div.pass{
+	margin-bottom: 4px;
 }
 
-.active {
-    background: #e1e0e0;
-    border: 1px solid var(--button-color);
+a{
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	color: #999;
+	font-size: 0.9rem;
+	transition: .3s;
 }
 
-.menu-open {
-    display: block;
-    opacity: 1;
+a:hover{
+	color: var(--text-color);
 }
 
-/* footer */
-footer {
-    color: var(--text-color); 
-    text-align: center;
-    padding: 10px 0;
+.btn{
+	display: block;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #349df3, #0072CE, #349df3);
+	background-size: 200%;
+	font-size: 1.2rem;
+	color: #fff;
+	font-family: var(--font-family);
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+	transition: .5s;
+}
+.btn:hover{
+	background-position: right;
 }
 
-footer p {
-    margin: 0;
-    font-size: 15px;
-    margin-top: 60px;
-    font-weight: 700;
-    font-family: var(--font-family1);
+
+@media screen and (max-width: 1050px){
+	.container{
+		grid-gap: 5rem;
+	}
 }
 
-footer a {
-    text-decoration: none;
-    color: var(--text-color);
+@media screen and (max-width: 1000px){
+	form{
+		width: 290px;
+	}
+
+	.login-content h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+	}
+
+	.img img{
+		width: 400px;
+	}
 }
 
- @media (max-width: 320px) {
-    .dropdown {
-        min-width: 8em;
-        position: relative;
-        margin: 2em 0px;
-    }
-    .title h2 {
-        font-size: 24px;
-        padding: 0px;
-    }
-    footer{
-        margin: 0;
-        font-size: 18px;
-    }
-    footer p {
-        margin: 0;
-        font-size: 18px;
-        margin-top: 152px;
-    }
-    .containe {
-        margin-bottom: 120px;
-    }
-  }
+@media screen and (max-width: 900px){
+	.container{
+		grid-template-columns: 1fr;
+	}
 
-  @media (min-width: 340px) {
-    .dropdown {
-        min-width: 14em;
-        position: relative;
-        margin: 2em;
-        margin-left: 3px;
+	.img{
+		display: none;
+	}
+
+	.wave{
+		display: none;
+	}
+
+	.login-content{
+		justify-content: center;
+	}
 }
-  }

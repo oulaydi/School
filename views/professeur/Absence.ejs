@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="/public/css/forms.css" />
+        <link rel="stylesheet" href="/public/css/student.css" />
+        <link rel="stylesheet" href="/css/add-teacher.css" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+      
+    </head>
+    <body>
+        <!-- Header -->
+        <%- include('../partials/header.ejs') %>
+        <!-- Header Ends!! -->
+        <div class="container" id="header">
+            
+                
+             
+            <div>
+                <h3>الفضاء الخاص بالاستاد</h3>
+            </div>
+            <div class="container" id="add-rem">
+               
+
+                <a href="/teacherDashboard" title="إلفاء" id="cancel" class="mt-5"><button type="button" class="btn-close" aria-label="Close" style="margin-right: 20px;margin-bottom:0px;"></button></a> 
+                <button class="btn btn-primary my-5">
+                    <a href="/add-grade" class="text-light">إضافة النقط
+                        <i id="bi-icon" class="bi bi-plus fw-bold"></i>
+                    </a>
+                </button>
+            </div>
+        </div>
+
+    <% if (StudentGroup.length > 0) { %>
+      <div class="container mt-4 d-flex justify-content-center w-90 ">
+            <table class="table table-striped table-bordered" dir="rtl">
+                <thead class="thead-dark">
+                <!-- <th scope="col" style="cursor: pointer;" id="sort-id">&UpEquilibrium; رقم الاستاذ(ة)</th> -->
+                <th scope="col">رقم التلميد(ة)</th>
+                <th scope="col">الإسم الكامل</th>
+                <th scope="col">اسم المستخدم</th>
+                <th scope="col"> المجموعة </th>
+                <th scope="col">الوحدة</th>
+                <th scope="col">absence</th>
+                <th scope="col"> اجراء</th>
+            </tr>
+        </thead>
+        <!-- Displaying the values -->
+        <tbody class="table-group-divider">
+            <% StudentGroup.forEach(Student => { %>
+                <% groupTeacherAbsence.forEach(groupTeacherAbsence => { %>    
+                <tr class="text-center">
+                             <td class="info" ><%= Student.INE %></td>
+                             <td class="info"><%= Student.name_student %></td>
+                             <td name="username" class="info"><%= Student.username %></td>
+                             <td class="info"><%= Student.name_group %></td>
+                             <td class="info"><%= groupTeacherAbsence.name_module %></td>
+                             <td class="info">
+                                <label>
+                                    <input type="checkbox" name="attendance" value="Present"> P
+                                  </label>
+                                  <label>
+                                    <input type="checkbox" name="attendance" value="Absent"> A
+                                  </label>
+                             </td>
+                         
+                             
+                             
+                                        
+                    <td class="actions">
+                        <button type="button" class="btn btn-warning">
+                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-grade/<%= Student.username %>">تحديث</a>
+                        </button>
+                        <form action="/edit-student/<%= Student._id %>?_method=DELETE" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">
+                                <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <script>
+        function redirectToGrades(usernameGrade,moduleGrade) {
+            const encodedUsernameGrade = encodeURIComponent(usernameGrade);
+            const encodedModuleGrade = encodeURIComponent(moduleGrade);
+
+            window.location.href = `/add-grade/${encodedUsernameGrade}/${encodedModuleGrade}`;
+        }
+    </script>
+    <% } else { %>
+        <div class="text-center mt-4">
+            <p>.لا يوجد اي بببب(ة)</p>
+        </div>
+    <% } %>
+</div>
+
+        <!-- footer -->
+        <%- include('../partials/footer.ejs') %>
+        <!-- footer ends -->
+        
+    </body>
+</html>
