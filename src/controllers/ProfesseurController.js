@@ -380,7 +380,7 @@ const getAllStudentsByGroups = async (req, res) => {
         if (!teacher) {
           return res.status(404).json({ message: "Teacher not found" });
         }
-    
+
         const StudentGroup = await AddStudent.find({ name_group: groupName });
         const groupTeacher = await AddSeance.find({ name_module: moduleName });
     
@@ -423,7 +423,6 @@ const getAllStudentsByGroups = async (req, res) => {
             if (!teacher) {
               return res.status(404).json({ message: "Teacher not found" });
             }
-          
         
              const StudentGrade  = await AddStudent.find({username : usernameGrade });
              const ModuleStudent = await AddSeance.find({name_module : moduleGrade });
@@ -433,7 +432,6 @@ const getAllStudentsByGroups = async (req, res) => {
                 StudentGrade,
                 ModuleStudent,
                 
-               
             });
         } catch (error) {
             console.log(error);
@@ -444,11 +442,11 @@ const getAllStudentsByGroups = async (req, res) => {
      const professeur_add_grade = async (req, res) => {
         try {
             const {
-                name_module, username, grade_normal, grade_partiel, grade_final,decision  } = req.body;
+                name_module, username, grade_normal, grade_partiel, grade_final,grade_decision  } = req.body;
 
     
             const newGrade = AddGrade({
-                name_module, username, grade_normal, grade_partiel, grade_final,decision});
+                name_module, username, grade_normal, grade_partiel, grade_final,grade_decision});
     
             await AddGrade.create(newGrade);
             req.flash("success","grade has been saved successfully!");
@@ -556,6 +554,36 @@ const getAllStudentsByGroups = async (req, res) => {
 
 
 
+    /****************Absence**********/
+
+    const professeur_Add_Absence = async (req, res) => {
+        try {
+            const auth_user = req.session.username;
+
+            const { groupName, moduleName } = req.params;      
+            
+            const teacher = await AddTeacher.findOne({ username: auth_user });
+
+            const StudentGroup = await AddStudent.find({ name_group: groupName });
+            const groupTeacherAbsence = await AddSeance.find({ name_module: moduleName });
+    
+            if (!teacher) {
+              return res.status(404).json({ message: "Teacher not found" });
+            }
+        
+            
+            // console.log(autoGrade);
+            res.render("professeur/Absence", {
+                title: `Absence for student `,  
+                StudentGroup,
+                auth_user,
+                groupTeacherAbsence,
+                
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
 module.exports = {
     //auth
@@ -594,4 +622,8 @@ module.exports = {
     //emploi
 
     professeur_Get_Emploi,
+
+
+    //Absence
+    professeur_Add_Absence,
 };
