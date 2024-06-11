@@ -37,18 +37,11 @@ router.get("/absence", (req, res) => {
     });
 });
 //modules view
-router.get("/modules", (req, res) => {
-    res.render("modules", {
-        title: "الفضاء الخاص - بالتلاميذ",
-    });
-});
+router.get("/modules",StudentController.student_getModule);
 //cours view
-router.get("/cours", (req, res) => {
-    res.render("cours", {
-        title: "الفضاء الخاص - بالتلاميذ",
-    });
-});
+router.get("/cours/:name_module",StudentController.student_getCour);
 
+router.get("/download/:id",StudentController.download_file);
 
 
 

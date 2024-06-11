@@ -14,104 +14,20 @@
             <h1>Modules</h1>
         <div class="content">
             <div class="modules">
-                <a href="#" class="module">
+                <% Modules.forEach(Module => { %>
+                <a href="/cours/<%= Module.name_module %>" class="module">
                     <img src="/images/course.png" alt="Network" class="module-icon">
                     <div class="module-content">
-                        <span class="module-title">Bases de données </span>
-                        <span class="module-subtitle">Développement web</span>
+                        <span class="<%= Module.name_module %>"><%= Module.name_module %> </span>
+                        <span class="<%= Module.desc_module %>"><%= Module.desc_module %></span>
                     </div>
                     <img src="/images/row.png" alt="Network" class="module-icon-row">
                 </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Réseau informatique</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Communication</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Administration de Réseau</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Administration de Réseau</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Administration de Réseau</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Administration de Réseau</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Administration de Réseau</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Administration de Réseau</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Administration de Réseau</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Javascripte</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
-                <a href="#" class="module">
-                    <img src="/images/course.png" alt="Network" class="module-icon">
-                    <div class="module-content">
-                        <span class="module-title">Java</span>
-                        <span class="module-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/row.png" alt="Network" class="module-icon-row">
-                </a>
+                <% }); %>
+                
                 <!-- End of  modules -->
             </div>
+            
             <%# Menu  %>
             <%# 
             <div class="sidebar">
