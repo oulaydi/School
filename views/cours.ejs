@@ -10,108 +10,22 @@
         <%- include('./partials/header.ejs') %>
     <!-- header ends -->
     <div class="background">
-    <div class="container">
+        <div class="container">
             <h1>Cours In Progress</h1>
-        <div class="content">
-            <div class="Cours">
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Bases de données </span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" download alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Réseau informatique</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Communication</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Administration de Réseau</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png"  alt="Network" class="icon-download" >
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Administration de Réseau</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Administration de Réseau</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Administration de Réseau</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Administration de Réseau</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Administration de Réseau</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Administration de Réseau</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Javascripte</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <a href="#" class="Cour">
-                    <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
-                    <div class="Cour-content">
-                        <span class="Cour-title">Java</span>
-                        <span class="Cour-subtitle">Développement web</span>
-                    </div>
-                    <img src="/images/Download-icon.png" alt="Network" class="icon-download">
-                </a>
-                <!-- End of  Cours -->
-            </div>
+            <div class="content">
+                <div class="Cours">
+                    <% Cours.forEach(Cour => { %>
+                        <a href="/download/<%= Cour._id %>" method="get"  class="Cour">
+                            <img src="/images/pdf-icon.png" alt="Network" class="icon-pdf">
+                            <div class="Cour-content">
+                                <span class="course-name"><%= Cour.name_cour %></span>
+                                <span class="module-name"><%= Cour.module %></span>
+                            </div>
+                            <img src="/images/Download-icon.png" alt="Download" class="icon-download">
+                        </a>
+                    <% }) %>
+                    <!-- End of Cours -->
+                </div>
              <%# Menu  %>
             <%# 
             <div class="sidebar">
