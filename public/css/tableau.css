@@ -1,11 +1,4 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+
 
 .table-container {
     display: grid;
@@ -51,16 +44,20 @@ button {
     font-weight: bold;
     transition: background-color 0.3s, box-shadow 0.3s;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    
 }
 
 button.absente {
     background: linear-gradient(45deg, #db1b1f, #ffd9d7);
     color: white;
+    border-radius: 20px;
+
 }
 
 button.present {
     background: linear-gradient(45deg, #a6f3a9, hsl(123, 88%, 55%));
     color: white;
+    border-radius: 20px;
 }
 
 button:hover {
