@@ -24,7 +24,7 @@ const GroupSchema = new Schema({
 
     name_subject :{
         type: String,
-        required: true,
+        required: false,
    },
 
     createdAt: { type: Date, default: Date.now },

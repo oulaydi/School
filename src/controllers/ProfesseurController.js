@@ -382,7 +382,7 @@ const getAllStudentsByGroups = async (req, res) => {
         }
 
         const StudentGroup = await AddStudent.find({ name_group: groupName });
-        const groupTeacher = await AddSeance.find({ name_module: moduleName });
+        const groupTeacher = await AddSeance.find({ name_module: moduleName },"name_module");
     
         res.render('professeur/Students', {
           title: `Students for Group: ${groupName} - ${moduleName}`,
