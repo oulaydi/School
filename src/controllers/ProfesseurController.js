@@ -382,13 +382,16 @@ const getAllStudentsByGroups = async (req, res) => {
         }
 
         const StudentGroup = await AddStudent.find({ name_group: groupName });
-        const groupTeacher = await AddSeance.find({ name_module: moduleName });
+        const Notes = await AddGrade.find();
+        const groupTeacher = await AddSeance.find({ name_module: moduleName },"name_module");
     
         res.render('professeur/Students', {
           title: `Students for Group: ${groupName} - ${moduleName}`,
           StudentGroup,
           auth_user,
           groupTeacher,
+
+          Notes
         });
       } catch (err) {
         console.error(err);
@@ -437,17 +440,24 @@ const getAllStudentsByGroups = async (req, res) => {
                 name_module, username, grade_normal, grade_partiel, grade_final,grade_decision});
     
             await AddGrade.create(newGrade);
-            // req.flash("success","grade has been saved successfully!");
-            // res.render('professeur/add-grades',{
-            //     messages:req.flash(),
-            // });
-            
-            res.redirect("/studentsbygroupsNote");
-            
+
+            req.flash("success","grade has been saved successfully!");
+         
+            if (name_module === "PFE") {
+                res.redirect("/studentsbygroupsNote/DevOp2%2023-24/PFE");
+              
+            } else if (name_module === "Administration Reseaux ") {
+                res.redirect("/studentsbygroupsNote/Cyber3%2022-23/Administration%20Reseaux");
+           
+            } else {
+              
+                res.redirect("/studentsbygroupsNote/Cyber3%2022-23/Administration%20Reseaux");
+            }
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: "Internal Server Error" });
         }
+    
     };
     /*edit_grade */
     

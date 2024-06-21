@@ -273,8 +273,11 @@ const director_getStudent = async (req, res) => {
    /*add_student  pour get view form */
    const director_Add_Student = async (req, res) => {
     try {
-        res.render("/admin/add-student", {
+        const groups = await AddGroup.find().sort({ createdAt: -1 });
+
+        res.render("admin/add-student", {
             title: "إضافة تلميد(ة)",
+            groups,
         });
     } catch (error) {
         console.log(error);
@@ -290,7 +293,7 @@ const director_getStudent = async (req, res) => {
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
         const newStudent = AddStudent({
-            INE, name_student, username, birthday, birthplace,num_tel ,email, password,name_group,confirm_password});
+            INE, name_student,username, birthday, birthplace,num_tel ,email, password, name_group,confirm_password});
 
         await AddStudent.create(newStudent);
         req.flash("success","student has been saved successfully!");
@@ -311,7 +314,7 @@ const director_getStudent = async (req, res) => {
 
 const director_edit_student = async (req, res) => {
     try {
-      const { INE, name_student, username, birthday, birthplace,num_tel ,email, password,name_group,confirm_password } = req.body;
+      const { INE, name_student, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password } = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
@@ -322,7 +325,6 @@ const director_edit_student = async (req, res) => {
         if (birthplace) updateObject.birthplace = birthplace;
         if (num_tel) updateObject.num_tel = num_tel;
         if (email) updateObject.email = email;
-        if (name_group) updateObject.name_group = name_group;
         if (password) updateObject.email = password;
         if (confirm_password) updateObject.confirm_password = confirm_password;
   
@@ -566,6 +568,7 @@ const director_Add_group = async (req, res) => {
 /*add_group  methode post store une bd */
 const director_add_group = async (req, res) => {
     try {
+        const Groups = await AddGroup.find().sort({ createdAt: -1 });
 
         const {
             name_group, selected_level,selected_saison,capacity_group,name_subject } = req.body;

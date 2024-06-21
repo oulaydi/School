@@ -24,6 +24,7 @@ body {
     border: 5px solid white;
     background-color: white;
     border-radius: 20px;
+    margin-top: 60px;
 
 }
 header {
@@ -47,9 +48,12 @@ header h1 {
 }
 
 .content {
+    
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
+    
 }
 
 .modules {
@@ -61,14 +65,9 @@ header h1 {
     padding: 20px;
     border-radius: 8px;
     border: 2px solid #b0d4ff;
-    flex: 1;
-    flex: 1;
-    background-color: #d3e8ff;
-    padding: 20px;
-    border-radius: 8px;
-    border: 2px solid #b0d4ff;
-    display: flex;
     align-items: center;
+    margin-left: auto;
+    margin-right: 40px;
 }
 
 .module {

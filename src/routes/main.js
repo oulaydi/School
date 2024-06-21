@@ -51,6 +51,13 @@ router.get("/dashbordstudent", (req, res) => {
 });
 
 
+//cours view
+router.get("/EmploiStudent", (req, res) => {
+    res.render("EmploiStudent", {
+        title: "الفضاء الخاص - بالتلاميذ",
+    });
+});
+
 
 //
 
