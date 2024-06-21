@@ -450,15 +450,22 @@ const getAllStudentsByGroups = async (req, res) => {
     
             await AddGrade.create(newGrade);
             req.flash("success","grade has been saved successfully!");
-            res.render('professeur/add-grades',{
-                messages:req.flash(),
-            });
-            res.redirect("/grades");
-            
+         
+            if (name_module === "PFE") {
+                res.redirect("/studentsbygroupsNote/DevOp2%2023-24/PFE");
+              
+            } else if (name_module === "Administration Reseaux ") {
+                res.redirect("/studentsbygroupsNote/Cyber3%2022-23/Administration%20Reseaux");
+           
+            } else {
+              
+                res.redirect("/studentsbygroupsNote/Cyber3%2022-23/Administration%20Reseaux");
+            }
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: "Internal Server Error" });
         }
+    
     };
     /*edit_grade */
     

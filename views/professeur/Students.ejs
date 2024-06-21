@@ -40,6 +40,10 @@
                 <th style="text-align: center;" scope="col">رقم التلميد(ة)</th>
                 <th style="text-align: center;" scope="col">الإسم الكامل</th>
                 <th style="text-align: center;" scope="col">اسم المستخدم</th>
+                <th style="text-align: center;" scope="col"> الامتحان </th>
+                <th style="text-align: center;" scope="col"> الجزئية </th>
+                <th style="text-align: center;" scope="col"> النهائية </th>
+                <th style="text-align: center;" scope="col">القرار </th>
                 <th style="text-align: center;" scope="col"> المجموعة </th>
                 <th style="text-align: center;" scope="col"> اجراء</th>
             </tr>
@@ -52,25 +56,26 @@
                              <td class="info" ><%= Student.INE %></td>
                              <td class="info"><%= Student.name_student %></td>
                              <td class="info"><%= Student.username %></td>
+                             <td class="info">12</td>
+                             <td class="info">12</td>
+                             <td class="info">12.00</td>
+                             <td class="info">Validée</td>
                              <td class="info"><%= Student.name_group %></td>
                                       
                          
                              
                              
                                         
-                    <td class="actions">
-                        <button type="button" class="btn btn-warning">
-                            <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-grade/<%= Student.username %>">تحديث</a>
-                        </button>
-                        <button id="ajouter-button" type="button" class="btn btn-warning" onclick="redirectToGrades('<%= Student.username %>','<%= groupteacher.name_module %>')" >
-                            <a class="fw-semibold text-decoration-none link-light py-3"  >اضافة</a>
-                        </button>
-                        <form action="/edit-student/<%= Student._id %>?_method=DELETE" method="POST" style="display: inline;">
-                            <button type="submit" class="btn btn-danger">
-                                <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
-                            </button>
-                        </form>
-                    </td>
+                             <td class="actions">
+                                <div class="d-flex">
+                                    <button type="button" class="btn btn-warning me-2">
+                                        <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-grade/<%= Student.username %>">تحديث</a>
+                                    </button>
+                                    <button id="ajouter-button" type="button" class="btn btn-primary" onclick="redirectToGrades('<%= Student.username %>','<%= groupteacher.name_module %>')">
+                                        <a class="fw-semibold text-decoration-none link-light py-3">اضافة</a>
+                                    </button>
+                                </div>
+                            </td>
                 </tr>
                 <% }); %>
             <% }); %>
