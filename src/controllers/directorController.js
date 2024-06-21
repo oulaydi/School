@@ -230,7 +230,7 @@ const director_edit_id = async (req, res) => {
     try {
         const rooms = await AddRoom.find();
         const subjects = await AddSubject.find({}, 'name_subject');
-        const teacherInfo = await AddTeacher.findOne({ _id: req.params.id });
+        const teacherInfo = await AddTeacher.findOne({ _id: req.params.id }) .select('-password');
         res.render("admin/edit-teacher", {
             teacherInfo,
             title: "تحديث استاذ(ة)",
@@ -285,12 +285,12 @@ const director_getStudent = async (req, res) => {
  const director_add_student = async (req, res) => {
     try {
         const {
-            INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password } = req.body;
+            INE, name_student, username, birthday, birthplace,num_tel ,email, password,name_group,confirm_password } = req.body;
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
         const newStudent = AddStudent({
-            INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password});
+            INE, name_student, username, birthday, birthplace,num_tel ,email, password,name_group,confirm_password});
 
         await AddStudent.create(newStudent);
         req.flash("success","student has been saved successfully!");
@@ -311,7 +311,7 @@ const director_getStudent = async (req, res) => {
 
 const director_edit_student = async (req, res) => {
     try {
-      const { INE, full_name, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password } = req.body;
+      const { INE, name_student, username, birthday, birthplace,num_tel ,email, password,name_group,confirm_password } = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
@@ -319,9 +319,12 @@ const director_edit_student = async (req, res) => {
         if (name_student) updateObject.name_student = name_student;
         if (username) updateObject.username = username;
         if (birthday) updateObject.city = birthday;
-        if (selected_birthplace) updateObject.tele = selected_birthplace;
+        if (birthplace) updateObject.birthplace = birthplace;
+        if (num_tel) updateObject.num_tel = num_tel;
         if (email) updateObject.email = email;
+        if (name_group) updateObject.name_group = name_group;
         if (password) updateObject.email = password;
+        if (confirm_password) updateObject.confirm_password = confirm_password;
   
       await AddStudent.findByIdAndUpdate(req.params.id, updateObject);
 
@@ -565,13 +568,13 @@ const director_add_group = async (req, res) => {
     try {
 
         const {
-            name_group, selected_level,selected_saison,capacity_group,select_subject } = req.body;
+            name_group, selected_level,selected_saison,capacity_group,name_subject } = req.body;
             
 
         // Hash the password before saving to MongoDB (you can use bcrypt or any other hashing library)
         //const hashedPassword = await bcrypt.hash(password, 10);
         const newGroup = AddGroup({
-            name_group, selected_level, selected_saison,capacity_group,select_subject});
+            name_group, selected_level, selected_saison,capacity_group,name_subject});
 
         await AddGroup.create(newGroup);
         req.flash("success","Group has been saved successfully!");
@@ -626,7 +629,7 @@ const director_getGroupsTeachers = async (req, res) => {
 
 const director_edit_group = async (req, res) => {
     try {
-      const { name_group, selected_level, selected_saison,capacity_group,selected_subject} = req.body;
+      const { name_group, selected_level, selected_saison,capacity_group,name_subject} = req.body;
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
@@ -634,7 +637,7 @@ const director_edit_group = async (req, res) => {
         if (selected_level) updateObject.selected_level = selected_level;
         if (selected_saison) updateObject.selected_saison = selected_saison;
         if (capacity_group) updateObject.capacity_group = capacity_group;
-        if (select_subject) updateObject.select_subject = select_subject;
+        if (name_subject) updateObject.name_subject = name_subject;
 
       await AddGroup.findByIdAndUpdate(req.params.id, updateObject);
       
@@ -873,7 +876,6 @@ const director_edit_schedule = async (req, res) => {
         if (name_seance) updateObject.name_seance = name_seance;
         if (selected_room) updateObject.selected_room = selected_room;
         
-
       await AddSchedule.findByIdAndUpdate(req.params.id, updateObject);
       
       res.redirect("/Schedules");
@@ -944,7 +946,7 @@ const getSubjects_Teacher = async (req, res) => {
 };
 
 //getGroups depuuis mongoose
-const getGroups = async (req, res) => {
+const getGroupsStudents = async (req, res) => {
     try {
         const groups = await AddGroup.find({}, 'name_group'); // Récupère uniquement le champ name_group
         res.render('admin/add-student',
@@ -1191,13 +1193,13 @@ module.exports = {
     director_edit_modules_id,
     director_delete_modules,
       /*crud student*/ 
-      director_add_student,
     director_getStudent,
     director_Add_Student,
     director_add_student,
     director_edit_student,
     director_edit_student_id,
     director_delete_student,
+    getGroupsStudents,
     /*CRUD subject*/
     director_Add_Subject,
     director_add_subject,

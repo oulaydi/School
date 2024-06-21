@@ -66,7 +66,7 @@ router.delete("/edit-teacher/:id", authMiddleware, directorController.director_d
 
 /*******************Student*********************/
 //passer la valeur name_group dans add-student
-router.get("/add-student",authMiddleware, directorController.director_getGroups);
+router.get("/add-student",authMiddleware, directorController.getGroupsStudents);
 /**
  * GET /
  * Director - All student

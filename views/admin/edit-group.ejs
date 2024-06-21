@@ -34,7 +34,7 @@ s">
             <div class="col-md-6">
                 <label class="form-label cus-label">  المادة </label><span> :</span>
                 <select class="form-select" aria-label="Default select example" id="input-field" name="name_subject">
-                  <% Subjects.forEach(subject => { %>
+                  <% subjects.forEach(subject => { %>
                     <option value="<%= subject.name_subject %>"><%= subject.name_subject  %></option>
                 <% }) %>
                 </select>

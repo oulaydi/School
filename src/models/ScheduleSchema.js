@@ -25,5 +25,4 @@ const ScheduleSchema = new Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-
 module.exports = mongoose.model("Schedule", ScheduleSchema);

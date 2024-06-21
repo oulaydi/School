@@ -398,19 +398,7 @@ const getAllStudentsByGroups = async (req, res) => {
 
 
 /********************GRADES**************/
-    /*getAllGrades*/
-    const professeur_getGrades = async (req, res) => {
-        try {
-            const Grades = await AddGrade.find().sort({ createdAt: -1 });
-            res.render("professeur/Grades", {
-                title: "الثلاميد",
-                Grades,
-            });
-           
-        } catch (error) {
-            console.log(error);
-        }
-    };
+  
     
        /*add_grade  pour get view form */
        const professeur_Add_Grade = async (req, res) => {
@@ -438,7 +426,7 @@ const getAllStudentsByGroups = async (req, res) => {
         }
     };
     
-     /*add_grade  methode post store une bd */
+     /*add_grade methode post store une bd */
      const professeur_add_grade = async (req, res) => {
         try {
             const {
@@ -449,11 +437,12 @@ const getAllStudentsByGroups = async (req, res) => {
                 name_module, username, grade_normal, grade_partiel, grade_final,grade_decision});
     
             await AddGrade.create(newGrade);
-            req.flash("success","grade has been saved successfully!");
-            res.render('professeur/add-grades',{
-                messages:req.flash(),
-            });
-            res.redirect("/grades");
+            // req.flash("success","grade has been saved successfully!");
+            // res.render('professeur/add-grades',{
+            //     messages:req.flash(),
+            // });
+            
+            res.redirect("/studentsbygroupsNote");
             
         } catch (error) {
             console.log(error);
@@ -473,7 +462,7 @@ const getAllStudentsByGroups = async (req, res) => {
       
           await AddGrade.findByIdAndUpdate(req.params.id, updateObject);
     
-          res.redirect("/Grades");
+          res.redirect("/Students");
         } catch (error) {
           console.log(error);
         }
@@ -496,7 +485,7 @@ const getAllStudentsByGroups = async (req, res) => {
     const professeur_delete_grade = async (req, res) => {
         try {
             await AddGrade.deleteOne({ _id: req.params.id });
-            res.redirect("/Grades");
+            res.redirect("/Students");
         } catch (error) {
             console.log(error);
         }
@@ -611,7 +600,7 @@ module.exports = {
     professeur_delete_Cour,
 
     //grades
-    professeur_getGrades,
+   
     professeur_Add_Grade,
     professeur_add_grade,
     professeur_edit_grade,
