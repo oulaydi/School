@@ -76,11 +76,9 @@ router.get("/add-grade/:usernameGrade/:moduleGrade", profMiddleware, professeurC
 
 router.post("/add-grade", profMiddleware, professeurController.professeur_add_grade);
 
-router.get("/edit-grade", profMiddleware, (req,res)=>{
-    res.json({edit:"edit userll"})
-});
+router.post("/edit-grades", profMiddleware, professeurController.professeur_edit_grade);
 
-
+router.get("/edit-grades/:id",professeurController.professeur_edit_grade_id);
 
 
 //emploi by teacher

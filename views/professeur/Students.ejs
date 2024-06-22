@@ -40,33 +40,36 @@
                             <th style="text-align: center;" scope="col">رقم التلميد(ة)</th>
                             <th style="text-align: center;" scope="col">الإسم الكامل</th>
                             <th style="text-align: center;" scope="col">اسم المستخدم</th>
-                            <th style="text-align: center;" scope="col"> الامتحان </th>
-                            <th style="text-align: center;" scope="col"> الجزئية </th>
-                            <th style="text-align: center;" scope="col"> النهائية </th>
-                            <th style="text-align: center;" scope="col">القرار </th>
-                            <th style="text-align: center;" scope="col"> المجموعة </th>
+                            <th style="text-align: center;" scope="col"> normal </th>
+                            <th style="text-align: center;" scope="col"> partiel </th>
+                            <th style="text-align: center;" scope="col"> final </th>
+                            <th style="text-align: center;" scope="col"> status </th>
+                            <th style="text-align: center;" scope="col"> module </th>
                             <th style="text-align: center;" scope="col"> اجراء</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <% StudentGroup.forEach(Student => { %>
-                            <% groupTeacher.forEach(groupteacher => { %>    
+                        <% StudentGroup.forEach(Student => { %>    
+                        <% groupTeacher.forEach(groupteacher => { %>
+                        <% notes.forEach(note => { %>
+                            <% if (note.username === Student.username) { %>    
+
                                 <tr class="text-center">
                                     <td class="info"><%= Student.INE %></td>
                                     <td class="info"><%= Student.name_student %></td>
                                     <td class="info"><%= Student.username %></td>
-                                 
-                                      
-                                        <td class="info">12</td>
-                                        <td class="info">12</td>
-                                        <td class="info">12</td>
-                                        <td class="info">validé</td>
-                             
-                                    <td class="info"><%= Student.name_group %></td>
+                            
+                                    <td class="info"><%= groupteacher.name_module %></td>
+                            
+                                    <td class="info"><%= note.grade_normal %></td>
+                                    <td class="info"><%= note.grade_partiel %></td>
+                                    <td class="info"><%= note.grade_final %></td>
+                                    <td class="info"><%= note.grade_decision %></td>
+                            
                                     <td class="actions">
                                         <div class="d-flex">
                                             <button type="button" class="btn btn-warning me-2">
-                                                <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-grade/<%= Student.username %>">تحديث</a>
+                                                <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-grades/<%= note._id %>">تحديث</a>
                                             </button>
                                             <button id="ajouter-button" type="button" class="btn btn-primary" onclick="redirectToGrades('<%= Student.username %>','<%= groupteacher.name_module %>')">
                                                 <a class="fw-semibold text-decoration-none link-light py-3">اضافة</a>
@@ -74,6 +77,8 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <% } %>
+                            <% }); %>
                             <% }); %>
                             <% }); %>
                         

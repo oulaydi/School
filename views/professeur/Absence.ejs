@@ -40,8 +40,8 @@
                 <th style="text-align: center;" scope="col">رقم التلميد(ة)</th>
                 <th style="text-align: center;" scope="col">الإسم الكامل</th>
                 <th style="text-align: center;" scope="col">اسم المستخدم</th>
-                <th style="text-align: center;" scope="col"> المجموعة </th>
-                <th style="text-align: center;" scope="col">الوحدة</th>
+                <th style="text-align: center;" scope="col"> Groupe</th>
+                <th style="text-align: center;" scope="col">module</th>
                 <th style="text-align: center;" scope="col">absence</th>
                 <th style="text-align: center;" scope="col"> اجراء</th>
             </tr>
@@ -58,16 +58,12 @@
                              <td class="info"><%= groupTeacherAbsence.name_module %></td>
                              <td class="info">
                                 <label>
-                                    <input type="checkbox" name="attendance" value="Present"> P
+                                    <input type="checkbox" name="attendance" value="Present"  > P
                                   </label>
                                   <label>
                                     <input type="checkbox" name="attendance" value="Absent"> A
                                   </label>
-                             </td>
-                         
-                             
-                             
-                                        
+                             </td>         
                     <td class="actions">
                         <button type="button" class="btn btn-warning">
                             <a class="fw-semibold text-decoration-none link-light py-3" href="/edit-grade/<%= Student.username %>">تحديث</a>
@@ -76,6 +72,7 @@
                             <button type="submit" class="btn btn-danger">
                                 <a class="fw-semibold text-decoration-none link-light py-3">حذف</a>
                             </button>
+
                         </form>
                     </td>
                 </tr>
@@ -83,6 +80,7 @@
             <% }); %>
         </tbody>
     </table>
+    
 
     <script>
         function redirectToGrades(usernameGrade,moduleGrade) {

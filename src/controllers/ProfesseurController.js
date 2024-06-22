@@ -16,6 +16,7 @@ const fs = require('fs');
 const bcrypt = require("bcrypt");
 const jwtSecret = 'yourSecretKeyHere'; 
 const jwt = require("jsonwebtoken");
+const { render } = require("express/lib/response");
 
 //get view login
 const loginProfAuth = async (req, res) => {
@@ -382,16 +383,16 @@ const getAllStudentsByGroups = async (req, res) => {
         }
 
         const StudentGroup = await AddStudent.find({ name_group: groupName });
-        const Notes = await AddGrade.find();
+       // const Notes = await AddGrade.find();
         const groupTeacher = await AddSeance.find({ name_module: moduleName },"name_module");
+        const notes = await AddGrade.find().sort({ createdAt: -1 });
     
         res.render('professeur/Students', {
           title: `Students for Group: ${groupName} - ${moduleName}`,
           StudentGroup,
           auth_user,
           groupTeacher,
-
-          Notes
+          notes
         });
       } catch (err) {
         console.error(err);
@@ -442,17 +443,12 @@ const getAllStudentsByGroups = async (req, res) => {
             await AddGrade.create(newGrade);
 
             req.flash("success","grade has been saved successfully!");
-         
-            if (name_module === "PFE") {
-                res.redirect("/studentsbygroupsNote/DevOp2%2023-24/PFE");
-              
-            } else if (name_module === "Administration Reseaux ") {
-                res.redirect("/studentsbygroupsNote/Cyber3%2022-23/Administration%20Reseaux");
-           
-            } else {
-              
-                res.redirect("/studentsbygroupsNote/Cyber3%2022-23/Administration%20Reseaux");
-            }
+            res.render("professeur/add-grades", {
+                title: `Grades for student ${usernameGrade} - ${moduleGrade}`,  
+                StudentGrade,
+                ModuleStudent,
+                
+            });
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: "Internal Server Error" });
@@ -481,9 +477,9 @@ const getAllStudentsByGroups = async (req, res) => {
     // edit_grade_with_ID
     const professeur_edit_grade_id = async (req, res) => {
         try {
-            const gradeinfo = await AddGrade.findOne({ _id: req.params.id });
-            res.render("admin/edit-grade", {
-                gradeinfo,
+            const Gradeinfo = await AddGrade.findOne({ _id: req.params.id });
+            res.render("professeur/edit-grades", {
+                Gradeinfo,
                 title: "تحديث تلميد(ة)",           
             });
         } catch (error) {
