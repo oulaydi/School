@@ -314,18 +314,21 @@ const director_getStudent = async (req, res) => {
 
 const director_edit_student = async (req, res) => {
     try {
-      const { INE, name_student, username, birthday, birthplace,num_tel ,email, password,select_group,confirm_password } = req.body;
+      const { INE, name_student, username, birthday, birthplace,num_tel ,email, password,name_group,confirm_password } = req.body;
+    
   
       // Create an update object to store the values of data passing by body to ensures that only modified data are sent to the update query
       const updateObject = {};
         if (INE) updateObject.INE = INE;
         if (name_student) updateObject.name_student = name_student;
         if (username) updateObject.username = username;
-        if (birthday) updateObject.city = birthday;
+        if (birthday) updateObject.birthday = birthday;
         if (birthplace) updateObject.birthplace = birthplace;
         if (num_tel) updateObject.num_tel = num_tel;
         if (email) updateObject.email = email;
-        if (password) updateObject.email = password;
+        if (password) updateObject.password = password;
+        if (name_group) updateObject.name_group = name_group;
+        
         if (confirm_password) updateObject.confirm_password = confirm_password;
   
       await AddStudent.findByIdAndUpdate(req.params.id, updateObject);

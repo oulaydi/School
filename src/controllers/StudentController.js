@@ -1,9 +1,173 @@
-const AddStudent = require("../models/StudenteSchema");
 const AddModule = require("../models/ModuleSchema");
 const AddCour = require("../models/CourSchema");
+const AddStudent = require("../models/StudenteSchema");
+const Addgrade = require("../models/GradeSchema");
+
+
 const fs = require('fs');
 const path = require('path');
-//GET USER PROFILE
+
+
+const bcrypt = require("bcrypt");
+const jwtSecret = 'yourSecretKeyHere'; 
+const jwt = require("jsonwebtoken");
+
+//get view login
+const loginstudentAuth = async (req, res) => {
+  try {
+      res.render("student", {
+          title: "تسجيل الدخول",
+
+      });
+
+  } catch (error) {
+      console.log(error);
+  }
+};
+//find prof and login
+const StudentLogin = async (req, res) => {
+  let student;
+  try {
+    const { username, password } = req.body;
+    req.session.username = username;
+    let errorType = "";
+
+    if (!username || !password) {
+      errorType = "missingCredentials";
+    } else {
+      student = await AddStudent.findOne({ username });
+   
+      if (!student) {
+        errorType = "invalidLogin";
+      } else {
+        const isPasswordValid = await bcrypt.compare(password, student.password);
+        if (!isPasswordValid) {
+          req.flash("error", "اسم المستخدم أو كلمة المرور غير صحيحة.");
+          return res.status(401).redirect("/student");
+        } else if (password.length < 5) {
+          req.flash("error", "يجب أن تكون كلمة المرور على الأقل 5 أحرف.");
+          return res.status(401).redirect("/student");
+        }
+      }
+    }
+
+    switch (errorType) {
+      case "missingCredentials":
+        req.flash("error", ".اسم المستخدم وكلمة المرور مطلوبان");
+        res.status(401).redirect("/student");
+        break;
+      case "passwordTooShort":
+        req.flash("error", ".يجب أن تكون كلمة المرور على الأقل 5 أحرف");
+        res.status(401).redirect("/student");
+        break;
+      case "invalidLogin":
+        req.flash("error", ".اسم المستخدم أو كلمة المرور غير صحيحة");
+        res.status(401).redirect("/student");
+        break;
+      default:
+        const studentToken = jwt.sign({ studentId: student._id }, jwtSecret);
+        res.cookie("studentToken", studentToken, { httpOnly: true });
+        res.redirect("/dashbordstudent");
+        break;
+    }
+  } catch (error) {
+    console.log(error);
+    req.flash("error", "حدث خطأ. حاول مرة اخرى.");
+    res.redirect("/student");
+  }
+};
+
+
+// student_logout
+const student_logout = (req, res) => {
+  res.clearCookie("studentToken");
+  res.redirect("/student");
+};
+
+
+
+// dashboard student
+const dashboardStusent = async (req, res) => {
+  try {
+
+    const auth_user = req.session.username;
+    // Find the teacher by username
+    const studeent = await AddStudent.findOne({ username: auth_user });     
+    
+
+      //pour affiche obligatoir pass params -------------------------------------
+
+        // const auth_user = req.session.username;
+
+
+          // Find the teacher by username
+        //  const teacher = await AddTeacher.findOne({ username: auth_user }); 
+       
+   
+
+         //--------------------------------------------------------------------
+
+      const countCour = await AddCour.countDocuments();
+      
+      const countModule = await AddModule.countDocuments();
+
+      res.render("dashboardStudent",{
+        
+          title: "الثلاميد",
+          countCour: countCour, 
+          countModule: countModule, 
+         //info student
+         studeent,
+       
+      });
+  } catch (error) {
+      console.log(error);
+  }
+};
+
+
+
+
+
+const getStudentGrades = async (req, res) => {
+  try {
+    const auth_user = req.session.username;
+    
+    const grades = await Addgrade.find({ username: auth_user });
+
+     grades.forEach(grade => {
+      const createdAt = new Date(grade.createdAt);
+      
+      const currentTime = new Date();
+      const timeDifference = currentTime - createdAt;
+
+      if (timeDifference < 60000) { 
+        grade.timePassed = Math.floor(timeDifference / 1000) + ' seconds ago';
+      } else if (timeDifference < 3600000) { // Less than 1 hour
+        grade.timePassed = Math.floor(timeDifference / 60000) + ' minutes ago';
+      } else if (timeDifference < 86400000) { // Less than 1 day
+        grade.timePassed = Math.floor(timeDifference / 3600000) + ' hours ago';
+      } else { 
+        grade.timePassed = Math.floor(timeDifference / 86400000) + ' days ago';
+      }
+    });
+    res.render("Gardes", {
+      title: "الثلاميد",
+      grades,
+    });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+
+
+
+
+
+
+
+
 const student_edit = async (req, res) => {
   try {
     const studentInfo = await AddStudent.findById(req.params.id).select("-password")
@@ -97,12 +261,25 @@ const download_file = async (req, res) => {
 
 
 module.exports = {
+
+  //login
+  StudentLogin,
+  student_logout,
+  loginstudentAuth,
+  dashboardStusent,
+
+  //
   student_edit_id,
   student_edit,
   student_edit_id,
   student_getModule,
   student_getCour,
   download_file,
+
+
+  //gardes student
+
+  getStudentGrades,
 };
 
 

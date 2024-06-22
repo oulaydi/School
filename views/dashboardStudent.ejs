@@ -21,7 +21,7 @@
             <li class="active">
                 <a href="">
                     <i class="bx bxs-user"></i>
-                    <span  style="font-size: 20px;" class="text">Hajita</span>
+                    <span  style="font-size: 20px;" class="text"><%= studeent.username %></span>
                 </a>
             </li>
             <li>
@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="modules">
                     <i class="bx bxs-book"></i>
                     <span  style="font-size: 20px;" class="text">Cours</span>
                 </a>
@@ -60,7 +60,7 @@
                 </a>
             </li>
             <li>
-                <a href="" class="logout">
+                <a href="/logoutstudent" class="logout">
                     <i class='bx bx-log-out'></i>
                     <span  style="font-size: 20px;" class="text">Déconnexion</span>
                 </a>
@@ -97,33 +97,27 @@
         <main >
             <div class="head-title">
                 <div class="left">
-                    <h1 >Hajita</h1>
+                    <h1 ><%= studeent.username %></h1>
                 
                 </div>
               
             </div>
 
             <ul  class="box-info">
-                <li>
-                    <i class='bx bxs-calendar-check' ></i>
-                    <span class="text">
-                        <h3>4</h3>
-                        <p  style="font-size: 20px;">Notes</p>
-                    </span>
-                </li>
+             
                 <li>
                  
                     <i class='bx bxs-group' ></i>
                     <span class="text">
-                        <h3>4</h3>
+                        <h3><%= countCour %></h3>
                         <p  style="font-size: 20px;">cours</p>
                     </span>
                 </li>
                 <li>
                     <i class='bx bxs-info-circle'></i>
                     <span class="text">
-                        <h3>4</h3>
-                        <p  style="font-size: 20px;">absence</p>
+                        <h3><%= countModule %></h3>
+                        <p  style="font-size: 20px;">Module</p>
                     </span>
                 </li>
             </ul>
@@ -145,48 +139,36 @@
                         <th   style="text-align: center; font-size: 20px;">Salle</th>
                         <th  style="text-align: center; font-size: 20px;" >Heur</th>
                         <th  style="text-align: center; font-size: 20px;" >Day</th>
-                        <th  style="text-align: center; font-size: 20px;"  >Seances</th>
+                        <th  style="text-align: center; font-size: 20px;"  >Seance</th>
                     </tr>
                 </thead>
                 <tbody>
                   
                             <tr class="text-center">
                                 <td class="table-info">sv6</td>
-                                <td class="table-info">12h</td>
+                                <td class="table-info">10.30-12.00</td>
                                 <td class="table-info">Lundi</td>
                                 <td class="table-info">JEE</td>
                             </tr>
                             <tr class="text-center">
-                                <td class="table-info">sv6</td>
-                                <td class="table-info">12h</td>
+                                <td class="table-info">AV3</td>
+                                <td class="table-info">13.00-14.30</td>
                                 <td class="table-info">Lundi</td>
-                                <td class="table-info">JEE</td>
+                                <td class="table-info">Communication</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td class="table-info">E2im6</td>
+                                <td class="table-info">14.30-16.00</td>
+                                <td class="table-info">Mercredi</td>
+                                <td class="table-info">Resau1</td>
                             </tr>
                             <tr class="text-center">
                                 <td class="table-info">sv6</td>
-                                <td class="table-info">12h</td>
-                                <td class="table-info">Lundi</td>
-                                <td class="table-info">JEE</td>
+                                <td class="table-info">13.00-14.30</td>
+                                <td class="table-info">jeudi</td>
+                                <td class="table-info">Administration Reseaux</td>
                             </tr>
-                            <tr class="text-center">
-                                <td class="table-info">sv6</td>
-                                <td class="table-info">12h</td>
-                                <td class="table-info">Lundi</td>
-                                <td class="table-info">JEE</td>
-                            </tr>
-                            <tr class="text-center">
-                                <td class="table-info">sv6</td>
-                                <td class="table-info">12h</td>
-                                <td class="table-info">Lundi</td>
-                                <td class="table-info">JEE</td>
-                            </tr>
-                            <tr class="text-center">
-                                <td class="table-info">sv6</td>
-                                <td class="table-info">12h</td>
-                                <td class="table-info">Lundi</td>
-                                <td class="table-info">JEE</td>
-                            </tr>
-                  
+                                         
                 
                         
                   

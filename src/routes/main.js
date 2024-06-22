@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const StudentController = require("../controllers/StudentController");
+const { studentMiddlware } = require("../middlewares/studentMiddlware");
+
 
 
 //test controler prof  
@@ -13,7 +15,24 @@ router.get("/", (req, res) => {
     });
 });
 
+//get view auth
+router.get("/student", StudentController.loginstudentAuth);
 
+
+//fetch stuent login
+router.post("/student", StudentController.StudentLogin)
+
+
+//get student's main dashboard*/
+router.get("/dashbordstudent",studentMiddlware, StudentController.dashboardStusent);
+
+
+//grades view
+router.get("/Gardes",studentMiddlware,StudentController.getStudentGrades);
+
+
+//logaout student 
+router.get("/logoutstudent", StudentController.student_logout)
 
 
 /**
@@ -23,13 +42,7 @@ router.get("/", (req, res) => {
 router.put("/profile/:id", StudentController.student_edit_id);
 router.get("/profile", StudentController.student_edit);
 
-//grades view
-router.get("/gardes",);
-router.get("/Gardes", (req, res) => {
-    res.render("Gardes", {
-        title: " الفضاء الخاص  بنقط- ",
-    });
-});
+
 //absence view
 router.get("/absence", (req, res) => {
     res.render("absence", {
@@ -44,11 +57,6 @@ router.get("/cours/:name_module",StudentController.student_getCour);
 router.get("/download/:id",StudentController.download_file);
 
 
-router.get("/dashbordstudent", (req, res) => {
-    res.render("dashboardStudent", {
-        title: "الفضاء الخاص - بالتلاميذ",
-    });
-});
 
 
 //cours view

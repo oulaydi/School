@@ -71,134 +71,43 @@
                    
                
                      
-                        <div class="table-responsive ">
-                          
-                            <table class="table table-data2 w-50 " style="margin-left: auto;margin-right: auto;margin-top: 5%;">
-                              
-                              
-                             
-                                <thead >
-                                   
-                                    
-                                    <tr  class="tr-shadow">
-                                      
-                                
-                                        <th >Prenom</th>
-                                        <th>Nom</th>
-                                        <th>Matiere</th>
-                                        <th>Note</th>
-                                        <th>Decisin</th>
-                                        <th>Semestre</th>
-                                        <th>Niveau Scolaire</th>
-                                        <th>Annee Scolaire</th>
-                                      
+                   <div class="table-responsive">
+                    <table class="table table-data2 w-50" style="margin-left: auto; margin-right: auto; margin-top: 5%;">
+                        <thead>
+                            <tr class="tr-shadow">
+                                <th>Username</th>
+                                <th>Name Module</th>
+                                <th>Grade Normal</th>
+                                <th>Grade Partiel</th>
+                                <th>Grade Final</th>
+                                <th>Grade Decision</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (grades && grades.length > 0) { %>    
+                                <% grades.forEach(grade => { %>   
+                                    <tr class="tr-shadow">
+                                        <td><%= grade.username %></td>
+                                        <td><%= grade.name_module %></td>
+                                        <td><%= grade.grade_normal %></td>
+                                        <td><%= grade.grade_partiel %></td>
+                                        <td><%= grade.grade_final %></td>
+                                        <td><%= grade.grade_decision %></td>
+                                        <td><%= grade.timePassed %> </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                   
-                                    <tr  class="tr-shadow">
-                                        
-                                       
-                                        <td>youness</td>
-                                        <td>Benbakka</td>
-                                        <td>java</td>
-                                        <td>20</td>
-                                        <td>Decisin</td>
-                                        <td >s6</td>
-                                        <td>INFO3</td>
-                                        <td>2024-2025</td>
-                                        
-                                    </tr>
-                                  
-                                    <tr  class="tr-shadow">
-                                       
-                                        <td>youness</td>
-                                        <td>Benbakka</td>
-                                        <td>java</td>
-                                        <td>20</td>
-                                        <td>Decisin</td>
-                                        <td >s6</td>
-                                        <td>INFO3</td>
-                                        <td>2024-2025</td>
-                                        
-                                    </tr>
-                                  
-                                    <tr  class="tr-shadow">
-                                       
-                                        <td>youness</td>
-                                        <td>Benbakka</td>
-                                        <td>java</td>
-                                        <td>20</td>
-                                        <td>Decisin</td>
-                                        <td >s6</td>
-                                        <td>INFO3</td>
-                                        <td>2024-2025</td>
-                                        
-                                    </tr>
-                                  
-                                    <tr  class="tr-shadow">
-                                       
-                                        <td>youness</td>
-                                        <td>Benbakka</td>
-                                        <td>java</td>
-                                        <td>20</td>
-                                        <td>Decisin</td>
-                                        <td >s6</td>
-                                        <td>INFO3</td>
-                                        <td>2024-2025</td>
-                                        
-                                    </tr>
-                                  
-                                    <tr  class="tr-shadow">
-                                       
-                                        <td>youness</td>
-                                        <td>Benbakka</td>
-                                        <td>java</td>
-                                        <td>20</td>
-                                        <td>Decisin</td>
-                                        <td >s6</td>
-                                        <td>INFO3</td>
-                                        <td>2024-2025</td>
-                                        
-                                    </tr>
-                                  
-                                    <tr  class="tr-shadow">
-                                       
-                                        <td>youness</td>
-                                        <td>Benbakka</td>
-                                        <td>java</td>
-                                        <td>20</td>
-                                        <td>Decisin</td>
-                                        <td >s6</td>
-                                        <td>INFO3</td>
-                                        <td>2024-2025</td>
-                                        
-                                    </tr>
-                                  
-                                    <tr  class="tr-shadow">
-                                       
-                                        <td>youness</td>
-                                        <td>Benbakka</td>
-                                        <td>java</td>
-                                        <td>20</td>
-                                        <td>Decisin</td>
-                                        <td >s6</td>
-                                        <td>INFO3</td>
-                                        <td>2024-2025</td>
-                                        
-                                    </tr>
-                                  
-                                
-                                 
-                                  
-                                    
-                                
-                                   
-                                     
-                                </tbody>
-                            </table>
-                           
-                        </div>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="7" class="text-center mt-4">
+                                        <p>.لا يوجد اي بببب(ة)</p>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                
                    </div>
                  
 </div>

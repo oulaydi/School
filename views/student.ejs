@@ -14,7 +14,8 @@
 			<img src="images/bg.svg">
 		</div>
 		<div class="login-content">
-			<form action="dashbordstudent" dir="rtl">
+			<form action="/student" method="post" class="sign-in-form" autocomplete="off" dir="rtl">
+				
 				<img src="images/avatar.svg">
 				<h2 class="title">الفضاء الخاص بالتلاميذ</h2>
            		<div class="input-div one">
@@ -23,7 +24,7 @@
            		   </div>
            		   <div class="div">
            		   		<h5>اسم المستخدم</h5>
-           		   		<input type="text" class="input">
+           		   		<input name="username" type="text" class="input">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -32,7 +33,7 @@
            		   </div>
            		   <div class="div">
            		    	<h5>كلمة المرور</h5>
-           		    	<input type="password" class="input">
+           		    	<input name="password" type="password" class="input">
             	   </div>
             	</div>
             	<a href="#">نسيت كلمة المرور؟</a>
